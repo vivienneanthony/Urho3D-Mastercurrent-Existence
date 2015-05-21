@@ -1,0 +1,911 @@
+<scene id="1">
+	<component id="1" type="Octree"/>
+	<component id="2" type="DebugRenderer"/>
+	<component id="3" type="Light">
+		<attribute name="Light Type" value="Directional"/>
+	</component>
+	<component id="4" type="PhysicsWorld"/>
+	<node id="16777216">
+		<attribute name="Name" value="Scene"/>
+		<node id="16777217">
+			<attribute name="Name" value="Circle.002"/>
+			<attribute name="Position" value="0 5.25928 -42.0499"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777216" type="StaticModel">
+				<attribute name="Model" value="Model;Models/Circle.002.mdl"/>
+				<attribute name="Material" value="Material;Materials/CircularCeilingCement.xml"/>
+			</component>
+			<component id="16777217" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777218" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/Circle.002.mdl"/>
+			</component>
+		</node>
+		<node id="16777218">
+			<attribute name="Name" value="CircularFloorCeiling"/>
+			<attribute name="Position" value="0 -0.216347 -42.0501"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777219" type="StaticModel">
+				<attribute name="Model" value="Model;Models/CircularFloorCeiling.mdl"/>
+				<attribute name="Material" value="Material;Materials/CircularFloorCeilingCement.xml"/>
+			</component>
+			<component id="16777220" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777221" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/CircularFloorCeiling.mdl"/>
+			</component>
+		</node>
+		<node id="16777219">
+			<attribute name="Name" value="CircularFloorCeiling1"/>
+			<attribute name="Position" value="0 -3.21635 -42.0501"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777222" type="StaticModel">
+				<attribute name="Model" value="Model;Models/CircularFloorCeiling1.mdl"/>
+				<attribute name="Material" value="Material;Materials/CircularFloorCeilingCement.xml"/>
+			</component>
+			<component id="16777223" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777224" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/CircularFloorCeiling1.mdl"/>
+			</component>
+		</node>
+		<node id="16777220">
+			<attribute name="Name" value="CircularFloorCeiling2"/>
+			<attribute name="Position" value="0 -6.21635 -42.0501"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777225" type="StaticModel">
+				<attribute name="Model" value="Model;Models/CircularFloorCeiling2.mdl"/>
+				<attribute name="Material" value="Material;Materials/CircularFloorCeilingCement.xml"/>
+			</component>
+			<component id="16777226" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777227" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/CircularFloorCeiling2.mdl"/>
+			</component>
+		</node>
+		<node id="16777221">
+			<attribute name="Name" value="CircularGlass"/>
+			<attribute name="Position" value="-2.38419e-07 0.347635 -42.0501"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777228" type="StaticModel">
+				<attribute name="Model" value="Model;Models/CircularGlass.mdl"/>
+				<attribute name="Material" value="Material;Materials/CircularGlass.xml"/>
+			</component>
+			<component id="16777229" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777230" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/CircularGlass.mdl"/>
+			</component>
+		</node>
+		<node id="16777222">
+			<attribute name="Name" value="CircularOvalCeilingDish"/>
+			<attribute name="Position" value="-2.38419e-07 5.85478 -42.0501"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777231" type="StaticModel">
+				<attribute name="Model" value="Model;Models/CircularOvalCeilingDish.mdl"/>
+				<attribute name="Material" value="Material;Materials/CircularOvalCeilingDish.xml"/>
+			</component>
+			<component id="16777232" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777233" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/CircularOvalCeilingDish.mdl"/>
+			</component>
+		</node>
+		<node id="16777223">
+			<attribute name="Name" value="CircularWall"/>
+			<attribute name="Position" value="-0.000509262 2.62769 -42.0499"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777234" type="StaticModel">
+				<attribute name="Model" value="Model;Models/CircularWall.mdl"/>
+				<attribute name="Material" value="Material;Materials/CircularWallCement.xml"/>
+			</component>
+			<component id="16777235" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777236" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/CircularWall.mdl"/>
+			</component>
+		</node>
+		<node id="16777224">
+			<attribute name="Name" value="CircularWall.002"/>
+			<attribute name="Position" value="-0.000509262 1.62769 -42.0499"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777237" type="StaticModel">
+				<attribute name="Model" value="Model;Models/CircularWall.002.mdl"/>
+				<attribute name="Material" value="Material;Materials/CircularWallCement.xml"/>
+			</component>
+			<component id="16777238" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777239" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/CircularWall.002.mdl"/>
+			</component>
+		</node>
+		<node id="16777225">
+			<attribute name="Name" value="CircularWallBelowLevel"/>
+			<attribute name="Position" value="-0.000509262 -3.89139 -42.0499"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777240" type="StaticModel">
+				<attribute name="Model" value="Model;Models/CircularWallBelowLevel.mdl"/>
+				<attribute name="Material" value="Material;Materials/CircularWallCement.xml"/>
+			</component>
+			<component id="16777241" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777242" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/CircularWallBelowLevel.mdl"/>
+			</component>
+		</node>
+		<node id="16777226">
+			<attribute name="Name" value="DomeHolographic"/>
+			<attribute name="Position" value="0 5.13745 -42.0501"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777243" type="StaticModel">
+				<attribute name="Model" value="Model;Models/DomeHolographic.mdl"/>
+				<attribute name="Material" value="Material;Materials/DomeHolographic.xml"/>
+			</component>
+			<component id="16777244" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777245" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/DomeHolographic.mdl"/>
+			</component>
+		</node>
+		<node id="16777227">
+			<attribute name="Name" value="HallDoor"/>
+			<attribute name="Position" value="-10.8878 1.00428 -42.0493"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777246" type="StaticModel">
+				<attribute name="Model" value="Model;Models/HallDoor.mdl"/>
+				<attribute name="Material" value="Material;Materials/SteelDoulbeDoor.001.xml"/>
+			</component>
+			<component id="16777247" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777248" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/HallDoor.mdl"/>
+			</component>
+		</node>
+		<node id="16777228">
+			<attribute name="Name" value="HallDoor1"/>
+			<attribute name="Position" value="25.3167 1.00428 -42.0493"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777249" type="StaticModel">
+				<attribute name="Model" value="Model;Models/HallDoor1.mdl"/>
+				<attribute name="Material" value="Material;Materials/SteelDoulbeDoor.001.xml"/>
+			</component>
+			<component id="16777250" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777251" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/HallDoor1.mdl"/>
+			</component>
+		</node>
+		<node id="16777229">
+			<attribute name="Name" value="HallDoor2"/>
+			<attribute name="Position" value="-0.00070524 1.00428 -67.2952"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777252" type="StaticModel">
+				<attribute name="Model" value="Model;Models/HallDoor2.mdl"/>
+				<attribute name="Material" value="Material;Materials/SteelDoulbeDoor.001.xml"/>
+			</component>
+			<component id="16777253" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777254" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/HallDoor2.mdl"/>
+			</component>
+		</node>
+		<node id="16777230">
+			<attribute name="Name" value="HallLong1"/>
+			<attribute name="Position" value="-0.000705242 1.00428 -58.6564"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777255" type="StaticModel">
+				<attribute name="Model" value="Model;Models/HallLong1.mdl"/>
+				<attribute name="Material" value="Material;Materials/HallLongCement.xml"/>
+			</component>
+			<component id="16777256" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777257" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/HallLong1.mdl"/>
+			</component>
+		</node>
+		<node id="16777231">
+			<attribute name="Name" value="HallLong2"/>
+			<attribute name="Position" value="16.6064 1.00428 -42.0508"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777258" type="StaticModel">
+				<attribute name="Model" value="Model;Models/HallLong2.mdl"/>
+				<attribute name="Material" value="Material;Materials/HallLongCement.xml"/>
+			</component>
+			<component id="16777259" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777260" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/HallLong2.mdl"/>
+			</component>
+		</node>
+		<node id="16777232">
+			<attribute name="Name" value="HallShort"/>
+			<attribute name="Position" value="-9.41796 1.00428 -42.0493"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777261" type="StaticModel">
+				<attribute name="Model" value="Model;Models/HallShort.mdl"/>
+				<attribute name="Material" value="Material;Materials/HallShortCement.xml"/>
+			</component>
+			<component id="16777262" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777263" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/HallShort.mdl"/>
+			</component>
+		</node>
+		<node id="16777233">
+			<attribute name="Name" value="SurfacePlane"/>
+			<attribute name="Position" value="0 -0.264999 -19.0806"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777264" type="StaticModel">
+				<attribute name="Model" value="Model;Models/SurfacePlane.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100wall.xml"/>
+			</component>
+			<component id="16777265" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777266" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/SurfacePlane.mdl"/>
+			</component>
+		</node>
+		<node id="16777234">
+			<attribute name="Name" value="hanger100buffers1"/>
+			<attribute name="Position" value="-14.6649 8.34359 -1.00136e-05"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777267" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100buffers1.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100buffers.xml"/>
+			</component>
+			<component id="16777268" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777269" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100buffers1.mdl"/>
+			</component>
+		</node>
+		<node id="16777235">
+			<attribute name="Name" value="hanger100buffers2"/>
+			<attribute name="Position" value="14.6649 8.34359 -1.43051e-06"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777270" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100buffers2.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100buffers.xml"/>
+			</component>
+			<component id="16777271" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777272" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100buffers2.mdl"/>
+			</component>
+		</node>
+		<node id="16777236">
+			<attribute name="Name" value="hanger100ceilinglight"/>
+			<attribute name="Position" value="-16.4569 7.927 -1.44729e-05"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777273" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100ceilinglight.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100wall.xml;Materials/hanger100emit.xml"/>
+			</component>
+			<component id="16777274" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777275" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100ceilinglight.mdl"/>
+			</component>
+		</node>
+		<node id="16777237">
+			<attribute name="Name" value="hanger100ceilinglight2"/>
+			<attribute name="Position" value="16.4569 7.927 1.12143e-06"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777276" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100ceilinglight2.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100wall.xml;Materials/hanger100emit.xml"/>
+			</component>
+			<component id="16777277" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777278" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100ceilinglight2.mdl"/>
+			</component>
+		</node>
+		<node id="16777238">
+			<attribute name="Name" value="hanger100ceilingroofopening"/>
+			<attribute name="Position" value="0 9.025 0"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777279" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100ceilingroofopening.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100ceilingroofopening.xml"/>
+			</component>
+			<component id="16777280" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777281" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100ceilingroofopening.mdl"/>
+			</component>
+		</node>
+		<node id="16777239">
+			<attribute name="Name" value="hanger100doubledoor"/>
+			<attribute name="Position" value="1.71661e-05 1 -20.0319"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777282" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100doubledoor.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100wall.xml"/>
+			</component>
+			<component id="16777283" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777284" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100doubledoor.mdl"/>
+			</component>
+		</node>
+		<node id="16777240">
+			<attribute name="Name" value="hanger100floor"/>
+			<attribute name="Position" value="0 -0.025 0"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777285" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100floor.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100floor.xml;Materials/hanger100floorglass.xml;Materials/hanger100flooryellowemit.xml"/>
+			</component>
+			<component id="16777286" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777287" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100floor.mdl"/>
+			</component>
+		</node>
+		<node id="16777241">
+			<attribute name="Name" value="hanger100floorglass"/>
+			<attribute name="Position" value="0 -0.00323509 8.10623e-06"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777288" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100floorglass.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100glass.001.xml"/>
+			</component>
+			<component id="16777289" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777290" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100floorglass.mdl"/>
+			</component>
+		</node>
+		<node id="16777242">
+			<attribute name="Name" value="hanger100geeblewall"/>
+			<attribute name="Position" value="-1.71661e-05 4.5 19.9511"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777291" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100geeblewall.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100geeblewall.xml"/>
+			</component>
+			<component id="16777292" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777293" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100geeblewall.mdl"/>
+			</component>
+		</node>
+		<node id="16777243">
+			<attribute name="Name" value="hanger100geeblewall2"/>
+			<attribute name="Position" value="1.71661e-05 4.5 -19.9648"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777294" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100geeblewall2.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100diffuse.003.xml"/>
+			</component>
+			<component id="16777295" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777296" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100geeblewall2.mdl"/>
+			</component>
+		</node>
+		<node id="16777244">
+			<attribute name="Name" value="hanger100glassbeam"/>
+			<attribute name="Position" value="-16.4665 1.8 1.89188"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777297" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100glassbeam.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100glass.xml;Materials/hanger100emit.xml"/>
+			</component>
+			<component id="16777298" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777299" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100glassbeam.mdl"/>
+			</component>
+		</node>
+		<node id="16777245">
+			<attribute name="Name" value="hanger100glassbeam1"/>
+			<attribute name="Position" value="-16.4665 1.8 9.68492"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777300" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100glassbeam1.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100glass.xml;Materials/hanger100emit.xml"/>
+			</component>
+			<component id="16777301" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777302" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100glassbeam1.mdl"/>
+			</component>
+		</node>
+		<node id="16777246">
+			<attribute name="Name" value="hanger100glassbeam2"/>
+			<attribute name="Position" value="-16.4665 1.8 -11.1019"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777303" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100glassbeam2.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100glass.xml;Materials/hanger100emit.xml"/>
+			</component>
+			<component id="16777304" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777305" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100glassbeam2.mdl"/>
+			</component>
+		</node>
+		<node id="16777247">
+			<attribute name="Name" value="hanger100glassbeam4"/>
+			<attribute name="Position" value="16.4665 1.8 14.4777"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777306" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100glassbeam4.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100glass.xml;Materials/hanger100emit.xml"/>
+			</component>
+			<component id="16777307" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777308" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100glassbeam4.mdl"/>
+			</component>
+		</node>
+		<node id="16777248">
+			<attribute name="Name" value="hanger100glassbeam5"/>
+			<attribute name="Position" value="16.4665 1.8 1.3571"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777309" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100glassbeam5.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100glass.xml;Materials/hanger100emit.xml"/>
+			</component>
+			<component id="16777310" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777311" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100glassbeam5.mdl"/>
+			</component>
+		</node>
+		<node id="16777249">
+			<attribute name="Name" value="hanger100glassbeam6"/>
+			<attribute name="Position" value="16.4665 1.8 -12.5887"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777312" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100glassbeam6.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100glass.xml;Materials/hanger100emit.xml"/>
+			</component>
+			<component id="16777313" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777314" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100glassbeam6.mdl"/>
+			</component>
+		</node>
+		<node id="16777250">
+			<attribute name="Name" value="hanger100hallway"/>
+			<attribute name="Position" value="1.33514e-05 2.8759 -27.1041"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777315" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100hallway.mdl"/>
+				<attribute name="Material" value="Material;Materials/CircularCeilingCement.xml"/>
+			</component>
+			<component id="16777316" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777317" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100hallway.mdl"/>
+			</component>
+		</node>
+		<node id="16777251">
+			<attribute name="Name" value="hanger100innerroofborderlong1"/>
+			<attribute name="Position" value="9.13047 9.55 2.14888e-05"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777318" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100innerroofborderlong1.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100innerroofborderlong.xml;Materials/hanger100transulcentglass.xml;Materials/hanger100innerroofborderwhiteemit.xml"/>
+			</component>
+			<component id="16777319" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777320" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100innerroofborderlong1.mdl"/>
+			</component>
+		</node>
+		<node id="16777252">
+			<attribute name="Name" value="hanger100innerroofborderlong2"/>
+			<attribute name="Position" value="-9.13047 9.55 -3.37519e-05"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777321" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100innerroofborderlong2.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100innerroofborderlong.xml;Materials/hanger100transulcentglass.xml;Materials/hanger100innerroofborderwhiteemit.xml"/>
+			</component>
+			<component id="16777322" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777323" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100innerroofborderlong2.mdl"/>
+			</component>
+		</node>
+		<node id="16777253">
+			<attribute name="Name" value="hanger100innerroofbordershort1"/>
+			<attribute name="Position" value="1.04904e-05 9.55 -12.1144"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777324" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100innerroofbordershort1.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100innerroofbordershort.xml;Materials/hanger100transulcentglass.xml;Materials/hanger100innerroofborderwhiteemit.xml"/>
+			</component>
+			<component id="16777325" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777326" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100innerroofbordershort1.mdl"/>
+			</component>
+		</node>
+		<node id="16777254">
+			<attribute name="Name" value="hanger100innerroofbordershort2"/>
+			<attribute name="Position" value="-2.88793e-05 9.55 12.1144"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777327" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100innerroofbordershort2.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100innerroofbordershort.xml;Materials/hanger100transulcentglass.xml;Materials/hanger100innerroofborderwhiteemit.xml"/>
+			</component>
+			<component id="16777328" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777329" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100innerroofbordershort2.mdl"/>
+			</component>
+		</node>
+		<node id="16777255">
+			<attribute name="Name" value="hanger100mainroof"/>
+			<attribute name="Position" value="1.67942e-16 10.0745 0"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777330" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100mainroof.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100diffuse.001.xml"/>
+			</component>
+			<component id="16777331" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777332" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100mainroof.mdl"/>
+			</component>
+		</node>
+		<node id="16777256">
+			<attribute name="Name" value="hanger100mainroofdoor"/>
+			<attribute name="Position" value="0 10.2456 0"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777333" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100mainroofdoor.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100mainroofdoor.xml;Materials/hanger100transulcentglass.xml;Materials/hanger100mainroofdooremit.xml"/>
+			</component>
+			<component id="16777334" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777335" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100mainroofdoor.mdl"/>
+			</component>
+		</node>
+		<node id="16777257">
+			<attribute name="Name" value="hanger100mainwall"/>
+			<attribute name="Position" value="1.71661e-05 4.5 -20.05"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777336" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100mainwall.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100wall.xml"/>
+			</component>
+			<component id="16777337" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777338" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100mainwall.mdl"/>
+			</component>
+		</node>
+		<node id="16777258">
+			<attribute name="Name" value="hanger100singledoor"/>
+			<attribute name="Position" value="8.8149 1 -20.0319"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777339" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100singledoor.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100wall.xml"/>
+			</component>
+			<component id="16777340" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777341" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100singledoor.mdl"/>
+			</component>
+		</node>
+		<node id="16777259">
+			<attribute name="Name" value="hanger100walkwaystorage1"/>
+			<attribute name="Position" value="-17.021 5.60731 -1.71661e-05"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777342" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100walkwaystorage1.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100walkwaystorage.xml;Materials/hanger100glass.xml"/>
+			</component>
+			<component id="16777343" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777344" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100walkwaystorage1.mdl"/>
+			</component>
+		</node>
+		<node id="16777260">
+			<attribute name="Name" value="hanger100walkwaystorage2"/>
+			<attribute name="Position" value="17.021 5.60731 1.52588e-05"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777345" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100walkwaystorage2.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100walkwaystorage.xml;Materials/hanger100glass.xml"/>
+			</component>
+			<component id="16777346" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777347" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100walkwaystorage2.mdl"/>
+			</component>
+		</node>
+		<node id="16777261">
+			<attribute name="Name" value="hanger100wallbase"/>
+			<attribute name="Position" value="20.05 4.5 1.71661e-05"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777348" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100wallbase.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100wall.xml"/>
+			</component>
+			<component id="16777349" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777350" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100wallbase.mdl"/>
+			</component>
+		</node>
+		<node id="16777262">
+			<attribute name="Name" value="hanger100wallbase2"/>
+			<attribute name="Position" value="-1.71661e-05 4.5 20.05"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777351" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100wallbase2.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100diffuse.xml"/>
+			</component>
+			<component id="16777352" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777353" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100wallbase2.mdl"/>
+			</component>
+		</node>
+		<node id="16777263">
+			<attribute name="Name" value="hanger100wallbase3"/>
+			<attribute name="Position" value="-20.05 4.5 -1.71661e-05"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777354" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100wallbase3.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100wall.xml"/>
+			</component>
+			<component id="16777355" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777356" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100wallbase3.mdl"/>
+			</component>
+		</node>
+		<node id="16777264">
+			<attribute name="Name" value="hanger100wallstorageunit"/>
+			<attribute name="Position" value="0 3.52 28.9809"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777357" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100wallstorageunit.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100wallstorageunit.xml"/>
+			</component>
+			<component id="16777358" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777359" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100wallstorageunit.mdl"/>
+			</component>
+		</node>
+		<node id="16777265">
+			<attribute name="Name" value="hanger100wallthickpanel1"/>
+			<attribute name="Position" value="-19.8786 1 -1.71661e-05"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777360" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100wallthickpanel1.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100wallthickpanel.xml"/>
+			</component>
+			<component id="16777361" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777362" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100wallthickpanel1.mdl"/>
+			</component>
+		</node>
+		<node id="16777266">
+			<attribute name="Name" value="hanger100wallthickpanel2"/>
+			<attribute name="Position" value="19.8786 1 1.71661e-05"/>
+			<attribute name="Rotation" value="1 0 0 0"/>
+			<component id="16777363" type="StaticModel">
+				<attribute name="Model" value="Model;Models/hanger100wallthickpanel2.mdl"/>
+				<attribute name="Material" value="Material;Materials/hanger100wallthickpanel.xml"/>
+			</component>
+			<component id="16777364" type="RigidBody">
+				<attribute name="Collision Layer" value="2"/>
+				<attribute name="Use Gravity" value="False"/>
+				<attribute name="Mass" value="0"/>
+			</component>
+			<component id="16777365" type="CollisionShape">
+				<attribute name="Shape Type" value="TriangleMesh"/>
+				<attribute name="Model" value="Model;Models/hanger100wallthickpanel2.mdl"/>
+			</component>
+		</node>
+	</node>
+</scene>

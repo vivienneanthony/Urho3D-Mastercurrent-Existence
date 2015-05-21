@@ -1,0 +1,6 @@
+<material>
+	<technique name="Techniques/Diff.xml"/>
+	<texture name="Textures/hanger100junctionconnectortapsdiffuse.png" unit="diffuse"/>
+	<parameter name="MatDiffColor" value="0.0819803 0.0819803 0.0819803 1"/>
+	<parameter name="MatSpecColor" value="0.5 0.5 0.5 50"/>
+</material>

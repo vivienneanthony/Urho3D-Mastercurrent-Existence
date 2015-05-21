@@ -1,0 +1,3386 @@
+<?xml version="1.0"?>
+<scene id="1">
+	<attribute name="Name" value="" />
+	<attribute name="Time Scale" value="1" />
+	<attribute name="Smoothing Constant" value="50" />
+	<attribute name="Snap Threshold" value="5" />
+	<attribute name="Elapsed Time" value="0" />
+	<attribute name="Next Replicated Node ID" value="1" />
+	<attribute name="Next Replicated Component ID" value="1" />
+	<attribute name="Next Local Node ID" value="16777537" />
+	<attribute name="Next Local Component ID" value="16777905" />
+	<attribute name="Variables" />
+	<attribute name="Variable Names" value="" />
+	<component type="Octree" id="1" />
+	<component type="DebugRenderer" id="2" />
+	<component type="Light" id="3">
+		<attribute name="Is Enabled" value="false" />
+		<attribute name="Brightness Multiplier" value="0" />
+		<attribute name="Light Shape Texture" value="TextureCube;" />
+	</component>
+	<component type="PhysicsWorld" id="4" />
+	<node id="16777267">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="Hanger100Lights" />
+		<attribute name="Position" value="0 0 0" />
+		<attribute name="Rotation" value="1 0 0 0" />
+		<attribute name="Scale" value="1 1 1" />
+		<attribute name="Variables" />
+		<node id="16777470">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="LightBar" />
+			<attribute name="Position" value="6.28641 9.78598 -6.40002" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<node id="16777462">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="" />
+				<attribute name="Position" value="-0.00024128 0.322514 3.93903" />
+				<attribute name="Rotation" value="0.707107 0.707107 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="Light" id="16777847">
+					<attribute name="Light Type" value="Spot" />
+					<attribute name="Brightness Multiplier" value="0.04" />
+					<attribute name="Range" value="30" />
+					<attribute name="Spot FOV" value="160" />
+					<attribute name="Cast Shadows" value="true" />
+				</component>
+			</node>
+			<node id="16777465">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="" />
+				<attribute name="Position" value="-0.000236511 0.322524 -3.08778" />
+				<attribute name="Rotation" value="0.707107 0.707107 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="Light" id="16777850">
+					<attribute name="Light Type" value="Spot" />
+					<attribute name="Brightness Multiplier" value="0.04" />
+					<attribute name="Range" value="30" />
+					<attribute name="Spot FOV" value="160" />
+					<attribute name="Cast Shadows" value="true" />
+				</component>
+			</node>
+			<node id="16777469">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="" />
+				<attribute name="Position" value="-0.000236511 0.322524 0.458412" />
+				<attribute name="Rotation" value="0.707107 0.707107 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="Light" id="16777853">
+					<attribute name="Light Type" value="Spot" />
+					<attribute name="Brightness Multiplier" value="0.1" />
+					<attribute name="Range" value="30" />
+					<attribute name="Spot FOV" value="160" />
+					<attribute name="Cast Shadows" value="true" />
+				</component>
+			</node>
+		</node>
+		<node id="16777471">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="LightBar" />
+			<attribute name="Position" value="-6.55759 9.78598 -6.40002" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<node id="16777472">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="" />
+				<attribute name="Position" value="-0.00024128 0.322514 3.93903" />
+				<attribute name="Rotation" value="0.707107 0.707107 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="Light" id="16777854">
+					<attribute name="Light Type" value="Spot" />
+					<attribute name="Brightness Multiplier" value="0.04" />
+					<attribute name="Range" value="30" />
+					<attribute name="Spot FOV" value="160" />
+				</component>
+			</node>
+			<node id="16777473">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="" />
+				<attribute name="Position" value="-0.000236511 0.322524 -3.08778" />
+				<attribute name="Rotation" value="0.707107 0.707107 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="Light" id="16777855">
+					<attribute name="Light Type" value="Spot" />
+					<attribute name="Brightness Multiplier" value="0.04" />
+					<attribute name="Range" value="30" />
+					<attribute name="Spot FOV" value="160" />
+				</component>
+			</node>
+			<node id="16777474">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="" />
+				<attribute name="Position" value="-0.000236511 0.322524 0.458412" />
+				<attribute name="Rotation" value="0.707107 0.707107 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="Light" id="16777856">
+					<attribute name="Light Type" value="Spot" />
+					<attribute name="Brightness Multiplier" value="0.1" />
+					<attribute name="Range" value="30" />
+					<attribute name="Spot FOV" value="160" />
+					<attribute name="Cast Shadows" value="true" />
+				</component>
+			</node>
+		</node>
+		<node id="16777475">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="LightBar" />
+			<attribute name="Position" value="2.46849 9.78598 -6.40002" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<node id="16777476">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="" />
+				<attribute name="Position" value="-0.00024128 0.322514 3.93903" />
+				<attribute name="Rotation" value="0.707107 0.707107 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="Light" id="16777857">
+					<attribute name="Light Type" value="Spot" />
+					<attribute name="Brightness Multiplier" value="0.04" />
+					<attribute name="Range" value="30" />
+					<attribute name="Spot FOV" value="160" />
+				</component>
+			</node>
+			<node id="16777477">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="" />
+				<attribute name="Position" value="-0.000236511 0.322524 -3.08778" />
+				<attribute name="Rotation" value="0.707107 0.707107 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="Light" id="16777858">
+					<attribute name="Light Type" value="Spot" />
+					<attribute name="Brightness Multiplier" value="0.04" />
+					<attribute name="Range" value="30" />
+					<attribute name="Spot FOV" value="160" />
+				</component>
+			</node>
+			<node id="16777478">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="" />
+				<attribute name="Position" value="-0.000236511 0.322524 0.458412" />
+				<attribute name="Rotation" value="0.707107 0.707107 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="Light" id="16777859">
+					<attribute name="Light Type" value="Spot" />
+					<attribute name="Brightness Multiplier" value="0.1" />
+					<attribute name="Range" value="30" />
+					<attribute name="Spot FOV" value="160" />
+					<attribute name="Cast Shadows" value="true" />
+				</component>
+			</node>
+		</node>
+		<node id="16777479">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="LightBar" />
+			<attribute name="Position" value="-3.09749 9.78598 -6.40002" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<node id="16777480">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="" />
+				<attribute name="Position" value="-0.00024128 0.322514 3.93903" />
+				<attribute name="Rotation" value="0.707107 0.707107 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="Light" id="16777860">
+					<attribute name="Light Type" value="Spot" />
+					<attribute name="Brightness Multiplier" value="0.01" />
+					<attribute name="Range" value="30" />
+					<attribute name="Spot FOV" value="160" />
+				</component>
+			</node>
+			<node id="16777481">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="" />
+				<attribute name="Position" value="-0.000236511 0.322524 -3.08778" />
+				<attribute name="Rotation" value="0.707107 0.707107 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="Light" id="16777861">
+					<attribute name="Light Type" value="Spot" />
+					<attribute name="Brightness Multiplier" value="0.01" />
+					<attribute name="Range" value="30" />
+					<attribute name="Spot FOV" value="160" />
+				</component>
+			</node>
+			<node id="16777482">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="" />
+				<attribute name="Position" value="-0.000236511 0.322524 0.458412" />
+				<attribute name="Rotation" value="0.707107 0.707107 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="Light" id="16777862">
+					<attribute name="Light Type" value="Spot" />
+					<attribute name="Brightness Multiplier" value="0.01" />
+					<attribute name="Range" value="30" />
+					<attribute name="Spot FOV" value="160" />
+					<attribute name="Cast Shadows" value="true" />
+				</component>
+			</node>
+		</node>
+	</node>
+	<node id="16777279">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="Character" />
+		<attribute name="Position" value="-3.46399 0.586512 7.85393" />
+		<attribute name="Rotation" value="1 0 0 0" />
+		<attribute name="Scale" value="1 1 1" />
+		<attribute name="Variables" />
+	</node>
+	<node id="16777280">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="Hanger100Props" />
+		<attribute name="Position" value="0 0 0" />
+		<attribute name="Rotation" value="1 0 0 0" />
+		<attribute name="Scale" value="1 1 1" />
+		<attribute name="Variables" />
+		<node id="16777284">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100divider1x" />
+			<attribute name="Position" value="12.4417 0.820578 -9.18107" />
+			<attribute name="Rotation" value="0.707107 0 0.707107 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777380">
+				<attribute name="Model" value="Model;Models/hanger100divider1x.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100dividerglass.xml;Materials/hanger100dividerframe.xml" />
+			</component>
+			<component type="RigidBody" id="16777381">
+				<attribute name="Physics Rotation" value="0.707107 0 0.707107 0" />
+				<attribute name="Physics Position" value="12.4417 0.820578 -9.18107" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777382">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100divider1x.mdl" />
+			</component>
+		</node>
+		<node id="16777285">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100divider2x" />
+			<attribute name="Position" value="12.5145 0.80274 -3.39747" />
+			<attribute name="Rotation" value="0.707107 0 0.707107 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777383">
+				<attribute name="Model" value="Model;Models/hanger100divider2x.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100dividerglass.xml;Materials/hanger100dividerframe.xml" />
+			</component>
+			<component type="RigidBody" id="16777384">
+				<attribute name="Physics Rotation" value="0.707107 0 0.707107 0" />
+				<attribute name="Physics Position" value="12.5145 0.80274 -3.39747" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777385">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100divider2x.mdl" />
+			</component>
+		</node>
+		<node id="16777334">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100airdocksdown" />
+			<attribute name="Position" value="-1.56564 6.85647 19.6987" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777521">
+				<attribute name="Model" value="Model;Models/hanger100airdocksdown.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100airdocksinlets.xml;Materials/hanger100airdocksfan.xml;Materials/hanger100airdockssurface.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777522">
+				<attribute name="Physics Position" value="-1.56564 6.85647 19.6987" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777523">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100airdocksdown.mdl" />
+			</component>
+		</node>
+		<node id="16777335">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100airdocksup" />
+			<attribute name="Position" value="-1.56564 7.95816 19.6987" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777524">
+				<attribute name="Model" value="Model;Models/hanger100airdocksup.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100airdocksinlets.xml;Materials/hanger100airdocksfan.xml;Materials/hanger100airdockssurface.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777525">
+				<attribute name="Physics Position" value="-1.56564 7.95816 19.6987" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777526">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100airdocksup.mdl" />
+			</component>
+		</node>
+		<node id="16777336">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100ceilingfanround" />
+			<attribute name="Position" value="-2.03517 8.39484 13.2981" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777527">
+				<attribute name="Model" value="Model;Models/hanger100ceilingfanround.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100ceilingfanround.xml;Materials/hanger100ceilingfanroundblades.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777528">
+				<attribute name="Physics Position" value="-2.03517 8.39484 13.2981" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777529">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100ceilingfanround.mdl" />
+			</component>
+		</node>
+		<node id="16777337">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100ceilingfansquare" />
+			<attribute name="Position" value="-3.47058 8.29451 13.2981" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777530">
+				<attribute name="Model" value="Model;Models/hanger100ceilingfansquare.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100ceilingfansquareblades.xml;Materials/hanger100ceilingfansquare.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777531">
+				<attribute name="Physics Position" value="-3.47058 8.29451 13.2981" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777532">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100ceilingfansquare.mdl" />
+			</component>
+		</node>
+		<node id="16777338">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100ceilingventcovers" />
+			<attribute name="Position" value="-11.5911 8.73864 5.55546" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777533">
+				<attribute name="Model" value="Model;Models/hanger100ceilingventcovers.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100ceilingventcovers.xml" />
+			</component>
+			<component type="RigidBody" id="16777534">
+				<attribute name="Physics Position" value="-11.5911 8.73864 5.55546" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777535">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100ceilingventcovers.mdl" />
+			</component>
+		</node>
+		<node id="16777339">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100circularlocker" />
+			<attribute name="Position" value="16.8575 1.30434 19.375" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777536">
+				<attribute name="Model" value="Model;Models/hanger100circularlocker.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100circularlocker.xml;Materials/hanger100circularlockerglass.xml;Materials/hanger100circularlockeremit.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777537">
+				<attribute name="Physics Position" value="16.8575 1.30434 19.375" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777538">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100circularlocker.mdl" />
+			</component>
+		</node>
+		<node id="16777340">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100connector" />
+			<attribute name="Position" value="-5.09231 7.63937 19.6998" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777539">
+				<attribute name="Model" value="Model;Models/hanger100connector.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100junctionconnectortaps.xml;Materials/hanger100junctionconnectorsurface.xml" />
+			</component>
+			<component type="RigidBody" id="16777540">
+				<attribute name="Physics Position" value="-5.09231 7.63937 19.6998" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777541">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100connector.mdl" />
+			</component>
+		</node>
+		<node id="16777341">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100floorventshorizontal" />
+			<attribute name="Position" value="0.00503894 0.0540964 -14.4987" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777542">
+				<attribute name="Model" value="Model;Models/hanger100floorventshorizontal.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100floorventssurface2.xml;Materials/hanger100floorventssurface1.xml" />
+			</component>
+			<component type="RigidBody" id="16777543">
+				<attribute name="Physics Position" value="0.00503894 0.0540964 -14.4987" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777544">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100floorventshorizontal.mdl" />
+			</component>
+		</node>
+		<node id="16777342">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100floorventsvertical" />
+			<attribute name="Position" value="-11.4987 0.0540964 -0.00502844" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777545">
+				<attribute name="Model" value="Model;Models/hanger100floorventsvertical.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100floorventssurface2.xml;Materials/hanger100floorventssurface1.xml" />
+			</component>
+			<component type="RigidBody" id="16777546">
+				<attribute name="Physics Position" value="-11.4987 0.0540964 -0.00502844" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777547">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100floorventsvertical.mdl" />
+			</component>
+		</node>
+		<node id="16777343">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100hangingceilpipeline" />
+			<attribute name="Position" value="0.0585952 8.81732 18.4848" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777548">
+				<attribute name="Model" value="Model;Models/hanger100hangingceilpipeline.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100hangingceilpipeline.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777549">
+				<attribute name="Physics Position" value="0.0585952 8.81732 18.4848" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777550">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100hangingceilpipeline.mdl" />
+			</component>
+		</node>
+		<node id="16777344">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100junctiontypea" />
+			<attribute name="Position" value="2.56957 3.45535 19.7111" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777551">
+				<attribute name="Model" value="Model;Models/hanger100junctiontypea.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100junctiontypeapipes.xml;Materials/hanger100junctiontypeasuurface.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777552">
+				<attribute name="Physics Position" value="2.56957 3.45535 19.7111" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777553">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100junctiontypea.mdl" />
+			</component>
+		</node>
+		<node id="16777345">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100junctiontypeb" />
+			<attribute name="Position" value="-0.830121 3.67226 19.675" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777554">
+				<attribute name="Model" value="Model;Models/hanger100junctiontypeb.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100junctiontypebsurface.xml;Materials/hanger100junctiontypebpipes.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777555">
+				<attribute name="Physics Position" value="-0.830121 3.67226 19.675" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777556">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100junctiontypeb.mdl" />
+			</component>
+		</node>
+		<node id="16777346">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100loadingplatformsmall" />
+			<attribute name="Position" value="15.5209 0.168688 9.20902" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777557">
+				<attribute name="Model" value="Model;Models/hanger100loadingplatformsmall.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100loadingplatformsmall.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777558">
+				<attribute name="Physics Position" value="15.5209 0.168688 9.20902" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777559">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100loadingplatformsmall.mdl" />
+			</component>
+		</node>
+		<node id="16777347">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100lockerthin" />
+			<attribute name="Position" value="13.2937 0.920315 19.5291" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777560">
+				<attribute name="Model" value="Model;Models/hanger100lockerthin.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100lockerthin.xml" />
+			</component>
+			<component type="RigidBody" id="16777561">
+				<attribute name="Physics Position" value="13.2937 0.920315 19.5291" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777562">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100lockerthin.mdl" />
+			</component>
+		</node>
+		<node id="16777348">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100lockerwide" />
+			<attribute name="Position" value="13.8126 0.920315 19.5291" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777563">
+				<attribute name="Model" value="Model;Models/hanger100lockerwide.mdl" />
+				<attribute name="Material" value="Material;Materials/Material.xml" />
+			</component>
+			<component type="RigidBody" id="16777564">
+				<attribute name="Physics Position" value="13.8126 0.920315 19.5291" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777565">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100lockerwide.mdl" />
+			</component>
+		</node>
+		<node id="16777349">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100pillartypea" />
+			<attribute name="Position" value="-5.21339 2.06365 -19.5333" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777566">
+				<attribute name="Model" value="Model;Models/hanger100pillartypea.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100pillartypea.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777567">
+				<attribute name="Physics Position" value="-5.21339 2.06365 -19.5333" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777568">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100pillartypea.mdl" />
+			</component>
+		</node>
+		<node id="16777350">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100pillartypeb" />
+			<attribute name="Position" value="-8.21339 2.06365 -19.5333" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777569">
+				<attribute name="Model" value="Model;Models/hanger100pillartypeb.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100pillartypeb.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777570">
+				<attribute name="Physics Position" value="-8.21339 2.06365 -19.5333" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777571">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100pillartypeb.mdl" />
+			</component>
+		</node>
+		<node id="16777351">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100pipechannelcontrolthin" />
+			<attribute name="Position" value="-6.70229 8.76547 13.2981" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777572">
+				<attribute name="Model" value="Model;Models/hanger100pipechannelcontrolthin.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100pipechannelcontrolthinpipes.xml;Materials/hanger100pipechannelcontrolthinprotector.xml" />
+			</component>
+			<component type="RigidBody" id="16777573">
+				<attribute name="Physics Position" value="-6.70229 8.76547 13.2981" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777574">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100pipechannelcontrolthin.mdl" />
+			</component>
+		</node>
+		<node id="16777352">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100pipechannelcontrolwide" />
+			<attribute name="Position" value="-8.30242 8.77217 13.2981" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777575">
+				<attribute name="Model" value="Model;Models/hanger100pipechannelcontrolwide.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100pipechannelcontrolwidepipe.xml;Materials/hanger100pipechannelcontrolwideprotector.xml" />
+			</component>
+			<component type="RigidBody" id="16777576">
+				<attribute name="Physics Position" value="-8.30242 8.77217 13.2981" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777577">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100pipechannelcontrolwide.mdl" />
+			</component>
+		</node>
+		<node id="16777353">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100pipeinterlockcontrol" />
+			<attribute name="Position" value="3.27256 8.64412 15.3036" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777578">
+				<attribute name="Model" value="Model;Models/hanger100pipeinterlockcontrol.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100pipeinterlockcontrolprotector.xml;Materials/hanger100pipeinterlockcontrolpipe.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777579">
+				<attribute name="Physics Position" value="3.27256 8.64412 15.3036" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777580">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100pipeinterlockcontrol.mdl" />
+			</component>
+		</node>
+		<node id="16777354">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100pipeprotector" />
+			<attribute name="Position" value="0.0718009 8.70041 18.723" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777581">
+				<attribute name="Model" value="Model;Models/hanger100pipeprotector.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100pipeprotector.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777582">
+				<attribute name="Physics Position" value="0.0718009 8.70041 18.723" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777583">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100pipeprotector.mdl" />
+			</component>
+		</node>
+		<node id="16777355">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100platform" />
+			<attribute name="Position" value="4.83887 0.153828 -18.4647" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777584">
+				<attribute name="Model" value="Model;Models/hanger100platform.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100platformsurfacemain.xml;Materials/hanger100platformemit.xml" />
+			</component>
+			<component type="RigidBody" id="16777585">
+				<attribute name="Physics Position" value="4.83887 0.153828 -18.4647" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777586">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100platform.mdl" />
+			</component>
+		</node>
+		<node id="16777356">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100platformglass" />
+			<attribute name="Position" value="4.83887 5.17592 -17.4691" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777587">
+				<attribute name="Model" value="Model;Models/hanger100platformglass.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100platformglass.xml;Materials/hanger100platformglassurface.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777588">
+				<attribute name="Physics Position" value="4.83887 5.17592 -17.4691" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777589">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100platformglass.mdl" />
+			</component>
+		</node>
+		<node id="16777357">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100rollingladder" />
+			<attribute name="Position" value="-1.69827 0.651176 17.7908" />
+			<attribute name="Rotation" value="-0.597616 0 0.801783 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777590">
+				<attribute name="Model" value="Model;Models/hanger100rollingladder.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100rollingladderstair.xml;Materials/hanger100rollingladderpipe.xml;Materials/hanger100rollingladderglass.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777591">
+				<attribute name="Physics Rotation" value="0.597616 0 -0.801783 0" />
+				<attribute name="Physics Position" value="-1.69827 0.651176 17.7908" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777592">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100rollingladder.mdl" />
+			</component>
+		</node>
+		<node id="16777358">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100smallpipe1" />
+			<attribute name="Position" value="-14.0382 3.58162 19.7424" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777593">
+				<attribute name="Model" value="Model;Models/hanger100smallpipe1.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100smallpipe.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777594">
+				<attribute name="Physics Position" value="-14.0382 3.58162 19.7424" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777595">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100smallpipe1.mdl" />
+			</component>
+		</node>
+		<node id="16777359">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100smallpipe10" />
+			<attribute name="Position" value="-8.01836 0.625372 -19.127" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777596">
+				<attribute name="Model" value="Model;Models/hanger100smallpipe10.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100smallpipe.xml" />
+			</component>
+			<component type="RigidBody" id="16777597">
+				<attribute name="Physics Position" value="-8.01836 0.625372 -19.127" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777598">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100smallpipe10.mdl" />
+			</component>
+		</node>
+		<node id="16777360">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100smallpipe11" />
+			<attribute name="Position" value="-4.99766 0.625372 -19.127" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777599">
+				<attribute name="Model" value="Model;Models/hanger100smallpipe11.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100smallpipe.xml" />
+			</component>
+			<component type="RigidBody" id="16777600">
+				<attribute name="Physics Position" value="-4.99766 0.625372 -19.127" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777601">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100smallpipe11.mdl" />
+			</component>
+		</node>
+		<node id="16777361">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100smallpipe12" />
+			<attribute name="Position" value="-3.19554 6.39323 -19.798" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777602">
+				<attribute name="Model" value="Model;Models/hanger100smallpipe12.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100smallpipe.xml" />
+			</component>
+			<component type="RigidBody" id="16777603">
+				<attribute name="Physics Position" value="-3.19554 6.39323 -19.798" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777604">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100smallpipe12.mdl" />
+			</component>
+		</node>
+		<node id="16777362">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100smallpipe13" />
+			<attribute name="Position" value="-16.9835 2.58243 -19.8036" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777605">
+				<attribute name="Model" value="Model;Models/hanger100smallpipe13.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100smallpipe.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777606">
+				<attribute name="Physics Position" value="-16.9835 2.58243 -19.8036" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777607">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100smallpipe13.mdl" />
+			</component>
+		</node>
+		<node id="16777363">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100smallpipe14" />
+			<attribute name="Position" value="16.4133 1.44177 -19.7979" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777608">
+				<attribute name="Model" value="Model;Models/hanger100smallpipe14.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100smallpipe.xml" />
+			</component>
+			<component type="RigidBody" id="16777609">
+				<attribute name="Physics Position" value="16.4133 1.44177 -19.7979" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777610">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100smallpipe14.mdl" />
+			</component>
+		</node>
+		<node id="16777364">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100smallpipe2" />
+			<attribute name="Position" value="-3.71586 8.14202 19.7424" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777611">
+				<attribute name="Model" value="Model;Models/hanger100smallpipe2.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100smallpipe.xml" />
+			</component>
+			<component type="RigidBody" id="16777612">
+				<attribute name="Physics Position" value="-3.71586 8.14202 19.7424" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777613">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100smallpipe2.mdl" />
+			</component>
+		</node>
+		<node id="16777365">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100smallpipe3" />
+			<attribute name="Position" value="0.255945 6.77643 19.7424" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777614">
+				<attribute name="Model" value="Model;Models/hanger100smallpipe3.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100smallpipe.xml" />
+			</component>
+			<component type="RigidBody" id="16777615">
+				<attribute name="Physics Position" value="0.255945 6.77643 19.7424" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777616">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100smallpipe3.mdl" />
+			</component>
+		</node>
+		<node id="16777366">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100smallpipe5" />
+			<attribute name="Position" value="-9.20071 8.14202 19.7424" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777617">
+				<attribute name="Model" value="Model;Models/hanger100smallpipe5.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100smallpipe.xml" />
+			</component>
+			<component type="RigidBody" id="16777618">
+				<attribute name="Physics Position" value="-9.20071 8.14202 19.7424" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777619">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100smallpipe5.mdl" />
+			</component>
+		</node>
+		<node id="16777367">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100smallpipe7" />
+			<attribute name="Position" value="8.39136 7.40749 19.7424" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777620">
+				<attribute name="Model" value="Model;Models/hanger100smallpipe7.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100smallpipe.xml" />
+			</component>
+			<component type="RigidBody" id="16777621">
+				<attribute name="Physics Position" value="8.39136 7.40749 19.7424" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777622">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100smallpipe7.mdl" />
+			</component>
+		</node>
+		<node id="16777368">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100smallpipe9" />
+			<attribute name="Position" value="-7.55813 0.625372 -19.127" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777623">
+				<attribute name="Model" value="Model;Models/hanger100smallpipe9.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100smallpipe.xml" />
+			</component>
+			<component type="RigidBody" id="16777624">
+				<attribute name="Physics Position" value="-7.55813 0.625372 -19.127" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777625">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100smallpipe9.mdl" />
+			</component>
+		</node>
+		<node id="16777369">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100storageshelf" />
+			<attribute name="Position" value="13.7804 1.37097 22.1125" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777626">
+				<attribute name="Model" value="Model;Models/hanger100storageshelf.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100storageshelf.xml" />
+			</component>
+			<component type="RigidBody" id="16777627">
+				<attribute name="Physics Position" value="13.7804 1.37097 22.1125" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777628">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100storageshelf.mdl" />
+			</component>
+		</node>
+		<node id="16777370">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100wallled1" />
+			<attribute name="Position" value="-19.8286 1 1.81248" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777629">
+				<attribute name="Model" value="Model;Models/hanger100wallled1.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100wallled1.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777630">
+				<attribute name="Physics Position" value="-19.8286 1 1.81248" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777631">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100wallled1.mdl" />
+			</component>
+		</node>
+		<node id="16777371">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100wallled2" />
+			<attribute name="Position" value="19.8286 1 1.05742" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777632">
+				<attribute name="Model" value="Model;Models/hanger100wallled2.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100wallled2.xml" />
+			</component>
+			<component type="RigidBody" id="16777633">
+				<attribute name="Physics Position" value="19.8286 1 1.05742" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777634">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100wallled2.mdl" />
+			</component>
+		</node>
+		<node id="16777372">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100walllight" />
+			<attribute name="Position" value="-13.2714 6.33057 -19.7416" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777635">
+				<attribute name="Model" value="Model;Models/hanger100walllight.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100walllightsurface.xml;Materials/hanger100walllight.xml;Materials/hanger100walllightglass.xml" />
+			</component>
+			<component type="RigidBody" id="16777636">
+				<attribute name="Physics Position" value="-13.2714 6.33057 -19.7416" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777637">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100walllight.mdl" />
+			</component>
+		</node>
+		<node id="16777374">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100wallpipeline" />
+			<attribute name="Position" value="-19.8438 3.17869 -0.141798" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777641">
+				<attribute name="Model" value="Model;Models/hanger100wallpipeline.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100wallpipelinepipe.xml;Materials/hanger100wallpipebrackets.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777642">
+				<attribute name="Physics Position" value="-19.8438 3.17869 -0.141798" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777643">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100wallpipeline.mdl" />
+			</component>
+		</node>
+		<node id="16777393">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="MissileBlockRaptor" />
+			<attribute name="Position" value="12.6191 0.180075 -5.99934" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777692">
+				<attribute name="Model" value="Model;Models/MissileBlockRaptor.mdl" />
+				<attribute name="Material" value="Material;Materials/MissileBlockRaptor.xml" />
+			</component>
+			<component type="RigidBody" id="16777693">
+				<attribute name="Physics Position" value="12.6191 0.180075 -5.99934" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777694">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/MissileBlockRaptor.mdl" />
+			</component>
+		</node>
+		<node id="16777394">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100bench" />
+			<attribute name="Position" value="-13.111 0.230794 19.584" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777695">
+				<attribute name="Model" value="Model;Models/hanger100bench.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100benchsurface.xml;Materials/hanger100benchemit.xml;Materials/hanger100benchtransulentglass.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777696">
+				<attribute name="Physics Position" value="-13.111 0.230794 19.584" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777697">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100bench.mdl" />
+			</component>
+		</node>
+		<node id="16777395">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100controlpanel" />
+			<attribute name="Position" value="5.69013 0.656124 -17.7378" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777698">
+				<attribute name="Model" value="Model;Models/hanger100controlpanel.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100controlpanelsurface.xml;Materials/hanger100controlpanelinterface.xml" />
+			</component>
+			<component type="RigidBody" id="16777699">
+				<attribute name="Physics Position" value="5.69013 0.656124 -17.7378" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777700">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100controlpanel.mdl" />
+			</component>
+		</node>
+		<node id="16777396">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100controlunit" />
+			<attribute name="Position" value="10.0267 0.978994 -18.8539" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777701">
+				<attribute name="Model" value="Model;Models/hanger100controlunit.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100controlunitsurface.xml;Materials/hanger100controlunitpanel.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777702">
+				<attribute name="Physics Position" value="10.0267 0.978994 -18.8539" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777703">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100controlunit.mdl" />
+			</component>
+		</node>
+		<node id="16777397">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100geeblewall2" />
+			<attribute name="Position" value="1.71661e-05 4.5 -19.9648" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777704">
+				<attribute name="Model" value="Model;Models/hanger100geeblewall2.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100geeblewall.xml" />
+				<attribute name="Can Be Occluded" value="false" />
+			</component>
+			<component type="RigidBody" id="16777705">
+				<attribute name="Physics Position" value="1.71661e-05 4.5 -19.9648" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777706">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100geeblewall2.mdl" />
+			</component>
+		</node>
+		<node id="16777398">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100junctiontypec" />
+			<attribute name="Position" value="-13.2867 2.6167 -19.8386" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777707">
+				<attribute name="Model" value="Model;Models/hanger100junctiontypec.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100junctiontypec.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777708">
+				<attribute name="Physics Position" value="-13.2867 2.6167 -19.8386" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777709">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100junctiontypec.mdl" />
+			</component>
+		</node>
+		<node id="16777399">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100loadingplatformbig" />
+			<attribute name="Position" value="-9.2047 0.224413 23.4937" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777710">
+				<attribute name="Model" value="Model;Models/hanger100loadingplatformbig.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100loadingplatformbig.xml" />
+			</component>
+			<component type="RigidBody" id="16777711">
+				<attribute name="Physics Position" value="-9.2047 0.224413 23.4937" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777712">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100loadingplatformbig.mdl" />
+			</component>
+		</node>
+		<node id="16777400">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100lockervent1" />
+			<attribute name="Position" value="13.8126 0.205582 19.3658" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777713">
+				<attribute name="Model" value="Model;Models/hanger100lockervent1.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100lockerventborder.xml;" />
+			</component>
+			<component type="RigidBody" id="16777714">
+				<attribute name="Physics Position" value="13.8126 0.205582 19.3658" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777715">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100lockervent1.mdl" />
+			</component>
+		</node>
+		<node id="16777401">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100miscpipe1" />
+			<attribute name="Position" value="0.77154 3.18567 19.6728" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777716">
+				<attribute name="Model" value="Model;Models/hanger100miscpipe1.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100miscpipe.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777717">
+				<attribute name="Physics Position" value="0.77154 3.18567 19.6728" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777718">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100miscpipe1.mdl" />
+			</component>
+		</node>
+		<node id="16777402">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100panellight" />
+			<attribute name="Position" value="-8.84203 8.98345 16.0755" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777719">
+				<attribute name="Model" value="Model;Models/hanger100panellight.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100panellightsurface.xml;Materials/hanger100panellightemit.xml;Materials/hanger100panellightglass.xml" />
+			</component>
+			<component type="RigidBody" id="16777720">
+				<attribute name="Physics Position" value="-8.84203 8.98345 16.0755" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777721">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100panellight.mdl" />
+			</component>
+		</node>
+		<node id="16777403">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100pillarplatestypea" />
+			<attribute name="Position" value="-5.21379 0.90846 -19.1723" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777722">
+				<attribute name="Model" value="Model;Models/hanger100pillarplatestypea.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100pillarplatestypea.xml" />
+			</component>
+			<component type="RigidBody" id="16777723">
+				<attribute name="Physics Position" value="-5.21379 0.90846 -19.1723" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777724">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100pillarplatestypea.mdl" />
+			</component>
+		</node>
+		<node id="16777404">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100pillarplatestypeb" />
+			<attribute name="Position" value="-8.21378 0.906274 -19.1723" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777725">
+				<attribute name="Model" value="Model;Models/hanger100pillarplatestypeb.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100pillarplatestypeb.xml" />
+			</component>
+			<component type="RigidBody" id="16777726">
+				<attribute name="Physics Position" value="-8.21378 0.906274 -19.1723" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777727">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100pillarplatestypeb.mdl" />
+			</component>
+		</node>
+		<node id="16777405">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100printersquare" />
+			<attribute name="Position" value="13.8106 1.15381 -18.2466" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777728">
+				<attribute name="Model" value="Model;Models/hanger100printersquare.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100printersquaresurface.xml;Materials/hanger100printersquareyellowemit.xml;Materials/hanger100printersquareglass.xml;Materials/hanger100printersquarewhiteemit.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777729">
+				<attribute name="Physics Position" value="13.8106 1.15381 -18.2466" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777730">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100printersquare.mdl" />
+			</component>
+		</node>
+		<node id="16777406">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100sign" />
+			<attribute name="Position" value="-12.5156 4.1564 19.8253" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777731">
+				<attribute name="Model" value="Model;Models/hanger100sign.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100sign.xml" />
+			</component>
+			<component type="RigidBody" id="16777732">
+				<attribute name="Physics Position" value="-12.5156 4.1564 19.8253" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777733">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100sign.mdl" />
+			</component>
+		</node>
+		<node id="16777407">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100toolbox" />
+			<attribute name="Position" value="2.90748 0.434369 19.5006" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777734">
+				<attribute name="Model" value="Model;Models/hanger100toolbox.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100toolboxrubber.xml;Materials/hanger100toolboxwheelmetal.xml;Materials/hanger100toolboxsurface.xml;Materials/hanger100toolboxhandles.xml" />
+				<attribute name="Is Occluder" value="true" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777735">
+				<attribute name="Physics Position" value="2.90748 0.434369 19.5006" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777736">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100toolbox.mdl" />
+			</component>
+		</node>
+		<node id="16777409">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100junctiontypea" />
+			<attribute name="Position" value="2.56957 1.99714 19.7111" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777740">
+				<attribute name="Model" value="Model;Models/hanger100junctiontypea.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100junctiontypeapipes.xml;Materials/hanger100junctiontypeasuurface.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777741">
+				<attribute name="Physics Position" value="2.56957 1.99714 19.7111" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777742">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100junctiontypea.mdl" />
+			</component>
+		</node>
+		<node id="16777411">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100controlpanel" />
+			<attribute name="Position" value="4.02599 0.656124 -17.7378" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777746">
+				<attribute name="Model" value="Model;Models/hanger100controlpanel.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100controlpanelsurface.xml;Materials/hanger100controlpanelinterface.xml" />
+			</component>
+			<component type="RigidBody" id="16777747">
+				<attribute name="Physics Position" value="4.02599 0.656124 -17.7378" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777748">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100controlpanel.mdl" />
+			</component>
+		</node>
+		<node id="16777412">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100wallpipeline2" />
+			<attribute name="Position" value="-19.8438 2.55079 -0.141798" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777749">
+				<attribute name="Model" value="Model;Models/hanger100wallpipeline.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100wallpipelinepipe.xml;Materials/hanger100wallpipebrackets.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777750">
+				<attribute name="Physics Position" value="-19.8438 2.55079 -0.141798" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777751">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100wallpipeline.mdl" />
+			</component>
+		</node>
+		<node id="16777413">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100wallpipeline" />
+			<attribute name="Position" value="19.855 3.17869 -0.141798" />
+			<attribute name="Rotation" value="-4.37114e-08 0 1 -0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777752">
+				<attribute name="Model" value="Model;Models/hanger100wallpipeline.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100wallpipelinepipe.xml;Materials/hanger100wallpipebrackets.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777753">
+				<attribute name="Physics Rotation" value="-4.37114e-08 0 1 0" />
+				<attribute name="Physics Position" value="19.855 3.17869 -0.141798" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777754">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100wallpipeline.mdl" />
+			</component>
+		</node>
+		<node id="16777414">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100wallpipeline2" />
+			<attribute name="Position" value="19.855 2.55079 -0.141798" />
+			<attribute name="Rotation" value="-4.37114e-08 0 1 -0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777755">
+				<attribute name="Model" value="Model;Models/hanger100wallpipeline.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100wallpipelinepipe.xml;Materials/hanger100wallpipebrackets.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777756">
+				<attribute name="Physics Rotation" value="-4.37114e-08 0 1 0" />
+				<attribute name="Physics Position" value="19.855 2.55079 -0.141798" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777757">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100wallpipeline.mdl" />
+			</component>
+		</node>
+		<node id="16777415">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="Manifest" />
+			<attribute name="Position" value="0 0 0" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<node id="16777416">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="hanger100containerbig111" />
+				<attribute name="Position" value="-12.4475 0.47595 1.0064" />
+				<attribute name="Rotation" value="0.992809 0 -0.119711 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="StaticModel" id="16777386">
+					<attribute name="Model" value="Model;Models/hanger100containerbig111.mdl" />
+					<attribute name="Material" value="Material;Materials/hanger100containerbig111.xml;Materials/CautionStrip.xml" />
+					<attribute name="Cast Shadows" value="true" />
+				</component>
+				<component type="RigidBody" id="16777387">
+					<attribute name="Physics Rotation" value="0.992809 0 -0.119711 0" />
+					<attribute name="Physics Position" value="-12.4475 0.47595 1.0064" />
+					<attribute name="Collision Layer" value="2" />
+					<attribute name="Use Gravity" value="false" />
+				</component>
+				<component type="CollisionShape" id="16777388">
+					<attribute name="Shape Type" value="TriangleMesh" />
+					<attribute name="Model" value="Model;Models/hanger100containerbig111.mdl" />
+				</component>
+			</node>
+			<node id="16777417">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="hanger100containerbig112" />
+				<attribute name="Position" value="12.4192 0.47595 2.95487" />
+				<attribute name="Rotation" value="1 0 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="StaticModel" id="16777389">
+					<attribute name="Model" value="Model;Models/hanger100containerbig112.mdl" />
+					<attribute name="Material" value="Material;Materials/hanger100containerbig112.xml;Materials/CautionStrip.xml" />
+					<attribute name="Cast Shadows" value="true" />
+				</component>
+				<component type="RigidBody" id="16777390">
+					<attribute name="Physics Position" value="12.4192 0.47595 2.95487" />
+					<attribute name="Collision Layer" value="2" />
+					<attribute name="Use Gravity" value="false" />
+				</component>
+				<component type="CollisionShape" id="16777391">
+					<attribute name="Shape Type" value="TriangleMesh" />
+					<attribute name="Model" value="Model;Models/hanger100containerbig112.mdl" />
+				</component>
+			</node>
+			<node id="16777418">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="hanger100containerbig211" />
+				<attribute name="Position" value="12.8664 0.47595 -0.877645" />
+				<attribute name="Rotation" value="1 0 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="StaticModel" id="16777392">
+					<attribute name="Model" value="Model;Models/hanger100containerbig211.mdl" />
+					<attribute name="Material" value="Material;Materials/hanger100containerbig211.xml;Materials/CautionStrip.xml" />
+					<attribute name="Cast Shadows" value="true" />
+				</component>
+				<component type="RigidBody" id="16777393">
+					<attribute name="Physics Position" value="12.8664 0.47595 -0.877645" />
+					<attribute name="Collision Layer" value="2" />
+					<attribute name="Use Gravity" value="false" />
+				</component>
+				<component type="CollisionShape" id="16777394">
+					<attribute name="Shape Type" value="TriangleMesh" />
+					<attribute name="Model" value="Model;Models/hanger100containerbig211.mdl" />
+				</component>
+			</node>
+			<node id="16777419">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="hanger100containerbig212" />
+				<attribute name="Position" value="-13.3779 0.47595 5.00346" />
+				<attribute name="Rotation" value="1 0 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="StaticModel" id="16777395">
+					<attribute name="Model" value="Model;Models/hanger100containerbig212.mdl" />
+					<attribute name="Material" value="Material;Materials/hanger100containerbig212.xml;Materials/CautionStrip.xml" />
+					<attribute name="Cast Shadows" value="true" />
+				</component>
+				<component type="RigidBody" id="16777396">
+					<attribute name="Physics Position" value="-13.3779 0.47595 5.00346" />
+					<attribute name="Collision Layer" value="2" />
+					<attribute name="Use Gravity" value="false" />
+				</component>
+				<component type="CollisionShape" id="16777397">
+					<attribute name="Shape Type" value="TriangleMesh" />
+					<attribute name="Model" value="Model;Models/hanger100containerbig212.mdl" />
+				</component>
+			</node>
+			<node id="16777420">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="hanger100containerbig112" />
+				<attribute name="Position" value="12.4192 0.47595 4.38922" />
+				<attribute name="Rotation" value="1 0 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="StaticModel" id="16777758">
+					<attribute name="Model" value="Model;Models/hanger100containerbig112.mdl" />
+					<attribute name="Material" value="Material;Materials/hanger100containerbig112.xml;Materials/CautionStrip.xml" />
+					<attribute name="Cast Shadows" value="true" />
+				</component>
+				<component type="RigidBody" id="16777759">
+					<attribute name="Physics Position" value="12.4192 0.47595 4.38922" />
+					<attribute name="Collision Layer" value="2" />
+					<attribute name="Use Gravity" value="false" />
+				</component>
+				<component type="CollisionShape" id="16777760">
+					<attribute name="Shape Type" value="TriangleMesh" />
+					<attribute name="Model" value="Model;Models/hanger100containerbig112.mdl" />
+				</component>
+			</node>
+			<node id="16777423">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="hanger100containerbig211" />
+				<attribute name="Position" value="12.8664 1.49293 -0.877645" />
+				<attribute name="Rotation" value="0.747028 0 0.664793 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="StaticModel" id="16777767">
+					<attribute name="Model" value="Model;Models/hanger100containerbig211.mdl" />
+					<attribute name="Material" value="Material;Materials/hanger100containerbig211.xml;Materials/CautionStrip.xml" />
+					<attribute name="Cast Shadows" value="true" />
+				</component>
+				<component type="RigidBody" id="16777768">
+					<attribute name="Physics Rotation" value="0.747028 0 0.664793 0" />
+					<attribute name="Physics Position" value="12.8664 1.49293 -0.877645" />
+					<attribute name="Collision Layer" value="2" />
+					<attribute name="Use Gravity" value="false" />
+				</component>
+				<component type="CollisionShape" id="16777769">
+					<attribute name="Shape Type" value="TriangleMesh" />
+					<attribute name="Model" value="Model;Models/hanger100containerbig211.mdl" />
+				</component>
+			</node>
+			<node id="16777425">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="hanger100containerbig111" />
+				<attribute name="Position" value="-12.4475 0.47595 2.95487" />
+				<attribute name="Rotation" value="1 0 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="StaticModel" id="16777773">
+					<attribute name="Model" value="Model;Models/hanger100containerbig111.mdl" />
+					<attribute name="Material" value="Material;Materials/hanger100containerbig111.xml;Materials/CautionStrip.xml" />
+					<attribute name="Cast Shadows" value="true" />
+				</component>
+				<component type="RigidBody" id="16777774">
+					<attribute name="Physics Position" value="-12.4475 0.47595 2.95487" />
+					<attribute name="Collision Layer" value="2" />
+					<attribute name="Use Gravity" value="false" />
+				</component>
+				<component type="CollisionShape" id="16777775">
+					<attribute name="Shape Type" value="TriangleMesh" />
+					<attribute name="Model" value="Model;Models/hanger100containerbig111.mdl" />
+				</component>
+			</node>
+		</node>
+	</node>
+	<node id="16777216">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="Hanger100" />
+		<attribute name="Position" value="0 0 0" />
+		<attribute name="Rotation" value="1 0 0 0" />
+		<attribute name="Scale" value="1 1 1" />
+		<attribute name="Variables" />
+		<node id="16777235">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100buffers2" />
+			<attribute name="Position" value="14.6649 8.34359 -1.43051e-06" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777270">
+				<attribute name="Model" value="Model;Models/hanger100buffers2.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100buffers.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777271">
+				<attribute name="Physics Position" value="14.6649 8.34359 -1.43051e-06" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777272">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100buffers2.mdl" />
+			</component>
+		</node>
+		<node id="16777236">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100ceilinglight" />
+			<attribute name="Position" value="-16.4569 7.927 -1.44729e-05" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777273">
+				<attribute name="Model" value="Model;Models/hanger100ceilinglight.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100ceiliinglight.xml;Materials/hanger100emit.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777274">
+				<attribute name="Physics Position" value="-16.4569 7.927 -1.44729e-05" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777275">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100ceilinglight.mdl" />
+			</component>
+		</node>
+		<node id="16777237">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100ceilinglight2" />
+			<attribute name="Position" value="16.4569 7.927 1.12143e-06" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777276">
+				<attribute name="Model" value="Model;Models/hanger100ceilinglight2.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100ceiliinglight.xml;Materials/hanger100emit.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777277">
+				<attribute name="Physics Position" value="16.4569 7.927 1.12143e-06" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777278">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100ceilinglight2.mdl" />
+			</component>
+		</node>
+		<node id="16777238">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100ceilingroofopening" />
+			<attribute name="Position" value="0 9.025 0" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777279">
+				<attribute name="Model" value="Model;Models/hanger100ceilingroofopening.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100ceilingroofopening.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777280">
+				<attribute name="Physics Position" value="0 9.025 0" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777281">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100ceilingroofopening.mdl" />
+			</component>
+		</node>
+		<node id="16777241">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100floorglass" />
+			<attribute name="Position" value="0 -0.00323509 8.10623e-06" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777288">
+				<attribute name="Model" value="Model;Models/hanger100floorglass.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100glass.001.xml" />
+			</component>
+			<component type="RigidBody" id="16777289">
+				<attribute name="Physics Position" value="0 -0.00323509 8.10623e-06" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777290">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100floorglass.mdl" />
+			</component>
+		</node>
+		<node id="16777242">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100geeblewall" />
+			<attribute name="Position" value="-1.71661e-05 4.5 19.9511" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777291">
+				<attribute name="Model" value="Model;Models/hanger100geeblewall.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100geeblewall.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777292">
+				<attribute name="Physics Position" value="-1.71661e-05 4.5 19.9511" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777293">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100geeblewall.mdl" />
+			</component>
+		</node>
+		<node id="16777243">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100geeblewall2" />
+			<attribute name="Position" value="1.71661e-05 4.5 -19.9648" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777294">
+				<attribute name="Model" value="Model;Models/hanger100geeblewall2.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100geeblewall.xml" />
+				<attribute name="Is Occluder" value="true" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777295">
+				<attribute name="Physics Position" value="1.71661e-05 4.5 -19.9648" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777296">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100geeblewall2.mdl" />
+			</component>
+		</node>
+		<node id="16777244">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100glassbeam" />
+			<attribute name="Position" value="-16.4665 1.8 1.89188" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777297">
+				<attribute name="Model" value="Model;Models/hanger100glassbeam.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100glass.xml;Materials/hanger100emit.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777298">
+				<attribute name="Physics Position" value="-16.4665 1.8 1.89188" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777299">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100glassbeam.mdl" />
+			</component>
+		</node>
+		<node id="16777245">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100glassbeam1" />
+			<attribute name="Position" value="-16.4665 1.8 9.68492" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777300">
+				<attribute name="Model" value="Model;Models/hanger100glassbeam1.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100glass.xml;Materials/hanger100emit.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777301">
+				<attribute name="Physics Position" value="-16.4665 1.8 9.68492" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777302">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100glassbeam1.mdl" />
+			</component>
+		</node>
+		<node id="16777246">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100glassbeam2" />
+			<attribute name="Position" value="-16.4665 1.8 -11.1019" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777303">
+				<attribute name="Model" value="Model;Models/hanger100glassbeam2.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100glass.xml;Materials/hanger100emit.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777304">
+				<attribute name="Physics Position" value="-16.4665 1.8 -11.1019" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777305">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100glassbeam2.mdl" />
+			</component>
+		</node>
+		<node id="16777247">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100glassbeam4" />
+			<attribute name="Position" value="16.4665 1.8 14.4777" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777306">
+				<attribute name="Model" value="Model;Models/hanger100glassbeam4.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100glass.xml;Materials/hanger100emit.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777307">
+				<attribute name="Physics Position" value="16.4665 1.8 14.4777" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777308">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100glassbeam4.mdl" />
+			</component>
+		</node>
+		<node id="16777248">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100glassbeam5" />
+			<attribute name="Position" value="16.4665 1.8 1.3571" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777309">
+				<attribute name="Model" value="Model;Models/hanger100glassbeam5.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100glass.xml;Materials/hanger100emit.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777310">
+				<attribute name="Physics Position" value="16.4665 1.8 1.3571" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777311">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100glassbeam5.mdl" />
+			</component>
+		</node>
+		<node id="16777249">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100glassbeam6" />
+			<attribute name="Position" value="16.4665 1.8 -12.5887" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777312">
+				<attribute name="Model" value="Model;Models/hanger100glassbeam6.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100glass.xml;Materials/hanger100emit.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777313">
+				<attribute name="Physics Position" value="16.4665 1.8 -12.5887" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777314">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100glassbeam6.mdl" />
+			</component>
+		</node>
+		<node id="16777251">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100innerroofborderlong1" />
+			<attribute name="Position" value="9.13047 9.55 2.14888e-05" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777318">
+				<attribute name="Model" value="Model;Models/hanger100innerroofborderlong1.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100innerroofborderlong.xml;Materials/hanger100transulcentglass.xml;Materials/hanger100innerroofborderwhiteemit.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777319">
+				<attribute name="Physics Position" value="9.13047 9.55 2.14888e-05" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777320">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100innerroofborderlong1.mdl" />
+			</component>
+		</node>
+		<node id="16777252">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100innerroofborderlong2" />
+			<attribute name="Position" value="-9.13047 9.55 -3.37519e-05" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777321">
+				<attribute name="Model" value="Model;Models/hanger100innerroofborderlong2.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100innerroofborderlong.xml;Materials/hanger100transulcentglass.xml;Materials/hanger100innerroofborderwhiteemit.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777322">
+				<attribute name="Physics Position" value="-9.13047 9.55 -3.37519e-05" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777323">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100innerroofborderlong2.mdl" />
+			</component>
+		</node>
+		<node id="16777253">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100innerroofbordershort1" />
+			<attribute name="Position" value="1.04904e-05 9.55 -12.1144" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777324">
+				<attribute name="Model" value="Model;Models/hanger100innerroofbordershort1.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100innerroofbordershort.xml;Materials/hanger100transulcentglass.xml;Materials/hanger100innerroofborderwhiteemit.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777325">
+				<attribute name="Physics Position" value="1.04904e-05 9.55 -12.1144" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777326">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100innerroofbordershort1.mdl" />
+			</component>
+		</node>
+		<node id="16777254">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100innerroofbordershort2" />
+			<attribute name="Position" value="-2.88793e-05 9.55 12.1144" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777327">
+				<attribute name="Model" value="Model;Models/hanger100innerroofbordershort2.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100innerroofbordershort.xml;Materials/hanger100transulcentglass.xml;Materials/hanger100innerroofborderwhiteemit.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777328">
+				<attribute name="Physics Position" value="-2.88793e-05 9.55 12.1144" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777329">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100innerroofbordershort2.mdl" />
+			</component>
+		</node>
+		<node id="16777255">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100mainroof" />
+			<attribute name="Position" value="1.67942e-16 10.0745 0" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777330">
+				<attribute name="Model" value="Model;Models/hanger100mainroof.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100ceilingroofopening.xml" />
+			</component>
+			<component type="RigidBody" id="16777331">
+				<attribute name="Physics Position" value="1.67942e-16 10.0745 0" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777332">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100mainroof.mdl" />
+			</component>
+		</node>
+		<node id="16777256">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100mainroofdoor" />
+			<attribute name="Position" value="-0.0114157 10.2456 0" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777333">
+				<attribute name="Model" value="Model;Models/hanger100mainroofdoor.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100mainroofdoor.xml;Materials/hanger100transulcentglass.xml;Materials/hanger100mainroofdooremit.xml" />
+				<attribute name="Max Lights" value="1" />
+			</component>
+			<component type="RigidBody" id="16777334">
+				<attribute name="Physics Position" value="-0.0114157 10.2456 0" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777335">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100mainroofdoor.mdl" />
+			</component>
+		</node>
+		<node id="16777257">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100mainwall" />
+			<attribute name="Position" value="1.71661e-05 4.5 -20.003" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777336">
+				<attribute name="Model" value="Model;Models/hanger100mainwall.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100wall.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777337">
+				<attribute name="Physics Position" value="1.71661e-05 4.5 -20.003" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777338">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100mainwall.mdl" />
+			</component>
+		</node>
+		<node id="16777259">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100walkwaystorage1" />
+			<attribute name="Position" value="-17.021 5.60731 -1.71661e-05" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777342">
+				<attribute name="Model" value="Model;Models/hanger100walkwaystorage1.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100walkwaystorage.xml;Materials/hanger100glassdark.xml" />
+			</component>
+			<component type="RigidBody" id="16777343">
+				<attribute name="Physics Position" value="-17.021 5.60731 -1.71661e-05" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777344">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100walkwaystorage1.mdl" />
+			</component>
+		</node>
+		<node id="16777260">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100walkwaystorage2" />
+			<attribute name="Position" value="17.021 5.60731 1.52588e-05" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777345">
+				<attribute name="Model" value="Model;Models/hanger100walkwaystorage2.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100walkwaystorage.xml;Materials/hanger100glassdark.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777346">
+				<attribute name="Physics Position" value="17.021 5.60731 1.52588e-05" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777347">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100walkwaystorage2.mdl" />
+			</component>
+		</node>
+		<node id="16777261">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100wallbase" />
+			<attribute name="Position" value="20.05 4.5 1.71661e-05" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777348">
+				<attribute name="Model" value="Model;Models/hanger100wallbase.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100wall.xml" />
+			</component>
+			<component type="RigidBody" id="16777349">
+				<attribute name="Physics Position" value="20.05 4.5 1.71661e-05" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777350">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100wallbase.mdl" />
+			</component>
+		</node>
+		<node id="16777262">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100wallbase2" />
+			<attribute name="Position" value="-1.71661e-05 4.5 20.05" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777351">
+				<attribute name="Model" value="Model;Models/hanger100wallbase2.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100diffuse.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777352">
+				<attribute name="Physics Position" value="-1.71661e-05 4.5 20.05" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777353">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100wallbase2.mdl" />
+			</component>
+		</node>
+		<node id="16777263">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100wallbase3" />
+			<attribute name="Position" value="-20.05 4.5 -1.71661e-05" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777354">
+				<attribute name="Model" value="Model;Models/hanger100wallbase3.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100wall.xml" />
+			</component>
+			<component type="RigidBody" id="16777355">
+				<attribute name="Physics Position" value="-20.05 4.5 -1.71661e-05" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777356">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100wallbase3.mdl" />
+			</component>
+		</node>
+		<node id="16777264">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100wallstorageunit" />
+			<attribute name="Position" value="0 3.52 28.9307" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777357">
+				<attribute name="Model" value="Model;Models/hanger100wallstorageunit.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100wallstorageunit.xml" />
+			</component>
+			<component type="RigidBody" id="16777358">
+				<attribute name="Physics Position" value="0 3.52 28.9307" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777359">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100wallstorageunit.mdl" />
+			</component>
+		</node>
+		<node id="16777265">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100wallthickpanel1" />
+			<attribute name="Position" value="-19.8786 1 -1.71661e-05" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777360">
+				<attribute name="Model" value="Model;Models/hanger100wallthickpanel1.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100wallthickpanel.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777361">
+				<attribute name="Physics Position" value="-19.8786 1 -1.71661e-05" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777362">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100wallthickpanel1.mdl" />
+			</component>
+		</node>
+		<node id="16777240">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100floor" />
+			<attribute name="Position" value="0 -0.025 -0.000973344" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777285">
+				<attribute name="Model" value="Model;Models/hanger100floor.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100floor.xml;Materials/hanger100floorglass.xml;Materials/hanger100flooryellowemit.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777286">
+				<attribute name="Physics Position" value="0 -0.025 -0.000973344" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777287">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100floor.mdl" />
+			</component>
+		</node>
+		<node id="16777266">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100wallthickpanel2" />
+			<attribute name="Position" value="19.8786 1 1.71661e-05" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777363">
+				<attribute name="Model" value="Model;Models/hanger100wallthickpanel2.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100wallthickpanel.xml" />
+			</component>
+			<component type="RigidBody" id="16777364">
+				<attribute name="Physics Position" value="19.8786 1 1.71661e-05" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777365">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100wallthickpanel2.mdl" />
+			</component>
+		</node>
+		<node id="16777234">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100buffers1" />
+			<attribute name="Position" value="-14.6649 8.34359 -1.00136e-05" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777267">
+				<attribute name="Model" value="Model;Models/hanger100buffers1.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100buffers.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777268">
+				<attribute name="Physics Position" value="-14.6649 8.34359 -1.00136e-05" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777269">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100buffers1.mdl" />
+			</component>
+		</node>
+		<node id="16777376">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100circularceil" />
+			<attribute name="Position" value="-3.04542e-07 5.25928 -45.0499" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777644">
+				<attribute name="Model" value="Model;Models/hanger100circularceil.mdl" />
+				<attribute name="Material" value="Material;Materials/CircularCeilingCement.xml" />
+			</component>
+			<component type="RigidBody" id="16777645">
+				<attribute name="Physics Position" value="-3.04542e-07 5.25928 -45.0499" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777646">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/Circle.002.mdl" />
+			</component>
+		</node>
+		<node id="16777377">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="CircularFloorCeiling" />
+			<attribute name="Position" value="-2.8882e-07 -0.216341 -45.0501" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777647">
+				<attribute name="Model" value="Model;Models/CircularFloorCeiling.mdl" />
+				<attribute name="Material" value="Material;Materials/CircularFloorCeilingCement.xml" />
+			</component>
+			<component type="RigidBody" id="16777648">
+				<attribute name="Physics Position" value="-2.8882e-07 -0.216341 -45.0501" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777649">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/CircularFloorCeiling.mdl" />
+			</component>
+		</node>
+		<node id="16777378">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="CircularFloorCeiling1" />
+			<attribute name="Position" value="-2.8882e-07 -3.21634 -45.0501" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777650">
+				<attribute name="Model" value="Model;Models/CircularFloorCeiling1.mdl" />
+				<attribute name="Material" value="Material;Materials/CircularFloorCeilingCement.xml" />
+			</component>
+			<component type="RigidBody" id="16777651">
+				<attribute name="Physics Position" value="-2.8882e-07 -3.21634 -45.0501" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777652">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/CircularFloorCeiling1.mdl" />
+			</component>
+		</node>
+		<node id="16777379">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="CircularFloorCeiling2" />
+			<attribute name="Position" value="-2.8882e-07 -6.21634 -45.0501" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777653">
+				<attribute name="Model" value="Model;Models/CircularFloorCeiling2.mdl" />
+				<attribute name="Material" value="Material;Materials/CircularFloorCeilingCement.xml" />
+			</component>
+			<component type="RigidBody" id="16777654">
+				<attribute name="Physics Position" value="-2.8882e-07 -6.21634 -45.0501" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777655">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/CircularFloorCeiling2.mdl" />
+			</component>
+		</node>
+		<node id="16777380">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="CircularGlass" />
+			<attribute name="Position" value="-2.91155e-07 0.34546 -45.0501" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777656">
+				<attribute name="Model" value="Model;Models/CircularGlass.mdl" />
+				<attribute name="Material" value="Material;Materials/CircularGlass.xml" />
+			</component>
+			<component type="RigidBody" id="16777657">
+				<attribute name="Physics Position" value="-2.91155e-07 0.34546 -45.0501" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777658">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/CircularGlass.mdl" />
+			</component>
+		</node>
+		<node id="16777381">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="CircularOvalCeilingDish" />
+			<attribute name="Position" value="-3.41439e-07 5.74954 -45.0501" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777659">
+				<attribute name="Model" value="Model;Models/CircularOvalCeilingDish.mdl" />
+				<attribute name="Material" value="Material;Materials/CircularOvalCeilingDish.xml" />
+			</component>
+			<component type="RigidBody" id="16777660">
+				<attribute name="Physics Position" value="-3.41439e-07 5.74954 -45.0501" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777661">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/CircularOvalCeilingDish.mdl" />
+			</component>
+		</node>
+		<node id="16777382">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="CircularWall" />
+			<attribute name="Position" value="-0.000324528 2.74594 -45.0499" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777662">
+				<attribute name="Model" value="Model;Models/CircularWall.mdl" />
+				<attribute name="Material" value="Material;Materials/CircularWallCement.xml" />
+			</component>
+			<component type="RigidBody" id="16777663">
+				<attribute name="Physics Position" value="-0.000324528 2.74594 -45.0499" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777664">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/CircularWall.mdl" />
+			</component>
+		</node>
+		<node id="16777383">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="CircularWallBelowLevel" />
+			<attribute name="Position" value="-0.000509823 -3.88018 -45.0499" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777665">
+				<attribute name="Model" value="Model;Models/CircularWallBelowLevel.mdl" />
+				<attribute name="Material" value="Material;Materials/CircularWallCement.xml" />
+			</component>
+			<component type="RigidBody" id="16777666">
+				<attribute name="Physics Position" value="-0.000509823 -3.88018 -45.0499" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777667">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/CircularWallBelowLevel.mdl" />
+			</component>
+		</node>
+		<node id="16777384">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="DomeHolographic" />
+			<attribute name="Position" value="7.91431e-09 5.28768 -45.0501" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777668">
+				<attribute name="Model" value="Model;Models/DomeHolographic.mdl" />
+				<attribute name="Material" value="Material;Materials/DomeHolographic.xml" />
+			</component>
+			<component type="RigidBody" id="16777669">
+				<attribute name="Physics Position" value="7.91431e-09 5.28768 -45.0501" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777670">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/DomeHolographic.mdl" />
+			</component>
+		</node>
+		<node id="16777385">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="HallDoor" />
+			<attribute name="Position" value="-10.8878 0.840859 -45.0493" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777671">
+				<attribute name="Model" value="Model;Models/HallDoor.mdl" />
+				<attribute name="Material" value="Material;Materials/SteelDoulbeDoor.001.xml" />
+			</component>
+			<component type="RigidBody" id="16777672">
+				<attribute name="Physics Position" value="-10.8878 0.840859 -45.0493" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777673">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/HallDoor.mdl" />
+			</component>
+		</node>
+		<node id="16777386">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="HallDoor2" />
+			<attribute name="Position" value="-0.000705244 0.840859 -70.2952" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777674">
+				<attribute name="Model" value="Model;Models/HallDoor2.mdl" />
+				<attribute name="Material" value="Material;Materials/SteelDoulbeDoor.001.xml" />
+			</component>
+			<component type="RigidBody" id="16777675">
+				<attribute name="Physics Position" value="-0.000705244 0.840859 -70.2952" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777676">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/HallDoor2.mdl" />
+			</component>
+		</node>
+		<node id="16777387">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="HallLong1" />
+			<attribute name="Position" value="-0.000705242 1.00428 -61.6564" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777677">
+				<attribute name="Model" value="Model;Models/HallLong1.mdl" />
+				<attribute name="Material" value="Material;Materials/HallLongCement.xml" />
+			</component>
+			<component type="RigidBody" id="16777678">
+				<attribute name="Physics Position" value="-0.000705242 1.00428 -61.6564" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777679">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/HallLong1.mdl" />
+			</component>
+		</node>
+		<node id="16777388">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="HallLong2" />
+			<attribute name="Position" value="16.6064 1.00428 -45.0508" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777680">
+				<attribute name="Model" value="Model;Models/HallLong2.mdl" />
+				<attribute name="Material" value="Material;Materials/HallLongCement.xml" />
+			</component>
+			<component type="RigidBody" id="16777681">
+				<attribute name="Physics Position" value="16.6064 1.00428 -45.0508" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777682">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/HallLong2.mdl" />
+			</component>
+		</node>
+		<node id="16777389">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="HallShort" />
+			<attribute name="Position" value="-9.41796 1.00428 -45.0493" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777683">
+				<attribute name="Model" value="Model;Models/HallShort.mdl" />
+				<attribute name="Material" value="Material;Materials/HallShortCement.xml" />
+			</component>
+			<component type="RigidBody" id="16777684">
+				<attribute name="Physics Position" value="-9.41796 1.00428 -45.0493" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777685">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/HallShort.mdl" />
+			</component>
+		</node>
+		<node id="16777390">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="SurfacePlane" />
+			<attribute name="Position" value="1.37329e-05 -0.264999 -36.0376" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777686">
+				<attribute name="Model" value="Model;Models/SurfacePlane.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100wall.xml" />
+			</component>
+			<component type="RigidBody" id="16777687">
+				<attribute name="Physics Position" value="1.37329e-05 -0.264999 -36.0376" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777688">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/SurfacePlane.mdl" />
+			</component>
+		</node>
+		<node id="16777391">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="hanger100hallway" />
+			<attribute name="Position" value="1.38283e-05 2.3759 -26.3509" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777689">
+				<attribute name="Model" value="Model;Models/hanger100hallway.mdl" />
+				<attribute name="Material" value="Material;Materials/CircularCeilingCement.xml" />
+			</component>
+			<component type="RigidBody" id="16777690">
+				<attribute name="Physics Position" value="1.38283e-05 2.3759 -26.3509" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777691">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/hanger100hallway.mdl" />
+			</component>
+		</node>
+	</node>
+	<node id="16777449">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="Scorpion" />
+		<attribute name="Position" value="-0.246669 -0.051565 0.136344" />
+		<attribute name="Rotation" value="1 0 0 0" />
+		<attribute name="Scale" value="1 1 1" />
+		<attribute name="Variables" />
+		<node id="16777450">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="Scorpion" />
+			<attribute name="Position" value="0.0569719 1.37359 0.338702" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777816">
+				<attribute name="Model" value="Model;Models/Scorpion.mdl" />
+				<attribute name="Material" value="Material;Materials/scorpionsurface1.xml;Materials/scorpionsurface2.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777817">
+				<attribute name="Physics Position" value="-0.189697 1.32202 0.475046" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777818">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/Scorpion.mdl" />
+			</component>
+		</node>
+		<node id="16777451">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="ShipCockpitFloorLadder" />
+			<attribute name="Position" value="0 0.909385 -4.02154" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777819">
+				<attribute name="Model" value="Model;Models/ShipCockpitFloorLadder.mdl" />
+				<attribute name="Material" value="Material;Materials/scorpionsurfacecockpit.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777820">
+				<attribute name="Physics Position" value="-0.246669 0.85782 -3.8852" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777821">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/ShipCockpitFloorLadder.mdl" />
+			</component>
+		</node>
+		<node id="16777452">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="ShipCockpitFloorMain" />
+			<attribute name="Position" value="-4.90296e-08 0.910249 -2.66786" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777822">
+				<attribute name="Model" value="Model;Models/ShipCockpitFloorMain.mdl" />
+				<attribute name="Material" value="Material;Materials/scorpionsurfacecockpit.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777823">
+				<attribute name="Physics Position" value="-0.246669 0.858684 -2.53152" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777824">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/ShipCockpitFloorMain.mdl" />
+			</component>
+		</node>
+		<node id="16777453">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="ShipCockpitGlassLower" />
+			<attribute name="Position" value="0.0569636 0.775313 -4.17215" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777825">
+				<attribute name="Model" value="Model;Models/ShipCockpitGlassLower.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100glass.001.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777826">
+				<attribute name="Physics Position" value="-0.189705 0.723748 -4.03581" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777827">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/ShipCockpitGlassLower.mdl" />
+			</component>
+		</node>
+		<node id="16777454">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="ShipCockpitGlassUpper" />
+			<attribute name="Position" value="0.0569689 1.32902 -4.77047" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777828">
+				<attribute name="Model" value="Model;Models/ShipCockpitGlassUpper.mdl" />
+				<attribute name="Material" value="Material;Materials/hanger100glass.001.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777829">
+				<attribute name="Physics Position" value="-0.1897 1.27745 -4.63413" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777830">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/ShipCockpitGlassUpper.mdl" />
+			</component>
+		</node>
+		<node id="16777455">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="ShipHullCockpitEnclosure" />
+			<attribute name="Position" value="0.0569691 1.30609 -2.99454" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777831">
+				<attribute name="Model" value="Model;Models/ShipHullCockpitEnclosure.mdl" />
+				<attribute name="Material" value="Material;Materials/scorpionsurfacecockpit.xml;Materials/scorpioninternalblueemit.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777832">
+				<attribute name="Physics Position" value="-0.1897 1.25452 -2.8582" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777833">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/ShipHullCockpitEnclosure.mdl" />
+			</component>
+		</node>
+		<node id="16777456">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="ShipLegs" />
+			<attribute name="Position" value="0.0569745 0.383364 2.36716" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777834">
+				<attribute name="Model" value="Model;Models/ShipLegs.mdl" />
+				<attribute name="Material" value="Material;Materials/scorpionsurfacelegs.xml" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+			<component type="RigidBody" id="16777835">
+				<attribute name="Physics Position" value="-0.189694 0.331799 2.5035" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777836">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/ShipLegs.mdl" />
+			</component>
+		</node>
+	</node>
+	<node id="16777500">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="Hanger100Lights" />
+		<attribute name="Position" value="0 0 0" />
+		<attribute name="Rotation" value="1 0 0 0" />
+		<attribute name="Scale" value="1 1 1" />
+		<attribute name="Variables" />
+		<node id="16777501">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="LightBar" />
+			<attribute name="Position" value="6.28641 9.78598 -0.728684" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<node id="16777502">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="" />
+				<attribute name="Position" value="-0.00024128 0.322514 9.61037" />
+				<attribute name="Rotation" value="0.707107 0.707107 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="Light" id="16777875">
+					<attribute name="Light Type" value="Spot" />
+					<attribute name="Brightness Multiplier" value="0.04" />
+					<attribute name="Range" value="30" />
+					<attribute name="Spot FOV" value="160" />
+				</component>
+			</node>
+			<node id="16777503">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="" />
+				<attribute name="Position" value="-0.000236511 0.322524 2.58356" />
+				<attribute name="Rotation" value="0.707107 0.707107 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="Light" id="16777876">
+					<attribute name="Light Type" value="Spot" />
+					<attribute name="Brightness Multiplier" value="0.04" />
+					<attribute name="Range" value="30" />
+					<attribute name="Spot FOV" value="160" />
+				</component>
+			</node>
+			<node id="16777504">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="" />
+				<attribute name="Position" value="-0.000236511 0.322524 6.12975" />
+				<attribute name="Rotation" value="0.707107 0.707107 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="Light" id="16777877">
+					<attribute name="Light Type" value="Spot" />
+					<attribute name="Brightness Multiplier" value="0" />
+					<attribute name="Range" value="30" />
+					<attribute name="Spot FOV" value="160" />
+					<attribute name="Cast Shadows" value="true" />
+				</component>
+			</node>
+		</node>
+		<node id="16777505">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="LightBar" />
+			<attribute name="Position" value="-6.55759 9.78598 -0.728684" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<node id="16777506">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="" />
+				<attribute name="Position" value="-0.00024128 0.322514 9.61037" />
+				<attribute name="Rotation" value="0.707107 0.707107 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="Light" id="16777878">
+					<attribute name="Light Type" value="Spot" />
+					<attribute name="Brightness Multiplier" value="0.04" />
+					<attribute name="Range" value="30" />
+					<attribute name="Spot FOV" value="160" />
+				</component>
+			</node>
+			<node id="16777507">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="" />
+				<attribute name="Position" value="-0.000236511 0.322524 2.58356" />
+				<attribute name="Rotation" value="0.707107 0.707107 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="Light" id="16777879">
+					<attribute name="Light Type" value="Spot" />
+					<attribute name="Brightness Multiplier" value="0.04" />
+					<attribute name="Range" value="30" />
+					<attribute name="Spot FOV" value="160" />
+				</component>
+			</node>
+			<node id="16777508">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="" />
+				<attribute name="Position" value="-0.000236511 0.322524 6.12975" />
+				<attribute name="Rotation" value="0.707107 0.707107 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="Light" id="16777880">
+					<attribute name="Light Type" value="Spot" />
+					<attribute name="Brightness Multiplier" value="0.1" />
+					<attribute name="Range" value="30" />
+					<attribute name="Spot FOV" value="160" />
+					<attribute name="Cast Shadows" value="true" />
+				</component>
+			</node>
+		</node>
+		<node id="16777509">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="LightBar" />
+			<attribute name="Position" value="2.46849 9.78598 -0.728684" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<node id="16777510">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="" />
+				<attribute name="Position" value="-0.00024128 0.322514 9.61037" />
+				<attribute name="Rotation" value="0.707107 0.707107 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="Light" id="16777881">
+					<attribute name="Light Type" value="Spot" />
+					<attribute name="Brightness Multiplier" value="0.04" />
+					<attribute name="Range" value="30" />
+					<attribute name="Spot FOV" value="160" />
+				</component>
+			</node>
+			<node id="16777511">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="" />
+				<attribute name="Position" value="-0.000236511 0.322524 2.58356" />
+				<attribute name="Rotation" value="0.707107 0.707107 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="Light" id="16777882">
+					<attribute name="Light Type" value="Spot" />
+					<attribute name="Brightness Multiplier" value="0.04" />
+					<attribute name="Range" value="30" />
+					<attribute name="Spot FOV" value="160" />
+				</component>
+			</node>
+			<node id="16777512">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="" />
+				<attribute name="Position" value="-0.000236511 0.322524 6.12975" />
+				<attribute name="Rotation" value="0.707107 0.707107 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="Light" id="16777883">
+					<attribute name="Light Type" value="Spot" />
+					<attribute name="Brightness Multiplier" value="0.2" />
+					<attribute name="Range" value="30" />
+					<attribute name="Spot FOV" value="160" />
+					<attribute name="Cast Shadows" value="true" />
+				</component>
+			</node>
+		</node>
+		<node id="16777513">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="LightBar" />
+			<attribute name="Position" value="-3.09749 9.78598 -0.728684" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<node id="16777514">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="" />
+				<attribute name="Position" value="-0.00024128 0.322514 9.61037" />
+				<attribute name="Rotation" value="0.707107 0.707107 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="Light" id="16777884">
+					<attribute name="Light Type" value="Spot" />
+					<attribute name="Brightness Multiplier" value="0.1" />
+					<attribute name="Range" value="30" />
+					<attribute name="Spot FOV" value="160" />
+				</component>
+			</node>
+			<node id="16777515">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="" />
+				<attribute name="Position" value="-0.000236511 0.322524 2.58356" />
+				<attribute name="Rotation" value="0.707107 0.707107 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="Light" id="16777885">
+					<attribute name="Light Type" value="Spot" />
+					<attribute name="Brightness Multiplier" value="0.1" />
+					<attribute name="Range" value="30" />
+					<attribute name="Spot FOV" value="160" />
+				</component>
+			</node>
+			<node id="16777516">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="" />
+				<attribute name="Position" value="-0.000236511 0.322524 6.12975" />
+				<attribute name="Rotation" value="0.707107 0.707107 0 0" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="Light" id="16777886">
+					<attribute name="Light Type" value="Spot" />
+					<attribute name="Brightness Multiplier" value="0.1" />
+					<attribute name="Range" value="30" />
+					<attribute name="Spot FOV" value="160" />
+					<attribute name="Cast Shadows" value="true" />
+				</component>
+			</node>
+		</node>
+	</node>
+	<node id="16777517">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="HangarLightsFillUp" />
+		<attribute name="Position" value="0 0 0" />
+		<attribute name="Rotation" value="1 0 0 0" />
+		<attribute name="Scale" value="1 1 1" />
+		<attribute name="Variables" />
+		<node id="16777518">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="A" />
+			<attribute name="Position" value="3.92434 1.00598 3.03121" />
+			<attribute name="Rotation" value="0.724351 0.689431 6.02722e-08 -6.33249e-08" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="Light" id="16777887">
+				<attribute name="Light Type" value="Spot" />
+				<attribute name="Brightness Multiplier" value="0.5" />
+				<attribute name="Range" value="20" />
+				<attribute name="Spot FOV" value="160" />
+			</component>
+		</node>
+		<node id="16777519">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="B" />
+			<attribute name="Position" value="-7.32298 1.00598 3.03121" />
+			<attribute name="Rotation" value="0.724351 0.689431 6.02722e-08 -6.33249e-08" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="Light" id="16777888">
+				<attribute name="Light Type" value="Spot" />
+				<attribute name="Brightness Multiplier" value="0.5" />
+				<attribute name="Range" value="20" />
+				<attribute name="Spot FOV" value="160" />
+			</component>
+		</node>
+		<node id="16777521">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="B" />
+			<attribute name="Position" value="-7.32298 1.52987 -10.9603" />
+			<attribute name="Rotation" value="0.788073 -0.615582 -5.38158e-08 -6.88955e-08" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="Light" id="16777890">
+				<attribute name="Light Type" value="Spot" />
+				<attribute name="Specular Intensity" value="0.4" />
+				<attribute name="Brightness Multiplier" value="0.4" />
+				<attribute name="Range" value="20" />
+				<attribute name="Spot FOV" value="160" />
+			</component>
+		</node>
+		<node id="16777520">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="A" />
+			<attribute name="Position" value="3.92434 0.482093 -6.76154" />
+			<attribute name="Rotation" value="0.788073 -0.615582 -5.38157e-08 -6.88955e-08" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="Light" id="16777889">
+				<attribute name="Light Type" value="Spot" />
+				<attribute name="Specular Intensity" value="0.4" />
+				<attribute name="Brightness Multiplier" value="0.4" />
+				<attribute name="Range" value="20" />
+				<attribute name="Spot FOV" value="160" />
+			</component>
+		</node>
+	</node>
+	<node id="16777527">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="HangerLights" />
+		<attribute name="Position" value="0 0 0" />
+		<attribute name="Rotation" value="1 0 0 0" />
+		<attribute name="Scale" value="1 1 1" />
+		<attribute name="Variables" />
+		<node id="16777528">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="" />
+			<attribute name="Position" value="12.3759 7.2131 5.25437" />
+			<attribute name="Rotation" value="0.703561 0.647272 -0.284672 -0.0707209" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="Light" id="16777895">
+				<attribute name="Light Type" value="Spot" />
+				<attribute name="Color" value="0.7 0.9 1 1" />
+				<attribute name="Specular Intensity" value="5" />
+				<attribute name="Brightness Multiplier" value="0.3" />
+				<attribute name="Range" value="20" />
+				<attribute name="Spot FOV" value="160" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+		</node>
+		<node id="16777529">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="" />
+			<attribute name="Position" value="12.3759 7.2131 17.1122" />
+			<attribute name="Rotation" value="0.702366 0.642731 -0.294782 -0.0817392" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="Light" id="16777896">
+				<attribute name="Light Type" value="Spot" />
+				<attribute name="Color" value="0.7 0.9 1 1" />
+				<attribute name="Specular Intensity" value="5" />
+				<attribute name="Brightness Multiplier" value="0.2" />
+				<attribute name="Range" value="20" />
+				<attribute name="Spot FOV" value="160" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+		</node>
+		<node id="16777530">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="" />
+			<attribute name="Position" value="12.3759 7.2131 -17.4207" />
+			<attribute name="Rotation" value="0.702366 0.642731 -0.294782 -0.0817392" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="Light" id="16777897">
+				<attribute name="Light Type" value="Spot" />
+				<attribute name="Color" value="0.7 0.9 1 1" />
+				<attribute name="Specular Intensity" value="5" />
+				<attribute name="Brightness Multiplier" value="0.2" />
+				<attribute name="Range" value="20" />
+				<attribute name="Spot FOV" value="160" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+		</node>
+		<node id="16777531">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="" />
+			<attribute name="Position" value="12.3759 7.2131 -6.31433" />
+			<attribute name="Rotation" value="0.702366 0.642731 -0.294782 -0.0817392" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="Light" id="16777898">
+				<attribute name="Light Type" value="Spot" />
+				<attribute name="Color" value="0.7 0.9 1 1" />
+				<attribute name="Specular Intensity" value="5" />
+				<attribute name="Brightness Multiplier" value="0.1" />
+				<attribute name="Range" value="20" />
+				<attribute name="Spot FOV" value="160" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+		</node>
+		<node id="16777523">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="" />
+			<attribute name="Position" value="0 0 0" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<node id="16777522">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="" />
+				<attribute name="Position" value="-13.0957 7.2131 5.25437" />
+				<attribute name="Rotation" value="0.594497 0.683707 0.180401 0.382849" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="Light" id="16777891">
+					<attribute name="Light Type" value="Spot" />
+					<attribute name="Color" value="0.7 0.9 1 1" />
+					<attribute name="Specular Intensity" value="5" />
+					<attribute name="Brightness Multiplier" value="0.1" />
+					<attribute name="Range" value="20" />
+					<attribute name="Spot FOV" value="160" />
+					<attribute name="Cast Shadows" value="true" />
+				</component>
+			</node>
+			<node id="16777524">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="" />
+				<attribute name="Position" value="-13.0957 7.2131 17.1122" />
+				<attribute name="Rotation" value="0.600424 0.686451 0.169663 0.373484" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="Light" id="16777892">
+					<attribute name="Light Type" value="Spot" />
+					<attribute name="Color" value="0.7 0.9 1 1" />
+					<attribute name="Specular Intensity" value="5" />
+					<attribute name="Brightness Multiplier" value="0.1" />
+					<attribute name="Range" value="20" />
+					<attribute name="Spot FOV" value="160" />
+					<attribute name="Cast Shadows" value="true" />
+				</component>
+			</node>
+			<node id="16777525">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="" />
+				<attribute name="Position" value="-13.0957 7.2131 -17.4207" />
+				<attribute name="Rotation" value="0.600424 0.686451 0.169663 0.373484" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="Light" id="16777893">
+					<attribute name="Light Type" value="Spot" />
+					<attribute name="Color" value="0.7 0.9 1 1" />
+					<attribute name="Specular Intensity" value="5" />
+					<attribute name="Brightness Multiplier" value="0.1" />
+					<attribute name="Range" value="20" />
+					<attribute name="Spot FOV" value="160" />
+					<attribute name="Cast Shadows" value="true" />
+				</component>
+			</node>
+			<node id="16777526">
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Name" value="" />
+				<attribute name="Position" value="-13.0957 7.2131 -6.31433" />
+				<attribute name="Rotation" value="0.600424 0.686451 0.169663 0.373484" />
+				<attribute name="Scale" value="1 1 1" />
+				<attribute name="Variables" />
+				<component type="Light" id="16777894">
+					<attribute name="Light Type" value="Spot" />
+					<attribute name="Color" value="0.7 0.9 1 1" />
+					<attribute name="Specular Intensity" value="5" />
+					<attribute name="Brightness Multiplier" value="0.1" />
+					<attribute name="Range" value="20" />
+					<attribute name="Spot FOV" value="160" />
+					<attribute name="Cast Shadows" value="true" />
+				</component>
+			</node>
+		</node>
+	</node>
+	<node id="16777532">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="HangerZone" />
+		<attribute name="Position" value="0 0 0" />
+		<attribute name="Rotation" value="1 0 0 0" />
+		<attribute name="Scale" value="1 1 1" />
+		<attribute name="Variables" />
+		<node id="16777533">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="" />
+			<attribute name="Position" value="0 -10 0" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="Zone" id="16777900">
+				<attribute name="Bounding Box Min" value="-10 10 -20" />
+				<attribute name="Bounding Box Max" value="10 20 20" />
+				<attribute name="Ambient Color" value="0.2 0.2 0.2 1" />
+			</component>
+		</node>
+	</node>
+	<node id="16777535">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="" />
+		<attribute name="Position" value="7.91431e-09 5.28768 -53.5175" />
+		<attribute name="Rotation" value="1 0 0 0" />
+		<attribute name="Scale" value="1 1 1" />
+		<attribute name="Variables" />
+		<node id="16777536">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="" />
+			<attribute name="Position" value="0 -0.0791235 8.53662" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="Light" id="16777904">
+				<attribute name="Brightness Multiplier" value="3" />
+				<attribute name="Light Shape Texture" value="TextureCube;" />
+				<attribute name="Cast Shadows" value="true" />
+			</component>
+		</node>
+	</node>
+</scene>

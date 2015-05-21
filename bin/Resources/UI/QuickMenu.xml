@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<element>
+	<attribute name="Name" value="QuickMenuHolderUIElement" />
+	<attribute name="Size" value="18 69" />
+	<element type="Window">
+		<attribute name="Name" value="QuickMenuWindow" />
+		<attribute name="Size" value="18 118" />
+		<attribute name="Texture" value="Texture2D;UI/Buttons/darkgreyblanktexture.png" />
+		<element type="Button" style="Player16x16Button">
+			<attribute name="Name" value="PlayerButton" />
+			<attribute name="Bring To Front" value="true" />
+			<attribute name="Texture" value="Texture2D;UI/Buttons/player16x16.png" />
+		</element>
+		<element type="Button" style="Preferences16x16Button">
+			<attribute name="Name" value="PreferencesButton" />
+			<attribute name="Position" value="1 18" />
+			<attribute name="Bring To Front" value="true" />
+			<attribute name="Texture" value="Texture2D;UI/Buttons/preferences16x16.png" />
+		</element>
+		<element type="Button" style="Configuration16x16Button">
+			<attribute name="Name" value="ConfigurationButton" />
+			<attribute name="Position" value="1 35" />
+			<attribute name="Bring To Front" value="true" />
+			<attribute name="Texture" value="Texture2D;UI/Buttons/configuration16x16.png" />
+		</element>
+		<element type="Button" style="About16x16Button">
+			<attribute name="Name" value="AboutButton" />
+			<attribute name="Position" value="0 54" />
+			<attribute name="Bring To Front" value="true" />
+			<attribute name="Texture" value="Texture2D;UI/Buttons/about16x16.png" />
+		</element>
+		<element type="Button" style="Exit16x16Button">
+			<attribute name="Name" value="ExitButton" />
+			<attribute name="Position" value="0 100" />
+			<attribute name="Texture" value="Texture2D;UI/Buttons/exit16x16.png" />
+		</element>
+	</element>
+</element>

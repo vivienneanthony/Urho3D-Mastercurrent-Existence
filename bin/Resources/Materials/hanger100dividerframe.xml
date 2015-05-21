@@ -1,0 +1,6 @@
+<material>
+	<technique name="Techniques/Diff.xml"/>
+	<texture name="Textures/steelbrushed.jpg" unit="diffuse"/>
+	<parameter name="MatDiffColor" value="0.0757006 0.0757006 0.0757006 1"/>
+	<parameter name="MatSpecColor" value="0.292181 0.292181 0.292181 48"/>
+</material>

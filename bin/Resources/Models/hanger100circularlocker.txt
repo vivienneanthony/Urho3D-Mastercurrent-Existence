@@ -1,0 +1,3 @@
+Materials/hanger100circularlocker.xml
+Materials/hanger100circularlockerglass.xml
+Materials/hanger100circularlockeremit.xml

@@ -1,0 +1,6 @@
+<material>
+	<technique name="Techniques/Diff.xml"/>
+	<texture name="Textures/hanger100rollingladderstairdiffuse.png" unit="diffuse"/>
+	<parameter name="MatDiffColor" value="0.0433137 0.0433137 0.0433137 1"/>
+	<parameter name="MatSpecColor" value="0.139706 0.139706 0.139706 50"/>
+</material>

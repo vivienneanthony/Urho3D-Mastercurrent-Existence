@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<element>
+	<attribute name="Name" value="SceneLoadHolderUIElement" />
+	<attribute name="Size" value="500 600" />
+	<attribute name="Opacity" value="0.5" />
+	<attribute name="Is Enabled" value="true" />
+	<attribute name="Bring To Front" value="true" />
+	<attribute name="Focus Mode" value="Focusable" />
+	<element type="Window" style="none">
+		<attribute name="Name" value="PlayerWindow" />
+		<attribute name="Size" value="500 600" />
+		<attribute name="Texture" value="Texture2D;Textures/Buttons/darkgrey.png" />
+		<attribute name="Image Rect" value="0 0 128 128" />
+		<attribute name="Is Movable" value="true" />
+		<attribute name="Is Resizable" value="true" />
+		<element type="Button" style="CloseButton">
+			<attribute name="Name" value="closeButton" />
+			<attribute name="Position" value="460 16" />
+			<attribute name="Bring To Front" value="true" />
+			<attribute name="Focus Mode" value="Focusable" />
+		</element>
+		<element type="Window">
+			<attribute name="Name" value="ScenesWindow" />
+			<attribute name="Position" value="16 48" />
+			<attribute name="Size" value="230 500" />
+			<attribute name="Color" value="0 0 0 0" />
+			<attribute name="Top Left Color" value="0 0 0 0" />
+			<attribute name="Top Right Color" value="0 0 0 0" />
+			<attribute name="Bottom Left Color" value="0 0 0 0" />
+			<attribute name="Bottom Right Color" value="0 0 0 0" />
+			<element type="ListView">
+				<attribute name="Name" value="ScenesListView" />
+				<attribute name="Scroll Snap Epsilon" value="1e-06" />
+				<element type="ScrollBar" internal="true" style="none">
+					<attribute name="Size" value="16 16" />
+					<element type="Button" internal="true" style="none" />
+					<element type="Slider" internal="true" style="none">
+						<attribute name="Position" value="16 0" />
+						<attribute name="Size" value="0 16" />
+						<element type="BorderImage" internal="true" style="none" />
+					</element>
+					<element type="Button" internal="true" style="none">
+						<attribute name="Position" value="16 0" />
+					</element>
+				</element>
+				<element type="ScrollBar" internal="true" style="none">
+					<attribute name="Size" value="16 16" />
+					<element type="Button" internal="true" style="none" />
+					<element type="Slider" internal="true" style="none">
+						<attribute name="Position" value="0 16" />
+						<attribute name="Size" value="16 0" />
+						<element type="BorderImage" internal="true" style="none" />
+					</element>
+					<element type="Button" internal="true" style="none">
+						<attribute name="Position" value="0 16" />
+					</element>
+				</element>
+				<element type="BorderImage" internal="true" style="none">
+					<element internal="true" style="none" />
+				</element>
+			</element>
+		</element>
+		<element type="Window">
+			<attribute name="Name" value="SceneInfoWindow" />
+			<attribute name="Position" value="250 48" />
+			<attribute name="Size" value="230 500" />
+			<attribute name="Color" value="0 0 0 0" />
+			<attribute name="Top Left Color" value="0 0 0 0" />
+			<attribute name="Top Right Color" value="0 0 0 0" />
+			<attribute name="Bottom Left Color" value="0 0 0 0" />
+			<attribute name="Bottom Right Color" value="0 0 0 0" />
+			<element type="Text">
+				<attribute name="Name" value="SceneNameText" />
+				<attribute name="Top Left Color" value="0.85 0.85 0.85 1" />
+				<attribute name="Top Right Color" value="0.85 0.85 0.85 1" />
+				<attribute name="Bottom Left Color" value="0.85 0.85 0.85 1" />
+				<attribute name="Bottom Right Color" value="0.85 0.85 0.85 1" />
+				<attribute name="Text" value="Scene Name" />
+			</element>
+		</element>
+		<element type="Text">
+			<attribute name="Name" value="SceneLoadText" />
+			<attribute name="Position" value="16 16" />
+			<attribute name="Top Left Color" value="0.85 0.85 0.85 1" />
+			<attribute name="Top Right Color" value="0.85 0.85 0.85 1" />
+			<attribute name="Bottom Left Color" value="0.85 0.85 0.85 1" />
+			<attribute name="Bottom Right Color" value="0.85 0.85 0.85 1" />
+			<attribute name="Text" value="Scene Load" />
+			<attribute name="Text Effect" value="Shadow" />
+		</element>
+		<element type="Button" style="continueButton">
+			<attribute name="Name" value="continueButton" />
+			<attribute name="Position" value="375 560" />
+			<attribute name="Size" value="105 32" />
+			<attribute name="Texture" value="Texture2D;Textures/Buttons/continue.png" />
+		</element>
+	</element>
+</element>

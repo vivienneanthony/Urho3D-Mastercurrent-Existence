@@ -1,0 +1,6 @@
+<material>
+	<technique name="Techniques/Diff.xml"/>
+	<texture name="Textures/PlasterBare0122_1_S.jpg" unit="diffuse"/>
+	<parameter name="MatDiffColor" value="0.64 0.64 0.64 1"/>
+	<parameter name="MatSpecColor" value="0.001 0.001 0.001 50"/>
+</material>

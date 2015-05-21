@@ -1,0 +1,6 @@
+<material>
+	<technique name="Techniques/Diff.xml"/>
+	<texture name="Textures/hanger100pipechannelcontrolwidepipediffuse.png" unit="diffuse"/>
+	<parameter name="MatDiffColor" value="0.64 0.64 0.64 1"/>
+	<parameter name="MatSpecColor" value="0.0530303 0.0530303 0.0530303 50"/>
+</material>

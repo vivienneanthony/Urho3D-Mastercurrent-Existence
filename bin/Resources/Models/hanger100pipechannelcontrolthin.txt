@@ -1,0 +1,2 @@
+Materials/hanger100pipechannelcontrolthinpipes.xml
+Materials/hanger100pipechannelcontrolthinprotector.xml

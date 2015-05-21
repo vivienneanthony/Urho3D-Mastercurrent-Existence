@@ -1,0 +1,6 @@
+<material>
+	<technique name="Techniques/Diff.xml"/>
+	<texture name="Textures/hanger100ceilingroofopeningdiffuse.png" unit="diffuse"/>
+	<parameter name="MatDiffColor" value="0.787908 0.787908 0.787908 1"/>
+	<parameter name="MatSpecColor" value="0 0 0 48"/>
+</material>

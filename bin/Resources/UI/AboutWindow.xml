@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<element>
+	<attribute name="Name" value="AboutHolderUIElement" />
+	<attribute name="Size" value="500 600" />
+	<attribute name="Opacity" value="0.7" />
+	<attribute name="Is Enabled" value="true" />
+	<attribute name="Bring To Front" value="true" />
+	<element type="Window" style="none">
+		<attribute name="Name" value="AboutWindow" />
+		<attribute name="Size" value="850 600" />
+		<attribute name="Min Size" value="850 600" />
+		<attribute name="Clip Children" value="false" />
+		<attribute name="Texture" value="Texture2D;Textures/UI.png" />
+		<attribute name="Image Rect" value="48 0 64 16" />
+		<attribute name="Border" value="4 4 4 4" />
+		<attribute name="Is Movable" value="true" />
+		<attribute name="Is Resizable" value="true" />
+		<element type="Button" style="CloseButton">
+			<attribute name="Name" value="closeButton" />
+			<attribute name="Position" value="825 16" />
+			<attribute name="Bring To Front" value="true" />
+		</element>
+		<element type="Text">
+			<attribute name="Name" value="AboutText" />
+			<attribute name="Position" value="16 16" />
+			<attribute name="Color" value="1 1 1 1" />
+			<attribute name="Bring To Front" value="true" />
+			<attribute name="Text" value="About" />
+			<attribute name="Text Effect" value="Shadow" />
+		</element>
+	</element>
+</element>

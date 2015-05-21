@@ -1,0 +1,4 @@
+Materials/hanger100printersquaresurface.xml
+Materials/hanger100printersquareyellowemit.xml
+Materials/hanger100printersquareglass.xml
+Materials/hanger100printersquarewhiteemit.xml
