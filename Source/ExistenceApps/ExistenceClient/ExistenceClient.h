@@ -166,6 +166,7 @@ private:
     bool loadUIXML(int windowtype, const int positionx, const int positiony);
     void QuickMenuPressed(StringHash eventType, VariantMap& eventData);
     void UpdateUI(float timestep);
+    void PlayerWindowUpdateUI(void);
 
     /// The Window.
     SharedPtr<Window> window_;

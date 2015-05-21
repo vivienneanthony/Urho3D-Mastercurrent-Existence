@@ -5119,8 +5119,6 @@ int ExistenceClient::LoadEnvironmentSettings(const char *environment)
 
     loadingfile->Load(LoadFile);
 
-    cout << "locat root node" << endl;
-
     XMLElement ElementRoot = loadingfile->GetRoot("environments");
 
     XMLElement nextElement = ElementRoot.GetChild("node");
@@ -5154,7 +5152,6 @@ int ExistenceClient::LoadEnvironmentSettings(const char *environment)
         return 0;
     }
 
-    cout << "find node" <<endl;
 
     /// remove nodes
     Node * GeneratedLight1 = scene_ -> GetChild("GeneratedLight_Light1");
@@ -5171,7 +5168,6 @@ int ExistenceClient::LoadEnvironmentSettings(const char *environment)
     /// loop through each node
     do
     {
-
         /// Is enabled
         XMLElement AttributesPosition;
 

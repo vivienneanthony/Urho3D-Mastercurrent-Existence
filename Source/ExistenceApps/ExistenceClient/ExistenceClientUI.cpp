@@ -76,6 +76,7 @@
 #include "GameStateHandler.h"
 #include "GameObject.h"
 #include "Manager.h"
+#include "../factions.h"
 
 #include <string>
 #include <iostream>
@@ -186,7 +187,11 @@ bool ExistenceClient::loadUIXML(int windowtype, const int positionx, const int p
         /// Get the child and assign a close pressed
         Window * healthWindow = (Window *) HUDFileElement -> GetChild("HealthWindow",true);
 
+        /// set healt to invisible
         healthWindow -> SetVisible(false);
+
+        /// Update UI
+        PlayerWindowUpdateUI();
     }
 
     /// Set QuickMenu
@@ -387,3 +392,55 @@ void ExistenceClient::UpdateUI(float timestep)
     return;
 }
 
+void ExistenceClient::PlayerWindowUpdateUI(void)
+{
+    /// Get ui subsystem
+    UI* ui_ = GetSubsystem<UI>();
+
+    UIElement * uiroot = ui_->	GetRoot ();
+
+    /// Get node and update
+    Window * PlayerWindow = (Window *) uiroot->GetChild("PlayerWindow",true);
+    Text * PlayerNameText = (Text *)PlayerWindow -> GetChild("PlayerNameText",true);
+    Text * PlayerRaceText = (Text *)PlayerWindow -> GetChild("PlayerRaceText",true);
+
+    /// Set hud sting to level and character name
+    string username=character_->GetPlayerInfo().lastname + " " + character_->GetPlayerInfo().firstname;
+
+    /// Set test
+    String playername(username.c_str());
+
+    PlayerNameText -> SetText(playername.CString());
+
+    /// player alienrce
+    unsigned int playeralienrace = character_ -> GetAlliance().alienrace;
+
+    /// Temporarily define faction information (Might make this a class)
+    unsigned int alienslimit=4;
+    alienraces Alien[alienslimit];
+
+    Alien[0].uniqueid=1;
+    Alien[0].name.append("Human");
+    Alien[0].button.append("logohumans");
+
+    Alien[1].uniqueid=100;
+    Alien[1].name.append("Romulan");
+    Alien[1].button.append("logoromulans");
+
+    Alien[2].uniqueid=200;
+    Alien[2].name.append("Klingon");
+    Alien[2].button.append("logoklingons");
+
+    Alien[3].uniqueid=1000;
+    Alien[3].name.append("Orcin");
+    Alien[3].button.append("logoorcins");
+
+    /// Loop through until a match
+    for(unsigned i=0; i<alienslimit; i++)
+    {
+        if(playeralienrace==Alien[i].uniqueid)
+        {
+            PlayerRaceText -> SetText(Alien[i].name.c_str());
+        }
+    }
+}
