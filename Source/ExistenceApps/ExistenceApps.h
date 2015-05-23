@@ -81,8 +81,12 @@ protected:
     SharedPtr<Sprite> logoSprite_;
     /// Scene.
     SharedPtr<Scene> scene_;
+    SharedPtr<Scene> scenePlayerUI_;
+
     /// Camera scene node.
     SharedPtr<Node> cameraNode_;
+    SharedPtr<Node> cameraNodePlayerUI_;
+
     /// Camera yaw angle.
     float yaw_;
     /// Camera pitch angle.

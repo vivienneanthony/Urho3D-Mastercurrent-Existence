@@ -3576,7 +3576,7 @@ void ExistenceClient::CreateCharacter(void)
     character_ -> SetHealth(100);
 
     /// Load a Character Mesh
-    LoadCharacterMesh("Character",character_->GetAlliance().alienrace,character_->GetCharacteristics().gender);
+    LoadCharacterMesh(CHARACTERMAINSCENE, "Character",character_->GetAlliance().alienrace,character_->GetCharacteristics().gender);
 
     GameObject* charaterGameObject = objectNode -> CreateComponent<GameObject>();
 
@@ -3672,7 +3672,7 @@ void ExistenceClient::Print(const String& output)
 }
 
 /// Load Character Mesh
-int ExistenceClient::LoadCharacterMesh(String nodename, unsigned int alienrace, unsigned int gender)
+int ExistenceClient::LoadCharacterMesh(int mode, String nodename, unsigned int alienrace, unsigned int gender)
 {
     /// Get Needed SubSystems
     ResourceCache* cache = GetSubsystem<ResourceCache>();
@@ -3681,7 +3681,18 @@ int ExistenceClient::LoadCharacterMesh(String nodename, unsigned int alienrace, 
     UI* ui = GetSubsystem<UI>();
     FileSystem * filesystem = GetSubsystem<FileSystem>();
 
-    Node* objectNode = scene_->GetChild(nodename);
+    Node * objectNode = new Node(context_);
+
+    if(mode==CHARACTERMAINSCENE)
+    {
+        objectNode = scene_->GetChild(nodename);
+    }
+
+    if(mode==CHARACTERUISCENE)
+    {
+        objectNode = scenePlayerUI_->GetChild(nodename);
+    }
+
 
     /// Temporarily define faction information (Might make this a class)
     unsigned int factionslimit=4;
@@ -4911,6 +4922,35 @@ int ExistenceClient::ConsoleActionBuild(const char * lineinput)
         }
     }
 
+    /// Conole Command :/build move
+    if(argument[1]=="moveobjectui")
+    {
+        /// Get character node
+        if(Node* objectNode = scenePlayerUI_->GetChild(argument[2].c_str(),true))
+        {
+            /// Get node position
+            Vector3 position = Vector3(StringToFloat(argument[3]),StringToFloat(argument[4]),StringToFloat(argument[5]));
+
+            objectNode->SetPosition(position);
+
+            if(argument[2].c_str()=="uidirectionallight")
+            {
+                /// get the character position
+                Node * uicharacterNode = scenePlayerUI_ -> GetChild("Character",true);
+
+                /// lookat the chracter
+                objectNode->LookAt(uicharacterNode->GetPosition());
+            }
+
+            /// Print character position
+            Print ("Node "+String(argument[2].c_str())+" moved to ("+position.ToString()+").");
+        }
+        else
+        {
+            Print ("Missing Node. Node "+String(argument[2].c_str())+" cannot be moved");
+        }
+    }
+
     /// Conole Command :/build rotate
     if(argument[1]=="rotateobject")
     {
@@ -4933,6 +4973,30 @@ int ExistenceClient::ConsoleActionBuild(const char * lineinput)
             Print ("Missing Node. Node "+String(argument[2].c_str())+" cannot be rotated.");
         }
     }
+
+ /// Conole Command :/build rotate
+    if(argument[1]=="rotateobjectui")
+    {
+        /// Get character node
+        if(Node* objectNode = scenePlayerUI_ ->GetChild(argument[2].c_str(),false))
+        {
+
+            /// Get node position
+            Quaternion rotation = Quaternion(StringToFloat(argument[3]),StringToFloat(argument[4]),StringToFloat(argument[5]));
+
+            ///RigidBody * objectNodeRigid=objectNode->GetComponent<RigidBody>();
+
+            objectNode->SetRotation(rotation);
+
+            /// Print character position
+            Print ("Node "+String(argument[2].c_str())+" rotated to ("+rotation.ToString()+").");
+        }
+        else
+        {
+            Print ("Missing Node. Node "+String(argument[2].c_str())+" cannot be rotated.");
+        }
+    }
+
 
 /// Conole Command :/build rotate
     if(argument[1]=="massobject")

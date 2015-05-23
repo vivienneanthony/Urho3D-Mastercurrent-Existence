@@ -30,6 +30,9 @@
 #define UIBLANK 0
 #define UIMAIN  1
 
+#define CHARACTERMAINSCENE          0
+#define CHARACTERUISCENE            1
+
 #define CAMERAORIENTATIONROTATEYAW 1
 #define CAMERAORIENTATIONROTATEPITCH 1
 
@@ -130,7 +133,7 @@ private:
     void Print(const String& output);
 
     void CharacterSelectionHandler(VariantMap& eventData);
-    int LoadCharacterMesh(String nodename, unsigned int alienrace, unsigned int gender);
+    int LoadCharacterMesh(int mode, String nodename, unsigned int alienrace, unsigned int gender);
 
     void HandlePostUpdates(StringHash eventType, VariantMap& eventData);
     void HandleMouseReleased(StringHash eventType, VariantMap& eventData);
@@ -167,6 +170,7 @@ private:
     void QuickMenuPressed(StringHash eventType, VariantMap& eventData);
     void UpdateUI(float timestep);
     void PlayerWindowUpdateUI(void);
+    void PlayerWindowHandleDisplaySelection(StringHash eventType, VariantMap& eventData);
 
     /// The Window.
     SharedPtr<Window> window_;
@@ -201,6 +205,8 @@ private:
     /// Class and variable declaration for alien race alliance information
     vector<string> aliensarray;
     vector<string> tempaliensarray;
+
+
 };
 
 #endif
