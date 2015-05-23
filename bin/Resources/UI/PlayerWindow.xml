@@ -5,7 +5,6 @@
 	<attribute name="Min Size" value="1024 720" />
 	<attribute name="Opacity" value="0.7" />
 	<attribute name="Is Enabled" value="true" />
-	<attribute name="Bring To Front" value="true" />
 	<attribute name="Layout Border" value="1 1 1 1" />
 	<element type="Window" style="none">
 		<attribute name="Name" value="PlayerWindow" />
@@ -19,21 +18,18 @@
 		<element type="Button" style="CloseButton">
 			<attribute name="Name" value="closeButton" />
 			<attribute name="Position" value="600 16" />
-			<attribute name="Bring To Front" value="true" />
 			<attribute name="Layout Border" value="1 1 1 1" />
 		</element>
 		<element type="Button" style="InfoThinWordButton">
 			<attribute name="Name" value="PlayerInfoButton" />
-			<attribute name="Position" value="360 16" />
+			<attribute name="Position" value="470 16" />
 			<attribute name="Size" value="33 16" />
-			<attribute name="Bring To Front" value="true" />
 			<attribute name="Texture" value="Texture2D;UI/Buttons/uibuttoninfothinword.png" />
 		</element>
 		<element type="Button" style="HealthThinWorldButton">
 			<attribute name="Name" value="PlayerHealthButton" />
-			<attribute name="Position" value="400 16" />
+			<attribute name="Position" value="510 16" />
 			<attribute name="Size" value="48 16" />
-			<attribute name="Bring To Front" value="true" />
 			<attribute name="Texture" value="Texture2D;UI/Buttons/uibuttonhealththinword.png" />
 		</element>
 		<element type="Window">
@@ -46,67 +42,15 @@
 			<attribute name="Bottom Left Color" value="0 0 0 0" />
 			<attribute name="Bottom Right Color" value="0 0 0 0" />
 			<attribute name="Layout Flex Scale" value="0 0" />
-			<element type="Window">
-				<attribute name="Name" value="PlayerBasicInfoWindow" />
-				<attribute name="Size" value="300 70" />
-				<attribute name="Color" value="0 0 0 0" />
-				<attribute name="Top Left Color" value="0 0 0 0" />
-				<attribute name="Top Right Color" value="0 0 0 0" />
-				<attribute name="Bottom Left Color" value="0 0 0 0" />
-				<attribute name="Bottom Right Color" value="0 0 0 0" />
-				<attribute name="Indent Spacing" value="0" />
-				<element type="Text">
-					<attribute name="Name" value="PlayerNameText" />
-					<attribute name="Position" value="0 16" />
-					<attribute name="Priority" value="1" />
-					<attribute name="Color" value="1 1 1 1" />
-					<attribute name="Is Enabled" value="true" />
-					<attribute name="Bring To Front" value="true" />
-					<attribute name="Use Derived Opacity" value="true" />
-					<attribute name="Indent Spacing" value="2" />
-					<attribute name="Font Size" value="13" />
-					<attribute name="Text" value="Player Name Text" />
-					<attribute name="Text Effect" value="Shadow" />
-				</element>
-				<element type="Text">
-					<attribute name="Name" value="PlayerRankText" />
-					<attribute name="Position" value="16 32" />
-					<attribute name="Priority" value="1" />
-					<attribute name="Color" value="1 1 1 1" />
-					<attribute name="Is Enabled" value="true" />
-					<attribute name="Bring To Front" value="true" />
-					<attribute name="Use Derived Opacity" value="true" />
-					<attribute name="Indent" value="1" />
-					<attribute name="Text" value="Player Rank  Text" />
-					<attribute name="Text Effect" value="Shadow" />
-				</element>
-				<element type="Text">
-					<attribute name="Name" value="PlayerRaceText" />
-					<attribute name="Position" value="16 48" />
-					<attribute name="Priority" value="1" />
-					<attribute name="Color" value="1 1 1 1" />
-					<attribute name="Is Enabled" value="true" />
-					<attribute name="Bring To Front" value="true" />
-					<attribute name="Use Derived Opacity" value="true" />
-					<attribute name="Indent" value="1" />
-					<attribute name="Text" value="Player Race Text" />
-					<attribute name="Text Effect" value="Shadow" />
-				</element>
-			</element>
 			<element type="View3D" style="View3D">
 				<attribute name="Name" value="PlayerViewWindow" />
 				<attribute name="Position" value="300 80" />
 				<attribute name="Size" value="230 400" />
-				<attribute name="Color" value="0 0 0 0" />
-				<attribute name="Top Left Color" value="0 0 0 0" />
-				<attribute name="Top Right Color" value="0 0 0 0" />
-				<attribute name="Bottom Left Color" value="0 0 0 0" />
-				<attribute name="Bottom Right Color" value="0 0 0 0" />
+				<attribute name="Min Size" value="230 400" />
+				<attribute name="Max Size" value="230 400" />
 				<attribute name="Clip Children" value="false" />
-				<attribute name="Texture" value="Texture2D;UI/Buttons/darkgreyblanktexture.png" />
 				<attribute name="Image Rect" value="0 0 230 400" />
 				<attribute name="Border" value="1 1 1 1" />
-				<attribute name="Modal Shade Color" value="1 0 0 0" />
 			</element>
 		</element>
 		<element type="Window">
@@ -122,17 +66,69 @@
 			<attribute name="Is Editable" value="false" />
 			<attribute name="Use Derived Opacity" value="false" />
 			<element type="View3D" style="View3D">
-				<attribute name="Name" value="PlayerViewWindow" />
+				<attribute name="Name" value="PlayerViewWindow2" />
 				<attribute name="Position" value="16 80" />
-				<attribute name="Size" value="230 400" />
-				<attribute name="Color" value="0 0 0 0" />
-				<attribute name="Top Left Color" value="0 0 0 0" />
-				<attribute name="Top Right Color" value="0 0 0 0" />
-				<attribute name="Bottom Left Color" value="0 0 0 0" />
-				<attribute name="Bottom Right Color" value="0 0 0 0" />
 				<attribute name="Texture" value="Texture2D;UI/Buttons/darkgreyblanktexture.png" />
 				<attribute name="Image Rect" value="0 0 230 400" />
-				<attribute name="Modal Shade Color" value="1 0 0 0" />
+			</element>
+			<element type="Text">
+				<attribute name="Name" value="PlayerHealthText" />
+				<attribute name="Position" value="16 80" />
+				<attribute name="Color" value="1 1 1 1" />
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Text" value="Player Health Text" />
+				<attribute name="Text Effect" value="Shadow" />
+				<attribute name="Effect Color" value="0.5 0.5 0.5 0.5" />
+			</element>
+		</element>
+		<element type="Button" style="Refresh16x16Button">
+			<attribute name="Name" value="refreshButton" />
+			<attribute name="Position" value="573 16" />
+			<attribute name="Texture" value="Texture2D;UI/Buttons/refresh16x16.png" />
+		</element>
+		<element type="Window">
+			<attribute name="Name" value="PlayerBasicInfoWindow" />
+			<attribute name="Position" value="16 48" />
+			<attribute name="Size" value="300 70" />
+			<attribute name="Color" value="0 0 0 0" />
+			<attribute name="Top Left Color" value="0 0 0 0" />
+			<attribute name="Top Right Color" value="0 0 0 0" />
+			<attribute name="Bottom Left Color" value="0 0 0 0" />
+			<attribute name="Bottom Right Color" value="0 0 0 0" />
+			<attribute name="Indent Spacing" value="0" />
+			<element type="Text">
+				<attribute name="Name" value="PlayerNameText" />
+				<attribute name="Position" value="0 16" />
+				<attribute name="Priority" value="1" />
+				<attribute name="Color" value="1 1 1 1" />
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Use Derived Opacity" value="true" />
+				<attribute name="Indent Spacing" value="2" />
+				<attribute name="Font Size" value="13" />
+				<attribute name="Text" value="Player Name Text" />
+				<attribute name="Text Effect" value="Shadow" />
+			</element>
+			<element type="Text">
+				<attribute name="Name" value="PlayerRankText" />
+				<attribute name="Position" value="16 32" />
+				<attribute name="Priority" value="1" />
+				<attribute name="Color" value="1 1 1 1" />
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Use Derived Opacity" value="true" />
+				<attribute name="Indent" value="1" />
+				<attribute name="Text" value="Player Rank  Text" />
+				<attribute name="Text Effect" value="Shadow" />
+			</element>
+			<element type="Text">
+				<attribute name="Name" value="PlayerRaceText" />
+				<attribute name="Position" value="16 48" />
+				<attribute name="Priority" value="1" />
+				<attribute name="Color" value="1 1 1 1" />
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Use Derived Opacity" value="true" />
+				<attribute name="Indent" value="1" />
+				<attribute name="Text" value="Player Race Text" />
+				<attribute name="Text Effect" value="Shadow" />
 			</element>
 		</element>
 	</element>
