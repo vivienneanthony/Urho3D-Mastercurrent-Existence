@@ -44,8 +44,12 @@
 #include "../Account.h"
 #include "../factions.h"
 #include "../Player.h"
+#include "../PlayerLevels.h"
+
 
 #include "GameStateHandler.h"
+
+string ConvertUIntToString(unsigned int val);
 
 /// This first example, maintaining tradition, prints a "Hello World" message.
 /// Furthermore it shows:
@@ -148,6 +152,7 @@ private:
     void UpdatePlayerInfoBar(void);
 
     int LoadAccountPlayers(void);
+    int LoadPlayer(int player);
 
     int CreateCursor(void);
 

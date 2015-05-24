@@ -20,7 +20,7 @@
 // THE SOFTWARE.
 //
 
- #include <Urho3D/Urho3D.h>
+#include <Urho3D/Urho3D.h>
 
 #include "../../../Urho3D/Graphics/AnimationController.h"
 #include "../../../Urho3D/Core/Context.h"
@@ -83,6 +83,8 @@ int Player::Start(void)
     CharacterPlayer.reputation5= 0;
 
     /// Set player experience
+    CharacterPlayer.level=0;
+    CharacterPlayer.reputation=0;
     CharacterPlayer.experience = 0;
     CharacterPlayer.personalitytrait=0;
 
@@ -158,7 +160,6 @@ int Player::SetPlayerInfo(playerbasicinfo TempPlayer)
     return 1;
 }
 
-
 playerbasicinfo Player::GetPlayerInfo(void)
 {
     /// Charcter specs
@@ -171,3 +172,35 @@ playerbasicinfo Player::GetPlayerInfo(void)
 
     return Temporarybasicinfo;
 }
+
+int Player::SetLevels(playerlevels TempPlayer)
+{
+    /// Set charcter alliance
+    CharacterPlayer.level=TempPlayer.level;
+    CharacterPlayer.experience=TempPlayer.experience;
+    CharacterPlayer.reputation=TempPlayer.reputation;
+    CharacterPlayer.reputation1=TempPlayer.reputation1;
+    CharacterPlayer.reputation2=TempPlayer.reputation2;
+    CharacterPlayer.reputation3=TempPlayer.reputation3;
+    CharacterPlayer.reputation4=TempPlayer.reputation4;
+
+    return 1;
+}
+
+playerlevels Player::GetLevels(void)
+{
+    /// Charcter specs
+    playerlevels Temporarylevels;
+
+    /// Set charcter alliance
+    Temporarylevels.level = CharacterPlayer.level;
+    Temporarylevels.experience = CharacterPlayer.experience;
+    Temporarylevels.reputation = CharacterPlayer.reputation;
+    Temporarylevels.reputation1 = CharacterPlayer.reputation1;
+    Temporarylevels.reputation2 = CharacterPlayer.reputation2;
+    Temporarylevels.reputation3 = CharacterPlayer.reputation3;
+    Temporarylevels.reputation4 = CharacterPlayer.reputation4;
+
+    return Temporarylevels;
+}
+

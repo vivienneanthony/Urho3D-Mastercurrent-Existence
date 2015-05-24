@@ -178,6 +178,28 @@ int Character::SetAlliance(playeralliance TempAlliance)
 }
 
 
+
+/// Get player alliance
+playerlevels Character::GetLevels(void)
+{
+    /// Charcter specs
+    playerlevels Temporarylevels;
+
+    Temporarylevels = CharacterPlayer.GetLevels();
+
+    return Temporarylevels;
+}
+
+/// Set player alliance
+int Character::SetLevels(playerlevels TempLevels)
+{
+    /// Set charcter alliance
+    CharacterPlayer.SetLevels(TempLevels);
+
+    return 1;
+}
+
+
 /// Create a object
 void Character::MagicBox(void)
 {
@@ -325,12 +347,12 @@ void Character::FixedUpdate(float timeStep)
             }
 
 
-                if(characterstate_==CHARACTERIDLE)
-                {
-                    AnimationState * idleAnimationState = animCtrl->GetAnimationState(String("IdleAnimation"));
-                     idleAnimationState -> SetWeight(1.0f);
-                    idleAnimationState -> AddTime(timeStep);
-                }
+            if(characterstate_==CHARACTERIDLE)
+            {
+                AnimationState * idleAnimationState = animCtrl->GetAnimationState(String("IdleAnimation"));
+                idleAnimationState -> SetWeight(1.0f);
+                idleAnimationState -> AddTime(timeStep);
+            }
         }
     }
 

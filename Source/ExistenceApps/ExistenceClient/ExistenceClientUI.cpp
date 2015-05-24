@@ -103,8 +103,10 @@
 
 #define DEFAULTSIZE 4096
 
+
 using namespace std;
 using namespace Urho3D;
+
 
 /// Load a HUD file in a XML format in the file system
 bool ExistenceClient::loadUIXML(int windowtype, const int positionx, const int positiony)
@@ -212,6 +214,22 @@ bool ExistenceClient::loadUIXML(int windowtype, const int positionx, const int p
         lightNode->SetDirection(Vector3(0.0f, .8f, 3.20f)); /// The direction vector does not need to be normalized
         Light* light = lightNode->CreateComponent<Light>();
         light->SetLightType(LIGHT_DIRECTIONAL);
+
+
+        /// Create a Zone component for ambient lighting & fog control
+        Node* zoneNode = scenePlayerUI_->CreateChild("uizone");
+        Zone* zone = zoneNode->CreateComponent<Zone>();
+
+        Vector3 boundingBoxMin(-20.0f,-20.0f,-20.0f);
+        Vector3 boundingBoxMax(20.0f,20.0f,20.0f);
+
+        /// change bounding box to something more accurate
+        zone->SetBoundingBox(BoundingBox(boundingBoxMin,boundingBoxMax));
+        //zone->SetAmbientColor(Color(0.01f, 0.01f, .01f));
+        zone->SetFogColor(Color(.08f, .08f, .08f));
+        zone->SetFogStart(10.0f);
+        zone->SetFogEnd(20.0f);
+        zone->SetHeightFog (false);
 
         ///Node* planeNode = scenePlayerUI_->CreateChild("Plane");
         ///planeNode->SetScale(Vector3(100.0f, 1.0f, 100.0f));
@@ -455,6 +473,8 @@ void ExistenceClient::PlayerWindowUpdateUI(void)
     Window * PlayerWindow = (Window *) uiroot->GetChild("PlayerWindow",true);
     Text * PlayerNameText = (Text *)PlayerWindow -> GetChild("PlayerNameText",true);
     Text * PlayerRaceText = (Text *)PlayerWindow -> GetChild("PlayerRaceText",true);
+    Text * PlayerRankText = (Text *)PlayerWindow -> GetChild("PlayerRankText",true);
+    Text * PlayerProgressText = (Text *)PlayerWindow -> GetChild("PlayerProgressText",true);
 
     /// Set hud sting to level and character name
     string username=character_->GetPlayerInfo().lastname + " " + character_->GetPlayerInfo().firstname;
@@ -549,6 +569,28 @@ void ExistenceClient::PlayerWindowUpdateUI(void)
             PlayerRaceText -> SetText(TempText);
         }
     }
+
+    /// Get player level and level text
+    unsigned int level=floor(character_->GetLevels().level/10);
+
+    string levelstring=ConvertUIntToString(level);
+
+    string levelstext=levels[level];
+
+    /// Set hud sting to level and character name
+    string playerrank=levelstext+" ("+levelstring+") ";
+
+    PlayerRankText -> SetText(playerrank.c_str());
+
+    /// Create the ranking info
+    string playerexperience=ConvertUIntToString(character_->GetLevels().experience);
+    string playerreputation=ConvertUIntToString((character_->GetLevels().reputation/100000)*10);
+
+    string progresstext = "Experience "+playerexperience+" Reputation "+playerreputation+"%";
+
+    PlayerProgressText -> SetText(progresstext.c_str());
+
+
 }
 
 void ExistenceClient::PlayerWindowHandleDisplaySelection(StringHash eventType, VariantMap& eventData)

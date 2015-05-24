@@ -90,6 +90,9 @@ public:
     int SetCharacteristics(playercharacteristics TempCharacteristics);
     playercharacteristics GetCharacteristics(void);
 
+    playerlevels GetLevels(void);
+    int SetLevels(playerlevels TempLevels);
+
         /// Create a object
     void MagicBox(void);
 

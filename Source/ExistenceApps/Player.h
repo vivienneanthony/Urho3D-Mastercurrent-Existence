@@ -32,10 +32,25 @@ struct playercharacteristics
     unsigned int personalitytrait;
 };
 
+struct playerlevels
+{
+    /// Set player experience
+    unsigned int level;
+    unsigned int experience;
+    unsigned int reputation;
+
+    /// player moves for surface of planet to a ship so it relations change for the x,y,z for respective object
+    unsigned int reputation1;
+    unsigned int reputation2;
+    unsigned int reputation3;
+    unsigned int reputation4;
+    unsigned int reputation5;
+};
+
 /// Player Object structure
 struct playerobject
 {
-     /// health
+    /// hffehgjfa3eaadfff2xZealth
     int health;
 
     /// name information
@@ -43,15 +58,17 @@ struct playerobject
     std::string middlename;
     std::string lastname;
 
+    /// Set player experience
+    unsigned long level;
+    unsigned long experience;
+    unsigned long reputation;
+
     /// player moves for surface of planet to a ship so it relations change for the x,y,z for respective object
     unsigned long reputation1;
     unsigned long reputation2;
     unsigned long reputation3;
     unsigned long reputation4;
     unsigned long reputation5;
-
-    /// Set player experience
-    unsigned long experience;
 
     /// character spec
     unsigned int alienrace;
@@ -83,6 +100,9 @@ public:
     /// Set basic information
     int SetPlayerInfo(playerbasicinfo TempPlayer);
     playerbasicinfo GetPlayerInfo(void);
+
+    int SetLevels(playerlevels TempPlayer);
+    playerlevels GetLevels(void);
 
 protected:
     playerobject CharacterPlayer;

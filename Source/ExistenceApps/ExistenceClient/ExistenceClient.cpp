@@ -78,7 +78,6 @@
 #include "EnvironmentBuild.h"
 #include "Manager.h"
 #include "../Account.h"
-#include "../PlayerLevels.h"
 
 #include <string>
 #include <iostream>
@@ -189,6 +188,8 @@ string ConvertUIntToString(unsigned int val)
     string str = buff;
     return(str);
 }
+
+
 
 float cutoff(float inputvalue, float pointmid, float range,bool debug);
 
@@ -2749,6 +2750,7 @@ void ExistenceClient::SavePlayer(int writemode)
     playerbasicinfo TempBasicInfo = TemporaryPlayer.GetPlayerInfo();
     playercharacteristics TempCharacteristics = TemporaryPlayer.GetCharacteristics();
     playeralliance TempAlliance = TemporaryPlayer.GetAlliance();
+    playerlevels TempLevels = TemporaryPlayer.GetLevels();
 
     /// if writemode equal 1 then new player
     {
@@ -2768,6 +2770,8 @@ void ExistenceClient::SavePlayer(int writemode)
         XMLElement firstnameElement  = characterElement.CreateChild("firstname");
         XMLElement middlenameElement  = characterElement.CreateChild("middlename");
         XMLElement lastnameElement  = characterElement.CreateChild("lastname");
+        XMLElement levelElement  = characterElement.CreateChild("level");
+        XMLElement reputationElement  = characterElement.CreateChild("reputation");
         XMLElement reputation1Element  = characterElement.CreateChild("reputation1");
         XMLElement reputation2Element  = characterElement.CreateChild("reputation2");
         XMLElement reputation3Element  = characterElement.CreateChild("reputation3");
@@ -2783,13 +2787,15 @@ void ExistenceClient::SavePlayer(int writemode)
         firstnameElement.SetString("firstname", String(TempBasicInfo.firstname.c_str()));
         middlenameElement.SetString("middlename", String(TempBasicInfo.middlename.c_str()));
         lastnameElement.SetString("lastname", String(TempBasicInfo.lastname.c_str()));
-        reputation1Element.SetUInt("reputation1",0);
-        reputation2Element.SetUInt("reputation2",0);
-        reputation3Element.SetUInt("reputation3",0);
-        reputation4Element.SetUInt("reputation4",0);
-        experienceElement.SetUInt("experience",0);
+        levelElement.SetUInt("level",TempLevels.level);
+        reputationElement.SetUInt("reputation",TempLevels.reputation);
+        reputation1Element.SetUInt("reputation1",TempLevels.reputation1);
+        reputation2Element.SetUInt("reputation2",TempLevels.reputation2);
+        reputation3Element.SetUInt("reputation3",TempLevels.reputation3);
+        reputation4Element.SetUInt("reputation4",TempLevels.reputation4);
+        experienceElement.SetUInt("experience",TempLevels.experience);
         alienraceElement.SetUInt("alienrace",TempAlliance.alienrace);
-        alienalliancealignedElement.SetBool("alienalliancealigned",0);
+        alienalliancealignedElement.SetBool("alienalliancealigned",TempAlliance.alienalliancealigned);
         genderElement.SetUInt("gender",TempCharacteristics.gender);
         personalitytraitElement.SetUInt("personalitytrait",TempCharacteristics.personalitytrait);
 
@@ -2811,6 +2817,8 @@ void ExistenceClient::SavePlayer(int writemode)
         XMLElement firstnameElement  = characterElement.CreateChild("firstname");
         XMLElement middlenameElement  = characterElement.CreateChild("middlename");
         XMLElement lastnameElement  = characterElement.CreateChild("lastname");
+        XMLElement levelElement  = characterElement.CreateChild("level");
+        XMLElement reputationElement  = characterElement.CreateChild("reputation");
         XMLElement reputation1Element  = characterElement.CreateChild("reputation1");
         XMLElement reputation2Element  = characterElement.CreateChild("reputation2");
         XMLElement reputation3Element  = characterElement.CreateChild("reputation3");
@@ -2826,13 +2834,15 @@ void ExistenceClient::SavePlayer(int writemode)
         firstnameElement.SetString("firstname", String(TempBasicInfo.firstname.c_str()));
         middlenameElement.SetString("middlename", String(TempBasicInfo.middlename.c_str()));
         lastnameElement.SetString("lastname", String(TempBasicInfo.lastname.c_str()));
-        reputation1Element.SetUInt("reputation1",0);
-        reputation2Element.SetUInt("reputation2",0);
-        reputation3Element.SetUInt("reputation3",0);
-        reputation4Element.SetUInt("reputation4",0);
-        experienceElement.SetUInt("experience",0);
+        levelElement.SetUInt("level",TempLevels.level);
+        reputationElement.SetUInt("reputation",TempLevels.reputation);
+        reputation1Element.SetUInt("reputation1",TempLevels.reputation1);
+        reputation2Element.SetUInt("reputation2",TempLevels.reputation2);
+        reputation3Element.SetUInt("reputation3",TempLevels.reputation3);
+        reputation4Element.SetUInt("reputation4",TempLevels.reputation4);
+        experienceElement.SetUInt("experience",TempLevels.experience);
         alienraceElement.SetUInt("alienrace",TempAlliance.alienrace);
-        alienalliancealignedElement.SetBool("alienalliancealigned",0);
+        alienalliancealignedElement.SetBool("alienalliancealigned",TempAlliance.alienalliancealigned);
         genderElement.SetUInt("gender",TempCharacteristics.gender);
         personalitytraitElement.SetUInt("personalitytrait",TempCharacteristics.personalitytrait);
 
@@ -3404,18 +3414,21 @@ void ExistenceClient::loadScene(const int mode, const char * lineinput)
     /// load hud
     loadUIXML(UIQUICKMENU,0,0);
 
-/// Get player info  name from temporary list and put it into the character object
+    /// Get player info  name from temporary list and put it into the character object
     Text* PlayerNameText = (Text*)ui->GetRoot()->GetChild("PlayerNameText", true);
 
-/// Get level text
-    string levelstext=levels[0];
+    /// Get player level and level text
+    unsigned int level=floor(character_->GetLevels().level/10);
 
-/// Set hud sting to level and character name
-    string username="(0) "+levelstext+" "+character_->GetPlayerInfo().lastname;
+    string levelstring=ConvertUIntToString(level);
 
-    String playername(username.c_str());
+    string levelstext=levels[level];
 
-    PlayerNameText -> SetText(playername.CString());
+    /// Set hud sting to level and character name
+    string playername=character_->GetPlayerInfo().lastname+" "+character_->GetPlayerInfo().firstname+" ("+levelstring+") "+ levelstext;
+
+
+    PlayerNameText -> SetText(playername.c_str());
 
     UpdatePlayerInfoBar();
 
@@ -3568,12 +3581,14 @@ void ExistenceClient::CreateCharacter(void)
     /// Register Character component
     character_ = objectNode->CreateComponent<Character>();
 
-    /// Copy character information
-    character_ -> SetAlliance(TemporaryAccountPlayerList[TemporaryAccountPlayerSelected].GetAlliance());
-    character_ -> SetCharacteristics(TemporaryAccountPlayerList[TemporaryAccountPlayerSelected].GetCharacteristics());
-    character_ -> SetPlayerInfo(TemporaryAccountPlayerList[TemporaryAccountPlayerSelected].GetPlayerInfo());
+    LoadPlayer(TemporaryAccountPlayerSelected);
 
-    character_ -> SetHealth(100);
+    /// Copy character information
+    //character_ -> SetAlliance(TemporaryAccountPlayerList[TemporaryAccountPlayerSelected].GetAlliance());
+    //character_ -> SetCharacteristics(TemporaryAccountPlayerList[TemporaryAccountPlayerSelected].GetCharacteristics());
+    //character_ -> SetPlayerInfo(TemporaryAccountPlayerList[TemporaryAccountPlayerSelected].GetPlayerInfo());
+
+    //character_ -> SetHealth(100);
 
     /// Load a Character Mesh
     LoadCharacterMesh(CHARACTERMAINSCENE, "Character",character_->GetAlliance().alienrace,character_->GetCharacteristics().gender);
@@ -4974,7 +4989,7 @@ int ExistenceClient::ConsoleActionBuild(const char * lineinput)
         }
     }
 
- /// Conole Command :/build rotate
+/// Conole Command :/build rotate
     if(argument[1]=="rotateobjectui")
     {
         /// Get character node
@@ -5265,5 +5280,91 @@ int ExistenceClient::LoadEnvironmentSettings(const char *environment)
 }
 
 
+/// Load account information from a account file
+int ExistenceClient::LoadPlayer(int player)
+{
+    ResourceCache * cache = GetSubsystem<ResourceCache>();
+    FileSystem * filesystem = GetSubsystem<FileSystem>();
 
+    String accountplayersfile;
 
+    accountplayersfile.Append(filesystem->GetProgramDir().CString());
+    accountplayersfile.Append("CoreData/");
+    accountplayersfile.Append(PLAYERFILE);
+
+    /// Set XML related elements
+    XMLFile* charactersplayer = cache->GetResource<XMLFile>(accountplayersfile);
+    XMLElement charactersRootElement;
+    XMLElement NextSibling;
+
+    /// if account file is found
+    if(charactersplayer!=NULL)
+    {
+        /// get account root
+        charactersRootElement = charactersplayer -> GetRoot("characters");
+
+        /// Set Counter
+        unsigned int counter=0;
+
+        NextSibling=charactersRootElement .GetChild();
+
+        for(unsigned int i=0; i<player; i++)
+        {
+            NextSibling=NextSibling.GetNext();
+        }
+
+        /// Temporay player Info
+        playerbasicinfo tempplayerinfo;
+        playercharacteristics tempplayercharacteristics;
+        playeralliance tempplayeralliance;
+        playerlevels templevels;
+
+        /// Get elements
+        XMLElement firstnameElement  = NextSibling.GetChild("firstname");
+        XMLElement middlenameElement  = NextSibling.GetChild("middlename");
+        XMLElement lastnameElement  = NextSibling.GetChild("lastname");
+        XMLElement levelElement  = NextSibling.GetChild("level");
+        XMLElement experienceElement  = NextSibling.GetChild("experience");
+        XMLElement reputationElement  = NextSibling.GetChild("reputation");
+        XMLElement reputation1Element  = NextSibling.GetChild("reputation1");
+        XMLElement reputation2Element  = NextSibling.GetChild("reputation2");
+        XMLElement reputation3Element  = NextSibling.GetChild("reputation3");
+        XMLElement reputation4Element  = NextSibling.GetChild("reputation4");
+        XMLElement alienraceElement  = NextSibling.GetChild("alienrace");
+        XMLElement alienalliancealignedElement  = NextSibling.GetChild("alienalliancealigned");
+        XMLElement genderElement  = NextSibling.GetChild("gender");
+        XMLElement personalitytraitElement  = NextSibling.GetChild("personalitytrait");
+
+        /// Assisgn values
+        tempplayerinfo.firstname.append(firstnameElement.GetAttributeCString("firstname"));
+        tempplayerinfo.middlename.append(middlenameElement.GetAttributeCString("middlename"));
+        tempplayerinfo.lastname.append(lastnameElement.GetAttributeCString("lastname"));
+
+        tempplayercharacteristics.gender=genderElement.GetUInt("gender");
+        tempplayercharacteristics.personalitytrait=genderElement.GetUInt("personalitytrait");
+
+        tempplayercharacteristics.gender=genderElement.GetUInt("gender");
+
+        templevels.level= levelElement.GetUInt("level");
+        templevels.experience=experienceElement.GetUInt("experience");
+        templevels.reputation=reputationElement.GetUInt("reputation");
+        templevels.reputation1=reputation1Element.GetUInt("reputation1");
+        templevels.reputation2=reputation2Element.GetUInt("reputation2");
+        templevels.reputation3=reputation3Element.GetUInt("reputation3");
+        templevels.reputation4=reputation4Element.GetUInt("reputation4");
+
+        tempplayeralliance.alienrace=alienraceElement.GetUInt("alienrace");
+        tempplayeralliance.alienalliancealigned=alienalliancealignedElement.GetBool("alienalliancealigned");
+
+        /// Copy to player
+        character_->SetAlliance(tempplayeralliance);
+        character_->SetCharacteristics(tempplayercharacteristics);
+        character_->SetPlayerInfo(tempplayerinfo);
+        character_->SetLevels(templevels);
+
+        /// Set health
+        character_ -> SetHealth(100);
+    }
+
+    return 0;
+}
