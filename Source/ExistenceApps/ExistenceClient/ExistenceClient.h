@@ -119,7 +119,7 @@ private:
     /// File access
     void LoadAccount(void);
     void SaveAccount(accountinformation account);
-    void SavePlayer(int writemode);
+    void SavePlayer(bool activeplayer);
 
     void InitializeConsole(void);
     void HandleConsoleCommand(StringHash eventType, VariantMap& eventData);

@@ -4,10 +4,14 @@
 	<attribute name="Size" value="500 600" />
 	<attribute name="Opacity" value="0.7" />
 	<attribute name="Is Enabled" value="true" />
+	<attribute name="Bring To Front" value="true" />
+	<attribute name="Focus Mode" value="Focusable" />
 	<element type="Window" style="none">
 		<attribute name="Name" value="PreferencesWindow" />
 		<attribute name="Size" value="850 600" />
 		<attribute name="Min Size" value="850 600" />
+		<attribute name="Clip Children" value="false" />
+		<attribute name="Focus Mode" value="Focusable" />
 		<attribute name="Texture" value="Texture2D;Textures/UI.png" />
 		<attribute name="Image Rect" value="48 0 64 16" />
 		<attribute name="Border" value="4 4 4 4" />
@@ -16,12 +20,15 @@
 		<element type="Button" style="CloseButton">
 			<attribute name="Name" value="closeButton" />
 			<attribute name="Position" value="825 16" />
+			<attribute name="Focus Mode" value="Focusable" />
 		</element>
 		<element type="Text">
 			<attribute name="Name" value="PreferencesText" />
 			<attribute name="Position" value="16 16" />
 			<attribute name="Color" value="1 1 1 1" />
 			<attribute name="Is Enabled" value="true" />
+			<attribute name="Use Derived Opacity" value="true" />
+			<attribute name="Focus Mode" value="Focusable" />
 			<attribute name="Text" value="Preferences" />
 			<attribute name="Text Effect" value="Shadow" />
 		</element>

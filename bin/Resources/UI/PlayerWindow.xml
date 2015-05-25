@@ -5,11 +5,14 @@
 	<attribute name="Min Size" value="1024 720" />
 	<attribute name="Opacity" value="0.7" />
 	<attribute name="Is Enabled" value="true" />
+	<attribute name="Focus Mode" value="Focusable" />
 	<attribute name="Layout Border" value="1 1 1 1" />
 	<element type="Window" style="none">
 		<attribute name="Name" value="PlayerWindow" />
 		<attribute name="Size" value="640 546" />
 		<attribute name="Min Size" value="640 546" />
+		<attribute name="Clip Children" value="false" />
+		<attribute name="Focus Mode" value="Focusable" />
 		<attribute name="Texture" value="Texture2D;Textures/UI.png" />
 		<attribute name="Image Rect" value="48 0 64 16" />
 		<attribute name="Border" value="4 4 4 4" />
@@ -18,18 +21,21 @@
 		<element type="Button" style="CloseButton">
 			<attribute name="Name" value="closeButton" />
 			<attribute name="Position" value="600 16" />
+			<attribute name="Focus Mode" value="Focusable" />
 			<attribute name="Layout Border" value="1 1 1 1" />
 		</element>
 		<element type="Button" style="InfoThinWordButton">
 			<attribute name="Name" value="PlayerInfoButton" />
 			<attribute name="Position" value="470 16" />
 			<attribute name="Size" value="33 16" />
+			<attribute name="Focus Mode" value="Focusable" />
 			<attribute name="Texture" value="Texture2D;UI/Buttons/uibuttoninfothinword.png" />
 		</element>
 		<element type="Button" style="HealthThinWorldButton">
 			<attribute name="Name" value="PlayerHealthButton" />
 			<attribute name="Position" value="510 16" />
 			<attribute name="Size" value="48 16" />
+			<attribute name="Focus Mode" value="Focusable" />
 			<attribute name="Texture" value="Texture2D;UI/Buttons/uibuttonhealththinword.png" />
 		</element>
 		<element type="Window">
@@ -41,6 +47,7 @@
 			<attribute name="Top Right Color" value="0 0 0 0" />
 			<attribute name="Bottom Left Color" value="0 0 0 0" />
 			<attribute name="Bottom Right Color" value="0 0 0 0" />
+			<attribute name="Focus Mode" value="Focusable" />
 			<attribute name="Layout Flex Scale" value="0 0" />
 			<element type="View3D" style="View3D">
 				<attribute name="Name" value="PlayerViewWindow" />
@@ -48,9 +55,89 @@
 				<attribute name="Size" value="230 400" />
 				<attribute name="Min Size" value="230 400" />
 				<attribute name="Max Size" value="230 400" />
+				<attribute name="Priority" value="1" />
 				<attribute name="Clip Children" value="false" />
+				<attribute name="Focus Mode" value="Focusable" />
 				<attribute name="Image Rect" value="0 0 230 400" />
 				<attribute name="Border" value="1 1 1 1" />
+			</element>
+			<element type="Window">
+				<attribute name="Name" value="PlayerProgress" />
+				<attribute name="Position" value="16 80" />
+				<attribute name="Size" value="270 400" />
+				<attribute name="Min Size" value="270 400" />
+				<attribute name="Color" value="0 0 0 0" />
+				<attribute name="Top Left Color" value="0 0 0 0" />
+				<attribute name="Top Right Color" value="0 0 0 0" />
+				<attribute name="Bottom Left Color" value="0 0 0 0" />
+				<attribute name="Bottom Right Color" value="0 0 0 0" />
+				<attribute name="Focus Mode" value="Focusable" />
+				<element type="ScrollBar">
+					<attribute name="Name" value="PlayerProgressScroll" />
+					<attribute name="Position" value="256 0" />
+					<attribute name="Size" value="16 400" />
+					<attribute name="Min Size" value="16 400" />
+					<attribute name="Opacity" value="0.8" />
+					<attribute name="Focus Mode" value="Focusable" />
+					<attribute name="Orientation" value="Vertical" />
+					<attribute name="Value" value="1" />
+					<element type="Button" internal="true" style="none" />
+					<element type="Slider" internal="true" style="none">
+						<attribute name="Position" value="0 16" />
+						<attribute name="Size" value="16 368" />
+						<element type="BorderImage" internal="true" style="none" />
+					</element>
+					<element type="Button" internal="true" style="none">
+						<attribute name="Position" value="0 384" />
+					</element>
+				</element>
+				<element type="Text">
+					<attribute name="Name" value="PlayerExperienceText" />
+					<attribute name="Color" value="1 1 1 1" />
+					<attribute name="Is Enabled" value="true" />
+					<attribute name="Use Derived Opacity" value="true" />
+					<attribute name="Focus Mode" value="Focusable" />
+					<attribute name="Layout Mode" value="Vertical" />
+					<attribute name="Font Size" value="9" />
+					<attribute name="Text" value="Experience" />
+					<attribute name="Text Effect" value="Shadow" />
+				</element>
+				<element type="Text">
+					<attribute name="Name" value="PlayerReputationText" />
+					<attribute name="Position" value="0 11" />
+					<attribute name="Color" value="1 1 1 1" />
+					<attribute name="Is Enabled" value="true" />
+					<attribute name="Use Derived Opacity" value="true" />
+					<attribute name="Focus Mode" value="Focusable" />
+					<attribute name="Layout Mode" value="Vertical" />
+					<attribute name="Font Size" value="9" />
+					<attribute name="Text" value="Reputation" />
+					<attribute name="Text Effect" value="Shadow" />
+				</element>
+				<element type="Text">
+					<attribute name="Name" value="PlayerExperienceResultText" />
+					<attribute name="Position" value="150 0" />
+					<attribute name="Color" value="1 1 1 1" />
+					<attribute name="Is Enabled" value="true" />
+					<attribute name="Use Derived Opacity" value="true" />
+					<attribute name="Focus Mode" value="Focusable" />
+					<attribute name="Layout Mode" value="Vertical" />
+					<attribute name="Font Size" value="9" />
+					<attribute name="Text" value="Results" />
+					<attribute name="Text Effect" value="Shadow" />
+				</element>
+				<element type="Text">
+					<attribute name="Name" value="PlayerReputationResultText" />
+					<attribute name="Position" value="150 12" />
+					<attribute name="Color" value="1 1 1 1" />
+					<attribute name="Is Enabled" value="true" />
+					<attribute name="Use Derived Opacity" value="true" />
+					<attribute name="Focus Mode" value="Focusable" />
+					<attribute name="Layout Mode" value="Vertical" />
+					<attribute name="Font Size" value="9" />
+					<attribute name="Text" value="Results" />
+					<attribute name="Text Effect" value="Shadow" />
+				</element>
 			</element>
 		</element>
 		<element type="Window">
@@ -62,21 +149,36 @@
 			<attribute name="Top Right Color" value="0 0 0 0" />
 			<attribute name="Bottom Left Color" value="0 0 0 0" />
 			<attribute name="Bottom Right Color" value="0 0 0 0" />
-			<attribute name="Is Enabled" value="false" />
-			<attribute name="Is Editable" value="false" />
 			<attribute name="Use Derived Opacity" value="false" />
+			<attribute name="Focus Mode" value="Focusable" />
 			<element type="View3D" style="View3D">
 				<attribute name="Name" value="PlayerViewWindow2" />
 				<attribute name="Position" value="16 80" />
+				<attribute name="Focus Mode" value="Focusable" />
 				<attribute name="Texture" value="Texture2D;UI/Buttons/darkgreyblanktexture.png" />
 				<attribute name="Image Rect" value="0 0 230 400" />
+			</element>
+			<element type="Text">
+				<attribute name="Name" value="PlayerHealthResultText" />
+				<attribute name="Position" value="150 80" />
+				<attribute name="Color" value="1 1 1 1" />
+				<attribute name="Is Enabled" value="true" />
+				<attribute name="Use Derived Opacity" value="true" />
+				<attribute name="Focus Mode" value="Focusable" />
+				<attribute name="Font Size" value="8" />
+				<attribute name="Text" value="Player Health Text" />
+				<attribute name="Text Effect" value="Shadow" />
+				<attribute name="Effect Color" value="0.5 0.5 0.5 0.5" />
 			</element>
 			<element type="Text">
 				<attribute name="Name" value="PlayerHealthText" />
 				<attribute name="Position" value="16 80" />
 				<attribute name="Color" value="1 1 1 1" />
 				<attribute name="Is Enabled" value="true" />
-				<attribute name="Text" value="Player Health Text" />
+				<attribute name="Use Derived Opacity" value="true" />
+				<attribute name="Focus Mode" value="Focusable" />
+				<attribute name="Font Size" value="8" />
+				<attribute name="Text" value="Health" />
 				<attribute name="Text Effect" value="Shadow" />
 				<attribute name="Effect Color" value="0.5 0.5 0.5 0.5" />
 			</element>
@@ -95,6 +197,7 @@
 			<attribute name="Top Right Color" value="0 0 0 0" />
 			<attribute name="Bottom Left Color" value="0 0 0 0" />
 			<attribute name="Bottom Right Color" value="0 0 0 0" />
+			<attribute name="Focus Mode" value="Focusable" />
 			<attribute name="Indent Spacing" value="0" />
 			<element type="Text">
 				<attribute name="Name" value="PlayerNameText" />
@@ -103,6 +206,7 @@
 				<attribute name="Color" value="1 1 1 1" />
 				<attribute name="Is Enabled" value="true" />
 				<attribute name="Use Derived Opacity" value="true" />
+				<attribute name="Focus Mode" value="Focusable" />
 				<attribute name="Indent Spacing" value="2" />
 				<attribute name="Font Size" value="13" />
 				<attribute name="Text" value="Player Name Text" />
@@ -115,6 +219,7 @@
 				<attribute name="Color" value="1 1 1 1" />
 				<attribute name="Is Enabled" value="true" />
 				<attribute name="Use Derived Opacity" value="true" />
+				<attribute name="Focus Mode" value="Focusable" />
 				<attribute name="Indent" value="1" />
 				<attribute name="Text" value="Player Rank  Text" />
 				<attribute name="Text Effect" value="Shadow" />
@@ -126,6 +231,7 @@
 				<attribute name="Color" value="1 1 1 1" />
 				<attribute name="Is Enabled" value="true" />
 				<attribute name="Use Derived Opacity" value="true" />
+				<attribute name="Focus Mode" value="Focusable" />
 				<attribute name="Indent" value="1" />
 				<attribute name="Text" value="Player Race Text" />
 				<attribute name="Text Effect" value="Shadow" />

@@ -4,11 +4,13 @@
 	<attribute name="Size" value="500 600" />
 	<attribute name="Opacity" value="0.7" />
 	<attribute name="Is Enabled" value="true" />
+	<attribute name="Focus Mode" value="Focusable" />
 	<element type="Window" style="none">
 		<attribute name="Name" value="AboutWindow" />
 		<attribute name="Size" value="850 600" />
 		<attribute name="Min Size" value="850 600" />
 		<attribute name="Clip Children" value="false" />
+		<attribute name="Focus Mode" value="Focusable" />
 		<attribute name="Texture" value="Texture2D;Textures/UI.png" />
 		<attribute name="Image Rect" value="48 0 64 16" />
 		<attribute name="Border" value="4 4 4 4" />
@@ -17,11 +19,13 @@
 		<element type="Button" style="CloseButton">
 			<attribute name="Name" value="closeButton" />
 			<attribute name="Position" value="825 16" />
+			<attribute name="Focus Mode" value="Focusable" />
 		</element>
 		<element type="Text">
 			<attribute name="Name" value="AboutText" />
 			<attribute name="Position" value="16 16" />
 			<attribute name="Color" value="1 1 1 1" />
+			<attribute name="Focus Mode" value="Focusable" />
 			<attribute name="Text" value="About" />
 			<attribute name="Text Effect" value="Shadow" />
 		</element>
@@ -29,6 +33,15 @@
 			<attribute name="Name" value="refreshButton" />
 			<attribute name="Position" value="805 16" />
 			<attribute name="Texture" value="Texture2D;UI/Buttons/refresh16x16.png" />
+		</element>
+		<element type="Text">
+			<attribute name="Name" value="AboutFullText" />
+			<attribute name="Position" value="16 38" />
+			<attribute name="Color" value="1 1 1 1" />
+			<attribute name="Use Derived Opacity" value="true" />
+			<attribute name="Focus Mode" value="Focusable" />
+			<attribute name="Text" value="Vivienne Anthony (Programmer, 3D Modeler, and Graphic Artist)" />
+			<attribute name="Text Effect" value="Shadow" />
 		</element>
 	</element>
 </element>

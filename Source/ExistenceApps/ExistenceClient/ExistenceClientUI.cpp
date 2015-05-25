@@ -584,12 +584,28 @@ void ExistenceClient::PlayerWindowUpdateUI(void)
 
     /// Create the ranking info
     string playerexperience=ConvertUIntToString(character_->GetLevels().experience);
-    string playerreputation=ConvertUIntToString((character_->GetLevels().reputation/100000)*10);
+    string playerreputationpercent=ConvertUIntToString((character_->GetLevels().reputation/100000)*10);
+    string playerreputation=ConvertUIntToString(character_->GetLevels().reputation);
+    string playerhealth=ConvertUIntToString(character_->GetHealth())+"%";
 
-    string progresstext = "Experience "+playerexperience+" Reputation "+playerreputation+"%";
+    /// If experience element exist
+    if(Text * PlayerExperienceResultText = (Text *)PlayerWindow -> GetChild("PlayerExperienceResultText",true))
+    {
+        PlayerExperienceResultText -> SetText(playerexperience.c_str());
+    }
 
-    PlayerProgressText -> SetText(progresstext.c_str());
+    /// If reputation element exist
+    if(Text * PlayerReputationResultText = (Text *)PlayerWindow -> GetChild("PlayerReputationResultText",true))
+    {
+        string combinedreputation = playerreputation+" ("+playerreputationpercent+"%)";
+        PlayerReputationResultText -> SetText(combinedreputation.c_str());
+    }
 
+/// If reputation element exist
+    if(Text * PlayerHealthResultText = (Text *)PlayerWindow -> GetChild("PlayerHealthResultText",true))
+    {
+        PlayerHealthResultText->SetText(playerhealth.c_str());
+    }
 
 }
 

@@ -79,13 +79,16 @@ protected:
 
     /// Logo sprite.
     SharedPtr<Sprite> logoSprite_;
+
     /// Scene.
     SharedPtr<Scene> scene_;
     SharedPtr<Scene> scenePlayerUI_;
+    SharedPtr<Scene> sceneLoadingGameModeTransition_;
 
     /// Camera scene node.
     SharedPtr<Node> cameraNode_;
     SharedPtr<Node> cameraNodePlayerUI_;
+    SharedPtr<Scene> sceneLoadingGameModeTransitionUI_;
 
     /// Camera yaw angle.
     float yaw_;
