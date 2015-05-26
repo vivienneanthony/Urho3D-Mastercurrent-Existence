@@ -321,6 +321,7 @@ void ExistenceClient::Start()
     /// Setup Screen and Viewport
     SetupScreenViewport();
     AddLogoViewport();
+    SetupScreenUI();
 
     /// Initialize Console
     InitializeConsole();
@@ -1539,6 +1540,56 @@ void ExistenceClient::HandleCharacterSelectedReleased(StringHash eventType, Vari
 }
 
 /// Handle character selection
+void ExistenceClient::HandleCharacterSelectedInfoButtonReleased(StringHash eventType, VariantMap& eventData)
+{
+
+    /// Get the button that was clicked
+    UI* ui_ = GetSubsystem<UI>();
+
+    UIElement* clickedinfo = static_cast<UIElement*>(eventData[UIMouseClick::P_ELEMENT].GetPtr());
+
+    /// Get Button String
+    String clickedButtonString(clickedinfo->GetName());
+
+    /// Convert text to a integer number
+    int button = clickedButtonString.Back()-'0';
+
+    /// Load UI root
+    UIElement * uiroot = ui_ ->	GetRoot ();
+
+    /// Locate Window PlayerWindow
+    Window* PlayerWindow = dynamic_cast<Window*>(uiroot ->GetChild("PlayerWindow", true));
+
+    /// Create save file
+    XMLFile * savefileXML = new XMLFile(context_);
+    XMLElement configElem = savefileXML -> CreateRoot("element");
+
+    /// ocpy info
+    uiroot -> SaveXML(configElem);
+
+    /// Save XML
+    File saveFile(context_, "DebugCharterSelectionInfoButtonReleased.xml",FILE_WRITE);
+    savefileXML->Save(saveFile);
+
+
+    /// IF PlayerWindow exist then enable visibility
+    if(PlayerWindow)
+    {
+        ///PlayerWindow-> SetEnabled(true);
+        ///PlayerWindow-> SetDeepEnabled(true);
+        PlayerWindow-> SetVisible(true);
+
+        cout << "test" <<endl;
+    }
+    else
+    {
+        /// Load Player WIndow UI
+        loadUIXML(UIPLAYERWINDOW,200,200, button);
+    }
+}
+
+
+/// Handle character selection
 void ExistenceClient::HandleMouseReleased(StringHash eventType, VariantMap& eventData)
 {
 
@@ -2022,7 +2073,7 @@ void ExistenceClient::HandleKeyDown(StringHash eventType, VariantMap& eventData)
         }
         else
         {
-            loadUIXML(UIPLAYERWINDOW,200,200);
+            loadUIXML(UIPLAYERWINDOW,200,200,0);
         }
 
     }
@@ -2337,7 +2388,9 @@ int ExistenceClient::mainScreenUI(void)
         UIElement * playerUIElement = new UIElement (context_);
 
         UIElement * playernameUIElement = new UIElement (context_);
+        UIElement * playerinfoUIElement = new UIElement (context_);
         Button * playernameButton = new Button(context_);
+        Button * playerinfoButton = new Button(context_);
         Text *  playernameText = new Text(context_);
 
         UIElement * playerupdatesUIElement = new UIElement (context_);
@@ -2350,19 +2403,31 @@ int ExistenceClient::mainScreenUI(void)
         playerUIElement -> SetAlignment(HA_LEFT, VA_TOP);
         playerUIElement  -> SetStyleAuto();
 
-        playernameUIElement -> SetPosition(1,1);
-        playernameUIElement  -> SetMinSize(470,66);
-        playernameUIElement  -> SetLayout(LM_FREE, 6, IntRect(0, 0, 470,66));
+        playernameUIElement -> SetPosition(0,0);
+        playernameUIElement  -> SetMinSize(470,48);
+        playernameUIElement  -> SetMaxSize(470,48);
+        playernameUIElement  -> SetLayout(LM_FREE, 6, IntRect(0, 0, 470,48));
         playernameUIElement -> SetAlignment(HA_LEFT, VA_TOP);
         playernameUIElement  -> SetStyleAuto();
 
-        playernameButton -> SetLayout(LM_FREE, 6, IntRect(0, 0, 470, 66));
+        playerinfoUIElement -> SetPosition(416,50);
+        playerinfoUIElement  -> SetMinSize(16,16);
+        playerinfoUIElement  -> SetLayout(LM_FREE, 6, IntRect(0, 0, 16,16));
+        playerinfoUIElement -> SetAlignment(HA_LEFT, VA_TOP);
+        playerinfoUIElement  -> SetStyleAuto();
+
+        playernameButton -> SetLayout(LM_FREE, 6, IntRect(0, 0, 470, 48));
         playernameButton -> SetAlignment(HA_LEFT, VA_TOP);
-        playernameButton -> SetFixedSize(470, 66);
+        playernameButton -> SetFixedSize(470, 48);
         playernameButton -> SetPosition(0, 0);
 
-        playernameText -> SetPosition(0, 0);
-        playernameText -> SetAlignment(HA_LEFT, VA_CENTER);
+        playerinfoButton -> SetLayout(LM_FREE, 6, IntRect(0, 0, 16, 16));
+        playerinfoButton -> SetAlignment(HA_LEFT, VA_TOP);
+        playerinfoButton-> SetFixedSize(16, 16);
+        playerinfoButton -> SetPosition(0, 0);
+
+        playernameText -> SetPosition(0, 8);
+        playernameText -> SetAlignment(HA_LEFT, VA_TOP);
         playernameText -> SetTextAlignment(HA_LEFT);
 
         /// Create a username to display on player button
@@ -2372,16 +2437,16 @@ int ExistenceClient::mainScreenUI(void)
 
         playernameText -> SetFont(cache->GetResource<Font>("Fonts/Anonymous Pro.ttf"), 13);
 
-        playerupdatesUIElement -> SetPosition(476, 1);
-        playerupdatesUIElement  -> SetMinSize(66,66);
-        playerupdatesUIElement  -> SetLayout(LM_FREE, 6, IntRect(0, 0, 66,66));
+        playerupdatesUIElement -> SetPosition(476, 0);
+        playerupdatesUIElement  -> SetMinSize(66,48);
+        playerupdatesUIElement  -> SetLayout(LM_FREE, 6, IntRect(0, 0, 66,48));
         playerupdatesUIElement -> SetAlignment(HA_LEFT, VA_TOP);
         playerupdatesUIElement  -> SetStyleAuto();
         playerupdatesUIElement -> SetOpacity(.8);
 
-        playerupdatesButton -> SetLayout(LM_FREE, 6, IntRect(0, 0, 66, 66));
+        playerupdatesButton -> SetLayout(LM_FREE, 6, IntRect(0, 0, 66, 48));
         playerupdatesButton -> SetAlignment(HA_LEFT, VA_TOP);
-        playerupdatesButton -> SetFixedSize(66, 66);
+        playerupdatesButton -> SetFixedSize(66, 48);
         playerupdatesButton -> SetPosition(0, 0);
 
         playernameUIElement -> SetOpacity(.8);
@@ -2389,36 +2454,50 @@ int ExistenceClient::mainScreenUI(void)
         playernameUIElement -> AddChild(playernameButton);
         playernameUIElement -> AddChild(playernameText);
 
+        playerinfoUIElement -> AddChild(playerinfoButton);
+
         playerupdatesUIElement -> AddChild(playerupdatesButton);
 
         playerUIElement ->AddChild(playernameUIElement);
+        playerUIElement ->AddChild(playerinfoUIElement);
         playerUIElement ->AddChild(playerupdatesUIElement);
+
 
         uiRoot_->AddChild(playerUIElement);
 
         playernameButton -> SetStyle("playermainscreenButton");
 
         string playerbuttontext="playermainscreenButton ";
+        string playerinfobuttontext="playermainscreeninfoButton";
 
         switch(i)
         {
         case 0:
             playerbuttontext.append("0");
+            playerinfobuttontext.append("1");
+
             break;
         case 1:
             playerbuttontext.append("1");
+            playerinfobuttontext.append("2");
             break;
         case 2:
             playerbuttontext.append("2");
+            playerinfobuttontext.append("3");
             break;
         case 3:
             playerbuttontext.append("3");
+            playerinfobuttontext.append("4");
         }
 
         playernameButton -> SetName(String(playerbuttontext.c_str()));
-        playerupdatesButton -> SetStyle("playermainscreenupdateButton");
+        playerinfoButton -> SetName(String(playerinfobuttontext.c_str()));
+
+        playerupdatesButton -> SetStyle("playermainscreenButton2");
+        playerinfoButton -> SetStyle("Player16x16Button");
 
         SubscribeToEvent(playernameButton, E_RELEASED, HANDLER(ExistenceClient, HandleCharacterSelectedReleased));
+        SubscribeToEvent(playerinfoButton, E_RELEASED, HANDLER(ExistenceClient, HandleCharacterSelectedInfoButtonReleased));
 
         placement=placement+(66+8);
 
@@ -2478,8 +2557,6 @@ int ExistenceClient::mainScreenUI(void)
     /// Subscribe to events
     SubscribeToEvent(newcharacterButton, E_RELEASED, HANDLER(ExistenceClient, MainScreenUIHandleClosePressed));
     SubscribeToEvent(exitButton, E_RELEASED, HANDLER(ExistenceClient, MainScreenUIHandleClosePressed));
-
-
 
     return 1;
 
@@ -2847,7 +2924,8 @@ void ExistenceClient::SavePlayer(bool activeplayer)
                 characterfound = true;
                 break;
             }
-        }while(characterElement = characterElement.GetNext("character"));
+        }
+        while(characterElement = characterElement.GetNext("character"));
 
         /// if player not found
         if(characterfound&&activeplayer==true)
@@ -3487,7 +3565,7 @@ void ExistenceClient::loadScene(const int mode, const char * lineinput)
     loadHUDFile("Resources/UI/PlayerInfoWindow.xml",0,34);
 
     /// load hud
-    loadUIXML(UIQUICKMENU,0,0);
+    loadUIXML(UIQUICKMENU,0,0,0);
 
     /// Get player info  name from temporary list and put it into the character object
     Text* PlayerNameText = (Text*)ui->GetRoot()->GetChild("PlayerNameText", true);
@@ -5456,4 +5534,142 @@ int ExistenceClient::LoadPlayer(int player)
     }
 
     return 0;
+}
+
+
+/// Load account information from a account file
+int ExistenceClient::LoadTemporaryPlayer(int player)
+{
+    ResourceCache * cache = GetSubsystem<ResourceCache>();
+    FileSystem * filesystem = GetSubsystem<FileSystem>();
+
+    String accountplayersfile;
+
+    accountplayersfile.Append(filesystem->GetProgramDir().CString());
+    accountplayersfile.Append("CoreData/");
+    accountplayersfile.Append(PLAYERFILE);
+
+    /// Set XML related elements
+    XMLFile* charactersplayer = cache->GetResource<XMLFile>(accountplayersfile);
+    XMLElement charactersRootElement;
+    XMLElement NextSibling;
+
+    /// if account file is found
+    if(charactersplayer!=NULL)
+    {
+        /// get account root
+        charactersRootElement = charactersplayer -> GetRoot("characters");
+
+        /// Set Counter
+        unsigned int counter=0;
+
+        NextSibling=charactersRootElement .GetChild();
+
+        for(unsigned int i=0; i<player; i++)
+        {
+            NextSibling=NextSibling.GetNext();
+        }
+
+        /// Temporay player Info
+        playerbasicinfo tempplayerinfo;
+        playercharacteristics tempplayercharacteristics;
+        playeralliance tempplayeralliance;
+        playerlevels templevels;
+
+        /// Get elements
+        XMLElement firstnameElement  = NextSibling.GetChild("firstname");
+        XMLElement middlenameElement  = NextSibling.GetChild("middlename");
+        XMLElement lastnameElement  = NextSibling.GetChild("lastname");
+        XMLElement levelElement  = NextSibling.GetChild("level");
+        XMLElement experienceElement  = NextSibling.GetChild("experience");
+        XMLElement reputationElement  = NextSibling.GetChild("reputation");
+        XMLElement reputation1Element  = NextSibling.GetChild("reputation1");
+        XMLElement reputation2Element  = NextSibling.GetChild("reputation2");
+        XMLElement reputation3Element  = NextSibling.GetChild("reputation3");
+        XMLElement reputation4Element  = NextSibling.GetChild("reputation4");
+        XMLElement alienraceElement  = NextSibling.GetChild("alienrace");
+        XMLElement alienalliancealignedElement  = NextSibling.GetChild("alienalliancealigned");
+        XMLElement genderElement  = NextSibling.GetChild("gender");
+        XMLElement personalitytraitElement  = NextSibling.GetChild("personalitytrait");
+
+        /// Assisgn values
+        tempplayerinfo.firstname.append(firstnameElement.GetAttributeCString("firstname"));
+        tempplayerinfo.middlename.append(middlenameElement.GetAttributeCString("middlename"));
+        tempplayerinfo.lastname.append(lastnameElement.GetAttributeCString("lastname"));
+
+        tempplayercharacteristics.gender=genderElement.GetUInt("gender");
+        tempplayercharacteristics.personalitytrait=genderElement.GetUInt("personalitytrait");
+
+        tempplayercharacteristics.gender=genderElement.GetUInt("gender");
+
+        templevels.level= levelElement.GetUInt("level");
+        templevels.experience=experienceElement.GetUInt("experience");
+        templevels.reputation=reputationElement.GetUInt("reputation");
+        templevels.reputation1=reputation1Element.GetUInt("reputation1");
+        templevels.reputation2=reputation2Element.GetUInt("reputation2");
+        templevels.reputation3=reputation3Element.GetUInt("reputation3");
+        templevels.reputation4=reputation4Element.GetUInt("reputation4");
+
+        tempplayeralliance.alienrace=alienraceElement.GetUInt("alienrace");
+        tempplayeralliance.alienalliancealigned=alienalliancealignedElement.GetBool("alienalliancealigned");
+
+        TemporaryPlayer.Clear();
+
+        /// Copy to player
+        TemporaryPlayer.SetAlliance(tempplayeralliance);
+        TemporaryPlayer.SetCharacteristics(tempplayercharacteristics);
+        TemporaryPlayer.SetPlayerInfo(tempplayerinfo);
+        TemporaryPlayer.SetLevels(templevels);
+
+        /// Set health
+        TemporaryPlayer.SetHealth(100);
+    }
+
+    return 0;
+}
+
+
+void ExistenceClient::SetupScreenUI(void)
+{
+    /// Create a new scene UI
+    scenePlayerUI_= new Scene(context_);
+    scenePlayerUI_-> CreateComponent<Octree>();
+    scenePlayerUI_-> CreateComponent<DebugRenderer>();
+
+    /// Add a lightdelightNode
+    Node* lightNode = scenePlayerUI_->CreateChild("uidirectionallight");
+    lightNode->SetDirection(Vector3(0.0f, .8f, 3.20f)); /// The direction vector does not need to be normalized
+    Light* light = lightNode->CreateComponent<Light>();
+    light->SetLightType(LIGHT_DIRECTIONAL);
+
+    /// Create a Zone component for ambient lighting & fog control
+    Node* zoneNode = scenePlayerUI_->CreateChild("uizone");
+    Zone* zone = zoneNode->CreateComponent<Zone>();
+
+    Vector3 boundingBoxMin(-20.0f,-20.0f,-20.0f);
+    Vector3 boundingBoxMax(20.0f,20.0f,20.0f);
+
+    /// change bounding box to something more accurate
+    zone->SetBoundingBox(BoundingBox(boundingBoxMin,boundingBoxMax));
+    zone->SetFogColor(Color(.08f, .08f, .08f));
+    zone->SetFogStart(10.0f);
+    zone->SetFogEnd(20.0f);
+    zone->SetHeightFog (false);
+
+    /// Add Camera
+    Node * cameraNodePlayerUI_ = scenePlayerUI_->CreateChild("uicamera");
+    cameraNodePlayerUI_->CreateComponent<Camera>();
+
+    /// Set an initial position for the camera scene node above the plane
+    cameraNodePlayerUI_->SetPosition(Vector3(0.0f, 0.8f, 3.0f));
+
+    Node * emptyNode= scenePlayerUI_->CreateChild("uiempty");
+    emptyNode->SetPosition(Vector3(0.0f,0.73f,0.0f));
+
+    /// Create character node;
+    Node * characterNode= scenePlayerUI_->CreateChild("Character");
+    characterNode->SetPosition(Vector3(0.0f,0.0f,0.0f));
+
+    cameraNodePlayerUI_ -> LookAt(Vector3(emptyNode->GetPosition()));
+    lightNode -> Rotate(Quaternion(.398377,0.854323,0.141073,-0.302532));
 }

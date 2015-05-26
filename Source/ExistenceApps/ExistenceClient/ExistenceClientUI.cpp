@@ -109,7 +109,7 @@ using namespace Urho3D;
 
 
 /// Load a HUD file in a XML format in the file system
-bool ExistenceClient::loadUIXML(int windowtype, const int positionx, const int positiony)
+bool ExistenceClient::loadUIXML(int windowtype, const int positionx, const int positiony, int selected)
 {
     /// Get resources
     ResourceCache * cache = GetSubsystem<ResourceCache>();
@@ -121,6 +121,9 @@ bool ExistenceClient::loadUIXML(int windowtype, const int positionx, const int p
     float width = (float)graphics->GetWidth();
     float height = (float)graphics->GetHeight();
 
+    /// Create save file
+    XMLFile * savefileXML = new XMLFile(context_);
+    XMLElement configElem = savefileXML -> CreateRoot("element");
 
     /// get current root
     UIElement * RootUIElement = ui_->GetRoot();
@@ -129,6 +132,7 @@ bool ExistenceClient::loadUIXML(int windowtype, const int positionx, const int p
 
     String filenameHUD;
 
+    /// chose based on menu type
     if(windowtype==UIQUICKMENU)
     {
         filenameHUD.Append("Resources/UI/QuickMenu.xml");
@@ -158,7 +162,6 @@ bool ExistenceClient::loadUIXML(int windowtype, const int positionx, const int p
     {
         return 0;
     }
-
 
     XMLFile* style = cache->GetResource<XMLFile>("UI/DefaultStyle.xml");
 
@@ -194,8 +197,14 @@ bool ExistenceClient::loadUIXML(int windowtype, const int positionx, const int p
         /// set healt to invisible
         healthWindow -> SetVisible(false);
 
+        /// load temporary player
+        if(selected)
+        {
+            LoadTemporaryPlayer(selected-1);
+        }
+
         /// Update Player Info Update
-        PlayerWindowUpdateUI();
+        PlayerWindowUpdateUI(selected);
 
         /// get buttons assign a event
         Button * infoButton  = (Button *) HUDFileElement -> GetChild("PlayerInfoButton",true);
@@ -204,65 +213,39 @@ bool ExistenceClient::loadUIXML(int windowtype, const int positionx, const int p
         SubscribeToEvent(infoButton, E_RELEASED, HANDLER(ExistenceClient, PlayerWindowHandleDisplaySelection));
         SubscribeToEvent(healthButton, E_RELEASED, HANDLER(ExistenceClient, PlayerWindowHandleDisplaySelection));
 
-        /// Create a new scene UI
-        scenePlayerUI_= new Scene(context_);
-        scenePlayerUI_-> CreateComponent<Octree>();
-        scenePlayerUI_-> CreateComponent<DebugRenderer>();
-
-        /// Add a lightdelightNode
-        Node* lightNode = scenePlayerUI_->CreateChild("uidirectionallight");
-        lightNode->SetDirection(Vector3(0.0f, .8f, 3.20f)); /// The direction vector does not need to be normalized
-        Light* light = lightNode->CreateComponent<Light>();
-        light->SetLightType(LIGHT_DIRECTIONAL);
-
-
-        /// Create a Zone component for ambient lighting & fog control
-        Node* zoneNode = scenePlayerUI_->CreateChild("uizone");
-        Zone* zone = zoneNode->CreateComponent<Zone>();
-
-        Vector3 boundingBoxMin(-20.0f,-20.0f,-20.0f);
-        Vector3 boundingBoxMax(20.0f,20.0f,20.0f);
-
-        /// change bounding box to something more accurate
-        zone->SetBoundingBox(BoundingBox(boundingBoxMin,boundingBoxMax));
-        //zone->SetAmbientColor(Color(0.01f, 0.01f, .01f));
-        zone->SetFogColor(Color(.08f, .08f, .08f));
-        zone->SetFogStart(10.0f);
-        zone->SetFogEnd(20.0f);
-        zone->SetHeightFog (false);
-
-        ///Node* planeNode = scenePlayerUI_->CreateChild("Plane");
-        ///planeNode->SetScale(Vector3(100.0f, 1.0f, 100.0f));
-        ///StaticModel* planeObject = planeNode->CreateComponent<StaticModel>();
-        ///planeObject->SetModel(cache->GetResource<Model>("Models/Plane.mdl"));
-
-        /// Add Camera
-        Node * cameraNodePlayerUI_ = scenePlayerUI_->CreateChild("uicamera");
-        cameraNodePlayerUI_->CreateComponent<Camera>();
-
-        /// Set an initial position for the camera scene node above the plane
-        cameraNodePlayerUI_->SetPosition(Vector3(0.0f, 0.8f, 3.0f));
-
         /// Get the view window
         View3D * playerViewWindow = (View3D *) HUDFileElement -> GetChild("PlayerViewWindow",true);
         View3D * playerViewWindow2 = (View3D *) HUDFileElement -> GetChild("PlayerViewWindow2",true);
+
+        /// Get camera NOde
+        Node * cameraNodePlayerUI_ = scenePlayerUI_-> GetChild("uicamera", true);
 
         /// Add scene and camera to window
         playerViewWindow -> SetView(scenePlayerUI_,(Camera *)cameraNodePlayerUI_->GetComponent<Camera>(),true);
         playerViewWindow2 -> SetView(scenePlayerUI_,(Camera *)cameraNodePlayerUI_->GetComponent<Camera>(),true);
 
-        Node * emptyNode= scenePlayerUI_->CreateChild("uiempty");
-        emptyNode->SetPosition(Vector3(0.0f,0.73f,0.0f));
+        /// Remove node children
+        if(Node * characterNode = scenePlayerUI_->GetChild("Character"))
+        {
+            /// Clear everything
+            characterNode -> RemoveAllChildren();
+            characterNode -> RemoveAllComponents();
 
-        /// Create character node;
-        Node * characterNode= scenePlayerUI_->CreateChild("Character");
-        characterNode->SetPosition(Vector3(0.0f,0.0f,0.0f));
+        }
 
-        cameraNodePlayerUI_ -> LookAt(Vector3(emptyNode->GetPosition()));
-        lightNode -> Rotate(Quaternion(.398377,0.854323,0.141073,-0.302532));
+        if(selected)
+        {
+            /// Load a Character Mesh
+            LoadCharacterMesh(CHARACTERUISCENE, "Character",TemporaryPlayer.GetAlliance().alienrace,TemporaryPlayer.GetCharacteristics().gender);
+        }
+        else
+        {
 
-        /// Load a Character Mesh
-        LoadCharacterMesh(CHARACTERUISCENE, "Character",character_->GetAlliance().alienrace,character_->GetCharacteristics().gender);
+            /// Load a Character Mesh
+            LoadCharacterMesh(CHARACTERUISCENE, "Character",character_->GetAlliance().alienrace,character_->GetCharacteristics().gender);
+        }
+
+
     }
 
     /// If load is quickmenu on side assign buttons and move position  to far right
@@ -285,7 +268,6 @@ bool ExistenceClient::loadUIXML(int windowtype, const int positionx, const int p
         SubscribeToEvent(exitButton, E_RELEASED, HANDLER(ExistenceClient, QuickMenuPressed));
     }
 
-
     /// If the close button exist
     if(closebutton)
     {
@@ -294,6 +276,12 @@ bool ExistenceClient::loadUIXML(int windowtype, const int positionx, const int p
 
     }
 
+    /// ocpy info
+    RootUIElement -> SaveXML(configElem);
+
+    /// Save XML
+    File saveFile(context_, "DebugOnUIPlayerLoad.xml",FILE_WRITE);
+    savefileXML->Save(saveFile);
 
     return true;
 }
@@ -301,6 +289,15 @@ bool ExistenceClient::loadUIXML(int windowtype, const int positionx, const int p
 /// Load a HUD file in a XML format in the file system
 void ExistenceClient::loadUIXMLClosePressed(StringHash eventType, VariantMap& eventData)
 {
+    /// Get roott
+    UI* ui_ = GetSubsystem<UI>();
+
+    UIElement * RootUIElement= ui_->GetRoot();
+
+    /// Create save file
+    XMLFile * savefileXML = new XMLFile(context_);
+    XMLElement configElem = savefileXML -> CreateRoot("element");
+    RootUIElement -> SaveXML(configElem);
 
     /// Get control that was clicked
     UIElement* clicked = static_cast<UIElement*>(eventData[UIMouseClick::P_ELEMENT].GetPtr());
@@ -309,8 +306,12 @@ void ExistenceClient::loadUIXMLClosePressed(StringHash eventType, VariantMap& ev
     UIElement* selfparent = clicked -> GetParent();
 
     /// Disable and hide
-    selfparent -> SetDeepEnabled(false);
+    ///selfparent -> SetDeepEnabled(false);
     selfparent -> SetVisible(false);
+
+    /// Save XML
+    File saveFile(context_, "DebugOnUIClosePressed.xml",FILE_WRITE);
+    savefileXML->Save(saveFile);
 
     return;
 }
@@ -333,7 +334,6 @@ void ExistenceClient::QuickMenuPressed(StringHash eventType, VariantMap& eventDa
     stringstream ss(clickedButtonString.CString());
     ss >> clickedtext >> clickedbutton;
 
-
     /// If exit was clicked
     if (clickedtext=="ExitButton")
     {
@@ -342,8 +342,6 @@ void ExistenceClient::QuickMenuPressed(StringHash eventType, VariantMap& eventDa
             ExistenceGameState.SetDebugHudMode(false);
             GetSubsystem<DebugHud>()->ToggleAll();
         }
-
-        scenePlayerUI_ -> Remove();
 
         eraseScene();
 
@@ -387,7 +385,7 @@ void ExistenceClient::QuickMenuPressed(StringHash eventType, VariantMap& eventDa
         }
         else
         {
-            loadUIXML(UIPLAYERWINDOW,200,200);
+            loadUIXML(UIPLAYERWINDOW,200,200,0);
         }
     }
 
@@ -408,7 +406,7 @@ void ExistenceClient::QuickMenuPressed(StringHash eventType, VariantMap& eventDa
         }
         else
         {
-            loadUIXML(UIPREFERENCESWINDOW,200,200);
+            loadUIXML(UIPREFERENCESWINDOW,200,200,0);
         }
     }
 
@@ -429,7 +427,7 @@ void ExistenceClient::QuickMenuPressed(StringHash eventType, VariantMap& eventDa
         }
         else
         {
-            loadUIXML(UICONFIGURATIONWINDOW,200,200);
+            loadUIXML(UICONFIGURATIONWINDOW,200,200,0);
         }
     }
 
@@ -451,7 +449,7 @@ void ExistenceClient::QuickMenuPressed(StringHash eventType, VariantMap& eventDa
         }
         else
         {
-            loadUIXML(UIABOUTWINDOW,200,200);
+            loadUIXML(UIABOUTWINDOW,200,200,0);
         }
     }
 
@@ -462,7 +460,7 @@ void ExistenceClient::UpdateUI(float timestep)
     return;
 }
 
-void ExistenceClient::PlayerWindowUpdateUI(void)
+void ExistenceClient::PlayerWindowUpdateUI(int selected)
 {
     /// Get ui subsystem
     UI* ui_ = GetSubsystem<UI>();
@@ -477,7 +475,16 @@ void ExistenceClient::PlayerWindowUpdateUI(void)
     Text * PlayerProgressText = (Text *)PlayerWindow -> GetChild("PlayerProgressText",true);
 
     /// Set hud sting to level and character name
-    string username=character_->GetPlayerInfo().lastname + " " + character_->GetPlayerInfo().firstname;
+    string username;
+
+    if(selected)
+    {
+        username=TemporaryPlayer.GetPlayerInfo().lastname + " " + TemporaryPlayer.GetPlayerInfo().firstname;
+    }
+    else
+    {
+        username=character_->GetPlayerInfo().lastname + " " + character_->GetPlayerInfo().firstname;
+    }
 
     /// Set test
     String playername(username.c_str());
@@ -485,7 +492,16 @@ void ExistenceClient::PlayerWindowUpdateUI(void)
     PlayerNameText -> SetText(playername.CString());
 
     /// player alienrce
-    unsigned int playeralienrace = character_ -> GetAlliance().alienrace;
+    unsigned int playeralienrace=0;
+
+    if(selected)
+    {
+        playeralienrace = TemporaryPlayer.GetAlliance().alienrace;
+    }
+    else
+    {
+        playeralienrace = character_ -> GetAlliance().alienrace;
+    }
 
     /// Temporarily define faction information (Might make this a class)
     unsigned int factionslimit=4;
@@ -540,7 +556,18 @@ void ExistenceClient::PlayerWindowUpdateUI(void)
         if(playeralienrace==Alien[i].uniqueid)
         {
 
-            if(character_ -> GetAlliance().alienalliancealigned==true)
+            int aligned;
+
+            if(selected)
+            {
+                TemporaryPlayer.GetAlliance().alienalliancealigned;
+            }
+            else
+            {
+                character_ -> GetAlliance().alienalliancealigned;
+            }
+
+            if(aligned==true)
             {
 
 
@@ -571,7 +598,16 @@ void ExistenceClient::PlayerWindowUpdateUI(void)
     }
 
     /// Get player level and level text
-    unsigned int level=floor(character_->GetLevels().level/10);
+    unsigned int level = 0;
+
+    if(selected)
+    {
+        level=floor(TemporaryPlayer.GetLevels().level/10);
+    }
+    else
+    {
+        level=floor(character_->GetLevels().level/10);
+    }
 
     string levelstring=ConvertUIntToString(level);
 
@@ -583,10 +619,29 @@ void ExistenceClient::PlayerWindowUpdateUI(void)
     PlayerRankText -> SetText(playerrank.c_str());
 
     /// Create the ranking info
-    string playerexperience=ConvertUIntToString(character_->GetLevels().experience);
-    string playerreputationpercent=ConvertUIntToString((character_->GetLevels().reputation/100000)*10);
-    string playerreputation=ConvertUIntToString(character_->GetLevels().reputation);
-    string playerhealth=ConvertUIntToString(character_->GetHealth())+"%";
+    string playerexperience;
+    string playerreputationpercent;
+    string playerreputation;
+    string playerhealth;
+
+
+    if(selected)
+    {
+        playerexperience=ConvertUIntToString(TemporaryPlayer.GetLevels().experience);
+        playerreputationpercent=ConvertUIntToString((TemporaryPlayer.GetLevels().reputation/100000)*10);
+        playerreputation=ConvertUIntToString(TemporaryPlayer.GetLevels().reputation);
+        playerhealth=ConvertUIntToString(TemporaryPlayer.GetHealth())+"%";
+
+    }
+    else
+    {
+
+        playerexperience=ConvertUIntToString(character_->GetLevels().experience);
+        playerreputationpercent=ConvertUIntToString((character_->GetLevels().reputation/100000)*10);
+        playerreputation=ConvertUIntToString(character_->GetLevels().reputation);
+        playerhealth=ConvertUIntToString(character_->GetHealth())+"%";
+
+    }
 
     /// If experience element exist
     if(Text * PlayerExperienceResultText = (Text *)PlayerWindow -> GetChild("PlayerExperienceResultText",true))
@@ -601,7 +656,7 @@ void ExistenceClient::PlayerWindowUpdateUI(void)
         PlayerReputationResultText -> SetText(combinedreputation.c_str());
     }
 
-/// If reputation element exist
+    /// If reputation element exist
     if(Text * PlayerHealthResultText = (Text *)PlayerWindow -> GetChild("PlayerHealthResultText",true))
     {
         PlayerHealthResultText->SetText(playerhealth.c_str());

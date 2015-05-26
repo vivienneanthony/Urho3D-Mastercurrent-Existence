@@ -92,6 +92,8 @@ private:
 
     // Diaplay login screen
     void SetupScreenViewport(void);
+    void SetupScreenUI(void);
+
     void LoginUI(bool exist);
 
     void LoginScreenUILoginHandleClosePressed(StringHash eventType, VariantMap& eventData);
@@ -124,6 +126,7 @@ private:
     void InitializeConsole(void);
     void HandleConsoleCommand(StringHash eventType, VariantMap& eventData);
 
+
     void HandleInput(const String& input);
     void eraseScene(void);
 
@@ -145,6 +148,7 @@ private:
     void HandlePersonalitySelectionItemClick(StringHash eventType, VariantMap& eventData);
 
     void HandleCharacterSelectedReleased(StringHash eventType, VariantMap& eventData);
+    void HandleCharacterSelectedInfoButtonReleased(StringHash eventType, VariantMap& eventData);
 
     void CameraOrientationRotateMove (float degrees, int movement);
     void loadSceneCreationCreation(const char * lineinput);
@@ -153,6 +157,7 @@ private:
 
     int LoadAccountPlayers(void);
     int LoadPlayer(int player);
+    int LoadTemporaryPlayer(int player);
 
     int CreateCursor(void);
 
@@ -171,10 +176,10 @@ private:
 
     /// load UI functions
     void loadUIXMLClosePressed(StringHash eventType, VariantMap& eventData);
-    bool loadUIXML(int windowtype, const int positionx, const int positiony);
+    bool loadUIXML(int windowtype, const int positionx, const int positiony, int selected);
     void QuickMenuPressed(StringHash eventType, VariantMap& eventData);
     void UpdateUI(float timestep);
-    void PlayerWindowUpdateUI(void);
+    void PlayerWindowUpdateUI(int selected);
     void PlayerWindowHandleDisplaySelection(StringHash eventType, VariantMap& eventData);
 
     /// The Window.

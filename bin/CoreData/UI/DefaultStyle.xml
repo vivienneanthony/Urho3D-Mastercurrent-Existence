@@ -388,20 +388,20 @@
       <attribute name="Hover Image Offset" value="0 0" />
       <attribute name="Pressed Child Offset" value="-1 1" />
    </element>
-   <element type="playermainscreenupdateButton" style="Button" auto="false">
+   <element type="playermainscreenButton2" style="Button" auto="false">
       <attribute name="Texture" value="Texture2D;Resources/Textures/Buttons/playermainscreenupdate.png" />
-      <attribute name="Min Size" value="66 66" />
-      <attribute name="Max Size" value="66 66" />
+      <attribute name="Min Size" value="66 48" />
+      <attribute name="Max Size" value="66 48" />
       <attribute name="Border" value="0 0 0 0" />
-      <attribute name="Image Rect" value="0 0 66 66" />
+      <attribute name="Image Rect" value="0 0 66 48" />
       <attribute name="Pressed Image Offset" value="0 0" />
       <attribute name="Hover Image Offset" value="0 0" />
       <attribute name="Pressed Child Offset" value="-1 1" />
    </element>
    <element type="playermainscreenButton" style="Button" auto="false">
       <attribute name="Texture" value="Texture2D;Resources/Textures/Buttons/playermainscreen.png" />
-      <attribute name="Min Size" value="470 66" />
-      <attribute name="Max Size" value="470 66" />
+      <attribute name="Min Size" value="470 48" />
+      <attribute name="Max Size" value="470 48" />
       <attribute name="Border" value="0 0 0 0" />
       <attribute name="Image Rect" value="0 0 470 66" />
       <attribute name="Pressed Image Offset" value="0 0" />
