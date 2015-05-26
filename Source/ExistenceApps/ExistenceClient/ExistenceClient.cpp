@@ -1558,28 +1558,13 @@ void ExistenceClient::HandleCharacterSelectedInfoButtonReleased(StringHash event
     UIElement * uiroot = ui_ ->	GetRoot ();
 
     /// Locate Window PlayerWindow
-    Window* PlayerWindow = dynamic_cast<Window*>(uiroot ->GetChild("PlayerWindow", true));
-
-    /// Create save file
-    XMLFile * savefileXML = new XMLFile(context_);
-    XMLElement configElem = savefileXML -> CreateRoot("element");
-
-    /// ocpy info
-    uiroot -> SaveXML(configElem);
-
-    /// Save XML
-    File saveFile(context_, "DebugCharterSelectionInfoButtonReleased.xml",FILE_WRITE);
-    savefileXML->Save(saveFile);
-
+    UIElement* PlayerWindow = dynamic_cast<UIElement*>(uiroot ->GetChild("PlayerWindow", true));
 
     /// IF PlayerWindow exist then enable visibility
     if(PlayerWindow)
     {
-        ///PlayerWindow-> SetEnabled(true);
-        ///PlayerWindow-> SetDeepEnabled(true);
-        PlayerWindow-> SetVisible(true);
-
-        cout << "test" <<endl;
+        PlayerWindow-> SetDeepEnabled(true);
+        PlayerWindow-> GetParent() -> SetVisible(true);
     }
     else
     {

@@ -121,10 +121,6 @@ bool ExistenceClient::loadUIXML(int windowtype, const int positionx, const int p
     float width = (float)graphics->GetWidth();
     float height = (float)graphics->GetHeight();
 
-    /// Create save file
-    XMLFile * savefileXML = new XMLFile(context_);
-    XMLElement configElem = savefileXML -> CreateRoot("element");
-
     /// get current root
     UIElement * RootUIElement = ui_->GetRoot();
     UIElement * HUDFileElement= new UIElement(context_);
@@ -276,12 +272,6 @@ bool ExistenceClient::loadUIXML(int windowtype, const int positionx, const int p
 
     }
 
-    /// ocpy info
-    RootUIElement -> SaveXML(configElem);
-
-    /// Save XML
-    File saveFile(context_, "DebugOnUIPlayerLoad.xml",FILE_WRITE);
-    savefileXML->Save(saveFile);
 
     return true;
 }
@@ -294,10 +284,6 @@ void ExistenceClient::loadUIXMLClosePressed(StringHash eventType, VariantMap& ev
 
     UIElement * RootUIElement= ui_->GetRoot();
 
-    /// Create save file
-    XMLFile * savefileXML = new XMLFile(context_);
-    XMLElement configElem = savefileXML -> CreateRoot("element");
-    RootUIElement -> SaveXML(configElem);
 
     /// Get control that was clicked
     UIElement* clicked = static_cast<UIElement*>(eventData[UIMouseClick::P_ELEMENT].GetPtr());
@@ -306,12 +292,9 @@ void ExistenceClient::loadUIXMLClosePressed(StringHash eventType, VariantMap& ev
     UIElement* selfparent = clicked -> GetParent();
 
     /// Disable and hide
-    ///selfparent -> SetDeepEnabled(false);
-    selfparent -> SetVisible(false);
+    selfparent -> SetDeepEnabled(false);
+    selfparent -> GetParent() -> Remove();
 
-    /// Save XML
-    File saveFile(context_, "DebugOnUIClosePressed.xml",FILE_WRITE);
-    savefileXML->Save(saveFile);
 
     return;
 }
@@ -379,8 +362,6 @@ void ExistenceClient::QuickMenuPressed(StringHash eventType, VariantMap& eventDa
         if(PlayerWindow)
         {
             /// Enable Player Window
-            PlayerWindow -> SetDeepEnabled(true);
-            PlayerWindow -> SetVisible(true);
             PlayerWindow -> SetFocus(true);
         }
         else
@@ -400,8 +381,6 @@ void ExistenceClient::QuickMenuPressed(StringHash eventType, VariantMap& eventDa
         if(PreferencesWindow)
         {
             /// Enable Preferences Window
-            PreferencesWindow -> SetDeepEnabled(true);
-            PreferencesWindow -> SetVisible(true);
             PreferencesWindow -> SetFocus(true);
         }
         else
@@ -421,8 +400,6 @@ void ExistenceClient::QuickMenuPressed(StringHash eventType, VariantMap& eventDa
         if(ConfigurationWindow)
         {
             /// Enable Configuration Window
-            ConfigurationWindow -> SetDeepEnabled(true);
-            ConfigurationWindow -> SetVisible(true);
             ConfigurationWindow -> SetFocus (true);
         }
         else
@@ -441,10 +418,7 @@ void ExistenceClient::QuickMenuPressed(StringHash eventType, VariantMap& eventDa
 
         if(AboutWindow)
         {
-
             /// Enable About Window
-            AboutWindow -> SetDeepEnabled(true);
-            AboutWindow -> SetVisible(true);
             AboutWindow -> SetFocus(true);
         }
         else
