@@ -181,6 +181,8 @@ bool ExistenceClient::loadUIXML(int windowtype, const int positionx, const int p
 
     HUDFileElement->SetStyleAuto();
 
+    HUDFileElement->BringToFront();
+
     /// Get the child and assign a close pressed
     Button * closebutton = (Button *) HUDFileElement -> GetChild("closeButton",true);
 
@@ -244,6 +246,7 @@ bool ExistenceClient::loadUIXML(int windowtype, const int positionx, const int p
 
     }
 
+
     /// If load is quickmenu on side assign buttons and move position  to far right
     if(windowtype==UIQUICKMENU)
     {
@@ -262,6 +265,24 @@ bool ExistenceClient::loadUIXML(int windowtype, const int positionx, const int p
         SubscribeToEvent(aboutButton, E_RELEASED, HANDLER(ExistenceClient, QuickMenuPressed));
         SubscribeToEvent(configurationButton, E_RELEASED, HANDLER(ExistenceClient, QuickMenuPressed));
         SubscribeToEvent(exitButton, E_RELEASED, HANDLER(ExistenceClient, QuickMenuPressed));
+    }
+
+    if(windowtype==UISCENESELECTWINDOW)
+    {
+
+        /// Add a playerid UIElement
+        /// Get continue button
+        Text * PlayerSelected = new Text(context_);
+
+        HUDFileElement->AddChild(PlayerSelected);
+
+        /// Add player selected
+        PlayerSelected->SetName("PlayerSelected");
+        PlayerSelected->SetText(String(ConvertUIntToString(selected).c_str()));
+
+
+        /// add hidden
+        UpdateUISceneLoader();
     }
 
     /// If the close button exist
@@ -697,3 +718,134 @@ void ExistenceClient::PlayerWindowHandleDisplaySelection(StringHash eventType, V
     return;
 }
 
+
+// Load account information from a account file
+int ExistenceClient::UpdateUISceneLoader(void)
+{
+    // Get resources
+    ResourceCache * cache = GetSubsystem<ResourceCache>();
+    FileSystem * filesystem = GetSubsystem<FileSystem>();
+    UI * ui_ = GetSubsystem<UI>();
+
+    /// Get SceneListViewElement
+    UIElement * uiroot = ui_ -> GetRoot();
+
+    ListView * ScenesListView = dynamic_cast <ListView *>( uiroot->GetChild("ScenesListView",true));
+
+    String scenesfile;
+
+    /// Create scenes file
+    scenesfile.Append(filesystem->GetProgramDir().CString());
+    scenesfile.Append("CoreData/");
+    scenesfile.Append("scenes.xml");
+
+    /// Set XML related elements
+    XMLFile* scenesload = cache->GetResource<XMLFile>(scenesfile);
+    XMLElement scenesRootElement;
+    XMLElement NextSibling;
+
+    /// set flags
+    ScenesListView->SetHighlightMode(HM_ALWAYS);
+    ScenesListView->SetSelectOnClickEnd(false);
+    ScenesListView->SetClearSelectionOnDefocus(false);
+    ScenesListView->SetMultiselect (false);
+
+        /// Set Counter
+        unsigned int counter=0;
+
+    /// If scenes file exist
+    if(scenesload!=NULL)
+    {
+        /// get account root
+        scenesRootElement= scenesload -> GetRoot("scenes");
+
+
+        /// Get first child
+        NextSibling=scenesRootElement.GetChild("scene");
+
+        /// Loop to file till next
+        do
+        {
+            /// Get  attributes
+            XMLElement AttributeSceneNameElement  = NextSibling.GetChild("attribute");
+            XMLElement AttributeSceneFileNameElement  =  AttributeSceneNameElement.GetNext();
+
+            String SceneName = AttributeSceneNameElement.GetAttribute("value");
+            String SceneFilename = AttributeSceneFileNameElement.GetAttribute("value");
+
+            /// Get attributes information and generate the menu
+            Text * SceneAdd = new Text(context_);
+
+            /// Create value
+            SceneAdd->SetEditable(true);
+            SceneAdd->SetEnabled(true);
+
+            SceneAdd->SetName(SceneFilename);
+            SceneAdd->SetText(SceneName);
+
+
+            SceneAdd->SetSelectionColor (Color(0.0f,0.0f,0.5f));
+            SceneAdd->SetHoverColor (Color(0.0f,0.0f,1.0f));
+
+            ScenesListView -> AddItem(SceneAdd);
+
+            SceneAdd->SetStyleAuto();
+
+            counter++;
+        }
+        while(NextSibling=NextSibling.GetNext());
+    }
+
+    /// set style
+    ScenesListView->SetStyleAuto();
+    ScenesListView->SetSelection(0);
+
+    /// Get continue button
+    Button * continueButton = dynamic_cast <Button*>( uiroot->GetChild("continueButton",true));
+
+    if(counter)
+    {
+
+        /// Subscribe
+        SubscribeToEvent(continueButton, E_RELEASED, HANDLER(ExistenceClient, SceneLoaderHanderPress));
+    }
+
+    return 0;
+}
+
+
+
+void ExistenceClient::SceneLoaderHanderPress(StringHash eventType, VariantMap& eventData)
+{
+    /// Get the button that was clicked
+    UI* ui_ = GetSubsystem<UI>();
+
+    /// Get needed info
+    ListView* ScenesListView= (ListView*)ui_->GetRoot()->GetChild("ScenesListView", true);
+    Text* PlayerSelected= (Text*)ui_->GetRoot()->GetChild("PlayerSelected", true);
+    Text * selectedScene = dynamic_cast <Text *> (ScenesListView->GetSelectedItem ());
+
+    /// Get Button String
+    String clickedButtonString(PlayerSelected->GetText());
+
+    /// Convert text to a integer number
+    int button = clickedButtonString.Back()-'0';
+
+    /// Set selected player
+    TemporaryAccountPlayerSelected=button;
+
+    /// Get Button String
+    String clicked("/scene file "+selectedScene->GetName());
+
+    /// erase scene
+    eraseScene();
+
+    /// change state
+    ExistenceGameState.SetUIState(UI_GAMECONSOLE);
+    ExistenceGameState.SetGameState(STATE_GAME);
+
+    /// load scene
+    loadScene(1,  clicked.CString());
+
+    return;
+}

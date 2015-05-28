@@ -1,11 +1,13 @@
 <?xml version="1.0"?>
 <element>
 	<attribute name="Name" value="PreferencesHolderUIElement" />
-	<attribute name="Size" value="500 600" />
-	<attribute name="Opacity" value="0.7" />
+	<attribute name="Size" value="1440 900" />
+	<attribute name="Max Size" value="2560 1600" />
+	<attribute name="Opacity" value="0.8" />
 	<attribute name="Is Enabled" value="true" />
 	<attribute name="Bring To Front" value="true" />
 	<attribute name="Focus Mode" value="Focusable" />
+	<attribute name="Layout Border" value="1 1 1 1" />
 	<element type="Window" style="none">
 		<attribute name="Name" value="PreferencesWindow" />
 		<attribute name="Size" value="850 600" />

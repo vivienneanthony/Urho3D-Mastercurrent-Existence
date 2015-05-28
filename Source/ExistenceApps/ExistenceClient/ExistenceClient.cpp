@@ -1558,18 +1558,57 @@ void ExistenceClient::HandleCharacterSelectedInfoButtonReleased(StringHash event
     UIElement * uiroot = ui_ ->	GetRoot ();
 
     /// Locate Window PlayerWindow
-    UIElement* PlayerWindow = dynamic_cast<UIElement*>(uiroot ->GetChild("PlayerWindow", true));
+    Window* PlayerWindow = dynamic_cast<Window*>(uiroot ->GetChild("PlayerWindow", true));
 
     /// IF PlayerWindow exist then enable visibility
     if(PlayerWindow)
     {
         PlayerWindow-> SetDeepEnabled(true);
         PlayerWindow-> GetParent() -> SetVisible(true);
+        PlayerWindow-> GetParent() -> SetBringToFront(true);
+
     }
     else
     {
         /// Load Player WIndow UI
         loadUIXML(UIPLAYERWINDOW,200,200, button);
+    }
+}
+
+
+/// Handle character selection
+void ExistenceClient::HandleCharacterStartButtonReleased(StringHash eventType, VariantMap& eventData)
+{
+
+    /// Get the button that was clicked
+    UI* ui_ = GetSubsystem<UI>();
+
+    UIElement* clickedinfo = static_cast<UIElement*>(eventData[UIMouseClick::P_ELEMENT].GetPtr());
+
+    /// Get Button String
+    String clickedButtonString(clickedinfo->GetName());
+
+    /// Convert text to a integer number
+    int button = clickedButtonString.Back()-'0';
+
+    /// Load UI root
+    UIElement * uiroot = ui_ ->	GetRoot ();
+
+    /// Locate Window PlayerWindow
+    Window* SceneLoaderWindow = dynamic_cast<Window*>(uiroot ->GetChild("SceneLoaderWindow", true));
+
+    /// IF PlayerWindow exist then enable visibility
+    if(SceneLoaderWindow)
+    {
+        SceneLoaderWindow-> SetDeepEnabled(true);
+        SceneLoaderWindow-> GetParent() -> SetVisible(true);
+        SceneLoaderWindow-> GetParent() -> SetBringToFront(true);
+
+    }
+    else
+    {
+        /// Load Player WIndow UI
+        loadUIXML(UISCENESELECTWINDOW,200,100, button);
     }
 }
 
@@ -2007,7 +2046,7 @@ void ExistenceClient::HandleUpdate(StringHash eventType, VariantMap& eventData)
 /// Handler for keydown
 void ExistenceClient::HandleKeyDown(StringHash eventType, VariantMap& eventData)
 {
-
+    /// Get Urho3D Subsystem
     UI* ui = GetSubsystem<UI>();
 
     ExistenceGameState.SetConsoleState(GetSubsystem<Console>()->IsVisible());
@@ -2033,7 +2072,6 @@ void ExistenceClient::HandleKeyDown(StringHash eventType, VariantMap& eventData)
                 Console* console = GetSubsystem<Console>();
 
                 console -> SetVisible(true);
-
                 ExistenceGameState.SetConsoleState(true);
 
             }
@@ -2047,13 +2085,16 @@ void ExistenceClient::HandleKeyDown(StringHash eventType, VariantMap& eventData)
         /// load window
         UIElement * uiroot = ui ->	GetRoot ();
 
-        UIElement * PlayerWindowUIElement = uiroot->GetChild("PlayerWindow",true);
+        /// Locate Player Window
+        Window * PlayerWindowUIElement = dynamic_cast<Window *>(uiroot->GetChild("PlayerWindow",true));
 
         /// Enable
         if(PlayerWindowUIElement)
         {
             PlayerWindowUIElement -> SetVisible(true);
-            PlayerWindowUIElement -> SetDeepEnabled(true);
+
+            PlayerWindowUIElement-> GetParent() -> SetVisible(true);
+            PlayerWindowUIElement-> GetParent() -> SetBringToFront(true);
 
         }
         else
@@ -2376,6 +2417,7 @@ int ExistenceClient::mainScreenUI(void)
         UIElement * playerinfoUIElement = new UIElement (context_);
         Button * playernameButton = new Button(context_);
         Button * playerinfoButton = new Button(context_);
+        Button * playerstartButton = new Button(context_);
         Text *  playernameText = new Text(context_);
 
         UIElement * playerupdatesUIElement = new UIElement (context_);
@@ -2411,6 +2453,11 @@ int ExistenceClient::mainScreenUI(void)
         playerinfoButton-> SetFixedSize(16, 16);
         playerinfoButton -> SetPosition(0, 0);
 
+        playerstartButton -> SetLayout(LM_FREE, 6, IntRect(0, 0, 16, 16));
+        playerstartButton -> SetAlignment(HA_LEFT, VA_TOP);
+        playerstartButton-> SetFixedSize(16, 16);
+        playerstartButton -> SetPosition(17, 0);
+
         playernameText -> SetPosition(0, 8);
         playernameText -> SetAlignment(HA_LEFT, VA_TOP);
         playernameText -> SetTextAlignment(HA_LEFT);
@@ -2440,6 +2487,7 @@ int ExistenceClient::mainScreenUI(void)
         playernameUIElement -> AddChild(playernameText);
 
         playerinfoUIElement -> AddChild(playerinfoButton);
+        playerinfoUIElement -> AddChild(playerstartButton);
 
         playerupdatesUIElement -> AddChild(playerupdatesButton);
 
@@ -2454,35 +2502,43 @@ int ExistenceClient::mainScreenUI(void)
 
         string playerbuttontext="playermainscreenButton ";
         string playerinfobuttontext="playermainscreeninfoButton";
+        string playerstartbuttontext="";
 
         switch(i)
         {
         case 0:
             playerbuttontext.append("0");
             playerinfobuttontext.append("1");
+            playerstartbuttontext.append("0");
 
             break;
         case 1:
             playerbuttontext.append("1");
             playerinfobuttontext.append("2");
+            playerstartbuttontext.append("1");
             break;
         case 2:
             playerbuttontext.append("2");
             playerinfobuttontext.append("3");
+            playerstartbuttontext.append("2");
             break;
         case 3:
             playerbuttontext.append("3");
             playerinfobuttontext.append("4");
+            playerstartbuttontext.append("3");
         }
 
         playernameButton -> SetName(String(playerbuttontext.c_str()));
         playerinfoButton -> SetName(String(playerinfobuttontext.c_str()));
+        playerstartButton -> SetName(String(playerstartbuttontext.c_str()));
 
         playerupdatesButton -> SetStyle("playermainscreenButton2");
         playerinfoButton -> SetStyle("Player16x16Button");
+        playerstartButton -> SetStyle("Select16x16Button");
 
         SubscribeToEvent(playernameButton, E_RELEASED, HANDLER(ExistenceClient, HandleCharacterSelectedReleased));
         SubscribeToEvent(playerinfoButton, E_RELEASED, HANDLER(ExistenceClient, HandleCharacterSelectedInfoButtonReleased));
+        SubscribeToEvent(playerstartButton, E_RELEASED, HANDLER(ExistenceClient, HandleCharacterStartButtonReleased));
 
         placement=placement+(66+8);
 

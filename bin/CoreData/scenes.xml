@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<scenes>
+	<scene name="hanger100">
+		<attribute name="Name" value="Hanger100" />
+		<attribute name="Filename" value="hanger100base.xml"/>
+	</scene>
+<scene name="hanger100">
+		<attribute name="Name" value="Hanger100" />
+		<attribute name="Filename" value="hanger100base.xml"/>
+	</scene>
+</scenes>

@@ -181,6 +181,9 @@ private:
     void UpdateUI(float timestep);
     void PlayerWindowUpdateUI(int selected);
     void PlayerWindowHandleDisplaySelection(StringHash eventType, VariantMap& eventData);
+    int UpdateUISceneLoader(void);
+    void HandleCharacterStartButtonReleased(StringHash eventType, VariantMap& eventData);
+    void SceneLoaderHanderPress(StringHash eventType, VariantMap& eventData);
 
     /// The Window.
     SharedPtr<Window> window_;

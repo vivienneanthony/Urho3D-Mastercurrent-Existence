@@ -1,16 +1,20 @@
 <?xml version="1.0"?>
 <element>
 	<attribute name="Name" value="SceneLoadHolderUIElement" />
-	<attribute name="Size" value="500 600" />
-	<attribute name="Opacity" value="0.5" />
+	<attribute name="Size" value="1440 900" />
+	<attribute name="Max Size" value="2560 1600" />
+	<attribute name="Opacity" value="0.8" />
 	<attribute name="Is Enabled" value="true" />
 	<attribute name="Bring To Front" value="true" />
 	<attribute name="Focus Mode" value="Focusable" />
+	<attribute name="Layout Border" value="1 1 1 1" />
 	<element type="Window" style="none">
-		<attribute name="Name" value="PlayerWindow" />
+		<attribute name="Name" value="SceneLoaderWindow" />
 		<attribute name="Size" value="500 600" />
-		<attribute name="Texture" value="Texture2D;Textures/Buttons/darkgrey.png" />
-		<attribute name="Image Rect" value="0 0 128 128" />
+		<attribute name="Min Size" value="500 600" />
+		<attribute name="Texture" value="Texture2D;Textures/UI.png" />
+		<attribute name="Image Rect" value="48 0 64 16" />
+		<attribute name="Border" value="4 4 4 4" />
 		<attribute name="Is Movable" value="true" />
 		<attribute name="Is Resizable" value="true" />
 		<element type="Button" style="CloseButton">
@@ -18,47 +22,6 @@
 			<attribute name="Position" value="460 16" />
 			<attribute name="Bring To Front" value="true" />
 			<attribute name="Focus Mode" value="Focusable" />
-		</element>
-		<element type="Window">
-			<attribute name="Name" value="ScenesWindow" />
-			<attribute name="Position" value="16 48" />
-			<attribute name="Size" value="230 500" />
-			<attribute name="Color" value="0 0 0 0" />
-			<attribute name="Top Left Color" value="0 0 0 0" />
-			<attribute name="Top Right Color" value="0 0 0 0" />
-			<attribute name="Bottom Left Color" value="0 0 0 0" />
-			<attribute name="Bottom Right Color" value="0 0 0 0" />
-			<element type="ListView">
-				<attribute name="Name" value="ScenesListView" />
-				<attribute name="Scroll Snap Epsilon" value="1e-06" />
-				<element type="ScrollBar" internal="true" style="none">
-					<attribute name="Size" value="16 16" />
-					<element type="Button" internal="true" style="none" />
-					<element type="Slider" internal="true" style="none">
-						<attribute name="Position" value="16 0" />
-						<attribute name="Size" value="0 16" />
-						<element type="BorderImage" internal="true" style="none" />
-					</element>
-					<element type="Button" internal="true" style="none">
-						<attribute name="Position" value="16 0" />
-					</element>
-				</element>
-				<element type="ScrollBar" internal="true" style="none">
-					<attribute name="Size" value="16 16" />
-					<element type="Button" internal="true" style="none" />
-					<element type="Slider" internal="true" style="none">
-						<attribute name="Position" value="0 16" />
-						<attribute name="Size" value="16 0" />
-						<element type="BorderImage" internal="true" style="none" />
-					</element>
-					<element type="Button" internal="true" style="none">
-						<attribute name="Position" value="0 16" />
-					</element>
-				</element>
-				<element type="BorderImage" internal="true" style="none">
-					<element internal="true" style="none" />
-				</element>
-			</element>
 		</element>
 		<element type="Window">
 			<attribute name="Name" value="SceneInfoWindow" />
@@ -93,6 +56,71 @@
 			<attribute name="Position" value="375 560" />
 			<attribute name="Size" value="105 32" />
 			<attribute name="Texture" value="Texture2D;Textures/Buttons/continue.png" />
+		</element>
+		<element type="Window">
+			<attribute name="Name" value="ScenesWindow" />
+			<attribute name="Position" value="16 48" />
+			<attribute name="Size" value="230 500" />
+			<attribute name="Min Size" value="230 500" />
+			<attribute name="Color" value="0 0 0 0" />
+			<attribute name="Top Left Color" value="0 0 0 0" />
+			<attribute name="Top Right Color" value="0 0 0 0" />
+			<attribute name="Bottom Left Color" value="0 0 0 0" />
+			<attribute name="Bottom Right Color" value="0 0 0 0" />
+			<element type="ListView">
+				<attribute name="Name" value="ScenesListView" />
+				<attribute name="Size" value="214 500" />
+				<attribute name="Min Size" value="214 500" />
+				<attribute name="Max Size" value="214 2147483647" />
+				<attribute name="Clip Children" value="false" />
+				<attribute name="Focus Mode" value="Focusable" />
+				<attribute name="Scroll Snap Epsilon" value="1e-06" />
+				<attribute name="Auto Disable Children" value="true" />
+				<attribute name="Select On Click End" value="true" />
+				<element type="ScrollBar" internal="true" style="none">
+					<attribute name="Size" value="214 16" />
+					<element type="Button" internal="true" style="none" />
+					<element type="Slider" internal="true" style="none">
+						<attribute name="Position" value="16 0" />
+						<attribute name="Size" value="182 16" />
+						<element type="BorderImage" internal="true" style="none" />
+					</element>
+					<element type="Button" internal="true" style="none">
+						<attribute name="Position" value="198 0" />
+					</element>
+				</element>
+				<element type="ScrollBar" internal="true" style="none">
+					<attribute name="Size" value="16 500" />
+					<element type="Button" internal="true" style="none" />
+					<element type="Slider" internal="true" style="none">
+						<attribute name="Position" value="0 16" />
+						<attribute name="Size" value="16 468" />
+						<element type="BorderImage" internal="true" style="none" />
+					</element>
+					<element type="Button" internal="true" style="none">
+						<attribute name="Position" value="0 484" />
+					</element>
+				</element>
+				<element type="BorderImage" internal="true" style="none">
+					<element internal="true" style="none" />
+				</element>
+			</element>
+			<element type="ScrollBar">
+				<attribute name="Position" value="216 0" />
+				<attribute name="Size" value="16 500" />
+				<attribute name="Max Size" value="16 2147483647" />
+				<attribute name="Bring To Front" value="true" />
+				<attribute name="Orientation" value="Vertical" />
+				<element type="Button" internal="true" style="none" />
+				<element type="Slider" internal="true" style="none">
+					<attribute name="Position" value="0 16" />
+					<attribute name="Size" value="16 468" />
+					<element type="BorderImage" internal="true" style="none" />
+				</element>
+				<element type="Button" internal="true" style="none">
+					<attribute name="Position" value="0 484" />
+				</element>
+			</element>
 		</element>
 	</element>
 </element>
