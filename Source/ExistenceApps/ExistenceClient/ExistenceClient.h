@@ -23,7 +23,6 @@
 // THE SOFTWARE.
 //
 
-
 #define DISPLAYMESH_MUILTIPLECHARACTER 1
 #define DISPLAYMESH_SINGLECHARACTER 2
 
@@ -47,7 +46,12 @@
 #include "../PlayerLevels.h"
 
 
+#include "GameStateEvents.h"
 #include "GameStateHandler.h"
+
+
+
+
 
 string ConvertUIntToString(unsigned int val);
 
@@ -79,6 +83,7 @@ protected:
             "    </add>"
             "</patch>";
     }
+
 
 private:
 
@@ -173,6 +178,10 @@ private:
     /// Class and variable declaration for alien race alliance information
     vector<string> aliensarray;
     vector<string> tempaliensarray;
+
+    /// Create a game state handler pointer
+    ExistenceClientStates::GameStateHandler * ExistenceGameState;
+
 };
 
 /// Login State
@@ -288,7 +297,6 @@ private:
 protected:
 
 };
-
 
 /// Miscellanous functions
 vector<string> split(const string& s, const string& delim, const bool keep_empty=true);

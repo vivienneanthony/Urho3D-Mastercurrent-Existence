@@ -144,6 +144,8 @@ void ExistenceClient::Start()
 
     UI* ui = GetSubsystem<UI>();
 
+    /// Change game state
+    GameStateHandler * ExistenceGameState = new GameStateHandler(context);
 
 
     /// create variables (urho3d)
@@ -154,9 +156,6 @@ void ExistenceClient::Start()
 
     /// add resource path to last
     cache -> AddResourceDir(additionresourcePath);
-
-    /// Initialize rudimentary state handler
-    ExistenceGameState.Start();
 
     /// Configure rudimentary state handler
     ExistenceGameState.SetUIState(UI_NONE);
@@ -189,7 +188,7 @@ void ExistenceClient::Start()
     LoadAccount();
 
     /// Star+t Login UI
-    LoginUI(accountexist);
+//    LoginUI(accountexist);
 
 
     /// Finally subscribe to the update event. Note that by subscribing events at this point we have already missed some events
@@ -199,6 +198,9 @@ void ExistenceClient::Start()
 
     /// Randomize timer
     srand (time(NULL));
+
+    /// Start here
+    ExistenceGameState->start(scene);
 
     return;
 }
