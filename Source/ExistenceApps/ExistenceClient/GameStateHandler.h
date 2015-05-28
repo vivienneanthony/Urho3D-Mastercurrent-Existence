@@ -22,41 +22,46 @@
 #define         CAMERAMODE_FLY                      2
 
 
-class Gamestatehandler
+
+
+namespace ExistenceClientStates
 {
+
+/// fw declaration
+class ExistenceClient;
+
+class GameStateHandler : public Urho3D::Object
+{
+    OBJECT(GameStateHandler);
 public:
-    Gamestatehandler(void);
-    virtual ~Gamestatehandler(void);
-    void virtual Start(void);
-
-    bool GetConsoleState(void);
-    bool SetConsoleState(int flag);
-
-    int GetUIState(void);
-    int SetUIState(int flag);
-
-
-    int GetGameState(void);
-    int SetGameState(int flag);
-
-
-    int GetCameraMode(void);
-    int SetCameraMode(int flag);
-
-    int GetDebugHudMode(void);
-    int SetDebugHudMode(int flag);
-
-
-protected:
+    ///costructor
+    GameStateHandler(Urho3D::Context * context );
+    /// Destruct.
+    ~GameStateHandler();
+    /// start point
+    void start(Urho3D::Scene * scene_);
+    // handler events
+    void onStateChange(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
+    /// Get last state
+    int getCurrentState(void);
 
 private:
+    /// create  state  classname
+    void createState( Urho3D::String newState );
+    /// register all states
+    void RegisterGameStates();
+    /// change state
+    void changeState(ExistenceClient * state);
+    /// exit and remove last state.
+    void RemoveLastState();
 
-    bool consolestate;
-    int gamestate;
-    int uistate;
-    int cameramode;
-    bool debughud;
+    /// scene
+    Urho3D::Scene * scene;
+
+    /// states container
+    Urho3D::Vector<ExistenceClient*> mStates;
 
 };
 
+}
 #endif // GAMESTATEHANDLER_H

@@ -76,6 +76,7 @@
 #include "../../../Urho3D/Math/Color.h"
 
 #include "GameStateHandler.h"
+#include "GameStateEvents.h"
 #include "GameObject.h"
 #include "Manager.h"
 #include "../factions.h"
@@ -102,7 +103,6 @@
 #include "ExistenceClientUI.h"
 
 #define DEFAULTSIZE 4096
-
 
 using namespace std;
 using namespace Urho3D;
@@ -848,4 +848,108 @@ void ExistenceClient::SceneLoaderHanderPress(StringHash eventType, VariantMap& e
     loadScene(1,  clicked.CString());
 
     return;
+}
+
+/// Update player info
+void ExistenceClient::UpdatePlayerInfoBar(void)
+{
+
+    /// Get resources
+    ResourceCache * cache = GetSubsystem<ResourceCache>();
+    UI* ui_ = GetSubsystem<UI>();
+
+    /// Get  UIElement
+    UIElement * PlayerInfoUIElement = (UIElement*)ui_->GetRoot()->GetChild("PlayerInfoUIElement", true);
+
+    /// Create a sprite
+    Sprite * spriteSlot = new Sprite(context_);
+
+    /// Load sprite
+    spriteSlot->SetTexture(cache->GetResource<Texture2D>("Resources/Textures/blankindicatorlarge.png"));
+    spriteSlot->SetPosition(13,6);
+    spriteSlot->SetPriority(1);
+    spriteSlot->SetVisible(true);
+    spriteSlot->SetFixedSize(32,32);
+
+
+    /// Create a sprite
+    Sprite * spriteSlot2 = new Sprite(context_);
+
+    /// Load sprite
+    spriteSlot2->SetTexture(cache->GetResource<Texture2D>("Resources/Textures/blankindicatorsmall.png"));
+    spriteSlot2->SetPosition(186,6);
+    spriteSlot2->SetPriority(1);
+    spriteSlot2->SetVisible(true);
+    spriteSlot2->SetFixedSize(12,12);
+
+
+/// Create a sprite
+    Sprite * spriteSlot3 = new Sprite(context_);
+
+    /// Load sprite
+    spriteSlot3->SetTexture(cache->GetResource<Texture2D>("Resources/Textures/blankindicatorsmall.png"));
+    spriteSlot3->SetPosition(206,6);
+    spriteSlot3->SetPriority(1);
+    spriteSlot3->SetVisible(true);
+    spriteSlot3->SetFixedSize(12,12);
+
+    PlayerInfoUIElement -> AddChild(spriteSlot);
+    PlayerInfoUIElement -> AddChild(spriteSlot2);
+    PlayerInfoUIElement -> AddChild(spriteSlot3);
+
+    for(unsigned int i=236; i<277; i+=20)
+    {
+        Sprite * spriteSlotAdd = new Sprite(context_);
+
+        /// Load sprite
+        spriteSlotAdd->SetTexture(cache->GetResource<Texture2D>("Resources/Textures/blankindicatorsmall.png"));
+        spriteSlotAdd->SetPosition(i,6);
+        spriteSlotAdd->SetPriority(1);
+        spriteSlotAdd->SetVisible(true);
+        spriteSlotAdd->SetFixedSize(12,12);
+
+        PlayerInfoUIElement -> AddChild(spriteSlotAdd);
+
+    }
+}
+
+/// Load a HUD file in a XML format in the file system
+bool ExistenceClient::loadHUDFile(const char * filename, const int positionx, const int positiony)
+{
+    /// Get resources
+    ResourceCache * cache = GetSubsystem<ResourceCache>();
+    FileSystem * filesystem = GetSubsystem<FileSystem>();
+    UI* ui_ = GetSubsystem<UI>();
+
+    /// get current root
+    UIElement * RootUIElement = ui_->GetRoot();
+    UIElement * HUDFileElement= new UIElement(context_);
+    UIElement * playerInfoHudElement= new UIElement(context_);
+
+    XMLFile* style = cache->GetResource<XMLFile>("UI/DefaultStyle.xml");
+
+    /// Configure resources
+    XMLElement hudElement;
+
+    /// Configure string to Urho friendly
+    String filenameHUD = String(filename);
+
+    /// Load Resource
+    XMLFile* hudFile= cache->GetResource<XMLFile>(filenameHUD);
+
+    /// Get root element XML
+    hudElement =  hudFile->GetRoot();
+
+    /// Add a min top bar
+    HUDFileElement-> LoadXML(hudElement, style);
+
+    /// Add a uielement for the bar
+    RootUIElement -> AddChild(HUDFileElement);
+
+    /// Position the window
+    HUDFileElement -> SetPosition(positionx,positiony);
+
+    HUDFileElement->SetStyleAuto();
+
+    return true;
 }

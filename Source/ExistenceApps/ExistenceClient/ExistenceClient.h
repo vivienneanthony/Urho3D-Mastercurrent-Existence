@@ -82,6 +82,10 @@ protected:
 
 private:
 
+    /// Diaplay login screen
+    void SetupScreenViewport(void);
+    void SetupScreenUI(void);
+
     /// Subscribe to application-wide logic update events.
     void SubscribeToEvents();
     /// Handle the logic update event.
@@ -89,77 +93,35 @@ private:
     /// Events Keyboard
     void HandleKeyDown(StringHash eventType, VariantMap& eventData);
 
-
-    // Diaplay login screen
-    void SetupScreenViewport(void);
-    void SetupScreenUI(void);
-
-    void LoginUI(bool exist);
-
-    void LoginScreenUILoginHandleClosePressed(StringHash eventType, VariantMap& eventData);
-    void LoginScreenUINewAccountHandleClosePressed(StringHash eventType, VariantMap& eventData);
-
-    bool loadHUDFile(const char * filename, const int positionx, const int positiony);
-
-    void ProgressScreenUI(void);
-    void ProgressScreenUIHandleClosePressed(StringHash eventType, VariantMap& eventData);
-
-    void CreatePlayerScreenUI(void);
-    void CreatePlayerUIHandleClosePressed(StringHash eventType, VariantMap& eventData);
-
-    void CreateAccountScreenUI(void);
-    void CreateAccountUIHandleClosePressed(StringHash eventType, VariantMap& eventData);
-
-    void CreatePlayerUIHandleControlClicked(StringHash eventType, VariantMap& eventData);
-
-    int loadplayerMesh(Node * playermeshNode, int alienrace, int gender,int mode);
-
-    int mainScreenUI(void);
-    void MainScreenUIHandleClosePressed(StringHash eventType, VariantMap& eventData);
-    void HandlerCameraOrientation(StringHash eventType, VariantMap& eventData);
-
-    /// File access
-    void LoadAccount(void);
-    void SaveAccount(accountinformation account);
-    void SavePlayer(bool activeplayer);
-
-    void InitializeConsole(void);
-    void HandleConsoleCommand(StringHash eventType, VariantMap& eventData);
-
-
     void HandleInput(const String& input);
     void eraseScene(void);
 
-    void loadDummyScene(void);
-    void loadScene(const int mode, const char * lineinput);
     void AddLogoViewport(void);
-    void loadSceneUI(void);
+
+    int CreateCursor(void);
 
     void MoveCamera(float timeStep);
-    void CreateCharacter(void);
     void Print(const String& output);
 
-    void CharacterSelectionHandler(VariantMap& eventData);
-    int LoadCharacterMesh(int mode, String nodename, unsigned int alienrace, unsigned int gender);
-
     void HandlePostUpdates(StringHash eventType, VariantMap& eventData);
-    void HandleMouseReleased(StringHash eventType, VariantMap& eventData);
 
-    void HandlePersonalitySelectionItemClick(StringHash eventType, VariantMap& eventData);
+    /// Render related functions
+    int LoadCharacterMesh(int mode, String nodename, unsigned int alienrace, unsigned int gender);
+    int loadplayerMesh(Node * playermeshNode, int alienrace, int gender,int mode);
 
-    void HandleCharacterSelectedReleased(StringHash eventType, VariantMap& eventData);
-    void HandleCharacterSelectedInfoButtonReleased(StringHash eventType, VariantMap& eventData);
-
-    void CameraOrientationRotateMove (float degrees, int movement);
-    void loadSceneCreationCreation(const char * lineinput);
-
-    void UpdatePlayerInfoBar(void);
-
+    /// File related functions
+    void LoadAccount(void);
+    void SaveAccount(accountinformation account);
+    void SavePlayer(bool activeplayer);
     int LoadAccountPlayers(void);
     int LoadPlayer(int player);
     int LoadTemporaryPlayer(int player);
+    int GenerateSceneLoadDifferential(const char *filename=NULL);
+    int LoadEnvironmentSettings(const char *environment);
 
-    int CreateCursor(void);
+    /// Console related functions
+    void InitializeConsole(void);
+    void HandleConsoleCommand(StringHash eventType, VariantMap& eventData);
 
     int ConsoleActionEnvironment(const char * lineinput);
     int ConsoleActionCamera(const char * lineinput);
@@ -168,13 +130,9 @@ private:
     int ConsoleActionRenderer(const char * lineinput);
     int ConsoleActionBuild(const char * lineinput);
 
-    void GenerateScene(terrain_rule terrainrule, const char *differentialfilename="");
-    int GenerateSceneBuildWorld(terrain_rule terrainrule);
-    int GenerateSceneUpdateEnvironment(terrain_rule terrainrule);
-    int GenerateSceneLoadDifferential(const char *filename=NULL);
-    int LoadEnvironmentSettings(const char *environment);
-
-    /// load UI functions
+    /// UI Related Functions
+    void loadSceneUI(void);
+    bool loadHUDFile(const char * filename, const int positionx, const int positiony);
     void loadUIXMLClosePressed(StringHash eventType, VariantMap& eventData);
     bool loadUIXML(int windowtype, const int positionx, const int positiony, int selected);
     void QuickMenuPressed(StringHash eventType, VariantMap& eventData);
@@ -182,10 +140,10 @@ private:
     void PlayerWindowUpdateUI(int selected);
     void PlayerWindowHandleDisplaySelection(StringHash eventType, VariantMap& eventData);
     int UpdateUISceneLoader(void);
-    void HandleCharacterStartButtonReleased(StringHash eventType, VariantMap& eventData);
+    void UpdatePlayerInfoBar(void);
     void SceneLoaderHanderPress(StringHash eventType, VariantMap& eventData);
 
-    /// The Window.
+    /// Window shared pointers
     SharedPtr<Window> window_;
     SharedPtr<Window> window2_;
 
@@ -206,9 +164,6 @@ private:
     /// Shared pointer for a single character
     WeakPtr<Character> character_;
 
-    /// Game state handler
-    Gamestatehandler  ExistenceGameState;
-
     /// Class and variable declation for character/player related information
     Player  TemporaryPlayer;
     Player  * TemporaryAccountPlayerList;
@@ -218,8 +173,134 @@ private:
     /// Class and variable declaration for alien race alliance information
     vector<string> aliensarray;
     vector<string> tempaliensarray;
+};
 
+/// Login State
+class ExistenceClientStateLogin : public ExistenceClient
+{
+    OBJECT(ExistenceClientStateLogin);
+public:
+    ExistenceClientStateLogin(Urho3D::Context * context);
+    virtual ~ExistenceClientStateLogin();
+    virtual void Enter();
+    virtual void Exit();
+    virtual void OnUpdate(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
+private:
+    void LoginUI(bool exist);
+    void LoginScreenUINewAccountHandleClosePressed(StringHash eventType, VariantMap& eventData);
+    void LoginScreenUILoginHandleClosePressed(StringHash eventType, VariantMap& eventData);
+protected:
 
 };
+
+/// Account State
+class ExistenceClientStateAccount: public ExistenceClient
+{
+    OBJECT(ExistenceClientStateAccount);
+public:
+    ExistenceClientStateAccount(Urho3D::Context * context);
+    virtual ~ ExistenceClientStateAccount();
+    virtual void Enter();
+    virtual void Exit();
+    virtual void OnUpdate(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
+private:
+    void CreateAccountScreenUI(void);
+    void CreateAccountUIHandleClosePressed(StringHash eventType, VariantMap& eventData);
+protected:
+
+};
+
+/// Main Screen State
+class ExistenceClientStateMainScreen: public ExistenceClient
+{
+    OBJECT(ExistenceClientStateMainScreen);
+public:
+    ExistenceClientStateMainScreen(Urho3D::Context * context);
+    virtual ~ExistenceClientStateMainScreen();
+    virtual void Enter();
+    virtual void Exit();
+    virtual void OnUpdate(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
+private:
+    void mainScreenUI(void);
+    void MainScreenUIHandleClosePressed(StringHash eventType, VariantMap& eventData);
+    void HandleCharacterStartButtonReleased(StringHash eventType, VariantMap& eventData);
+    void HandleCharacterSelectedReleased(StringHash eventType, VariantMap& eventData);
+    void HandleCharacterSelectedInfoButtonReleased(StringHash eventType, VariantMap& eventData);
+protected:
+
+};
+
+/// Player Create Login State
+class ExistenceClientStatePlayer: public ExistenceClient
+{
+    OBJECT(ExistenceClientStatePlayer);
+public:
+    ExistenceClientStatePlayer(Urho3D::Context * context);
+    virtual ~ExistenceClientStatePlayer();
+    virtual void Enter();
+    virtual void Exit();
+    virtual void OnUpdate(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
+private:
+    void CreatePlayerScreenUI(void);
+    void HandlerCameraOrientation(StringHash eventType, VariantMap& eventData);
+    void CameraOrientationRotateMove (float degrees, int movement);
+    void HandleMouseReleased(StringHash eventType, VariantMap& eventData);
+    void CreatePlayerUIHandleClosePressed(StringHash eventType, VariantMap& eventData);
+    void HandlePersonalitySelectionItemClick(StringHash eventType, VariantMap& eventData);
+protected:
+
+};
+
+/// Main Screen State
+class ExistenceClientStateProgress :public ExistenceClient
+{
+    OBJECT(ExistenceClientStateProgress);
+public:
+    ExistenceClientStateProgress(Urho3D::Context * context);
+    virtual ~ExistenceClientStateProgress();
+    virtual void Enter();
+    virtual void Exit();
+    virtual void OnUpdate(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
+private:
+    void ProgressScreenUI(void);
+    void ProgressScreenUIHandleClosePressed(StringHash eventType, VariantMap& eventData);
+    void CreateCharacter(void);
+    void GenerateScene(terrain_rule terrainrule,const char *differentialfilename);
+    void loadSceneCreationCreation(const char * lineinput);
+    int GenerateSceneBuildWorld(terrain_rule terrainrule);
+    void loadDummyScene(void);
+    void LoadScene(const int mode, const char * lineinput);
+protected:
+
+};
+
+/// Player Create Login State
+class ExistenceClientStateGameMode: public ExistenceClient
+{
+    OBJECT(ExistenceClientStateGameMode);
+public:
+    ExistenceClientStateGameMode(Urho3D::Context * context);
+    virtual ~ExistenceClientStateGameMode();
+    virtual void Enter();
+    virtual void Exit();
+private:
+    void GameMode(void);
+protected:
+
+};
+
+
+/// Miscellanous functions
+vector<string> split(const string& s, const string& delim, const bool keep_empty=true);
+time_t ConvertStringToTime(const char * buff, time_t timeseed);
+string GenerateName(char group, char subgroup);
+
+string ConvertUIntToString(unsigned int val);
+float cutoff(float inputvalue, float pointmid, float range,bool debug);
+float StringToFloat(string buffer);
+Vector3 NormalizedToWorld(Image *height, Terrain *terrain, Vector2 normalized);
+typedef std::pair<float,float> range ;
+bool intersects( range a, range b );
+range make_range( float a, float b );
 
 #endif

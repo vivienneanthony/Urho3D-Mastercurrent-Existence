@@ -41,15 +41,6 @@
 
 using namespace std;
 
-Entity::Entity()
-{
-    //ctor
-}
-
-Entity::~Entity()
-{
-    //dtor
-}
 
 /// Set and get the character health
 int Entity::SetHealth(int health)
