@@ -158,8 +158,8 @@ void ExistenceClient::Start()
     cache -> AddResourceDir(additionresourcePath);
 
     /// Configure rudimentary state handler
-    ExistenceGameState.SetUIState(UI_NONE);
-    ExistenceGameState.SetGameState(STATE_MAIN);
+    ExistenceGameState->SetUIState(UI_NONE);
+    ExistenceGameState->SetGameState(STATE_MAIN);
 
     /// Set the loaded style as default style
     uiRoot_->SetDefaultStyle(style);
@@ -200,7 +200,7 @@ void ExistenceClient::Start()
     srand (time(NULL));
 
     /// Start here
-    ExistenceGameState->start(scene);
+    ExistenceGameState->start(scene_);
 
     return;
 }
@@ -228,7 +228,7 @@ void ExistenceClient::HandlePostUpdates(StringHash eventType, VariantMap& eventD
     UI* ui = GetSubsystem<UI>();
 
     /// check if in game mode
-    if(ExistenceGameState.GetGameState()==STATE_GAME)
+    if(ExistenceGameState->GetGameState()==STATE_GAME)
     {
         Sprite* healthBar = (Sprite*)ui->GetRoot()->GetChild("PlayerInfoHealthBarIndicate", true);
 
@@ -367,13 +367,13 @@ void ExistenceClient::HandleUpdate(StringHash eventType, VariantMap& eventData)
 
 
     /// Handle UI updates
-    if(ExistenceGameState.GetGameState()==STATE_GAME)
+    if(ExistenceGameState->GetGameState()==STATE_GAME)
     {
         UpdateUI(timeStep);
     }
 
     /// controls movement
-    if(ExistenceGameState.GetCameraMode()==CAMERAMODE_FIRSTPERSON&&ExistenceGameState.GetGameState()==STATE_GAME)
+    if(ExistenceGameState->GetCameraMode()==CAMERAMODE_FIRSTPERSON&&ExistenceGameState->GetGameState()==STATE_GAME)
     {
         /// Clear previous controls
         character_->controls_.Set(CTRL_FORWARD | CTRL_BACK | CTRL_LEFT | CTRL_RIGHT | CTRL_JUMP | CTRL_FIRE, false);
@@ -430,14 +430,14 @@ void ExistenceClient::HandleKeyDown(StringHash eventType, VariantMap& eventData)
     /// Get Urho3D Subsystem
     UI* ui = GetSubsystem<UI>();
 
-    ExistenceGameState.SetConsoleState(GetSubsystem<Console>()->IsVisible());
+    ExistenceGameState->SetConsoleState(GetSubsystem<Console>()->IsVisible());
 
     /// Unlike the other samples, exiting the engine when ESC is pressed instead of just closing the console
     if (eventData[KeyDown::P_KEY].GetInt() == KEY_F12)
     {
-        if((ExistenceGameState.GetUIState()==UI_CHARACTERSELECTIONINTERFACE)||(ExistenceGameState.GetUIState()==UI_GAMECONSOLE))
+        if((ExistenceGameState->GetUIState()==UI_CHARACTERSELECTIONINTERFACE)||(ExistenceGameState->GetUIState()==UI_GAMECONSOLE))
         {
-            if(ExistenceGameState.GetConsoleState())
+            if(ExistenceGameState->GetConsoleState())
             {
                 Console* console = GetSubsystem<Console>();
 
@@ -445,7 +445,7 @@ void ExistenceClient::HandleKeyDown(StringHash eventType, VariantMap& eventData)
 
                 UI* ui = GetSubsystem<UI>();
 
-                ExistenceGameState.SetConsoleState(false);
+                ExistenceGameState->SetConsoleState(false);
 
             }
             else
@@ -453,7 +453,7 @@ void ExistenceClient::HandleKeyDown(StringHash eventType, VariantMap& eventData)
                 Console* console = GetSubsystem<Console>();
 
                 console -> SetVisible(true);
-                ExistenceGameState.SetConsoleState(true);
+                ExistenceGameState->SetConsoleState(true);
 
             }
         }
@@ -461,7 +461,7 @@ void ExistenceClient::HandleKeyDown(StringHash eventType, VariantMap& eventData)
         return;
     }
 
-    if (eventData[KeyDown::P_KEY].GetInt() == KEY_F10&&ExistenceGameState.GetGameState()==STATE_GAME)
+    if (eventData[KeyDown::P_KEY].GetInt() == KEY_F10&&ExistenceGameState->GetGameState()==STATE_GAME)
     {
         /// load window
         UIElement * uiroot = ui ->	GetRoot ();
@@ -487,7 +487,7 @@ void ExistenceClient::HandleKeyDown(StringHash eventType, VariantMap& eventData)
 
 
     /// Check if game is in first person camera mode and in game state
-    if(ExistenceGameState.GetCameraMode()==CAMERAMODE_FIRSTPERSON&&ExistenceGameState.GetGameState()==STATE_GAME)
+    if(ExistenceGameState->GetCameraMode()==CAMERAMODE_FIRSTPERSON&&ExistenceGameState->GetGameState()==STATE_GAME)
     {
         /// check if UI element is active
         if(GetSubsystem<UI>()->GetFocusElement())
@@ -509,19 +509,19 @@ void ExistenceClient::HandleKeyDown(StringHash eventType, VariantMap& eventData)
 void ExistenceClient::MoveCamera(float timeStep)
 {
     /// Do not move if the UI has a focused element (the console)
-    if (GetSubsystem<UI>()->GetFocusElement()||ExistenceGameState.GetConsoleState())
+    if (GetSubsystem<UI>()->GetFocusElement()||ExistenceGameState->GetConsoleState())
     {
         return;
     }
 
-    if(ExistenceGameState.GetGameState()==STATE_MAIN)
+    if(ExistenceGameState->GetGameState()==STATE_MAIN)
     {
         return;
     }
 
     Input* input = GetSubsystem<Input>();
 
-    if(ExistenceGameState.GetCameraMode()==CAMERAMODE_FLY)
+    if(ExistenceGameState->GetCameraMode()==CAMERAMODE_FLY)
     {
 
 

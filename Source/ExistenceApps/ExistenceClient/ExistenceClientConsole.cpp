@@ -122,7 +122,7 @@ void ExistenceClient::InitializeConsole(void)
     console->SetVisible(false);
     console->GetCloseButton()->SetVisible(false);
 
-    ExistenceGameState.SetConsoleState(UI_CONSOLEOFF);
+    ExistenceGameState->SetConsoleState(UI_CONSOLEOFF);
 }
 
 /// code to handle console command inputs
@@ -163,7 +163,7 @@ void ExistenceClient::HandleInput(const String& input)
     if (parseinput[0] == "/scene")
     {
 
-        if(ExistenceGameState.GetGameState()==STATE_GAME)
+        if(ExistenceGameState->GetGameState()==STATE_GAME)
         {
             return;
 
@@ -171,22 +171,22 @@ void ExistenceClient::HandleInput(const String& input)
         eraseScene();
 
 
-        ExistenceGameState.SetUIState(UI_GAMECONSOLE);
-        ExistenceGameState.SetGameState(STATE_GAME);
+        ExistenceGameState->SetUIState(UI_GAMECONSOLE);
+        ///ExistenceGameState->SetGameState(STATE_GAME);
 
-        loadScene(1, input.CString());
+        ///loadScene(1, input.CString());
     }
     /// if it the game is in game mode go here
-    else if (ExistenceGameState.GetGameState()==STATE_GAME)
+    else if (ExistenceGameState->GetGameState()==STATE_GAME)
     {
 
         /// Check termination - Check Action
         if(parseinput[0] == "/end")
         {
 
-            if(ExistenceGameState.GetDebugHudMode()==true)
+            if(ExistenceGameState->GetDebugHudMode()==true)
             {
-                ExistenceGameState.SetDebugHudMode(false);
+                ExistenceGameState->SetDebugHudMode(false);
                 GetSubsystem<DebugHud>()->ToggleAll();
             }
 
@@ -195,15 +195,18 @@ void ExistenceClient::HandleInput(const String& input)
             GetSubsystem<Input>()->SetMouseVisible(true);
 
             /// set ui state to none
-            ExistenceGameState.SetUIState(UI_CHARACTERSELECTIONINTERFACE);
-            ExistenceGameState.SetGameState(STATE_MAIN);
+            ExistenceGameState->SetUIState(UI_CHARACTERSELECTIONINTERFACE);
+            ///ExistenceGameState->SetGameState(STATE_MAIN);
 
             /// setup scene
             SetupScreenViewport();
 
-            ExistenceGameState.SetCameraMode(CAMERAMODE_DEFAULT);
+            ExistenceGameState->SetCameraMode(CAMERAMODE_DEFAULT);
 
-            mainScreenUI();
+            ///mainScreenUI();
+
+            /// change state
+            ExistenceGameState->changeState(ExistenceClientStates::GAME_STATE_MAINMENU);
 
             /// Create a scene node for the camera, which we will move around
             /// The camera will use default settings (1000 far clip distance, 45 degrees FOV, set aspect ratio automatically)
@@ -771,7 +774,7 @@ int ExistenceClient::ConsoleActionCamera(const char * lineinput)
         SharedPtr<Viewport> viewport(new Viewport(context_, scene_, cameraObject));
         renderer->SetViewport(0, viewport);
 
-        ExistenceGameState.SetCameraMode(CAMERAMODE_FIRSTPERSON);
+        ExistenceGameState->SetCameraMode(CAMERAMODE_FIRSTPERSON);
     }
 
 
@@ -785,7 +788,7 @@ int ExistenceClient::ConsoleActionCamera(const char * lineinput)
         SharedPtr<Viewport> viewport(new Viewport(context_, scene_, cameraObject));
         renderer->SetViewport(0, viewport);
 
-        ExistenceGameState.SetCameraMode(CAMERAMODE_FLY);
+        ExistenceGameState->SetCameraMode(CAMERAMODE_FLY);
     }
 
 
@@ -841,14 +844,14 @@ int ExistenceClient::ConsoleActionDebug(const char * lineinput)
     if(argument[1]=="hud")
     {
         /// toggle debug hud
-        if(ExistenceGameState.GetDebugHudMode()==false)
+        if(ExistenceGameState->GetDebugHudMode()==false)
         {
-            ExistenceGameState.SetDebugHudMode(true);
+            ExistenceGameState->SetDebugHudMode(true);
             GetSubsystem<DebugHud>()->ToggleAll();
         }
         else
         {
-            ExistenceGameState.SetDebugHudMode(false);
+            ExistenceGameState->SetDebugHudMode(false);
             GetSubsystem<DebugHud>()->ToggleAll();
         }
     }

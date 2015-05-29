@@ -143,7 +143,7 @@ void ExistenceClientStateAccount::CreateAccountScreenUI(void)
     float height = (float)graphics->GetHeight();
 
     /// set ui state to none
-    ExistenceGameState.SetUIState(UI_ACCOUNTCREATIONINTERFACE);
+    ExistenceGameState->SetUIState(UI_ACCOUNTCREATIONINTERFACE);
 
     /// Create the Window and add it to the UI's root node
     window_= new Window(context_);
@@ -328,7 +328,7 @@ void ExistenceClientStateAccount::CreateAccountUIHandleClosePressed(StringHash e
     UI* ui_ = GetSubsystem<UI>();
 
     /// Set UI state to account creation interface
-    ExistenceGameState.SetUIState(UI_ACCOUNTCREATIONINTERFACE);
+    ExistenceGameState->SetUIState(UI_ACCOUNTCREATIONINTERFACE);
 
     /// Get line objects
     LineEdit* firstnameLineEdit = (LineEdit*)ui_->GetRoot()->GetChild("firstnameInput", true);

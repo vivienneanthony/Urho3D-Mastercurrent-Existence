@@ -22,8 +22,6 @@
 #define         CAMERAMODE_FLY                      2
 
 
-
-
 namespace ExistenceClientStates
 {
 
@@ -45,6 +43,19 @@ public:
     /// Get last state
     int getCurrentState(void);
 
+    /// Function to access other states
+    int GetConsoleState(void);
+    void SetConsoleState(int flag);
+
+    int GetUIState(void);
+    int SetUIState(int flag);
+
+    int GetCameraMode(void);
+    int SetCameraMode(int flag);
+
+    int GetDebugHudMode(void);
+    int SetDebugHudMode(int flag);
+
 private:
     /// create  state  classname
     void createState( Urho3D::String newState );
@@ -60,6 +71,14 @@ private:
 
     /// states container
     Urho3D::Vector<ExistenceClient*> mStates;
+
+    /// Kept node just in case
+    Urho3D::SharedPtr<Urho3D::Node> mainNode;
+
+    bool consolestate;
+    int uistate;
+    int cameramode;
+    bool debughud;
 
 };
 

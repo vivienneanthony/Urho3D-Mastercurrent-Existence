@@ -139,7 +139,7 @@ void ExistenceClientStateLogin::LoginUI(bool exist)
     float height = (float)graphics->GetHeight();
 
     /// Set UI gamestate to logininterface
-    ExistenceGameState.SetUIState(UI_LOGININTERFACE);
+    ExistenceGameState->SetUIState(UI_LOGININTERFACE);
 
     /// Login screen - Create the Window and add it to the UI's root node
     window_= new Window(context_);
@@ -236,7 +236,7 @@ void ExistenceClientStateLogin::LoginUI(bool exist)
 void ExistenceClientStateLogin::LoginScreenUILoginHandleClosePressed(StringHash eventType, VariantMap& eventData)
 {
     /// set ui state to none
-    ExistenceGameState.SetUIState(UI_LOGININTERFACE);
+    ExistenceGameState->SetUIState(UI_LOGININTERFACE);
 
     /// Get Needed SubSystems
     UI* ui_= GetSubsystem<UI>();
@@ -260,7 +260,7 @@ void ExistenceClientStateLogin::LoginScreenUILoginHandleClosePressed(StringHash 
 void ExistenceClientStateLogin::LoginScreenUINewAccountHandleClosePressed(StringHash eventType, VariantMap& eventData)
 {
     /// set ui state to none
-    ExistenceGameState.SetUIState(UI_LOGININTERFACE);
+    ExistenceGameState->SetUIState(UI_LOGININTERFACE);
 
     /// remove Existence Logo Node
     scene_->GetChild("ExistenceLogo",true)->RemoveAllComponents();

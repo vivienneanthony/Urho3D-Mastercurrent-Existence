@@ -112,7 +112,6 @@
 using namespace std;
 using namespace Urho3D;
 
-
 /// Constructor Destror
 ExistenceClientStateMainScreen::ExistenceClientStateMainScreen(Context* context)
 {
@@ -130,7 +129,7 @@ ExistenceClientStateMainScreen::~ExistenceClientStateMainScreen()
 int ExistenceClientStateMainScreen::mainScreenUI(void)
 {
     /// set ui state to none
-    ExistenceGameState.SetUIState(UI_CHARACTERSELECTIONINTERFACE);
+    ExistenceGameState->SetUIState(UI_CHARACTERSELECTIONINTERFACE);
 
     /// Get Needed SubSystems
     ResourceCache* cache = GetSubsystem<ResourceCache>();
@@ -408,7 +407,7 @@ int ExistenceClientStateMainScreen::mainScreenUI(void)
 void ExistenceClientStateMainScreen::MainScreenUIHandleClosePressed(StringHash eventType, VariantMap& eventData)
 {
     /// Set ui state to UI_CHARACTERSELECTIONINTERFACE
-    ExistenceGameState.SetUIState(UI_CHARACTERSELECTIONINTERFACE);
+    ExistenceGameState->SetUIState(UI_CHARACTERSELECTIONINTERFACE);
 
     /// Get control that was clicked
     UIElement* clicked = static_cast<UIElement*>(eventData[UIMouseClick::P_ELEMENT].GetPtr());
@@ -436,7 +435,7 @@ void ExistenceClientStateMainScreen::MainScreenUIHandleClosePressed(StringHash e
 
             console -> SetVisible(false);
 
-            ExistenceGameState.SetConsoleState(UI_CONSOLEOFF);
+            ExistenceGameState->SetConsoleState(UI_CONSOLEOFF);
 
             /// Enable OS cursor
             GetSubsystem<Input>()->SetMouseVisible(true);

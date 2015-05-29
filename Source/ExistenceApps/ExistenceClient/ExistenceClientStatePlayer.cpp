@@ -146,7 +146,7 @@ void ExistenceClientStatePlayer::CreatePlayerScreenUI()
     float height = (float)graphics->GetHeight();
 
     /// set ui state to none
-    ExistenceGameState.SetUIState(UI_CHARACTERCREATIONINTERFACE);
+    ExistenceGameState->SetUIState(UI_CHARACTERCREATIONINTERFACE);
     TemporaryPlayer.Clear();
 
     /// Load XML
@@ -962,7 +962,7 @@ void ExistenceClientStatePlayer::CreatePlayerUIHandleClosePressed(StringHash eve
 {
 
     /// Set ui state to character creation
-    ExistenceGameState.SetUIState(UI_CHARACTERCREATIONINTERFACE);
+    ExistenceGameState->SetUIState(UI_CHARACTERCREATIONINTERFACE);
 
     /// Get Needed SubSystems
     ResourceCache* cache = GetSubsystem<ResourceCache>();

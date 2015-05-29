@@ -341,9 +341,9 @@ void ExistenceClient::QuickMenuPressed(StringHash eventType, VariantMap& eventDa
     /// If exit was clicked
     if (clickedtext=="ExitButton")
     {
-        if(ExistenceGameState.GetDebugHudMode()==true)
+        if(ExistenceGameState->GetDebugHudMode()==true)
         {
-            ExistenceGameState.SetDebugHudMode(false);
+            ExistenceGameState->SetDebugHudMode(false);
             GetSubsystem<DebugHud>()->ToggleAll();
         }
 
@@ -352,13 +352,13 @@ void ExistenceClient::QuickMenuPressed(StringHash eventType, VariantMap& eventDa
         GetSubsystem<Input>()->SetMouseVisible(true);
 
         /// set ui state to none
-        ExistenceGameState.SetUIState(UI_CHARACTERSELECTIONINTERFACE);
-        ExistenceGameState.SetGameState(STATE_MAIN);
+        ExistenceGameState->SetUIState(UI_CHARACTERSELECTIONINTERFACE);
+        ExistenceGameState->SetGameState(STATE_MAIN);
 
         /// setup scene
         SetupScreenViewport();
 
-        ExistenceGameState.SetCameraMode(CAMERAMODE_DEFAULT);
+        ExistenceGameState->SetCameraMode(CAMERAMODE_DEFAULT);
 
         mainScreenUI();
 
@@ -841,8 +841,8 @@ void ExistenceClient::SceneLoaderHanderPress(StringHash eventType, VariantMap& e
     eraseScene();
 
     /// change state
-    ExistenceGameState.SetUIState(UI_GAMECONSOLE);
-    ExistenceGameState.SetGameState(STATE_GAME);
+    ExistenceGameState->SetUIState(UI_GAMECONSOLE);
+    ExistenceGameState->SetGameState(STATE_GAME);
 
     /// load scene
     loadScene(1,  clicked.CString());

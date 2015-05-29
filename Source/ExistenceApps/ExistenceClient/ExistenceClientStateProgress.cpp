@@ -140,7 +140,7 @@ void ExistenceClientStateProgress::ProgressScreenUI(void)
     ui->Clear();
 
     /// set ui state to none
-    ExistenceGameState.SetUIState(UI_PROGRESSINTERFACE);
+    ExistenceGameState->SetUIState(UI_PROGRESSINTERFACE);
 
     /// Get rendering window size as floats
     float width = (float)graphics->GetWidth();
@@ -198,7 +198,7 @@ void ExistenceClientStateProgress::ProgressScreenUI(void)
 void ExistenceClientStateProgress::ProgressScreenUIHandleClosePressed(StringHash eventType, VariantMap& eventData)
 {
     /// set ui state to none
-    ExistenceGameState.SetUIState(UI_PROGRESSINTERFACE);
+    ExistenceGameState->SetUIState(UI_PROGRESSINTERFACE);
 
     mainScreenUI();
 
@@ -296,7 +296,7 @@ void ExistenceClientStateProgress::CreateCharacter(void)
     crossboxModel ->ApplyMaterialList("Resources/Models/CrossBox.txt");
 
     /// Set camera to first person
-    ExistenceGameState.SetCameraMode(CAMERAMODE_FIRSTPERSON);
+    ExistenceGameState->SetCameraMode(CAMERAMODE_FIRSTPERSON);
 
     /// Set up a viewport to the Renderer subsystem so that the 3D scene can be seen. We need to define the scene and the camera
     /// at minimum. Additionally we could configure the viewport screen size and the rendering path (eg. forward / deferred) to
