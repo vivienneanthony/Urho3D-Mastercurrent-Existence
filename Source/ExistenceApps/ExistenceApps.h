@@ -97,6 +97,9 @@ protected:
     /// Flag to indicate whether touch input has been enabled.
     bool touchEnabled_;
 
+    /// moved here
+    SharedPtr<GameStateHandler> ExistenceGameState;
+
 private:
 
     /// Set custom window Title & Icon

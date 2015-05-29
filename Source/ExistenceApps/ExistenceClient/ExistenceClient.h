@@ -180,7 +180,7 @@ protected:
 
     /// Create a game state handler pointer
     ///ExistenceClientStates::
-    GameStateHandler * ExistenceGameState;
+    SharedPtr<GameStateHandler> ExistenceGameState;
 
 private:
 

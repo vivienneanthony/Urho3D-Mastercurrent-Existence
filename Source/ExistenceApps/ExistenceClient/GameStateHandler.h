@@ -24,22 +24,24 @@
 #include "GameStateComponent.h"
 
 /// fw declaration
-class ExistenceClient;
+///class ExistenceClient,
 
 class GameStateHandler : public Urho3D::Object
 {
     OBJECT(GameStateHandler);
 public:
     ///costructor
-    GameStateHandler(Urho3D::Context * context );
+    GameStateHandler(Context * context);
     /// Destruct.
-    ~GameStateHandler();
+    virtual  ~GameStateHandler();
     /// start point
     void Start(Urho3D::Scene * scene_);
     // handler events
     void onStateChange(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
     /// Get last state
     int getCurrentState(void);
+
+    int Set(GameStateHandler * GSH);
 
     /// Function to access other states
     int GetConsoleState(void);
@@ -55,10 +57,12 @@ public:
     int SetDebugHudMode(int flag);
 
 private:
-    /// create  state  classname
-    void createState( Urho3D::String newState );
+    // Register object factory and attributes.
+    static void RegisterObject(Context* context);
     /// register all states
     void RegisterGameStates();
+    /// create  state  classname
+    void createState( Urho3D::String newState );
     /// change state
     void changeState(GameStateComponent * state);
     /// exit and remove last state.
@@ -73,11 +77,14 @@ private:
     /// Kept node just in case
     Urho3D::SharedPtr<Urho3D::Node> mainNode;
 
-    /// Added flags
+    GameStateHandler * GameStateHandlerPTR;
+
+/// Added flags
     bool consolestate;
     int uistate;
     int cameramode;
     bool debughud;
+
 
 };
 

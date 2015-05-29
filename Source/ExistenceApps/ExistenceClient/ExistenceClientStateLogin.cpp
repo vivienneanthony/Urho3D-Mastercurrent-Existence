@@ -115,6 +115,8 @@ using namespace Urho3D;
 ExistenceClientStateLogin::ExistenceClientStateLogin(Urho3D::Context* context)
 :ExistenceClient(context)
 {
+    cout << "show login " << endl;
+
     /// create UI
     LoginUI(true);
 }

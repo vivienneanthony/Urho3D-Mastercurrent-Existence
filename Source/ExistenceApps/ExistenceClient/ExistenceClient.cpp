@@ -150,8 +150,7 @@ void ExistenceClient::Start()
     /// Change game state
     GameStateHandler * ExistenceGameState = new GameStateHandler(context_);
 
-
-
+    ExistenceGameState->Set(ExistenceGameState);
 
     /// create variables (urho3d)
     String additionresourcePath;
@@ -161,8 +160,6 @@ void ExistenceClient::Start()
 
     /// add resource path to last
     cache -> AddResourceDir(additionresourcePath);
-
-
 
 
     /// Set the loaded style as default style
@@ -205,6 +202,8 @@ void ExistenceClient::Start()
 
     /// Configure rudimentary state handler
     ExistenceGameState->SetUIState(UI_NONE);
+
+    cout << "It got here" << endl;
 
 
     /// Start here
@@ -369,7 +368,7 @@ void ExistenceClient::HandleUpdate(StringHash eventType, VariantMap& eventData)
     float timeStep = eventData[P_TIMESTEP].GetFloat();
 
     Input* input = GetSubsystem<Input>();
-
+/*
     /// Move the camera, scale movement with time step
     MoveCamera(timeStep);
 
@@ -427,7 +426,7 @@ void ExistenceClient::HandleUpdate(StringHash eventType, VariantMap& eventData)
 
         }
     }
-
+*/
     return;
 }
 
@@ -438,7 +437,9 @@ void ExistenceClient::HandleKeyDown(StringHash eventType, VariantMap& eventData)
     /// Get Urho3D Subsystem
     UI* ui = GetSubsystem<UI>();
 
-    ExistenceGameState->SetConsoleState(GetSubsystem<Console>()->IsVisible());
+    //ExistenceGameState->SetConsoleState(GetSubsystem<Console>()->IsVisible());
+
+    ExistenceGameState->SetConsoleState(0);
 
     /// Unlike the other samples, exiting the engine when ESC is pressed instead of just closing the console
     if (eventData[KeyDown::P_KEY].GetInt() == KEY_F12)

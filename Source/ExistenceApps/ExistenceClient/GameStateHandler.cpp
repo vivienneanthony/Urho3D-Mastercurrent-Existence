@@ -108,18 +108,22 @@
 using namespace std;
 using namespace Urho3D;
 
-GameStateHandler::GameStateHandler(Urho3D::Context * context):
-    Object(context)
+GameStateHandler::GameStateHandler(Context * context):
+   Object(context)
     ,scene(0)
 
 {
+
     SubscribeToEvent(G_STATES_CHANGE, HANDLER(GameStateHandler, onStateChange));
+    RegisterObject(context);
     RegisterGameStates();
 }
 
 GameStateHandler::~GameStateHandler()
 {
+
     RemoveLastState();
+
     LOGINFO("Destroyng GameComponent" );
 }
 
@@ -132,12 +136,20 @@ void GameStateHandler::RegisterGameStates()
     context_->RegisterFactory<ExistenceClientStatePlayer>();
     context_->RegisterFactory<ExistenceClientStateProgress>();
     context_->RegisterFactory<ExistenceClientStateMainScreen>();
+
+    context_->RegisterFactory<GameStateHandler>();
+}
+
+
+/// Register a object
+void GameStateHandler::RegisterObject(Context* context)
+{
+    context->RegisterFactory<GameStateHandler>();
 }
 
 void GameStateHandler::Start(Urho3D::Scene * scene_)
 {
     uistate=UI_NONE;
-
     consolestate=UI_CONSOLEOFF;
     cameramode=CAMERAMODE_DEFAULT;
 
@@ -146,8 +158,12 @@ void GameStateHandler::Start(Urho3D::Scene * scene_)
     scene=scene_;
     if(scene)
     {
+        cout << "create state" << endl;
+
         ///mainNode = scene->CreateChild("Main");
         createState(ExistenceClientStateLogin::GetTypeNameStatic());
+        cout << "failee" << endl;
+
     }
     else
     {
@@ -200,9 +216,9 @@ void GameStateHandler::createState( String newState )
 
     GameStateComponent * gameState = dynamic_cast<GameStateComponent*>(GetSubsystem<GameStateComponent>());
 
+
     if(gameState)
     {
-
         changeState(gameState);
 
     }
@@ -243,14 +259,20 @@ int GameStateHandler::GetConsoleState(void)
     return flag;
 }
 
-int GameStateHandler::SetConsoleState(int flag)
+int GameStateHandler::Set(GameStateHandler * GSH)
 {
-
-    consolestate = flag;
+    GameStateHandlerPTR = GSH;
 
     return 1;
 }
 
+int GameStateHandler::SetConsoleState(int flag)
+{
+
+    GameStateHandlerPTR -> SetConsoleState(flag);
+
+    return 1;
+}
 
 int GameStateHandler::GetUIState(void)
 {
