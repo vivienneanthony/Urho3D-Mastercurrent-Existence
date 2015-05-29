@@ -73,6 +73,7 @@
 #include "../../../Urho3D/Graphics/RenderPath.h"
 #include "../../../Urho3D/Math/Color.h"
 
+
 #include "GameStateHandler.h"
 #include "GameStateEvents.h"
 #include "GameObject.h"
@@ -100,7 +101,9 @@
 #include "../../../Urho3D/Procedural/ProceduralTerrain.h"
 #include "../../../Urho3D/Procedural/RandomNumberGenerator.h"
 
+
 #include "ExistenceClient.h"
+
 #include "ExistenceClientConsole.h"
 #include "ExistenceClientUI.h"
 
@@ -122,7 +125,7 @@ void ExistenceClient::InitializeConsole(void)
     console->SetVisible(false);
     console->GetCloseButton()->SetVisible(false);
 
-    ExistenceGameState->SetConsoleState(UI_CONSOLEOFF);
+    //ExistenceGameState->SetConsoleState(UI_CONSOLEOFF);
 }
 
 /// code to handle console command inputs
@@ -130,8 +133,7 @@ void ExistenceClient::HandleConsoleCommand(StringHash eventType, VariantMap& eve
 {
     using namespace ConsoleCommand;
 
-    if (eventData[P_ID].GetString() == GetTypeName())
-        HandleInput(eventData[P_COMMAND].GetString());
+    if (eventData[P_ID].GetString() == GetTypeName())        HandleInput(eventData[P_COMMAND].GetString());
 }
 
 /// Code to handle actual commans
@@ -160,10 +162,12 @@ void ExistenceClient::HandleInput(const String& input)
         parseinputarray[i] =  parseinput [i];//Copy the vector to the string
     }
 
+
+    /*
     if (parseinput[0] == "/scene")
     {
 
-        if(ExistenceGameState->GetGameState()==STATE_GAME)
+        if(ExistenceGameState->getCurrentState()==GameStates::GAME_STATE_GAMEMODE)
         {
             return;
 
@@ -177,7 +181,7 @@ void ExistenceClient::HandleInput(const String& input)
         ///loadScene(1, input.CString());
     }
     /// if it the game is in game mode go here
-    else if (ExistenceGameState->GetGameState()==STATE_GAME)
+    else if(ExistenceGameState->getCurrentState()==GameStates::GAME_STATE_GAMEMODE)
     {
 
         /// Check termination - Check Action
@@ -206,7 +210,7 @@ void ExistenceClient::HandleInput(const String& input)
             ///mainScreenUI();
 
             /// change state
-            ExistenceGameState->changeState(ExistenceClientStates::GAME_STATE_MAINMENU);
+            ExistenceGameState-> SendEvent("GAME_STATE_MAINMENU");
 
             /// Create a scene node for the camera, which we will move around
             /// The camera will use default settings (1000 far clip distance, 45 degrees FOV, set aspect ratio automatically)
@@ -261,7 +265,8 @@ void ExistenceClient::HandleInput(const String& input)
             /// go to environment function
             ConsoleActionRenderer(input.CString());
         }
-    }
+
+    }*/
 }
 
 

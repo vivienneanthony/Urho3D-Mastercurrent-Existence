@@ -101,40 +101,43 @@
 #include "../../../Urho3D/Procedural/RandomNumberGenerator.h"
 
 #include "ExistenceClient.h"
-#include "ExistenceClientStateGameMode.h"
 #include "ExistenceClientUI.h"
+
+#include "GameStateComponent.h"
 
 #include "../../Urho3D/Engine/DebugHud.h"
 
-
-#define DEFAULTSIZE 4096
 
 using namespace std;
 using namespace Urho3D;
 
 
-ExistenceClientStateGameMode::ExistenceClientStateGameMode(Context* context):
-    ExistenceClient(context)
+GameStateComponent::GameStateComponent(Urho3D::Context* context) :
+    Component (context)
 {
-
 }
 
-ExistenceClientStateGameMode::~ExistenceClientStateGameMode()
-{
-    //dtor
-}
 
-void ExistenceClientStateGameMode::Enter()
+GameStateComponent::~GameStateComponent()
 {
     //dtor
 }
 
-void ExistenceClientStateGameMode::Exit()
+/// Register Subsystem
+void GameStateComponent::RegisterNewSubsystem(Urho3D::Context* context)
 {
-    //dtor
+    context -> RegisterSubsystem(new GameStateComponent(context));
+
+    return;
 }
 
-void ExistenceClientStateGameMode::OnUpdate(StringHash eventType, VariantMap& eventData)
+void GameStateComponent::Enter(void)
 {
-    //
+    return;
 }
+
+void GameStateComponent::Exit(void)
+{
+    return;
+}
+

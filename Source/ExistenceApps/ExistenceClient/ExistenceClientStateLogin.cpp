@@ -112,10 +112,11 @@ using namespace Urho3D;
 
 
 /// Constructor Destror
-ExistenceClientStateLogin::ExistenceClientStateLogin(Context* context)
+ExistenceClientStateLogin::ExistenceClientStateLogin(Urho3D::Context* context)
+:ExistenceClient(context)
 {
     /// create UI
-    LoginUI();
+    LoginUI(true);
 }
 
 ExistenceClientStateLogin::~ExistenceClientStateLogin()
@@ -123,6 +124,21 @@ ExistenceClientStateLogin::~ExistenceClientStateLogin()
     //dtor
 }
 
+
+void ExistenceClientStateLogin::Enter()
+{
+    //dtor
+}
+
+void ExistenceClientStateLogin::Exit()
+{
+    //dtor
+}
+
+void ExistenceClientStateLogin::OnUpdate(StringHash eventType, VariantMap& eventData)
+{
+    //
+}
 
 
 /// code
@@ -222,11 +238,11 @@ void ExistenceClientStateLogin::LoginUI(bool exist)
     /// Attach handler based on new account - Temporary
     if(accountexist)
     {
-        SubscribeToEvent(loginButton, E_RELEASED, HANDLER(ExistenceClient, LoginScreenUILoginHandleClosePressed));
+        SubscribeToEvent(loginButton, E_RELEASED, HANDLER(ExistenceClientStateLogin, LoginScreenUILoginHandleClosePressed));
     }
     else
     {
-        SubscribeToEvent(newaccountButton, E_RELEASED, HANDLER(ExistenceClient, LoginScreenUINewAccountHandleClosePressed));
+        SubscribeToEvent(newaccountButton, E_RELEASED, HANDLER(ExistenceClientStateLogin, LoginScreenUINewAccountHandleClosePressed));
     }
 
     return;
@@ -251,7 +267,8 @@ void ExistenceClientStateLogin::LoginScreenUILoginHandleClosePressed(StringHash 
     scene_->GetChild("ExistenceLogo",true)->Remove();
 
     /// Call progress screen function
-    ProgressScreenUI();
+        //ProgressScreenUI();
+        ExistenceGameState -> SendEvent("GAME_STATE_GAMEMODELOAD");
 
     return;
 }
@@ -268,7 +285,8 @@ void ExistenceClientStateLogin::LoginScreenUINewAccountHandleClosePressed(String
 
 
     /// Call create play screen function
-    CreateAccountScreenUI();
+    //CreateAccountScreenUI();
+    ExistenceGameState -> SendEvent("GAME_STATE_PLAYERCREATE");
 
     return;
 }

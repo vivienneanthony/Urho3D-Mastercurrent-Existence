@@ -113,20 +113,34 @@ using namespace std;
 using namespace Urho3D;
 
 
-
-
 /// Constructor Destror
-ExistenceClientStatePlayer::ExistenceClientStatePlayer(Context* context)
+ExistenceClientStatePlayer::ExistenceClientStatePlayer(Urho3D::Context* context):
+    ExistenceClient(context)
 {
     /// create UI
     CreatePlayerScreenUI();
 }
 
-ExistenceClientStatePlayer:~ExistenceClientStatePlayer()
+ExistenceClientStatePlayer::
+~ExistenceClientStatePlayer()
 {
     //dtor
 }
 
+void ExistenceClientStatePlayer::OnUpdate(StringHash eventType, VariantMap& eventData)
+{
+    //
+}
+
+void ExistenceClientStatePlayer::Enter()
+{
+    //dtor
+}
+
+void ExistenceClientStatePlayer::Exit()
+{
+    //dtor
+}
 
 /// Create a player screen UI
 void ExistenceClientStatePlayer::CreatePlayerScreenUI()
@@ -531,22 +545,22 @@ void ExistenceClientStatePlayer::CreatePlayerScreenUI()
     PersonalitySelection->SetSelection(0);
 
     /// Subscribe to events
-    SubscribeToEvent(continueButton, E_RELEASED, HANDLER(ExistenceClient, CreatePlayerUIHandleClosePressed));
-    SubscribeToEvent(faction0button, E_RELEASED, HANDLER(ExistenceClient, HandleMouseReleased));
-    SubscribeToEvent(faction1button, E_RELEASED, HANDLER(ExistenceClient, HandleMouseReleased));
-    SubscribeToEvent(faction2button,  E_RELEASED, HANDLER(ExistenceClient, HandleMouseReleased));
-    SubscribeToEvent(faction3button, E_RELEASED, HANDLER(ExistenceClient, HandleMouseReleased));
-    SubscribeToEvent(alien0button, E_RELEASED, HANDLER(ExistenceClient, HandleMouseReleased));
-    SubscribeToEvent(alien1button, E_RELEASED, HANDLER(ExistenceClient, HandleMouseReleased));
-    SubscribeToEvent(alien2button, E_RELEASED, HANDLER(ExistenceClient, HandleMouseReleased));
-    SubscribeToEvent(alien3button, E_RELEASED, HANDLER(ExistenceClient, HandleMouseReleased));
-    SubscribeToEvent(gendermalebutton, E_RELEASED, HANDLER(ExistenceClient, HandleMouseReleased));
-    SubscribeToEvent(genderfemalebutton, E_RELEASED, HANDLER(ExistenceClient, HandleMouseReleased));
-    SubscribeToEvent(PersonalitySelection, E_ITEMCLICKED,HANDLER(ExistenceClient,HandlePersonalitySelectionItemClick));
-    SubscribeToEvent(camerachangeorientationButton, E_RELEASED, HANDLER(ExistenceClient, HandlerCameraOrientation));
+    SubscribeToEvent(continueButton, E_RELEASED, HANDLER(ExistenceClientStatePlayer, CreatePlayerUIHandleClosePressed));
+    SubscribeToEvent(faction0button, E_RELEASED, HANDLER(ExistenceClientStatePlayer, HandleMouseReleased));
+    SubscribeToEvent(faction1button, E_RELEASED, HANDLER(ExistenceClientStatePlayer, HandleMouseReleased));
+    SubscribeToEvent(faction2button,  E_RELEASED, HANDLER(ExistenceClientStatePlayer, HandleMouseReleased));
+    SubscribeToEvent(faction3button, E_RELEASED, HANDLER(ExistenceClientStatePlayer, HandleMouseReleased));
+    SubscribeToEvent(alien0button, E_RELEASED, HANDLER(ExistenceClientStatePlayer, HandleMouseReleased));
+    SubscribeToEvent(alien1button, E_RELEASED, HANDLER(ExistenceClientStatePlayer, HandleMouseReleased));
+    SubscribeToEvent(alien2button, E_RELEASED, HANDLER(ExistenceClientStatePlayer, HandleMouseReleased));
+    SubscribeToEvent(alien3button, E_RELEASED, HANDLER(ExistenceClientStatePlayer, HandleMouseReleased));
+    SubscribeToEvent(gendermalebutton, E_RELEASED, HANDLER(ExistenceClientStatePlayer, HandleMouseReleased));
+    SubscribeToEvent(genderfemalebutton, E_RELEASED, HANDLER(ExistenceClientStatePlayer, HandleMouseReleased));
+    SubscribeToEvent(PersonalitySelection, E_ITEMCLICKED,HANDLER(ExistenceClientStatePlayer,HandlePersonalitySelectionItemClick));
+    SubscribeToEvent(camerachangeorientationButton, E_RELEASED, HANDLER(ExistenceClientStatePlayer, HandlerCameraOrientation));
 
     /// Subscribe also to all UI mouse clicks just to see where we have clicked
-    SubscribeToEvent(E_UIMOUSECLICK, HANDLER(ExistenceClient, CreatePlayerUIHandleControlClicked));
+    SubscribeToEvent(E_UIMOUSECLICK, HANDLER(ExistenceClientStatePlayer, CreatePlayerUIHandleControlClicked));
 
     /// Temporary data
     playeralliance temporaryAlliance = TemporaryPlayer.GetAlliance();
@@ -1009,10 +1023,10 @@ void ExistenceClientStatePlayer::CreatePlayerUIHandleClosePressed(StringHash eve
 
     SetupScreenViewport();
 
-    ProgressScreenUI();
+    //ProgressScreenUI();
+    ExistenceGameState -> SendEvent("GAME_STATE_GAMEMODELOAD");
 
 }
-
 
 /// Character zoom mode pressed
 void ExistenceClientStatePlayer::CreatePlayerUIHandleControlClicked(StringHash eventType, VariantMap& eventData)
@@ -1103,4 +1117,66 @@ string GenerateName(char group, char subgroup)
     }
 
     return generatedname;
+}
+
+
+// Load a scene
+void ExistenceClientStatePlayer::loadSceneCreationCreation( const char * lineinput)
+{
+    /// get resources
+    ResourceCache* cache = GetSubsystem<ResourceCache>();
+    Renderer* renderer = GetSubsystem<Renderer>();
+    Graphics* graphics = GetSubsystem<Graphics>();
+    UI* ui = GetSubsystem<UI>();
+    FileSystem * filesystem = GetSubsystem<FileSystem>();
+
+
+    /// Create variables (urho3d)
+    String InputDataFile;
+
+    InputDataFile.Append(filesystem->GetProgramDir().CString());
+    InputDataFile.Append("Resources/Scenes/");
+    InputDataFile.Append(lineinput);
+
+    /// Check if the input data file exist
+    if(filesystem->FileExists(InputDataFile))
+    {
+        /// Open file as a Urho3d Datafile
+        File dataFile(context_, InputDataFile, FILE_READ);
+
+        if (dataFile.IsOpen())
+        {
+
+            /// Get File Extension
+            String extension = GetExtension(InputDataFile);
+
+            /// Load File based on Extension
+
+            if (extension != ".xml")
+            {
+                scene_ -> Load(dataFile);
+            }
+            else
+            {
+                scene_ ->LoadXML(dataFile);
+            }
+
+        }
+
+    }
+    else
+    {
+        /// Load dummy scene
+//        loadDummyScene();
+    }
+
+
+    /// Get the Camera Node and setup the viewport
+    Node * cameraNode_ = scene_->GetChild("Camera");
+
+    /// Change viewport to camera node
+    SharedPtr<Viewport> viewport(new Viewport(context_, scene_, cameraNode_->GetComponent<Camera>()));
+    renderer->SetViewport(0, viewport);
+
+    return;
 }

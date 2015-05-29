@@ -353,14 +353,14 @@ void ExistenceClient::QuickMenuPressed(StringHash eventType, VariantMap& eventDa
 
         /// set ui state to none
         ExistenceGameState->SetUIState(UI_CHARACTERSELECTIONINTERFACE);
-        ExistenceGameState->SetGameState(STATE_MAIN);
+        ///ExistenceGameState->SetGameState(STATE_MAIN);
 
         /// setup scene
         SetupScreenViewport();
 
         ExistenceGameState->SetCameraMode(CAMERAMODE_DEFAULT);
 
-        mainScreenUI();
+        ExistenceGameState->SendEvent("GAME_STATE_MAINSCREEN");
 
         /// Create a scene node for the camera, which we will move around
         /// The camera will use default settings (1000 far clip distance, 45 degrees FOV, set aspect ratio automatically)
@@ -842,10 +842,11 @@ void ExistenceClient::SceneLoaderHanderPress(StringHash eventType, VariantMap& e
 
     /// change state
     ExistenceGameState->SetUIState(UI_GAMECONSOLE);
-    ExistenceGameState->SetGameState(STATE_GAME);
+
+    ExistenceGameState->SendEvent("GAME_STATE_GAMEMODELOAD");
 
     /// load scene
-    loadScene(1,  clicked.CString());
+    ///  loadScene(1,  clicked.CString());
 
     return;
 }

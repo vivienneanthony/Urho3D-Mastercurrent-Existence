@@ -64,7 +64,6 @@ class ExistenceClient : public ExistenceApp
 {
     OBJECT(ExistenceClient);
 
-
 public:
     /// Construct.
     ExistenceClient(Context* context);
@@ -84,8 +83,6 @@ protected:
             "</patch>";
     }
 
-
-private:
 
     /// Diaplay login screen
     void SetupScreenViewport(void);
@@ -136,6 +133,7 @@ private:
     int ConsoleActionBuild(const char * lineinput);
 
     /// UI Related Functions
+
     void loadSceneUI(void);
     bool loadHUDFile(const char * filename, const int positionx, const int positiony);
     void loadUIXMLClosePressed(StringHash eventType, VariantMap& eventData);
@@ -147,6 +145,7 @@ private:
     int UpdateUISceneLoader(void);
     void UpdatePlayerInfoBar(void);
     void SceneLoaderHanderPress(StringHash eventType, VariantMap& eventData);
+    int GenerateSceneUpdateEnvironment(terrain_rule terrainrule);
 
     /// Window shared pointers
     SharedPtr<Window> window_;
@@ -182,7 +181,11 @@ private:
     /// Create a game state handler pointer
     ExistenceClientStates::GameStateHandler * ExistenceGameState;
 
+private:
+
+
 };
+
 
 /// Login State
 class ExistenceClientStateLogin : public ExistenceClient
@@ -239,6 +242,22 @@ protected:
 
 };
 
+/// Main Screen State
+class ExistenceClientStateGameMode: public ExistenceClient
+{
+    OBJECT(ExistenceClientStateGameMode);
+public:
+    ExistenceClientStateGameMode(Urho3D::Context * context);
+    virtual ~ExistenceClientStateGameMode();
+    virtual void Enter();
+    virtual void Exit();
+    virtual void OnUpdate(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
+private:
+
+protected:
+
+};
+
 /// Player Create Login State
 class ExistenceClientStatePlayer: public ExistenceClient
 {
@@ -255,6 +274,8 @@ private:
     void CameraOrientationRotateMove (float degrees, int movement);
     void HandleMouseReleased(StringHash eventType, VariantMap& eventData);
     void CreatePlayerUIHandleClosePressed(StringHash eventType, VariantMap& eventData);
+    void loadSceneCreationCreation(const char * lineinput);
+    void CreatePlayerUIHandleControlClicked(StringHash eventType, VariantMap& eventData);
     void HandlePersonalitySelectionItemClick(StringHash eventType, VariantMap& eventData);
 protected:
 
@@ -275,28 +296,13 @@ private:
     void ProgressScreenUIHandleClosePressed(StringHash eventType, VariantMap& eventData);
     void CreateCharacter(void);
     void GenerateScene(terrain_rule terrainrule,const char *differentialfilename);
-    void loadSceneCreationCreation(const char * lineinput);
     int GenerateSceneBuildWorld(terrain_rule terrainrule);
     void loadDummyScene(void);
-    void LoadScene(const int mode, const char * lineinput);
+    void loadScene(const int mode, const char * lineinput);
 protected:
 
 };
 
-/// Player Create Login State
-class ExistenceClientStateGameMode: public ExistenceClient
-{
-    OBJECT(ExistenceClientStateGameMode);
-public:
-    ExistenceClientStateGameMode(Urho3D::Context * context);
-    virtual ~ExistenceClientStateGameMode();
-    virtual void Enter();
-    virtual void Exit();
-private:
-    void GameMode(void);
-protected:
-
-};
 
 /// Miscellanous functions
 vector<string> split(const string& s, const string& delim, const bool keep_empty=true);

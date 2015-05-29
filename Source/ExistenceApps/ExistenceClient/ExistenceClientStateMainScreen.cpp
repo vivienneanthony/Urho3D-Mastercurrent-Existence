@@ -113,7 +113,8 @@ using namespace std;
 using namespace Urho3D;
 
 /// Constructor Destror
-ExistenceClientStateMainScreen::ExistenceClientStateMainScreen(Context* context)
+ExistenceClientStateMainScreen::ExistenceClientStateMainScreen(Urho3D::Context * context):
+    ExistenceClient(context)
 {
     /// create UI
     mainScreenUI();
@@ -124,9 +125,23 @@ ExistenceClientStateMainScreen::~ExistenceClientStateMainScreen()
     //dtor
 }
 
+void ExistenceClientStateMainScreen::Enter()
+{
+    //dtor
+}
+
+void ExistenceClientStateMainScreen::Exit()
+{
+    //dtor
+}
+
+void ExistenceClientStateMainScreen::OnUpdate(StringHash eventType, VariantMap& eventData)
+{
+    //
+}
 
 /// Main screen user interface function
-int ExistenceClientStateMainScreen::mainScreenUI(void)
+void ExistenceClientStateMainScreen::mainScreenUI(void)
 {
     /// set ui state to none
     ExistenceGameState->SetUIState(UI_CHARACTERSELECTIONINTERFACE);
@@ -335,9 +350,9 @@ int ExistenceClientStateMainScreen::mainScreenUI(void)
         playerinfoButton -> SetStyle("Player16x16Button");
         playerstartButton -> SetStyle("Select16x16Button");
 
-        SubscribeToEvent(playernameButton, E_RELEASED, HANDLER(ExistenceClient, HandleCharacterSelectedReleased));
-        SubscribeToEvent(playerinfoButton, E_RELEASED, HANDLER(ExistenceClient, HandleCharacterSelectedInfoButtonReleased));
-        SubscribeToEvent(playerstartButton, E_RELEASED, HANDLER(ExistenceClient, HandleCharacterStartButtonReleased));
+        SubscribeToEvent(playernameButton, E_RELEASED, HANDLER(ExistenceClientStateMainScreen, HandleCharacterSelectedReleased));
+        SubscribeToEvent(playerinfoButton, E_RELEASED, HANDLER(ExistenceClientStateMainScreen, HandleCharacterSelectedInfoButtonReleased));
+        SubscribeToEvent(playerstartButton, E_RELEASED, HANDLER(ExistenceClientStateMainScreen, HandleCharacterStartButtonReleased));
 
         placement=placement+(66+8);
 
@@ -395,10 +410,10 @@ int ExistenceClientStateMainScreen::mainScreenUI(void)
     }
 
     /// Subscribe to events
-    SubscribeToEvent(newcharacterButton, E_RELEASED, HANDLER(ExistenceClient, MainScreenUIHandleClosePressed));
-    SubscribeToEvent(exitButton, E_RELEASED, HANDLER(ExistenceClient, MainScreenUIHandleClosePressed));
+    SubscribeToEvent(newcharacterButton, E_RELEASED, HANDLER(ExistenceClientStateMainScreen, MainScreenUIHandleClosePressed));
+    SubscribeToEvent(exitButton, E_RELEASED, HANDLER(ExistenceClientStateMainScreen, MainScreenUIHandleClosePressed));
 
-    return 1;
+    return ;
 
 }
 
@@ -428,9 +443,6 @@ void ExistenceClientStateMainScreen::MainScreenUIHandleClosePressed(StringHash e
             /// Clear screen
             eraseScene();
 
-            /// Create a player UI
-            CreatePlayerScreenUI();
-
             Console* console = GetSubsystem<Console>();
 
             console -> SetVisible(false);
@@ -439,6 +451,9 @@ void ExistenceClientStateMainScreen::MainScreenUIHandleClosePressed(StringHash e
 
             /// Enable OS cursor
             GetSubsystem<Input>()->SetMouseVisible(true);
+
+            ExistenceGameState-> SendEvent("GAME_STATE_PLAYER");
+
         }
         else if(clickednamestring=="exitButton")
         {

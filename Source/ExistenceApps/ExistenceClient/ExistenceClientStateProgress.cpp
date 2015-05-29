@@ -113,18 +113,32 @@ using namespace std;
 using namespace Urho3D;
 
 /// Constructor Destror
-ExistenceClientStateProgress::ExistenceClientStateProgress(Context* context)
+ExistenceClientStateProgress::ExistenceClientStateProgress(Urho3D::Context* context)
+:ExistenceClient(context)
 {
     /// create UI
     ProgressScreenUI();
 }
 
-ExistenceClientStateProgress::~ExistenceClientStateProgress:()
+ExistenceClientStateProgress::~ExistenceClientStateProgress()
 {
     //dtor
 }
 
+void ExistenceClientStateProgress::Enter()
+{
+    //dtor
+}
 
+void ExistenceClientStateProgress::Exit()
+{
+    //dtor
+}
+
+void ExistenceClientStateProgress::OnUpdate(StringHash eventType, VariantMap& eventData)
+{
+    //
+}
 
 // Log UI Code
 /// Create progress screen UI
@@ -189,7 +203,7 @@ void ExistenceClientStateProgress::ProgressScreenUI(void)
     window_->SetStyleAuto();
     windowTitle->SetStyleAuto();
 
-    SubscribeToEvent(continueButton, E_RELEASED, HANDLER(ExistenceClient, ProgressScreenUIHandleClosePressed));
+    SubscribeToEvent(continueButton, E_RELEASED, HANDLER(ExistenceClientStateProgress, ProgressScreenUIHandleClosePressed));
 
     return;
 }
@@ -200,7 +214,8 @@ void ExistenceClientStateProgress::ProgressScreenUIHandleClosePressed(StringHash
     /// set ui state to none
     ExistenceGameState->SetUIState(UI_PROGRESSINTERFACE);
 
-    mainScreenUI();
+    //mainScreenUI();
+    ExistenceGameState -> SendEvent("GAME_STATE_MAINSCREEN");
 
     return;
 }
@@ -630,61 +645,6 @@ int ExistenceClientStateProgress::GenerateSceneBuildWorld(terrain_rule terrainru
     return 1;
 }
 
-/// Change environment
-int ExistenceClientStateProgress::GenerateSceneUpdateEnvironment(terrain_rule terrainrule)
-{
-    /// Define Resouces
-    ResourceCache* cache = GetSubsystem<ResourceCache>();
-    Renderer* renderer = GetSubsystem<Renderer>();
-    Graphics* graphics = GetSubsystem<Graphics>();
-    UI* ui = GetSubsystem<UI>();
-    FileSystem * filesystem = GetSubsystem<FileSystem>();
-
-    /// Get skybox. The Skybox component is used like StaticModel, but it will be always located at the camera, giving the
-    /// illusion of the box planes being far away. Use just the ordinary Box model and a suitable material, whose shader will
-    /// generate the necessary 3D texture coordinates for cube mapping
-    Node* skyNode = scene_->GetChild("GeneratedSkybox_Skybox1",true);
-    Skybox* skybox = skyNode->GetComponent<Skybox>();
-
-    /*    /// Get a Zone component for ambient lighting & fog control
-        Node* zoneNode = scene_->GetChild("GeneratedZone_Zone1",true);
-        Zone* zone = zoneNode->GetComponent<Zone>();*/
-
-    /// Get a directional light to the world. Enable cascaded shadows on it
-    Node* lightNode1 = scene_->GetChild("GeneratedLight_Light1",true);
-    Light* light1 = lightNode1->GetComponent<Light>();
-
-    /// Get a directional light to the world. Enable cascaded shadows on it
-    Node* lightNode2 = scene_->GetChild("GeneratedLight_Light2",true);
-    Light* light2 = lightNode2->GetComponent<Light>();
-
-    /// Get a directional light to the world. Enable cascaded shadows on it
-    Node* lightNode3 = scene_->GetChild("GeneratedLight_Light3",true);
-    Light* light3 = lightNode3->GetComponent<Light>();
-
-    /// Generate Terrain
-    Node* terrainNode = scene_->GetChild("GeneratedTerrainRule_TerrainRoot",true);
-    Terrain* terrain = terrainNode->GetComponent<Terrain>();
-
-    /// Change texture
-    switch (terrainrule.worldtype)
-    {
-    case WORLD_DESERT:
-        /// Set light and skybox material
-        skybox->SetMaterial(cache->GetResource<Material>("Materials/Skybox_Desert.xml"));
-        LoadEnvironmentSettings("Skybox_Desert.xml");
-        break;
-    case WORLD_ICE:
-        skybox->SetMaterial(cache->GetResource<Material>("Materials/Skybox_Ice.xml"));
-        terrain->SetMaterial(cache->GetResource<Material>("Materials/TerrainTriPlanar-Ice.xml"));
-        break;
-    default:
-        break;
-    }
-
-    return 1;
-}
-
 
 
 /// Load a dummy scene
@@ -765,10 +725,6 @@ void ExistenceClientStateProgress::loadDummyScene(void)
 
     return;
 }
-
-
-
-
 
 
 /// Load a scene
@@ -1043,66 +999,5 @@ void ExistenceClientStateProgress::loadScene(const int mode, const char * linein
     return;
 }
 
-
-// Load a scene
-void ExistenceClientStateProgress::loadSceneCreationCreation( const char * lineinput)
-{
-    /// get resources
-    ResourceCache* cache = GetSubsystem<ResourceCache>();
-    Renderer* renderer = GetSubsystem<Renderer>();
-    Graphics* graphics = GetSubsystem<Graphics>();
-    UI* ui = GetSubsystem<UI>();
-    FileSystem * filesystem = GetSubsystem<FileSystem>();
-
-
-    /// Create variables (urho3d)
-    String InputDataFile;
-
-    InputDataFile.Append(filesystem->GetProgramDir().CString());
-    InputDataFile.Append("Resources/Scenes/");
-    InputDataFile.Append(lineinput);
-
-    /// Check if the input data file exist
-    if(filesystem->FileExists(InputDataFile))
-    {
-        /// Open file as a Urho3d Datafile
-        File dataFile(context_, InputDataFile, FILE_READ);
-
-        if (dataFile.IsOpen())
-        {
-
-            /// Get File Extension
-            String extension = GetExtension(InputDataFile);
-
-            /// Load File based on Extension
-
-            if (extension != ".xml")
-            {
-                scene_ -> Load(dataFile);
-            }
-            else
-            {
-                scene_ ->LoadXML(dataFile);
-            }
-
-        }
-
-    }
-    else
-    {
-        /// Load dummy scene
-        loadDummyScene();
-    }
-
-
-    /// Get the Camera Node and setup the viewport
-    Node * cameraNode_ = scene_->GetChild("Camera");
-
-    /// Change viewport to camera node
-    SharedPtr<Viewport> viewport(new Viewport(context_, scene_, cameraNode_->GetComponent<Camera>()));
-    renderer->SetViewport(0, viewport);
-
-    return;
-}
 
 

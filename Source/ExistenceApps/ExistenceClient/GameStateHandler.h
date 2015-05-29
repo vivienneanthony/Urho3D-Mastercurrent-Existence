@@ -21,6 +21,7 @@
 #define         CAMERAMODE_FIRSTPERSON              1
 #define         CAMERAMODE_FLY                      2
 
+#include "GameStateComponent.h"
 
 namespace ExistenceClientStates
 {
@@ -37,7 +38,7 @@ public:
     /// Destruct.
     ~GameStateHandler();
     /// start point
-    void start(Urho3D::Scene * scene_);
+    void Start(Urho3D::Scene * scene_);
     // handler events
     void onStateChange(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
     /// Get last state
@@ -45,7 +46,7 @@ public:
 
     /// Function to access other states
     int GetConsoleState(void);
-    void SetConsoleState(int flag);
+    int SetConsoleState(int flag);
 
     int GetUIState(void);
     int SetUIState(int flag);
@@ -62,7 +63,7 @@ private:
     /// register all states
     void RegisterGameStates();
     /// change state
-    void changeState(ExistenceClient * state);
+    void changeState(GameStateComponent * state);
     /// exit and remove last state.
     void RemoveLastState();
 
@@ -70,11 +71,12 @@ private:
     Urho3D::Scene * scene;
 
     /// states container
-    Urho3D::Vector<ExistenceClient*> mStates;
+    Urho3D::Vector<GameStateComponent*> mStates;
 
     /// Kept node just in case
     Urho3D::SharedPtr<Urho3D::Node> mainNode;
 
+    /// Added flags
     bool consolestate;
     int uistate;
     int cameramode;

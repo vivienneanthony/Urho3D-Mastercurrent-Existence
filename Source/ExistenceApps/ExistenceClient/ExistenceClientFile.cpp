@@ -1051,3 +1051,58 @@ void ExistenceClient::loadSceneUI(void)
 
     return;
 }
+
+/// Change environment
+int ExistenceClient::GenerateSceneUpdateEnvironment(terrain_rule terrainrule)
+{
+    /// Define Resouces
+    ResourceCache* cache = GetSubsystem<ResourceCache>();
+    Renderer* renderer = GetSubsystem<Renderer>();
+    Graphics* graphics = GetSubsystem<Graphics>();
+    UI* ui = GetSubsystem<UI>();
+    FileSystem * filesystem = GetSubsystem<FileSystem>();
+
+    /// Get skybox. The Skybox component is used like StaticModel, but it will be always located at the camera, giving the
+    /// illusion of the box planes being far away. Use just the ordinary Box model and a suitable material, whose shader will
+    /// generate the necessary 3D texture coordinates for cube mapping
+    Node* skyNode = scene_->GetChild("GeneratedSkybox_Skybox1",true);
+    Skybox* skybox = skyNode->GetComponent<Skybox>();
+
+    /*    /// Get a Zone component for ambient lighting & fog control
+        Node* zoneNode = scene_->GetChild("GeneratedZone_Zone1",true);
+        Zone* zone = zoneNode->GetComponent<Zone>();*/
+
+    /// Get a directional light to the world. Enable cascaded shadows on it
+    Node* lightNode1 = scene_->GetChild("GeneratedLight_Light1",true);
+    Light* light1 = lightNode1->GetComponent<Light>();
+
+    /// Get a directional light to the world. Enable cascaded shadows on it
+    Node* lightNode2 = scene_->GetChild("GeneratedLight_Light2",true);
+    Light* light2 = lightNode2->GetComponent<Light>();
+
+    /// Get a directional light to the world. Enable cascaded shadows on it
+    Node* lightNode3 = scene_->GetChild("GeneratedLight_Light3",true);
+    Light* light3 = lightNode3->GetComponent<Light>();
+
+    /// Generate Terrain
+    Node* terrainNode = scene_->GetChild("GeneratedTerrainRule_TerrainRoot",true);
+    Terrain* terrain = terrainNode->GetComponent<Terrain>();
+
+    /// Change texture
+    switch (terrainrule.worldtype)
+    {
+    case WORLD_DESERT:
+        /// Set light and skybox material
+        skybox->SetMaterial(cache->GetResource<Material>("Materials/Skybox_Desert.xml"));
+        LoadEnvironmentSettings("Skybox_Desert.xml");
+        break;
+    case WORLD_ICE:
+        skybox->SetMaterial(cache->GetResource<Material>("Materials/Skybox_Ice.xml"));
+        terrain->SetMaterial(cache->GetResource<Material>("Materials/TerrainTriPlanar-Ice.xml"));
+        break;
+    default:
+        break;
+    }
+
+    return 1;
+}

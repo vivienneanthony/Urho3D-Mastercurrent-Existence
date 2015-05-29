@@ -1,25 +1,116 @@
+//
+// Copyright (c) 2008-2014 the Urho3D project.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+//
+
 #include <Urho3D/Urho3D.h>
 
-
-///#include "Object.h"
 #include "../../../Urho3D/Core/CoreEvents.h"
+#include "../../../Urho3D/Engine/Engine.h"
+#include "../../../Urho3D/UI/Font.h"
+#include "../../../Urho3D/Input/Input.h"
+#include "../../../Urho3D/Core/ProcessUtils.h"
+#include "../../../Urho3D/UI/Text.h"
+#include "../../../Urho3D/UI/UI.h"
+#include "../../../Urho3D/Scene/Scene.h"
+#include "../../../Urho3D/Graphics/StaticModel.h"
+#include "../../../Urho3D/Graphics/Octree.h"
+#include "../../../Urho3D/Graphics/Model.h"
+#include "../../../Urho3D/Graphics/Material.h"
+#include "../../../Urho3D/Graphics/Camera.h"
 #include "../../../Urho3D/Resource/ResourceCache.h"
-///#include "Context.h"
+#include "../../../Urho3D/Graphics/Renderer.h"
+#include "../../../Urho3D/Graphics/Camera.h"
+#include "../../../Urho3D/UI/Window.h"
+#include "../../../Urho3D/UI/Button.h"
+#include "../../../Urho3D/UI/LineEdit.h"
+#include "../../../Urho3D/UI/UIElement.h"
+#include "../../../Urho3D/Math/BoundingBox.h"
+#include "../../../Urho3D/UI/UIEvents.h"
+#include "../../../Urho3D/Graphics/DebugRenderer.h"
+#include "../../../Urho3D/IO/File.h"
+#include "../../../Urho3D/IO/FileSystem.h"
+#include "../../../Urho3D/Resource/XMLFile.h"
+#include "../../../Urho3D/Resource/XMLElement.h"
+#include "../../../Urho3D/IO/Deserializer.h"
+#include "../../../Urho3D/UI/Cursor.h"
+#include "../../../Urho3D/IO/FileSystem.h"
+#include "../../../Urho3D/UI/ListView.h"
+#include "../../../Urho3D/Engine/Console.h"
+#include "../../../Urho3D/Physics/RigidBody.h"
+#include "../../../Urho3D/Physics/CollisionShape.h"
+#include "../../../Urho3D/Physics/PhysicsWorld.h"
+#include "../../../Urho3D/Graphics/Animation.h"
+#include "../../../Urho3D/Graphics/AnimatedModel.h"
+#include "../../../Urho3D/Graphics/AnimationController.h"
+#include "Character.h"
+#include "../../../Urho3D/Graphics/Terrain.h"
+#include "../../../Urho3D/Engine/EngineEvents.h"
+#include "../../../Urho3D/Graphics/Zone.h"
 #include "../../../Urho3D/IO/Log.h"
-///#include "Node.h"
-///#include "../../../Urho3D/Core/ProcessUtils.h"
+#include "../../../Urho3D/Graphics/Skybox.h"
+#include "../../../Urho3D/UI/Sprite.h"
+#include "../../../Urho3D/Graphics/StaticModelGroup.h"
+#include "../../../Urho3D/Graphics/BillboardSet.h"
+#include "../../../Urho3D/Math/Random.h"
+#include "../../../Urho3D/Graphics/RenderPath.h"
+#include "../../../Urho3D/Math/Color.h"
 
+#include "GameStateHandler.h"
+#include "GameStateEvents.h"
+#include "GameStateComponent.h"
+#include "GameObject.h"
+#include "EnvironmentBuild.h"
+#include "Manager.h"
+#include "../Account.h"
+
+#include <string>
+#include <iostream>
+#include <sstream>
+#include <vector>
+#include <iterator>
+#include <algorithm>
+#include <locale>
+#include <ctime>
+#include <cmath>
+#include <iomanip>
+#include <fstream>
+#include <cstdlib>
+#include <iostream>
+#include <utility>
+#include <algorithm>
+
+#include "../../../Urho3D/Procedural/Procedural.h"
+#include "../../../Urho3D/Procedural/ProceduralTerrain.h"
+#include "../../../Urho3D/Procedural/RandomNumberGenerator.h"
+
+#include "ExistenceClient.h"
 
 #include "GameStateHandler.h"
 
-#include "GameStatesEvents.h"
-#include "Existence.h"
-
-using namespace std;
+//using namespace std;
 using namespace Urho3D;
 
-namespace ExistenceClient
+namespace ExistenceClientStates
 {
+
 
 GameStateHandler::GameStateHandler(Urho3D::Context * context):
     Object(context)
@@ -39,7 +130,7 @@ GameStateHandler::~GameStateHandler()
 void GameStateHandler::RegisterGameStates()
 {
     /// .... all states here
-    context_->RegsiterFactory<ExistenceClientStateAccount>();
+    context_->RegisterFactory<ExistenceClientStateAccount>();
     context_->RegisterFactory<ExistenceClientStateGameMode>();
     context_->RegisterFactory<ExistenceClientStateLogin>();
     context_->RegisterFactory<ExistenceClientStatePlayer>();
@@ -47,11 +138,8 @@ void GameStateHandler::RegisterGameStates()
     context_->RegisterFactory<ExistenceClientStateMainScreen>();
 }
 
-void GameStateHandler::start(Urho3D::Scene * scene_)
+void GameStateHandler::Start(Urho3D::Scene * scene_)
 {
-
-    // set initialize of state
-    gamestate=STATE_NONE;
     uistate=UI_NONE;
 
     consolestate=UI_CONSOLEOFF;
@@ -74,7 +162,7 @@ void GameStateHandler::start(Urho3D::Scene * scene_)
 
 int GameStateHandler::getCurrentState(void)
 {
-    return mStates.Back();
+    return 3;
 }
 
 void GameStateHandler::onStateChange( Urho3D::StringHash eventType, Urho3D::VariantMap& eventData )
@@ -85,7 +173,7 @@ void GameStateHandler::onStateChange( Urho3D::StringHash eventType, Urho3D::Vari
 
     switch (newState)
     {
-    case  GAME_STATE_LOGIN:
+    case GAME_STATE_LOGIN:
         createState(ExistenceClientStateLogin::GetTypeNameStatic());
         break;
     case  GAME_STATE_ACCOUNTCREATE: //called from button on GameMainMenuSample form
@@ -97,8 +185,8 @@ void GameStateHandler::onStateChange( Urho3D::StringHash eventType, Urho3D::Vari
     case GAME_STATE_PLAYERCREATE:
         createState(ExistenceClientStatePlayer::GetTypeNameStatic());
         break;
-    case GAME_STATE_MAINMENU;
-        createState(ExistenceClientStateMainMenu::GetTypeNameStatic());
+    case GAME_STATE_MAINMENU:
+        createState(ExistenceClientStateMainScreen::GetTypeNameStatic());
         break;
     case GAME_STATE_GAMEMODE:
         createState(ExistenceClientStateGameMode::GetTypeNameStatic());
@@ -109,13 +197,13 @@ void GameStateHandler::onStateChange( Urho3D::StringHash eventType, Urho3D::Vari
     }
 }
 
-
 void GameStateHandler::createState( String newState )
 {
     /// add a node and a component
     /// so will be possible create / remove models attached it
-    Node * stateNode = scene->CreateChild(newState);
-    ExistenceClient  * gameState = dynamic_cast<ExistenceClient*>(stateNode->CreateComponent(newState));
+
+    GameStateComponent * gameState = dynamic_cast<GameStateComponent*>(GetSubsystem<GameStateComponent>());
+
     if(gameState)
     {
 
@@ -125,15 +213,12 @@ void GameStateHandler::createState( String newState )
     else
     {
         ErrorExit("Unkown GameState ");
-
     }
-
-
 }
 
-void GameStateHandler::changeState( ExistenceClient* state )
+void GameStateHandler::changeState( GameStateComponent* state )
 {
-    LOGINFO("Adding state" + state->GetTypeName());
+    //  LOGINFO("Adding state" + state->GetTypeName());
     //exit from old state
     RemoveLastState();
     //enter  new state
@@ -171,9 +256,9 @@ int GameStateHandler::SetConsoleState(int flag)
 }
 
 
-int GameStateHandler::GetUIState(int flag)
+int GameStateHandler::GetUIState(void)
 {
-    int flag
+    int flag;
     flag=uistate;
 
     return flag;
@@ -214,12 +299,16 @@ int GameStateHandler::GetDebugHudMode(void)
     return flag;;
 }
 
-void GameStateHandler::SetDebugHudMode(int flag)
+int GameStateHandler::SetDebugHudMode(int flag)
 {
 
     debughud = flag;
 
-    return;
+    return 1;
 }
 
 }
+
+
+
+

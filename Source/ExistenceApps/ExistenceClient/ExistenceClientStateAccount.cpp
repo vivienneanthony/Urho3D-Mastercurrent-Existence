@@ -115,7 +115,8 @@ using namespace Urho3D;
 
 
 /// Constructor Destror
-ExistenceClientStateAccount::ExistenceClientStateAccount(Context* context)
+ExistenceClientStateAccount::ExistenceClientStateAccount(Context* context):
+ExistenceClient(context)
 {
     /// create UI
     CreateAccountScreenUI();
@@ -126,6 +127,20 @@ ExistenceClientStateAccount::~ExistenceClientStateAccount()
     //dtor
 }
 
+void ExistenceClientStateAccount::Enter()
+{
+    //dtor
+}
+
+void ExistenceClientStateAccount::Exit()
+{
+    //dtor
+}
+
+void ExistenceClientStateAccount::OnUpdate(StringHash eventType, VariantMap& eventData)
+{
+    //
+}
 
 /// Create a account UI
 void ExistenceClientStateAccount::CreateAccountScreenUI(void)
@@ -316,7 +331,7 @@ void ExistenceClientStateAccount::CreateAccountScreenUI(void)
     blankText->SetStyleAuto();
 
     /// Subscribe to Handler
-    SubscribeToEvent(newaccount2Button, E_RELEASED, HANDLER(ExistenceClient, CreateAccountUIHandleClosePressed));
+    SubscribeToEvent(newaccount2Button, E_RELEASED, HANDLER(ExistenceClientStateAccount, CreateAccountUIHandleClosePressed));
 
     return;
 }
@@ -361,8 +376,8 @@ void ExistenceClientStateAccount::CreateAccountUIHandleClosePressed(StringHash e
 
     eraseScene();
 
-    CreatePlayerScreenUI();
-
+    //CreatePlayerScreenUI();
+    ExistenceGameState -> SendEvent("GAME_STATE_PLAYERCREATE");
     return;
 }
 
