@@ -23,9 +23,6 @@
 
 #include "GameStateComponent.h"
 
-namespace ExistenceClientStates
-{
-
 /// fw declaration
 class ExistenceClient;
 
@@ -84,5 +81,4 @@ private:
 
 };
 
-}
 #endif // GAMESTATEHANDLER_H

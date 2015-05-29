@@ -113,7 +113,7 @@ using namespace Urho3D;
 
 
 GameStateComponent::GameStateComponent(Urho3D::Context* context) :
-    Component (context)
+    LogicComponent (context)
 {
 }
 
@@ -122,6 +122,7 @@ GameStateComponent::~GameStateComponent()
 {
     //dtor
 }
+
 
 /// Register Subsystem
 void GameStateComponent::RegisterNewSubsystem(Urho3D::Context* context)

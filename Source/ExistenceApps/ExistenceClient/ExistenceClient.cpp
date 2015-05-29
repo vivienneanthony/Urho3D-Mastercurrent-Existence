@@ -148,7 +148,7 @@ void ExistenceClient::Start()
     UI* ui = GetSubsystem<UI>();
 
     /// Change game state
-    ExistenceClientStates::GameStateHandler * ExistenceGameState = new ExistenceClientStates::GameStateHandler(context_);
+    GameStateHandler * ExistenceGameState = new GameStateHandler(context_);
 
 
 
@@ -233,21 +233,21 @@ void ExistenceClient::SubscribeToEvents()
 /// Handle post updates
 void ExistenceClient::HandlePostUpdates(StringHash eventType, VariantMap& eventData)
 {
-   /*) UI* ui = GetSubsystem<UI>();
+    /*) UI* ui = GetSubsystem<UI>();
 
-    /// check if in game mode
-    if(ExistenceGameState->GetCurrentState()==GameStates:STATE_GAME_GAMEMODE)
-    {
-        Sprite* healthBar = (Sprite*)ui->GetRoot()->GetChild("PlayerInfoHealthBarIndicate", true);
+     /// check if in game mode
+     if(ExistenceGameState->GetCurrentState()==GameStates:STATE_GAME_GAMEMODE)
+     {
+         Sprite* healthBar = (Sprite*)ui->GetRoot()->GetChild("PlayerInfoHealthBarIndicate", true);
 
-        if(healthBar!=NULL)
-        {
+         if(healthBar!=NULL)
+         {
 
-            float scale=character_->GetHealth()/100;
+             float scale=character_->GetHealth()/100;
 
-            healthBar -> SetScale(scale,1.0f);
-        }
-    }*/
+             healthBar -> SetScale(scale,1.0f);
+         }
+     }*/
 }
 
 /// Setup the main viewport
@@ -375,13 +375,13 @@ void ExistenceClient::HandleUpdate(StringHash eventType, VariantMap& eventData)
 
 
     /// Handle UI updates
-    if(ExistenceGameState->getCurrentState()==ExistenceClientStates::GAME_STATE_GAMEMODE)
+    if(ExistenceGameState->getCurrentState()==GAME_STATE_GAMEMODE)
     {
         UpdateUI(timeStep);
     }
 
     /// controls movement
-    if(ExistenceGameState->GetCameraMode()==CAMERAMODE_FIRSTPERSON&&ExistenceGameState->getCurrentState()==ExistenceClientStates::GAME_STATE_GAMEMODE)
+    if(ExistenceGameState->GetCameraMode()==CAMERAMODE_FIRSTPERSON&&ExistenceGameState->getCurrentState()==GAME_STATE_GAMEMODE)
     {
         /// Clear previous controls
         character_->controls_.Set(CTRL_FORWARD | CTRL_BACK | CTRL_LEFT | CTRL_RIGHT | CTRL_JUMP | CTRL_FIRE, false);
@@ -469,7 +469,7 @@ void ExistenceClient::HandleKeyDown(StringHash eventType, VariantMap& eventData)
         return;
     }
 
-    if (eventData[KeyDown::P_KEY].GetInt() == KEY_F10&&ExistenceGameState->getCurrentState()==ExistenceClientStates::GAME_STATE_GAMEMODE)
+    if (eventData[KeyDown::P_KEY].GetInt() == KEY_F10&&ExistenceGameState->getCurrentState()==GAME_STATE_GAMEMODE)
     {
         /// load window
         UIElement * uiroot = ui ->	GetRoot ();
@@ -495,7 +495,7 @@ void ExistenceClient::HandleKeyDown(StringHash eventType, VariantMap& eventData)
 
 
     /// Check if game is in first person camera mode and in game state
-    if(ExistenceGameState->GetCameraMode()==CAMERAMODE_FIRSTPERSON&&ExistenceGameState->getCurrentState()==ExistenceClientStates::GAME_STATE_GAMEMODE)
+    if(ExistenceGameState->GetCameraMode()==CAMERAMODE_FIRSTPERSON&&ExistenceGameState->getCurrentState()==GAME_STATE_GAMEMODE)
     {
         /// check if UI element is active
         if(GetSubsystem<UI>()->GetFocusElement())
@@ -522,7 +522,7 @@ void ExistenceClient::MoveCamera(float timeStep)
         return;
     }
 
-    if(ExistenceGameState->getCurrentState()==ExistenceClientStates::GAME_STATE_MAINMENU)
+    if(ExistenceGameState->getCurrentState()==ExistenceGameState->getCurrentState()==GAME_STATE_MAINMENU)
     {
         return;
     }

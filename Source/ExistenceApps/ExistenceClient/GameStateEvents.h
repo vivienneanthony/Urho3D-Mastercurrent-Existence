@@ -1,8 +1,8 @@
 #ifndef GAMESTATEEVENT_H
 #define GAMESTATEEVENT_H
 
-namespace ExistenceClientStates
-{
+//namespace ExistenceClientStates
+//{
 /// P_CMD
 enum GameStates
 {
@@ -21,6 +21,6 @@ EVENT(G_STATES_CHANGE, GameState)
     PARAM(P_CMD, cmdType);                // States
     PARAM(P_OBJ, sender);                // class
 }
-}
+///}
 
 #endif

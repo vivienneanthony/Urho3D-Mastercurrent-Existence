@@ -179,7 +179,8 @@ protected:
     vector<string> tempaliensarray;
 
     /// Create a game state handler pointer
-    ExistenceClientStates::GameStateHandler * ExistenceGameState;
+    ///ExistenceClientStates::
+    GameStateHandler * ExistenceGameState;
 
 private:
 

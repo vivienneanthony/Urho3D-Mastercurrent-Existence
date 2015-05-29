@@ -105,12 +105,8 @@
 
 #include "GameStateHandler.h"
 
-//using namespace std;
+using namespace std;
 using namespace Urho3D;
-
-namespace ExistenceClientStates
-{
-
 
 GameStateHandler::GameStateHandler(Urho3D::Context * context):
     Object(context)
@@ -307,7 +303,7 @@ int GameStateHandler::SetDebugHudMode(int flag)
     return 1;
 }
 
-}
+//}
 
 
 

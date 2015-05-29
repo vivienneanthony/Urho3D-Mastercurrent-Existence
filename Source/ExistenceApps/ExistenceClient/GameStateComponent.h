@@ -13,7 +13,7 @@
 using namespace std;
 using namespace Urho3D;
 
-class GameStateComponent : public Component
+class GameStateComponent : public LogicComponent
 {
     /// Define subclass
     OBJECT(GameStateComponent)
