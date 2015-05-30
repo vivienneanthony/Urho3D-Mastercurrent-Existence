@@ -64,12 +64,21 @@ class ExistenceClient : public ExistenceApp
 {
     OBJECT(ExistenceClient);
 
+    friend class ExistenceClientStateAccount;
+    friend class ExistenceClientStateProgress;
+    friend class ExistenceClientStateGameMode;
+    friend class ExistenceClientStateLogin;
+    friend class ExistenceClientStatePlayer;
+    friend class ExistenceClientStateMainScreen;
+
 public:
     /// Construct.
     ExistenceClient(Context* context);
 
     /// Setup after engine initialization and before running the main loop.
     virtual void Start();
+
+    /// moved here
 
 protected:
     /// Return XML patch instructions for screen joystick layout for a specific sample app, if any.https://github.com/urho3d/Urho3D/tree/master/Source/Samples
@@ -178,9 +187,10 @@ protected:
     vector<string> aliensarray;
     vector<string> tempaliensarray;
 
-    /// Create a game state handler pointer
-    ///ExistenceClientStates::
+
     SharedPtr<GameStateHandler> ExistenceGameState;
+
+;
 
 private:
 
@@ -202,6 +212,7 @@ private:
     void LoginUI(bool exist);
     void LoginScreenUINewAccountHandleClosePressed(StringHash eventType, VariantMap& eventData);
     void LoginScreenUILoginHandleClosePressed(StringHash eventType, VariantMap& eventData);
+
 protected:
 
 };

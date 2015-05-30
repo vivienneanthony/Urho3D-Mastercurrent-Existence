@@ -779,7 +779,7 @@ int ExistenceClient::ConsoleActionCamera(const char * lineinput)
         SharedPtr<Viewport> viewport(new Viewport(context_, scene_, cameraObject));
         renderer->SetViewport(0, viewport);
 
-        ExistenceGameState->SetCameraMode(CAMERAMODE_FIRSTPERSON);
+         ExistenceGameState->SetCameraMode(CAMERAMODE_FIRSTPERSON);
     }
 
 

@@ -124,6 +124,7 @@ ExistenceClient::ExistenceClient(Context* context) :
     GameObject::RegisterObject(context);
     EnvironmentBuild::RegisterObject(context);
     ProceduralTerrain::RegisterObject(context);
+    GameStateHandler::RegisterObject(context);
     Manager::RegisterNewSubsystem(context);
     EnvironmentBuild::RegisterNewSubsystem(context);
     GameStateComponent::RegisterNewSubsystem(context);
@@ -149,8 +150,6 @@ void ExistenceClient::Start()
 
     /// Change game state
     GameStateHandler * ExistenceGameState = new GameStateHandler(context_);
-
-    ExistenceGameState->Set(ExistenceGameState);
 
     /// create variables (urho3d)
     String additionresourcePath;
@@ -201,7 +200,7 @@ void ExistenceClient::Start()
     srand (time(NULL));
 
     /// Configure rudimentary state handler
-    ExistenceGameState->SetUIState(UI_NONE);
+    ExistenceGameState->SetConsoleState(0);
 
     cout << "It got here" << endl;
 

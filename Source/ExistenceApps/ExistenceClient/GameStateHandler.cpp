@@ -103,27 +103,39 @@
 
 #include "ExistenceClient.h"
 
-#include "GameStateHandler.h"
 
-using namespace std;
+///using namespace std;
 using namespace Urho3D;
+
 
 GameStateHandler::GameStateHandler(Context * context):
    Object(context)
     ,scene(0)
-
+    ,consolestate(0)
+    ,uistate(0)
+    ,debughud(0)
+    ,cameramode(0)
 {
 
+    /// Set defaults
+    uistate=UI_NONE;
+    consolestate=UI_CONSOLEOFF;
+    cameramode=CAMERAMODE_DEFAULT;
+    debughud=false;
+
+    /// Subscribe to event state change
     SubscribeToEvent(G_STATES_CHANGE, HANDLER(GameStateHandler, onStateChange));
-    RegisterObject(context);
+
+    /// Register states
     RegisterGameStates();
 }
 
 GameStateHandler::~GameStateHandler()
 {
-
+    /// Remove last state
     RemoveLastState();
 
+    /// Destroy component
     LOGINFO("Destroyng GameComponent" );
 }
 
@@ -137,11 +149,10 @@ void GameStateHandler::RegisterGameStates()
     context_->RegisterFactory<ExistenceClientStateProgress>();
     context_->RegisterFactory<ExistenceClientStateMainScreen>();
 
-    context_->RegisterFactory<GameStateHandler>();
 }
 
 
-/// Register a object
+/// Register Object
 void GameStateHandler::RegisterObject(Context* context)
 {
     context->RegisterFactory<GameStateHandler>();
@@ -149,17 +160,10 @@ void GameStateHandler::RegisterObject(Context* context)
 
 void GameStateHandler::Start(Urho3D::Scene * scene_)
 {
-    uistate=UI_NONE;
-    consolestate=UI_CONSOLEOFF;
-    cameramode=CAMERAMODE_DEFAULT;
-
-    debughud=false;
 
     scene=scene_;
     if(scene)
     {
-        cout << "create state" << endl;
-
         ///mainNode = scene->CreateChild("Main");
         createState(ExistenceClientStateLogin::GetTypeNameStatic());
         cout << "failee" << endl;
@@ -172,6 +176,7 @@ void GameStateHandler::Start(Urho3D::Scene * scene_)
 
 }
 
+/// Temporary
 int GameStateHandler::getCurrentState(void)
 {
     return 3;
@@ -181,7 +186,8 @@ void GameStateHandler::onStateChange( Urho3D::StringHash eventType, Urho3D::Vari
 {
     /// intercept state event
     GameStates newState=  static_cast<GameStates>(eventData[GameState::P_CMD].GetInt());
-    ///LOGINFO("New State " +  (String)((int)newState)) ;
+
+    LOGINFO("New State " +  (String)((int)newState)) ;
 
     switch (newState)
     {
@@ -215,7 +221,6 @@ void GameStateHandler::createState( String newState )
     /// so will be possible create / remove models attached it
 
     GameStateComponent * gameState = dynamic_cast<GameStateComponent*>(GetSubsystem<GameStateComponent>());
-
 
     if(gameState)
     {
@@ -252,24 +257,21 @@ void GameStateHandler::RemoveLastState()
 
 int GameStateHandler::GetConsoleState(void)
 {
-    bool flag;
+    int flag;
 
     flag = consolestate;
 
     return flag;
 }
 
-int GameStateHandler::Set(GameStateHandler * GSH)
-{
-    GameStateHandlerPTR = GSH;
-
-    return 1;
-}
 
 int GameStateHandler::SetConsoleState(int flag)
 {
 
-    GameStateHandlerPTR -> SetConsoleState(flag);
+    cout << consolestate << endl;
+    cout << flag << endl;
+
+    consolestate=flag;
 
     return 1;
 }
@@ -289,7 +291,6 @@ int GameStateHandler::SetUIState(int flag)
 
     return 1;
 }
-
 
 int GameStateHandler::GetCameraMode(void)
 {

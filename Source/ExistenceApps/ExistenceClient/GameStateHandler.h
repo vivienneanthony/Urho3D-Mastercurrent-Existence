@@ -23,8 +23,11 @@
 
 #include "GameStateComponent.h"
 
+
+using namespace Urho3D;
+
 /// fw declaration
-///class ExistenceClient,
+class Existence;
 
 class GameStateHandler : public Urho3D::Object
 {
@@ -40,8 +43,8 @@ public:
     void onStateChange(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
     /// Get last state
     int getCurrentState(void);
-
-    int Set(GameStateHandler * GSH);
+    // Register object factory and attributes.
+    static void RegisterObject(Context* context);
 
     /// Function to access other states
     int GetConsoleState(void);
@@ -57,8 +60,7 @@ public:
     int SetDebugHudMode(int flag);
 
 private:
-    // Register object factory and attributes.
-    static void RegisterObject(Context* context);
+
     /// register all states
     void RegisterGameStates();
     /// create  state  classname
@@ -77,13 +79,12 @@ private:
     /// Kept node just in case
     Urho3D::SharedPtr<Urho3D::Node> mainNode;
 
-    GameStateHandler * GameStateHandlerPTR;
 
 /// Added flags
-    bool consolestate;
+    int consolestate;
     int uistate;
     int cameramode;
-    bool debughud;
+    int debughud;
 
 
 };

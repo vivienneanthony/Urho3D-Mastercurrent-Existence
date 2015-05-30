@@ -292,4 +292,3 @@ void ExistenceClientStateLogin::LoginScreenUINewAccountHandleClosePressed(String
 
     return;
 }
-
