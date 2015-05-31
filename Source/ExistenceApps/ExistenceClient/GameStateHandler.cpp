@@ -139,6 +139,7 @@ GameStateHandler::~GameStateHandler()
     LOGINFO("Destroyng GameComponent" );
 }
 
+
 void GameStateHandler::RegisterGameStates()
 {
     /// .... all states here
@@ -220,7 +221,11 @@ void GameStateHandler::createState( String newState )
     /// add a node and a component
     /// so will be possible create / remove models attached it
 
-    GameStateComponent * gameState = dynamic_cast<GameStateComponent*>(GetSubsystem<GameStateComponent>());
+    cout << "attempt to change state" << endl;
+
+    Node * stateNode = scene->CreateChild(newState);
+
+    GameStateComponent * gameState = dynamic_cast<GameStateComponent*>(stateNode ->CreateComponent(newState));
 
     if(gameState)
     {
@@ -235,7 +240,7 @@ void GameStateHandler::createState( String newState )
 
 void GameStateHandler::changeState( GameStateComponent* state )
 {
-    //  LOGINFO("Adding state" + state->GetTypeName());
+    LOGINFO("Adding state" + state->GetTypeName());
     //exit from old state
     RemoveLastState();
     //enter  new state

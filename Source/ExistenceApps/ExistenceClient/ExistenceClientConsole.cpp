@@ -845,6 +845,7 @@ int ExistenceClient::ConsoleActionDebug(const char * lineinput)
 
     }
 
+
     /// parameters for debug related command
     if(argument[1]=="hud")
     {

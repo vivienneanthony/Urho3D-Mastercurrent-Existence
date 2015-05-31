@@ -269,8 +269,7 @@ void ExistenceClientStateLogin::LoginScreenUILoginHandleClosePressed(StringHash 
     scene_->GetChild("ExistenceLogo",true)->Remove();
 
     /// Call progress screen function
-        //ProgressScreenUI();
-        ExistenceGameState -> SendEvent("GAME_STATE_GAMEMODELOAD");
+    ExistenceGameState -> SendEvent("GAME_STATE_PLAYERCREATE");
 
     return;
 }
@@ -287,8 +286,7 @@ void ExistenceClientStateLogin::LoginScreenUINewAccountHandleClosePressed(String
 
 
     /// Call create play screen function
-    //CreateAccountScreenUI();
-    ExistenceGameState -> SendEvent("GAME_STATE_PLAYERCREATE");
+    ExistenceGameState -> SendEvent("GAME_STATE_ACCOUNTCREATE");
 
     return;
 }
