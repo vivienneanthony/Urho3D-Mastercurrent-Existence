@@ -144,8 +144,6 @@ void ExistenceClient::Start()
     Manager * manager_ = GetSubsystem<Manager>();
     EnvironmentBuild * environmentbuild_ = GetSubsystem<EnvironmentBuild>();
 
-    ///Manager* manager = GetSubsystem<Manager>();
-
     UI* ui = GetSubsystem<UI>();
 
     /// Change game state
@@ -159,7 +157,6 @@ void ExistenceClient::Start()
 
     /// add resource path to last
     cache -> AddResourceDir(additionresourcePath);
-
 
     /// Set the loaded style as default style
     uiRoot_->SetDefaultStyle(style);
@@ -187,10 +184,6 @@ void ExistenceClient::Start()
     /// load account
     LoadAccount();
 
-    /// Star+t Login UI
-//    LoginUI(accountexist);
-
-
     /// Finally subscribe to the update event. Note that by subscribing events at this point we have already missed some events
     /// like the ScreenMode event sent by the Graphics subsystem when opening the application window. To catch those as well we
     /// could subscribe in the constructor instead.
@@ -201,9 +194,6 @@ void ExistenceClient::Start()
 
     /// Configure rudimentary state handler
     ExistenceGameState->SetConsoleState(0);
-
-    cout << "It got here" << endl;
-
 
     /// Start here
     ExistenceGameState->Start(scene_);
@@ -367,65 +357,65 @@ void ExistenceClient::HandleUpdate(StringHash eventType, VariantMap& eventData)
     float timeStep = eventData[P_TIMESTEP].GetFloat();
 
     Input* input = GetSubsystem<Input>();
-/*
-    /// Move the camera, scale movement with time step
-    MoveCamera(timeStep);
+    /*
+        /// Move the camera, scale movement with time step
+        MoveCamera(timeStep);
 
 
-    /// Handle UI updates
-    if(ExistenceGameState->getCurrentState()==GAME_STATE_GAMEMODE)
-    {
-        UpdateUI(timeStep);
-    }
-
-    /// controls movement
-    if(ExistenceGameState->GetCameraMode()==CAMERAMODE_FIRSTPERSON&&ExistenceGameState->getCurrentState()==GAME_STATE_GAMEMODE)
-    {
-        /// Clear previous controls
-        character_->controls_.Set(CTRL_FORWARD | CTRL_BACK | CTRL_LEFT | CTRL_RIGHT | CTRL_JUMP | CTRL_FIRE, false);
-
-        /// check if UI element is active
-        if(!GetSubsystem<UI>()->GetFocusElement())
+        /// Handle UI updates
+        if(ExistenceGameState->getCurrentState()==GAME_STATE_GAMEMODE)
         {
-
-            /// Clear previous controls
-
-            /// Update controls using keys
-            UI* ui = GetSubsystem<UI>();
-
-            character_->controls_.Set(CTRL_FORWARD, input->GetKeyDown('W'));
-            character_->controls_.Set(CTRL_BACK, input->GetKeyDown('S'));
-            character_->controls_.Set(CTRL_LEFT, input->GetKeyDown('A'));
-            character_->controls_.Set(CTRL_RIGHT, input->GetKeyDown('D'));
-            character_->controls_.Set(CTRL_FIRE, input->GetKeyDown('Q'));
-
-            character_->controls_.Set(CTRL_JUMP, input->GetKeyDown(KEY_SPACE));
-
-            /// Get character information
-            Node * characterNode = scene_->GetChild("Character",true);
-
-            RigidBody* body = characterNode->GetComponent<RigidBody>();
-
-            Node * firstpersonCameraNode = characterNode -> GetChild("CameraFirstPerson",true);
-
-            float YAW_SENSITIVITY=.5;
-
-            /// Updaw character yaw and povement
-            character_->controls_.yaw_ +=(float)input->GetMouseMoveX() * YAW_SENSITIVITY;
-            character_->controls_.pitch_ +=(float)input->GetMouseMoveY() * YAW_SENSITIVITY;
-
-            character_->controls_.yaw_ = Clamp(character_->controls_.yaw_, -80.0f, 80.0f);
-            character_->controls_.pitch_ = Clamp(character_->controls_.pitch_, -80.0f, 80.0f);
-
-            /// Copy yaw and pitch
-            float yaw_=character_->controls_.yaw_;
-            float pitch_=character_->controls_.pitch_;
-
-            firstpersonCameraNode->SetRotation(Quaternion(pitch_,yaw_, 0.0f));
-
+            UpdateUI(timeStep);
         }
-    }
-*/
+
+        /// controls movement
+        if(ExistenceGameState->GetCameraMode()==CAMERAMODE_FIRSTPERSON&&ExistenceGameState->getCurrentState()==GAME_STATE_GAMEMODE)
+        {
+            /// Clear previous controls
+            character_->controls_.Set(CTRL_FORWARD | CTRL_BACK | CTRL_LEFT | CTRL_RIGHT | CTRL_JUMP | CTRL_FIRE, false);
+
+            /// check if UI element is active
+            if(!GetSubsystem<UI>()->GetFocusElement())
+            {
+
+                /// Clear previous controls
+
+                /// Update controls using keys
+                UI* ui = GetSubsystem<UI>();
+
+                character_->controls_.Set(CTRL_FORWARD, input->GetKeyDown('W'));
+                character_->controls_.Set(CTRL_BACK, input->GetKeyDown('S'));
+                character_->controls_.Set(CTRL_LEFT, input->GetKeyDown('A'));
+                character_->controls_.Set(CTRL_RIGHT, input->GetKeyDown('D'));
+                character_->controls_.Set(CTRL_FIRE, input->GetKeyDown('Q'));
+
+                character_->controls_.Set(CTRL_JUMP, input->GetKeyDown(KEY_SPACE));
+
+                /// Get character information
+                Node * characterNode = scene_->GetChild("Character",true);
+
+                RigidBody* body = characterNode->GetComponent<RigidBody>();
+
+                Node * firstpersonCameraNode = characterNode -> GetChild("CameraFirstPerson",true);
+
+                float YAW_SENSITIVITY=.5;
+
+                /// Updaw character yaw and povement
+                character_->controls_.yaw_ +=(float)input->GetMouseMoveX() * YAW_SENSITIVITY;
+                character_->controls_.pitch_ +=(float)input->GetMouseMoveY() * YAW_SENSITIVITY;
+
+                character_->controls_.yaw_ = Clamp(character_->controls_.yaw_, -80.0f, 80.0f);
+                character_->controls_.pitch_ = Clamp(character_->controls_.pitch_, -80.0f, 80.0f);
+
+                /// Copy yaw and pitch
+                float yaw_=character_->controls_.yaw_;
+                float pitch_=character_->controls_.pitch_;
+
+                firstpersonCameraNode->SetRotation(Quaternion(pitch_,yaw_, 0.0f));
+
+            }
+        }
+    */
     return;
 }
 
@@ -439,77 +429,77 @@ void ExistenceClient::HandleKeyDown(StringHash eventType, VariantMap& eventData)
     //ExistenceGameState->SetConsoleState(GetSubsystem<Console>()->IsVisible());
 
     ExistenceGameState->SetConsoleState(0);
-
-    /// Unlike the other samples, exiting the engine when ESC is pressed instead of just closing the console
-    if (eventData[KeyDown::P_KEY].GetInt() == KEY_F12)
-    {
-        if((ExistenceGameState->GetUIState()==UI_CHARACTERSELECTIONINTERFACE)||(ExistenceGameState->GetUIState()==UI_GAMECONSOLE))
+    /*
+        /// Unlike the other samples, exiting the engine when ESC is pressed instead of just closing the console
+        if (eventData[KeyDown::P_KEY].GetInt() == KEY_F12)
         {
-            if(ExistenceGameState->GetConsoleState())
+            if((ExistenceGameState->GetUIState()==UI_CHARACTERSELECTIONINTERFACE)||(ExistenceGameState->GetUIState()==UI_GAMECONSOLE))
             {
-                Console* console = GetSubsystem<Console>();
+                if(ExistenceGameState->GetConsoleState())
+                {
+                    Console* console = GetSubsystem<Console>();
 
-                console -> SetVisible(false);
+                    console -> SetVisible(false);
 
-                UI* ui = GetSubsystem<UI>();
+                    UI* ui = GetSubsystem<UI>();
 
-                ExistenceGameState->SetConsoleState(false);
+                    ExistenceGameState->SetConsoleState(false);
+
+                }
+                else
+                {
+                    Console* console = GetSubsystem<Console>();
+
+                    console -> SetVisible(true);
+                    ExistenceGameState->SetConsoleState(true);
+
+                }
+            }
+
+            return;
+        }
+
+        if (eventData[KeyDown::P_KEY].GetInt() == KEY_F10&&ExistenceGameState->getCurrentState()==GAME_STATE_GAMEMODE)
+        {
+            /// load window
+            UIElement * uiroot = ui ->	GetRoot ();
+
+            /// Locate Player Window
+            Window * PlayerWindowUIElement = dynamic_cast<Window *>(uiroot->GetChild("PlayerWindow",true));
+
+            /// Enable
+            if(PlayerWindowUIElement)
+            {
+                PlayerWindowUIElement -> SetVisible(true);
+
+                PlayerWindowUIElement-> GetParent() -> SetVisible(true);
+                PlayerWindowUIElement-> GetParent() -> SetBringToFront(true);
 
             }
             else
             {
-                Console* console = GetSubsystem<Console>();
-
-                console -> SetVisible(true);
-                ExistenceGameState->SetConsoleState(true);
-
+                loadUIXML(UIPLAYERWINDOW,200,200,0);
             }
+
         }
 
-        return;
-    }
 
-    if (eventData[KeyDown::P_KEY].GetInt() == KEY_F10&&ExistenceGameState->getCurrentState()==GAME_STATE_GAMEMODE)
-    {
-        /// load window
-        UIElement * uiroot = ui ->	GetRoot ();
-
-        /// Locate Player Window
-        Window * PlayerWindowUIElement = dynamic_cast<Window *>(uiroot->GetChild("PlayerWindow",true));
-
-        /// Enable
-        if(PlayerWindowUIElement)
+        /// Check if game is in first person camera mode and in game state
+        if(ExistenceGameState->GetCameraMode()==CAMERAMODE_FIRSTPERSON&&ExistenceGameState->getCurrentState()==GAME_STATE_GAMEMODE)
         {
-            PlayerWindowUIElement -> SetVisible(true);
+            /// check if UI element is active
+            if(GetSubsystem<UI>()->GetFocusElement())
+            {
+                return;
+            }
 
-            PlayerWindowUIElement-> GetParent() -> SetVisible(true);
-            PlayerWindowUIElement-> GetParent() -> SetBringToFront(true);
+            /// Locate camera in scene
+            Node * characterNode = scene_->GetChild("Character",true);
+            RigidBody* body = characterNode->GetComponent<RigidBody>();
 
+            float force=.2;
         }
-        else
-        {
-            loadUIXML(UIPLAYERWINDOW,200,200,0);
-        }
-
-    }
-
-
-    /// Check if game is in first person camera mode and in game state
-    if(ExistenceGameState->GetCameraMode()==CAMERAMODE_FIRSTPERSON&&ExistenceGameState->getCurrentState()==GAME_STATE_GAMEMODE)
-    {
-        /// check if UI element is active
-        if(GetSubsystem<UI>()->GetFocusElement())
-        {
-            return;
-        }
-
-        /// Locate camera in scene
-        Node * characterNode = scene_->GetChild("Character",true);
-        RigidBody* body = characterNode->GetComponent<RigidBody>();
-
-        float force=.2;
-    }
-
+    */
     return;
 }
 
@@ -691,3 +681,29 @@ void ExistenceClient::SetupScreenUI(void)
     cameraNodePlayerUI_ -> LookAt(Vector3(emptyNode->GetPosition()));
     lightNode -> Rotate(Quaternion(.398377,0.854323,0.141073,-0.302532));
 }
+
+
+/// Temporary Network
+bool ExistenceClient::IsClientConnected(void)
+{
+    return ServerConnection;
+}
+
+/// Temporary online
+bool ExistenceClient::ClientConnect(void)
+{
+    /// Set Connection
+    ServerConnection = false;
+
+    return false;
+}
+/// Temporary online
+bool ExistenceClient::SetServerSettings(void)
+{
+    /// Set Connection
+    ServerConnection = false;
+
+    return false;
+}
+
+

@@ -117,7 +117,7 @@ ExistenceClientStateMainScreen::ExistenceClientStateMainScreen(Urho3D::Context *
     ExistenceClient(context)
 {
     /// create UI
-    mainScreenUI();
+    MainScreen();
 }
 
 ExistenceClientStateMainScreen::~ExistenceClientStateMainScreen()
@@ -140,8 +140,28 @@ void ExistenceClientStateMainScreen::OnUpdate(StringHash eventType, VariantMap& 
     //
 }
 
+
+/// Main screen
+void ExistenceClientStateMainScreen::MainScreen(void)
+{
+    /// Set variables
+    bool CurrentStateIsMainScreen=true;
+
+    /// Load the user interace
+    MainScreenUI();
+
+    /// Loop
+    do
+    {
+    }
+    while(CurrentStateIsMainScreen);
+
+    return;
+}
+
+
 /// Main screen user interface function
-void ExistenceClientStateMainScreen::mainScreenUI(void)
+void ExistenceClientStateMainScreen::MainScreenUI(void)
 {
     /// set ui state to none
     ExistenceGameState->SetUIState(UI_CHARACTERSELECTIONINTERFACE);

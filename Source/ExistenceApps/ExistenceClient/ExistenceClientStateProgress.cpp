@@ -117,7 +117,7 @@ ExistenceClientStateProgress::ExistenceClientStateProgress(Urho3D::Context* cont
 :ExistenceClient(context)
 {
     /// create UI
-    ProgressScreenUI();
+    Progress();
 }
 
 ExistenceClientStateProgress::~ExistenceClientStateProgress()
@@ -139,6 +139,23 @@ void ExistenceClientStateProgress::OnUpdate(StringHash eventType, VariantMap& ev
 {
     //
 }
+
+
+void ExistenceClientStateProgress::Progress(void)
+{
+    /// Temporary for use flag of states
+    bool CurrentStateIsProgress = true;
+
+    /// load the UI
+    ProgressScreenUI();
+
+    /// loop
+    do
+    {
+
+    } while (CurrentStateIsProgress);
+}
+
 
 // Log UI Code
 /// Create progress screen UI

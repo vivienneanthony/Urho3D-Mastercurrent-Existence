@@ -1,3 +1,4 @@
+
 //
 // Copyright (c) 2008-2014 the Urho3D project.
 //
@@ -101,7 +102,6 @@
 #include "../../../Urho3D/Procedural/RandomNumberGenerator.h"
 
 #include "ExistenceClient.h"
-#include "ExistenceClientStateGameMode.h"
 #include "ExistenceClientUI.h"
 
 #include "../../Urho3D/Engine/DebugHud.h"
@@ -113,46 +113,42 @@ using namespace std;
 using namespace Urho3D;
 
 
-ExistenceClientStateGameMode::ExistenceClientStateGameMode(Context* context):
+ExistenceClientStateSingleton::ExistenceClientStateSingleton(Context* context):
     ExistenceClient(context)
 {
-    /// Start Game Mode
-    GameMode();
+    Singleton();
 }
 
-ExistenceClientStateGameMode::~ExistenceClientStateGameMode()
+ExistenceClientStateSingleton::~ExistenceClientStateSingleton()
 {
     //dtor
 }
 
-void ExistenceClientStateGameMode::Enter()
+void ExistenceClientStateSingleton::Enter()
 {
     //dtor
 }
 
-void ExistenceClientStateGameMode::Exit()
+void ExistenceClientStateSingleton::Exit()
 {
     //dtor
 }
 
 
-void ExistenceClientStateGameMode::GameMode(void)
+void ExistenceClientStateSingleton::Singleton(void)
 {
     /// Temporary for use flag of states
-    bool CurrentStateIsGameMode = true;
-
-    /// load the UI
-    GameMode();
+    bool CurrentStateIsSingleton = true;
 
     /// loop
     do
     {
 
-    } while (CurrentStateIsGameMode);
+    } while (CurrentStateIsSingleton);
 }
 
-
-void ExistenceClientStateGameMode::OnUpdate(StringHash eventType, VariantMap& eventData)
+void ExistenceClientStateSingleton::OnUpdate(StringHash eventType, VariantMap& eventData)
 {
     //
 }
+

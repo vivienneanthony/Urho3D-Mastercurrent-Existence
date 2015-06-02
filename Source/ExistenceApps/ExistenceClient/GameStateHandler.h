@@ -27,7 +27,8 @@
 using namespace Urho3D;
 
 /// fw declaration
-class Existence;
+class ExistenceClient;
+class ExistenceClientStateSingleton;
 
 class GameStateHandler : public Urho3D::Object
 {
@@ -42,7 +43,7 @@ public:
     // handler events
     void onStateChange(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
     /// Get last state
-    int getCurrentState(void);
+    String getCurrentState(void);
     // Register object factory and attributes.
     static void RegisterObject(Context* context);
 
@@ -67,11 +68,15 @@ private:
     void createState( Urho3D::String newState );
     /// change state
     void changeState(GameStateComponent * state);
+    void changeState2(ExistenceClientStateSingleton * State);
     /// exit and remove last state.
     void RemoveLastState();
 
     /// scene
     Urho3D::Scene * scene;
+
+    /// holder
+    ExistenceClientStateSingleton * GameState;
 
     /// states container
     Urho3D::Vector<GameStateComponent*> mStates;

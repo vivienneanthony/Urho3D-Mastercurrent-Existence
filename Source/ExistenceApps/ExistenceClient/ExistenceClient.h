@@ -78,8 +78,6 @@ class ExistenceClient : public ExistenceApp
     /// Setup after engine initialization and before running the main loop.
     virtual void Start();
 
-
-protected:
     /// Return XML patch instructions for screen joystick layout for a specific sample app, if any.https://github.com/urho3d/Urho3D/tree/master/Source/Samples
     virtual String GetScreenJoystickPatchString() const
     {
@@ -155,46 +153,65 @@ protected:
     void SceneLoaderHanderPress(StringHash eventType, VariantMap& eventData);
     int GenerateSceneUpdateEnvironment(terrain_rule terrainrule);
 
-    /// Window shared pointers
+    /// Temporary online
+    bool IsClientConnected(void);
+    bool ClientConnect(void);
+    bool SetServerSettings(void);
+
+protected:
+
+private:
+    /// Urho3D window shared pointers
     SharedPtr<Window> window_;
     SharedPtr<Window> window2_;
 
-    /// The UI's root UIElement.
+    /// Urho3D UIelement root, viewport, and render path
     SharedPtr<UIElement> uiRoot_;
     SharedPtr<Viewport> viewport;
+
     SharedPtr<RenderPath> effectRenderPath;
 
-    /// Remembered drag begin position.
-    IntVector2 dragBeginPosition_;
-
-    /// Shared pointer for input
+    /// Urho3D Shared pointer for input
     SharedPtr<Input> input_;
 
-    /// This is temoporarily the necessary code
-    bool accountexist;
-
-    /// Shared pointer for a single character
+    /// Existence Weak pointer for a single character
     WeakPtr<Character> character_;
 
-    /// Class and variable declation for character/player related information
+    /// Existence Game State Handler Pointer for Game State
+    GameStateHandler * ExistenceGameState;
+
+    /// Existence player structure class and variable declation for character/player related information
     Player  TemporaryPlayer;
     Player  * TemporaryAccountPlayerList;
     unsigned int TemporaryAccountPlayerSelected;
     unsigned int TemporaryAccountPlayerListLimit;
 
-    /// Class and variable declaration for alien race alliance information
+    /// Existence class and variable declaration for alien race alliance information
     vector<string> aliensarray;
     vector<string> tempaliensarray;
 
-    /// moved here
-    GameStateHandler * ExistenceGameState;
+    /// This is temoporarily the necessary code
+    bool accountexist;
 
-
-private:
-
-
+    bool ServerConnection;
 };
 
+
+/// Login State
+class ExistenceClientStateSingleton: public ExistenceClient
+{
+    OBJECT(ExistenceClientStateSingleton);
+public:
+    ExistenceClientStateSingleton(Urho3D::Context * context);
+    virtual ~ExistenceClientStateSingleton();
+    virtual void Enter();
+    virtual void Exit();
+    virtual void OnUpdate(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
+private:
+    void Singleton(void);
+protected:
+
+};
 
 /// Login State
 class ExistenceClientStateLogin : public ExistenceClient
@@ -207,11 +224,13 @@ public:
     virtual void Exit();
     virtual void OnUpdate(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
 private:
-    void LoginUI(bool exist);
+    void LoginScreen(void);
+    void LoginScreenUI(void);
     void LoginScreenUINewAccountHandleClosePressed(StringHash eventType, VariantMap& eventData);
     void LoginScreenUILoginHandleClosePressed(StringHash eventType, VariantMap& eventData);
 
 protected:
+   UIElement * uiRoot_;
 
 };
 
@@ -226,6 +245,7 @@ public:
     virtual void Exit();
     virtual void OnUpdate(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
 private:
+    void Account(void);
     void CreateAccountScreenUI(void);
     void CreateAccountUIHandleClosePressed(StringHash eventType, VariantMap& eventData);
 protected:
@@ -243,7 +263,8 @@ public:
     virtual void Exit();
     virtual void OnUpdate(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
 private:
-    void mainScreenUI(void);
+    void MainScreen(void);
+    void MainScreenUI(void);
     void MainScreenUIHandleClosePressed(StringHash eventType, VariantMap& eventData);
     void HandleCharacterStartButtonReleased(StringHash eventType, VariantMap& eventData);
     void HandleCharacterSelectedReleased(StringHash eventType, VariantMap& eventData);
@@ -263,7 +284,7 @@ public:
     virtual void Exit();
     virtual void OnUpdate(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
 private:
-
+    void GameMode(void);
 protected:
 
 };
@@ -279,6 +300,7 @@ public:
     virtual void Exit();
     virtual void OnUpdate(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
 private:
+    void Player(void);
     void CreatePlayerScreenUI(void);
     void HandlerCameraOrientation(StringHash eventType, VariantMap& eventData);
     void CameraOrientationRotateMove (float degrees, int movement);
@@ -302,6 +324,7 @@ public:
     virtual void Exit();
     virtual void OnUpdate(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
 private:
+    void Progress(void);
     void ProgressScreenUI(void);
     void ProgressScreenUIHandleClosePressed(StringHash eventType, VariantMap& eventData);
     void CreateCharacter(void);

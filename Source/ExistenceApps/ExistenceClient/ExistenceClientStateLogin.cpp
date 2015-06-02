@@ -113,16 +113,19 @@ using namespace Urho3D;
 
 /// Constructor Destror
 ExistenceClientStateLogin::ExistenceClientStateLogin(Urho3D::Context* context)
-:ExistenceClient(context)
+    :ExistenceClient(context)
 {
-    cout << "show login " << endl;
+
+    cout << "State Login Constructor" << endl;
 
     /// create UI
-    LoginUI(true);
+    LoginScreenUI();
 }
 
 ExistenceClientStateLogin::~ExistenceClientStateLogin()
 {
+    cout << "State Login Deconstructor" << endl;
+
     //dtor
 }
 
@@ -142,27 +145,31 @@ void ExistenceClientStateLogin::OnUpdate(StringHash eventType, VariantMap& event
     //
 }
 
-
 /// code
-void ExistenceClientStateLogin::LoginUI(bool exist)
+void ExistenceClientStateLogin::LoginScreenUI(void)
 {
     /// Get Needed SubSystems
     ResourceCache* cache = GetSubsystem<ResourceCache>();
     Renderer* renderer = GetSubsystem<Renderer>();
     Graphics* graphics = GetSubsystem<Graphics>();
+
+    /// Get the UI subsystem
     UI* ui = GetSubsystem<UI>();
+
+    UIElement * uiRoot_ = ui -> GetRoot();
 
     /// Get rendering window size as floats
     float width = (float)graphics->GetWidth();
     float height = (float)graphics->GetHeight();
 
     /// Set UI gamestate to logininterface
-    ExistenceGameState->SetUIState(UI_LOGININTERFACE);
+    ///  ExistenceGameState->SetUIState(UI_LOGININTERFACE);
 
     /// Login screen - Create the Window and add it to the UI's root node
     window_= new Window(context_);
 
     uiRoot_->AddChild(window_);
+
     UIElement* usernameTextUIElement = new UIElement(context_);
     Text* usernameText = new Text(context_);
     LineEdit* usernameInput=new LineEdit(context_);
@@ -254,7 +261,7 @@ void ExistenceClientStateLogin::LoginUI(bool exist)
 void ExistenceClientStateLogin::LoginScreenUILoginHandleClosePressed(StringHash eventType, VariantMap& eventData)
 {
     /// set ui state to none
-    ExistenceGameState->SetUIState(UI_LOGININTERFACE);
+    ///ExistenceGameState->SetUIState(UI_LOGININTERFACE);
 
     /// Get Needed SubSystems
     UI* ui_= GetSubsystem<UI>();
@@ -269,7 +276,7 @@ void ExistenceClientStateLogin::LoginScreenUILoginHandleClosePressed(StringHash 
     scene_->GetChild("ExistenceLogo",true)->Remove();
 
     /// Call progress screen function
-    ExistenceGameState -> SendEvent("GAME_STATE_PLAYERCREATE");
+    ///ExistenceGameState -> SendEvent("GAME_STATE_PLAYERCREATE");
 
     return;
 }
@@ -278,15 +285,34 @@ void ExistenceClientStateLogin::LoginScreenUILoginHandleClosePressed(StringHash 
 void ExistenceClientStateLogin::LoginScreenUINewAccountHandleClosePressed(StringHash eventType, VariantMap& eventData)
 {
     /// set ui state to none
-    ExistenceGameState->SetUIState(UI_LOGININTERFACE);
+    ///ExistenceGameState->SetUIState(UI_LOGININTERFACE);
 
     /// remove Existence Logo Node
     scene_->GetChild("ExistenceLogo",true)->RemoveAllComponents();
     scene_->GetChild("ExistenceLogo",true)->Remove();
 
 
-    /// Call create play screen function
-    ExistenceGameState -> SendEvent("GAME_STATE_ACCOUNTCREATE");
+    /// Call create play screen functi/
+    ///    ExistenceGameState -> SendEvent("GAME_STATE_ACCOUNTCREATE");
+
+    return;
+}
+
+/// Login state main screen
+void ExistenceClientStateLogin::LoginScreen(void)
+{
+    /// Set variables
+    bool CurrentStateIsLogin=true;
+
+    /// Load the user interace
+    LoginScreenUI();
+
+    /// Loop
+    do
+    {
+        int a=1;
+
+    } while(CurrentStateIsLogin);
 
     return;
 }

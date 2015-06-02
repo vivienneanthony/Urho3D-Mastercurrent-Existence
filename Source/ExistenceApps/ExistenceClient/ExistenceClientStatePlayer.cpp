@@ -118,7 +118,7 @@ ExistenceClientStatePlayer::ExistenceClientStatePlayer(Urho3D::Context* context)
     ExistenceClient(context)
 {
     /// create UI
-    CreatePlayerScreenUI();
+    Player();
 }
 
 ExistenceClientStatePlayer::
@@ -140,6 +140,23 @@ void ExistenceClientStatePlayer::Enter()
 void ExistenceClientStatePlayer::Exit()
 {
     //dtor
+}
+
+void ExistenceClientStatePlayer::Player(void)
+{
+    /// Set variables
+    bool CurrentStateIsPlayer=true;
+
+    /// Load the user interace
+    CreatePlayerScreenUI();
+
+    /// Loop
+    do
+    {
+    }
+    while(CurrentStateIsPlayer);
+
+    return;
 }
 
 /// Create a player screen UI

@@ -119,7 +119,7 @@ ExistenceClientStateAccount::ExistenceClientStateAccount(Context* context):
 ExistenceClient(context)
 {
     /// create UI
-    CreateAccountScreenUI();
+    Account();
 }
 
 ExistenceClientStateAccount::~ExistenceClientStateAccount()
@@ -141,6 +141,24 @@ void ExistenceClientStateAccount::OnUpdate(StringHash eventType, VariantMap& eve
 {
     //
 }
+
+/// Login state main screen
+void ExistenceClientStateAccount::Account(void)
+{
+    /// Set variables
+    bool CurrentStateIsLogin=true;
+
+    /// Load the user interace
+    CreateAccountScreenUI();
+
+    /// Loop
+    do
+    {
+    } while(CurrentStateIsLogin);
+
+    return;
+}
+
 
 /// Create a account UI
 void ExistenceClientStateAccount::CreateAccountScreenUI(void)

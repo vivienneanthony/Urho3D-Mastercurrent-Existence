@@ -107,9 +107,8 @@
 ///using namespace std;
 using namespace Urho3D;
 
-
 GameStateHandler::GameStateHandler(Context * context):
-   Object(context)
+    Object(context)
     ,scene(0)
     ,consolestate(0)
     ,uistate(0)
@@ -143,6 +142,7 @@ GameStateHandler::~GameStateHandler()
 void GameStateHandler::RegisterGameStates()
 {
     /// .... all states here
+    context_->RegisterFactory<ExistenceClientStateSingleton>();
     context_->RegisterFactory<ExistenceClientStateAccount>();
     context_->RegisterFactory<ExistenceClientStateGameMode>();
     context_->RegisterFactory<ExistenceClientStateLogin>();
@@ -165,9 +165,9 @@ void GameStateHandler::Start(Urho3D::Scene * scene_)
     scene=scene_;
     if(scene)
     {
+        cout << "attempt to create login" << endl;
         ///mainNode = scene->CreateChild("Main");
         createState(ExistenceClientStateLogin::GetTypeNameStatic());
-        cout << "failee" << endl;
 
     }
     else
@@ -178,9 +178,13 @@ void GameStateHandler::Start(Urho3D::Scene * scene_)
 }
 
 /// Temporary
-int GameStateHandler::getCurrentState(void)
+String  GameStateHandler::getCurrentState(void)
 {
-    return 3;
+
+    String stateString = String("test") ;
+
+    //String stateString = mStates.Back().GetType();
+    return stateString;
 }
 
 void GameStateHandler::onStateChange( Urho3D::StringHash eventType, Urho3D::VariantMap& eventData )
@@ -190,8 +194,13 @@ void GameStateHandler::onStateChange( Urho3D::StringHash eventType, Urho3D::Vari
 
     LOGINFO("New State " +  (String)((int)newState)) ;
 
+    cout << "New State " <<  newState << endl;
+
     switch (newState)
     {
+    case GAME_STATE_SINGLETON:
+        createState(ExistenceClientStateSingleton::GetTypeNameStatic());
+        break;
     case GAME_STATE_LOGIN:
         createState(ExistenceClientStateLogin::GetTypeNameStatic());
         break;
@@ -221,15 +230,21 @@ void GameStateHandler::createState( String newState )
     /// add a node and a component
     /// so will be possible create / remove models attached it
 
-    cout << "attempt to change state" << endl;
+    ///Node * stateNode = scene->CreateChild(newState);
+    ///GameStateComponent * gameState = dynamic_cast<GameStateComponent*>(stateNode ->CreateComponent(newState));
 
-    Node * stateNode = scene->CreateChild(newState);
+    cout << "create state"  << endl;
 
-    GameStateComponent * gameState = dynamic_cast<GameStateComponent*>(stateNode ->CreateComponent(newState));
 
-    if(gameState)
+    ExistenceClientStateLogin * Child = new ExistenceClientStateLogin(context_);
+    ExistenceClientStateSingleton * GameState = dynamic_cast<ExistenceClientStateSingleton*>(Child);
+
+
+
+    /// uses new function
+    if(GameState)
     {
-        changeState(gameState);
+        changeState2(GameState);
 
     }
     else
@@ -240,24 +255,37 @@ void GameStateHandler::createState( String newState )
 
 void GameStateHandler::changeState( GameStateComponent* state )
 {
-    LOGINFO("Adding state" + state->GetTypeName());
+    /*LOGINFO("Adding state" + state->GetTypeName());
     //exit from old state
     RemoveLastState();
     //enter  new state
     mStates.Push(state);
-    mStates.Back()->Enter();
+    mStates.Back()->Enter();*/
 
 }
 
+void GameStateHandler::changeState2(ExistenceClientStateSingleton * State)
+{
+    LOGINFO("Adding state" + State->GetTypeName());
+
+    //exit from old state
+    //RemoveLastState();
+    //enter  new state
+    //mStates.Push(state);
+    //mStates.Back()->Enter();
+
+}
+
+
 void GameStateHandler::RemoveLastState()
 {
-    if ( !mStates.Empty() )
-    {
-        mStates.Back()->Exit();
-        //remove component's node  remove node and component
-        mStates.Back()->GetNode()->Remove();
-        mStates.Pop();
-    }
+    /*  if ( !mStates.Empty() )
+      {
+          mStates.Back()->Exit();
+          //remove component's node  remove node and component
+          mStates.Back()->GetNode()->Remove();
+          mStates.Pop();
+      }*/
 }
 
 int GameStateHandler::GetConsoleState(void)
@@ -272,9 +300,6 @@ int GameStateHandler::GetConsoleState(void)
 
 int GameStateHandler::SetConsoleState(int flag)
 {
-
-    cout << consolestate << endl;
-    cout << flag << endl;
 
     consolestate=flag;
 
