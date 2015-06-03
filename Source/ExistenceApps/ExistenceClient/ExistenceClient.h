@@ -62,8 +62,8 @@ string ConvertUIntToString(unsigned int val);
 ///     - Subscribing to and handling of update events
 class ExistenceClient : public ExistenceApp
 {
-    OBJECT(ExistenceClient);
-
+    /// friend the other classes
+    friend class ExistenceClientStateSingleton;
     friend class ExistenceClientStateAccount;
     friend class ExistenceClientStateProgress;
     friend class ExistenceClientStateGameMode;
@@ -71,6 +71,7 @@ class ExistenceClient : public ExistenceApp
     friend class ExistenceClientStatePlayer;
     friend class ExistenceClientStateMainScreen;
 
+    OBJECT(ExistenceClient);
 
     /// Construct.
     ExistenceClient(Context* context);
@@ -88,7 +89,6 @@ class ExistenceClient : public ExistenceApp
             "    </add>"
             "</patch>";
     }
-
 
     /// Diaplay login screen
     void SetupScreenViewport(void);
@@ -158,9 +158,17 @@ class ExistenceClient : public ExistenceApp
     bool ClientConnect(void);
     bool SetServerSettings(void);
 
-protected:
+    /// Get subsubsystems
+    Renderer * GetRenderSubsystems(void);
+    UI * GetUISubsystems(void);
+    Graphics * GetGraphicsSubsystems(void);
+    ResourceCache * GetResourceCacheSubsystems(void);
 
+    Window * GetSharedWindow(void);
+
+protected:
 private:
+
     /// Urho3D window shared pointers
     SharedPtr<Window> window_;
     SharedPtr<Window> window2_;
@@ -230,7 +238,6 @@ private:
     void LoginScreenUILoginHandleClosePressed(StringHash eventType, VariantMap& eventData);
 
 protected:
-   UIElement * uiRoot_;
 
 };
 

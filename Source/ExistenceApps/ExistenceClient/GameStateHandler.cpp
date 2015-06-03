@@ -109,7 +109,6 @@ using namespace Urho3D;
 
 GameStateHandler::GameStateHandler(Context * context):
     Object(context)
-    ,scene(0)
     ,consolestate(0)
     ,uistate(0)
     ,debughud(0)
@@ -159,21 +158,11 @@ void GameStateHandler::RegisterObject(Context* context)
     context->RegisterFactory<GameStateHandler>();
 }
 
-void GameStateHandler::Start(Urho3D::Scene * scene_)
+void GameStateHandler::Start(void)
 {
 
-    scene=scene_;
-    if(scene)
-    {
-        cout << "attempt to create login" << endl;
-        ///mainNode = scene->CreateChild("Main");
-        createState(ExistenceClientStateLogin::GetTypeNameStatic());
-
-    }
-    else
-    {
-        ErrorExit("Scene null");
-    }
+    ///mainNode = scene->CreateChild("Main");
+    createState(ExistenceClientStateLogin::GetTypeNameStatic());
 
 }
 
@@ -227,25 +216,14 @@ void GameStateHandler::onStateChange( Urho3D::StringHash eventType, Urho3D::Vari
 
 void GameStateHandler::createState( String newState )
 {
-    /// add a node and a component
-    /// so will be possible create / remove models attached it
-
-    ///Node * stateNode = scene->CreateChild(newState);
-    ///GameStateComponent * gameState = dynamic_cast<GameStateComponent*>(stateNode ->CreateComponent(newState));
-
-    cout << "create state"  << endl;
-
-
-    ExistenceClientStateLogin * Child = new ExistenceClientStateLogin(context_);
-    ExistenceClientStateSingleton * GameState = dynamic_cast<ExistenceClientStateSingleton*>(Child);
-
-
-
-    /// uses new function
-    if(GameState)
+    /// switch states
+    if(newState=="ExistenceClientStateSingleton")
     {
-        changeState2(GameState);
-
+        myDerivedSates.push_back(new ExistenceClientStateSingleton(context_));
+    }
+    else if(newState=="ExistenceClientStateLogin")
+    {
+        myDerivedSates.push_back(new ExistenceClientStateLogin(context_));
     }
     else
     {
@@ -253,6 +231,8 @@ void GameStateHandler::createState( String newState )
     }
 }
 
+
+/// Not used at the moment
 void GameStateHandler::changeState( GameStateComponent* state )
 {
     /*LOGINFO("Adding state" + state->GetTypeName());
@@ -264,6 +244,7 @@ void GameStateHandler::changeState( GameStateComponent* state )
 
 }
 
+/// Not used at the moment
 void GameStateHandler::changeState2(ExistenceClientStateSingleton * State)
 {
     LOGINFO("Adding state" + State->GetTypeName());
@@ -276,7 +257,7 @@ void GameStateHandler::changeState2(ExistenceClientStateSingleton * State)
 
 }
 
-
+/// Not used at the moment
 void GameStateHandler::RemoveLastState()
 {
     /*  if ( !mStates.Empty() )
@@ -301,7 +282,7 @@ int GameStateHandler::GetConsoleState(void)
 int GameStateHandler::SetConsoleState(int flag)
 {
 
-    consolestate=flag;
+    //consolestate=flag;
 
     return 1;
 }

@@ -149,12 +149,10 @@ void ExistenceClientStateLogin::OnUpdate(StringHash eventType, VariantMap& event
 void ExistenceClientStateLogin::LoginScreenUI(void)
 {
     /// Get Needed SubSystems
-    ResourceCache* cache = GetSubsystem<ResourceCache>();
-    Renderer* renderer = GetSubsystem<Renderer>();
-    Graphics* graphics = GetSubsystem<Graphics>();
-
-    /// Get the UI subsystem
-    UI* ui = GetSubsystem<UI>();
+    ResourceCache* cache = ExistenceClient::GetResourceCacheSubsystems();
+    Renderer* renderer = ExistenceClient::GetRenderSubsystems();
+    Graphics* graphics = ExistenceClient::GetGraphicsSubsystems();
+    UI* ui = ExistenceClient::GetUISubsystems();
 
     UIElement * uiRoot_ = ui -> GetRoot();
 
@@ -163,9 +161,12 @@ void ExistenceClientStateLogin::LoginScreenUI(void)
     float height = (float)graphics->GetHeight();
 
     /// Set UI gamestate to logininterface
-    ///  ExistenceGameState->SetUIState(UI_LOGININTERFACE);
+    /// ExistenceGameState->SetUIState(UI_LOGININTERFACE);
 
     /// Login screen - Create the Window and add it to the UI's root node
+    Window * window_ = (Window *)ExistenceClient::GetSharedWindow();
+
+    /// Create the Window and add it to the UI's root node
     window_= new Window(context_);
 
     uiRoot_->AddChild(window_);
@@ -263,8 +264,7 @@ void ExistenceClientStateLogin::LoginScreenUILoginHandleClosePressed(StringHash 
     /// set ui state to none
     ///ExistenceGameState->SetUIState(UI_LOGININTERFACE);
 
-    /// Get Needed SubSystems
-    UI* ui_= GetSubsystem<UI>();
+    UI* ui_ = ExistenceClient::GetUISubsystems();
 
     UIElement * RootUIElement = ui_->GetRoot();
 
@@ -284,6 +284,8 @@ void ExistenceClientStateLogin::LoginScreenUILoginHandleClosePressed(StringHash 
 /// Login screen handler function
 void ExistenceClientStateLogin::LoginScreenUINewAccountHandleClosePressed(StringHash eventType, VariantMap& eventData)
 {
+    UI* ui = ExistenceClient::GetUISubsystems();
+
     /// set ui state to none
     ///ExistenceGameState->SetUIState(UI_LOGININTERFACE);
 

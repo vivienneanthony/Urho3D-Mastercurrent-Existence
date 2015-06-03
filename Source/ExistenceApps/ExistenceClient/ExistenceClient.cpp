@@ -196,7 +196,7 @@ void ExistenceClient::Start()
     ExistenceGameState->SetConsoleState(0);
 
     /// Start here
-    ExistenceGameState->Start(scene_);
+    ExistenceGameState->Start();
 
     return;
 }
@@ -704,6 +704,50 @@ bool ExistenceClient::SetServerSettings(void)
     ServerConnection = false;
 
     return false;
+}
+
+
+/// Get subsystems
+Renderer * ExistenceClient::GetRenderSubsystems(void)
+{
+    /// Define Resouces
+    Renderer* CurrentRendererSubsystem = GetSubsystem<Renderer>();
+
+    return CurrentRendererSubsystem;
+}
+
+
+
+/// Get subsystems
+Graphics * ExistenceClient::GetGraphicsSubsystems(void)
+{
+    /// Define Resouces
+    Graphics* CurrentGraphics = GetSubsystem<Graphics>();
+
+    return CurrentGraphics;
+}
+
+/// Get subsystems
+UI * ExistenceClient::GetUISubsystems(void)
+{
+    /// Define Resouces
+    UI * CurrentUISubsystem = GetSubsystem<UI>();
+
+    return CurrentUISubsystem;
+}
+
+/// Get subsystems
+ResourceCache * ExistenceClient::GetResourceCacheSubsystems(void)
+{
+    /// Define Resouces
+    ResourceCache * CurrentResourceCacheSubsystem = GetSubsystem<ResourceCache>();
+
+    return CurrentResourceCacheSubsystem;
+}
+
+Window * ExistenceClient::GetSharedWindow(void)
+{
+    return window_;
 }
 
 

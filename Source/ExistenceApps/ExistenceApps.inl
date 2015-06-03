@@ -83,7 +83,7 @@ void ExistenceApp::SetWindowTitleAndIcon()
     Graphics* graphics = GetSubsystem<Graphics>();
     Image* icon = cache->GetResource<Image>("Textures/UrhoIcon.png");
     graphics->SetWindowIcon(icon);
-    graphics->SetWindowTitle("Urho3D ExistenceApp");
+    graphics->SetWindowTitle("ExistenceClient Alpha 0.001");
 }
 
 void ExistenceApp::CreateConsoleAndDebugHud()
@@ -105,7 +105,7 @@ void ExistenceApp::CreateConsoleAndDebugHud()
 
 void ExistenceApp::HandleSceneUpdate(StringHash eventType, VariantMap& eventData)
 {
-    // Move the camera by touch, if the camera node is initialized by descendant ExistenceApp class
+    /*// Move the camera by touch, if the camera node is initialized by descendant ExistenceApp class
     if (touchEnabled_ && cameraNode_)
     {
         Input* input = GetSubsystem<Input>();
@@ -137,6 +137,7 @@ void ExistenceApp::HandleSceneUpdate(StringHash eventType, VariantMap& eventData
             }
         }
     }
+    */
 }
 #endif
 

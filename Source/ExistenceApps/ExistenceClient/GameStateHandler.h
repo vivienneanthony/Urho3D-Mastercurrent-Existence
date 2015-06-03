@@ -39,7 +39,7 @@ public:
     /// Destruct.
     virtual  ~GameStateHandler();
     /// start point
-    void Start(Urho3D::Scene * scene_);
+    void Start(void);
     // handler events
     void onStateChange(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
     /// Get last state
@@ -72,18 +72,20 @@ private:
     /// exit and remove last state.
     void RemoveLastState();
 
-    /// scene
-    Urho3D::Scene * scene;
-
+    /// Not used at the moment
     /// holder
     ExistenceClientStateSingleton * GameState;
 
+    /// Not used at the moment
     /// states container
     Urho3D::Vector<GameStateComponent*> mStates;
 
+    /// Not used at the moment
     /// Kept node just in case
     Urho3D::SharedPtr<Urho3D::Node> mainNode;
 
+    /// Vector Array - Derived States
+    std::vector<ExistenceClient *> myDerivedSates;
 
 /// Added flags
     int consolestate;
