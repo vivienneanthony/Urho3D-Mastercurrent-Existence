@@ -20,6 +20,7 @@ enum GameStates
 EVENT(G_STATES_CHANGE, GameState)
 {
     PARAM(P_CMD, cmdType);                // States
+    PARAM(P_ARG, cmdArguments);
     PARAM(P_OBJ, sender);                // class
 }
 ///}

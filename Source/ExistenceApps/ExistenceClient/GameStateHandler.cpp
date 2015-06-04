@@ -169,7 +169,7 @@ void GameStateHandler::Start(void)
 /// Temporary
 String  GameStateHandler::getCurrentState(void)
 {
-
+    /// Not Used
     String stateString = String("test") ;
 
     //String stateString = mStates.Back().GetType();
@@ -183,7 +183,6 @@ void GameStateHandler::onStateChange( Urho3D::StringHash eventType, Urho3D::Vari
 
     LOGINFO("New State " +  (String)((int)newState)) ;
 
-    cout << "New State " <<  newState << endl;
 
     switch (newState)
     {
@@ -219,11 +218,11 @@ void GameStateHandler::createState( String newState )
     /// switch states
     if(newState=="ExistenceClientStateSingleton")
     {
-        myDerivedSates.push_back(new ExistenceClientStateSingleton(context_));
+        myDerivedStates.push_back(new ExistenceClientStateSingleton(context_));
     }
     else if(newState=="ExistenceClientStateLogin")
     {
-        myDerivedSates.push_back(new ExistenceClientStateLogin(context_));
+        myDerivedStates.push_back(new ExistenceClientStateLogin(context_));
     }
     else
     {

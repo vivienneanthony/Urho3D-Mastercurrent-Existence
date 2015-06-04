@@ -75,6 +75,7 @@ class ExistenceClient : public ExistenceApp
 
     /// Construct.
     ExistenceClient(Context* context);
+    virtual ~ExistenceClient();
 
     /// Setup after engine initialization and before running the main loop.
     virtual void Start();
@@ -139,7 +140,6 @@ class ExistenceClient : public ExistenceApp
     int ConsoleActionBuild(const char * lineinput);
 
     /// UI Related Functions
-
     void loadSceneUI(void);
     bool loadHUDFile(const char * filename, const int positionx, const int positiony);
     void loadUIXMLClosePressed(StringHash eventType, VariantMap& eventData);
@@ -159,15 +159,17 @@ class ExistenceClient : public ExistenceApp
     bool SetServerSettings(void);
 
     /// Get subsubsystems
-    Renderer * GetRenderSubsystems(void);
-    UI * GetUISubsystems(void);
-    Graphics * GetGraphicsSubsystems(void);
-    ResourceCache * GetResourceCacheSubsystems(void);
+    Renderer * GetRenderSubsystems(void) const;
+    UI * GetUISubsystems(void) const;
+    Graphics * GetGraphicsSubsystems(void) const;
+    ResourceCache * GetResourceCacheSubsystems(void) const;
 
-    Window * GetSharedWindow(void);
+    Window * GetSharedWindow(void) const;
+
+
 
 protected:
-private:
+
 
     /// Urho3D window shared pointers
     SharedPtr<Window> window_;
@@ -201,7 +203,11 @@ private:
     /// This is temoporarily the necessary code
     bool accountexist;
 
+    /// Server connection related
     bool ServerConnection;
+
+private:
+
 };
 
 

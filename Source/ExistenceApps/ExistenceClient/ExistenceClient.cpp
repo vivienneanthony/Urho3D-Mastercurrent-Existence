@@ -129,7 +129,13 @@ ExistenceClient::ExistenceClient(Context* context) :
     EnvironmentBuild::RegisterNewSubsystem(context);
     GameStateComponent::RegisterNewSubsystem(context);
 
+    cout << "Debug: Existence Client Base Class Constructor" << endl;
 
+}
+
+ExistenceClient::~ExistenceClient()
+{
+    cout << "Debug: Existence Client Base Class Deconstructor" << endl;
 }
 
 /// Main program execution code
@@ -183,6 +189,8 @@ void ExistenceClient::Start()
 
     /// load account
     LoadAccount();
+
+
 
     /// Finally subscribe to the update event. Note that by subscribing events at this point we have already missed some events
     /// like the ScreenMode event sent by the Graphics subsystem when opening the application window. To catch those as well we
@@ -708,7 +716,7 @@ bool ExistenceClient::SetServerSettings(void)
 
 
 /// Get subsystems
-Renderer * ExistenceClient::GetRenderSubsystems(void)
+Renderer * ExistenceClient::GetRenderSubsystems(void) const
 {
     /// Define Resouces
     Renderer* CurrentRendererSubsystem = GetSubsystem<Renderer>();
@@ -719,7 +727,7 @@ Renderer * ExistenceClient::GetRenderSubsystems(void)
 
 
 /// Get subsystems
-Graphics * ExistenceClient::GetGraphicsSubsystems(void)
+Graphics * ExistenceClient::GetGraphicsSubsystems(void) const
 {
     /// Define Resouces
     Graphics* CurrentGraphics = GetSubsystem<Graphics>();
@@ -728,7 +736,7 @@ Graphics * ExistenceClient::GetGraphicsSubsystems(void)
 }
 
 /// Get subsystems
-UI * ExistenceClient::GetUISubsystems(void)
+UI * ExistenceClient::GetUISubsystems(void) const
 {
     /// Define Resouces
     UI * CurrentUISubsystem = GetSubsystem<UI>();
@@ -737,7 +745,7 @@ UI * ExistenceClient::GetUISubsystems(void)
 }
 
 /// Get subsystems
-ResourceCache * ExistenceClient::GetResourceCacheSubsystems(void)
+ResourceCache * ExistenceClient::GetResourceCacheSubsystems(void) const
 {
     /// Define Resouces
     ResourceCache * CurrentResourceCacheSubsystem = GetSubsystem<ResourceCache>();
@@ -745,7 +753,7 @@ ResourceCache * ExistenceClient::GetResourceCacheSubsystems(void)
     return CurrentResourceCacheSubsystem;
 }
 
-Window * ExistenceClient::GetSharedWindow(void)
+Window * ExistenceClient::GetSharedWindow(void) const
 {
     return window_;
 }

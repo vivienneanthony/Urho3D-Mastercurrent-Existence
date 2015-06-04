@@ -119,7 +119,7 @@ ExistenceClientStateLogin::ExistenceClientStateLogin(Urho3D::Context* context)
     cout << "State Login Constructor" << endl;
 
     /// create UI
-    LoginScreenUI();
+    LoginScreen();
 }
 
 ExistenceClientStateLogin::~ExistenceClientStateLogin()
@@ -149,24 +149,23 @@ void ExistenceClientStateLogin::OnUpdate(StringHash eventType, VariantMap& event
 void ExistenceClientStateLogin::LoginScreenUI(void)
 {
     /// Get Needed SubSystems
-    ResourceCache* cache = ExistenceClient::GetResourceCacheSubsystems();
-    Renderer* renderer = ExistenceClient::GetRenderSubsystems();
-    Graphics* graphics = ExistenceClient::GetGraphicsSubsystems();
-    UI* ui = ExistenceClient::GetUISubsystems();
+    ResourceCache* cache_ = ExistenceClient::GetResourceCacheSubsystems();
+    Renderer* renderer_ = ExistenceClient::GetRenderSubsystems();
+    Graphics* graphics_ = ExistenceClient::GetGraphicsSubsystems();
+    UI* ui_ = ExistenceClient::GetUISubsystems();
 
-    UIElement * uiRoot_ = ui -> GetRoot();
+    UIElement * uiRoot_ = ui_ -> GetRoot();
 
     /// Get rendering window size as floats
-    float width = (float)graphics->GetWidth();
-    float height = (float)graphics->GetHeight();
+    float width = (float)graphics_->GetWidth();
+    float height = (float)graphics_->GetHeight();
 
     /// Set UI gamestate to logininterface
     /// ExistenceGameState->SetUIState(UI_LOGININTERFACE);
 
     /// Login screen - Create the Window and add it to the UI's root node
-    Window * window_ = (Window *)ExistenceClient::GetSharedWindow();
+       /// Create the Window and add it to the UI's root node
 
-    /// Create the Window and add it to the UI's root node
     window_= new Window(context_);
 
     uiRoot_->AddChild(window_);
@@ -310,6 +309,7 @@ void ExistenceClientStateLogin::LoginScreen(void)
     LoginScreenUI();
 
     /// Loop
+    cout << "start loop" << endl;
     do
     {
         int a=1;
