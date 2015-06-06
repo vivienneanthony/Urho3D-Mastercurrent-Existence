@@ -62,16 +62,18 @@ string ConvertUIntToString(unsigned int val);
 ///     - Subscribing to and handling of update events
 class ExistenceClient : public ExistenceApp
 {
+
+    OBJECT(ExistenceClient);
+
     /// friend the other classes
-    friend class ExistenceClientStateSingleton;
+ /*   friend class ExistenceClientStateSingleton;
     friend class ExistenceClientStateAccount;
     friend class ExistenceClientStateProgress;
     friend class ExistenceClientStateGameMode;
     friend class ExistenceClientStateLogin;
     friend class ExistenceClientStatePlayer;
-    friend class ExistenceClientStateMainScreen;
+    friend class ExistenceClientStateMainScreen;*/
 
-    OBJECT(ExistenceClient);
 
     /// Construct.
     ExistenceClient(Context* context);
@@ -166,10 +168,10 @@ class ExistenceClient : public ExistenceApp
 
     Window * GetSharedWindow(void) const;
 
+///protected:
 
 
 protected:
-
 
     /// Urho3D window shared pointers
     SharedPtr<Window> window_;
@@ -187,8 +189,6 @@ protected:
     /// Existence Weak pointer for a single character
     WeakPtr<Character> character_;
 
-    /// Existence Game State Handler Pointer for Game State
-    GameStateHandler * ExistenceGameState;
 
     /// Existence player structure class and variable declation for character/player related information
     Player  TemporaryPlayer;
@@ -206,7 +206,6 @@ protected:
     /// Server connection related
     bool ServerConnection;
 
-private:
 
 };
 

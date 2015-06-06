@@ -30,7 +30,7 @@ using namespace Urho3D;
 class ExistenceClient;
 class ExistenceClientStateSingleton;
 
-class GameStateHandler : public Urho3D::Object
+class GameStateHandler : public Object
 {
     OBJECT(GameStateHandler);
 public:
@@ -46,6 +46,8 @@ public:
     String getCurrentState(void);
     // Register object factory and attributes.
     static void RegisterObject(Context* context);
+    /// register all states
+    void RegisterGameStates();
 
     /// Function to access other states
     int GetConsoleState(void);
@@ -60,10 +62,10 @@ public:
     int GetDebugHudMode(void);
     int SetDebugHudMode(int flag);
 
+
 private:
 
-    /// register all states
-    void RegisterGameStates();
+
     /// create  state  classname
     void createState( Urho3D::String newState );
     /// change state
@@ -84,14 +86,15 @@ private:
     /// Kept node just in case
     Urho3D::SharedPtr<Urho3D::Node> mainNode;
 
-    /// Vector Array - Derived States
-    std::vector< ExistenceClientStateSingleton *> myDerivedStates;
-
 /// Added flags
     int consolestate;
     int uistate;
     int cameramode;
     int debughud;
+
+
+    /// Vector Array - Derived States
+    std::vector< ExistenceClientStateSingleton *> myDerivedStates;
 
 
 };

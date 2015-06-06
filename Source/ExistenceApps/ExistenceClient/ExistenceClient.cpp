@@ -152,8 +152,6 @@ void ExistenceClient::Start()
 
     UI* ui = GetSubsystem<UI>();
 
-    /// Change game state
-    GameStateHandler * ExistenceGameState = new GameStateHandler(context_);
 
     /// create variables (urho3d)
     String additionresourcePath;
@@ -201,10 +199,12 @@ void ExistenceClient::Start()
     srand (time(NULL));
 
     /// Configure rudimentary state handler
-    ExistenceGameState->SetConsoleState(0);
+    ///    ExistenceGameState->SetConsoleState(0);
 
     /// Start here
-    ExistenceGameState->Start();
+    SharedPtr<GameStateHandler> ExistenceGameState(new GameStateHandler(context_));
+
+   ExistenceGameState->Start();
 
     return;
 }

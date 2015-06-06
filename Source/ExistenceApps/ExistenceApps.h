@@ -28,6 +28,7 @@
 
 
 #include "../../Urho3D/Engine/Application.h"
+#include "ExistenceClient/GameStateHandler.h"
 
 namespace Urho3D
 {
@@ -84,6 +85,9 @@ protected:
     SharedPtr<Scene> scene_;
     SharedPtr<Scene> scenePlayerUI_;
     SharedPtr<Scene> sceneLoadingGameModeTransition_;
+
+    /// Existence Game State Handler Pointer for Game State
+    SharedPtr<GameStateHandler>  ExistenceGameState;
 
     /// Camera scene node.
     SharedPtr<Node> cameraNode_;

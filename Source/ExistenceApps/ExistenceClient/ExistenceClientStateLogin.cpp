@@ -116,7 +116,7 @@ ExistenceClientStateLogin::ExistenceClientStateLogin(Context* context)
     :ExistenceClientStateSingleton (context)
 {
 
-    cout << "State Login Constructor" << endl;
+    cout << "Debug: State Login Constructor" << endl;
 
     /// create UI
     LoginScreen();
@@ -124,7 +124,7 @@ ExistenceClientStateLogin::ExistenceClientStateLogin(Context* context)
 
 ExistenceClientStateLogin::~ExistenceClientStateLogin()
 {
-    cout << "State Login Deconstructor" << endl;
+    cout << "Debug: State Login Deconstructor" << endl;
 
     //dtor
 }

@@ -116,12 +116,14 @@ using namespace Urho3D;
 ExistenceClientStateSingleton::ExistenceClientStateSingleton(Context* context):
     ExistenceClient(context)
 {
-    Singleton();
+    // singleton construct
+    cout << "Debug: Singleton Constructor" << endl;
 }
 
 ExistenceClientStateSingleton::~ExistenceClientStateSingleton()
 {
     //dtor
+    cout << "Debug: Singleton Deconstructor" << endl;
 }
 
 void ExistenceClientStateSingleton::Enter()
