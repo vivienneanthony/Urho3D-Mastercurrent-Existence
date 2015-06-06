@@ -85,7 +85,7 @@ private:
     Urho3D::SharedPtr<Urho3D::Node> mainNode;
 
     /// Vector Array - Derived States
-    std::vector< ExistenceClient *> myDerivedStates;
+    std::vector< ExistenceClientStateSingleton *> myDerivedStates;
 
 /// Added flags
     int consolestate;

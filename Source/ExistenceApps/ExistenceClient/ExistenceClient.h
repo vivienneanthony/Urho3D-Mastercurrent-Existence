@@ -216,7 +216,7 @@ class ExistenceClientStateSingleton: public ExistenceClient
 {
     OBJECT(ExistenceClientStateSingleton);
 public:
-    ExistenceClientStateSingleton(Urho3D::Context * context);
+    ExistenceClientStateSingleton(Context * context);
     virtual ~ExistenceClientStateSingleton();
     virtual void Enter();
     virtual void Exit();
@@ -228,11 +228,11 @@ protected:
 };
 
 /// Login State
-class ExistenceClientStateLogin : public ExistenceClient
+class ExistenceClientStateLogin : public ExistenceClientStateSingleton
 {
     OBJECT(ExistenceClientStateLogin);
 public:
-    ExistenceClientStateLogin(Urho3D::Context * context);
+    ExistenceClientStateLogin(Context * context);
     virtual ~ExistenceClientStateLogin();
     virtual void Enter();
     virtual void Exit();
@@ -248,11 +248,11 @@ protected:
 };
 
 /// Account State
-class ExistenceClientStateAccount: public ExistenceClient
+class ExistenceClientStateAccount: public ExistenceClientStateSingleton
 {
     OBJECT(ExistenceClientStateAccount);
 public:
-    ExistenceClientStateAccount(Urho3D::Context * context);
+    ExistenceClientStateAccount(Context * context);
     virtual ~ ExistenceClientStateAccount();
     virtual void Enter();
     virtual void Exit();
@@ -266,11 +266,11 @@ protected:
 };
 
 /// Main Screen State
-class ExistenceClientStateMainScreen: public ExistenceClient
+class ExistenceClientStateMainScreen: public ExistenceClientStateSingleton
 {
     OBJECT(ExistenceClientStateMainScreen);
 public:
-    ExistenceClientStateMainScreen(Urho3D::Context * context);
+    ExistenceClientStateMainScreen(Context * context);
     virtual ~ExistenceClientStateMainScreen();
     virtual void Enter();
     virtual void Exit();
@@ -287,11 +287,11 @@ protected:
 };
 
 /// Main Screen State
-class ExistenceClientStateGameMode: public ExistenceClient
+class ExistenceClientStateGameMode: public ExistenceClientStateSingleton
 {
     OBJECT(ExistenceClientStateGameMode);
 public:
-    ExistenceClientStateGameMode(Urho3D::Context * context);
+    ExistenceClientStateGameMode(Context * context);
     virtual ~ExistenceClientStateGameMode();
     virtual void Enter();
     virtual void Exit();
@@ -303,11 +303,11 @@ protected:
 };
 
 /// Player Create Login State
-class ExistenceClientStatePlayer: public ExistenceClient
+class ExistenceClientStatePlayer: public ExistenceClientStateSingleton
 {
     OBJECT(ExistenceClientStatePlayer);
 public:
-    ExistenceClientStatePlayer(Urho3D::Context * context);
+    ExistenceClientStatePlayer(Context * context);
     virtual ~ExistenceClientStatePlayer();
     virtual void Enter();
     virtual void Exit();
@@ -327,11 +327,11 @@ protected:
 };
 
 /// Main Screen State
-class ExistenceClientStateProgress :public ExistenceClient
+class ExistenceClientStateProgress :public ExistenceClientStateSingleton
 {
     OBJECT(ExistenceClientStateProgress);
 public:
-    ExistenceClientStateProgress(Urho3D::Context * context);
+    ExistenceClientStateProgress(Context * context);
     virtual ~ExistenceClientStateProgress();
     virtual void Enter();
     virtual void Exit();

@@ -115,7 +115,7 @@ using namespace Urho3D;
 
 /// Constructor Destror
 ExistenceClientStatePlayer::ExistenceClientStatePlayer(Urho3D::Context* context):
-    ExistenceClient(context)
+    ExistenceClientStateSingleton (context)
 {
     /// create UI
     Player();

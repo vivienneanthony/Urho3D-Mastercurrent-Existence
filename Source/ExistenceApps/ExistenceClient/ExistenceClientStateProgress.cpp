@@ -114,7 +114,7 @@ using namespace Urho3D;
 
 /// Constructor Destror
 ExistenceClientStateProgress::ExistenceClientStateProgress(Urho3D::Context* context)
-:ExistenceClient(context)
+    :ExistenceClientStateSingleton (context)
 {
     /// create UI
     Progress();
@@ -153,7 +153,8 @@ void ExistenceClientStateProgress::Progress(void)
     do
     {
 
-    } while (CurrentStateIsProgress);
+    }
+    while (CurrentStateIsProgress);
 }
 
 

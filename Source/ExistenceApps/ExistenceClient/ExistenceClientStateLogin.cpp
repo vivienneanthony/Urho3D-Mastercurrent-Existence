@@ -112,8 +112,8 @@ using namespace Urho3D;
 
 
 /// Constructor Destror
-ExistenceClientStateLogin::ExistenceClientStateLogin(Urho3D::Context* context)
-    :ExistenceClient(context)
+ExistenceClientStateLogin::ExistenceClientStateLogin(Context* context)
+    :ExistenceClientStateSingleton (context)
 {
 
     cout << "State Login Constructor" << endl;

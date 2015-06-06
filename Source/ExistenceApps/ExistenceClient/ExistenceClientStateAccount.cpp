@@ -116,7 +116,7 @@ using namespace Urho3D;
 
 /// Constructor Destror
 ExistenceClientStateAccount::ExistenceClientStateAccount(Context* context):
-ExistenceClient(context)
+    ExistenceClientStateSingleton (context)
 {
     /// create UI
     Account();
@@ -154,7 +154,8 @@ void ExistenceClientStateAccount::Account(void)
     /// Loop
     do
     {
-    } while(CurrentStateIsLogin);
+    }
+    while(CurrentStateIsLogin);
 
     return;
 }

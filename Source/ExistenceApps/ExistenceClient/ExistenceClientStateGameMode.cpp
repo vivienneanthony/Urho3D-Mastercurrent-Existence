@@ -114,7 +114,7 @@ using namespace Urho3D;
 
 
 ExistenceClientStateGameMode::ExistenceClientStateGameMode(Context* context):
-    ExistenceClient(context)
+    ExistenceClientStateSingleton (context)
 {
     /// Start Game Mode
     GameMode();
