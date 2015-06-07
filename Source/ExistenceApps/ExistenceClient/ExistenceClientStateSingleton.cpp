@@ -113,11 +113,16 @@ using namespace std;
 using namespace Urho3D;
 
 
-ExistenceClientStateSingleton::ExistenceClientStateSingleton(Context* context):
-    ExistenceClient(context)
+
+ExistenceClientStateSingleton::ExistenceClientStateSingleton(Context * context)
+:ExistenceClient(context)
 {
+
     // singleton construct
     cout << "Debug: Singleton Constructor" << endl;
+
+
+    cout << "Output" << GetTestString() <<endl;
 }
 
 ExistenceClientStateSingleton::~ExistenceClientStateSingleton()
@@ -137,20 +142,9 @@ void ExistenceClientStateSingleton::Exit()
 }
 
 
-void ExistenceClientStateSingleton::Singleton(void)
-{
-    /// Temporary for use flag of states
-    bool CurrentStateIsSingleton = true;
 
-    /// loop
-    do
-    {
-
-    } while (CurrentStateIsSingleton);
-}
 
 void ExistenceClientStateSingleton::OnUpdate(StringHash eventType, VariantMap& eventData)
 {
     //
 }
-

@@ -112,11 +112,12 @@ using namespace Urho3D;
 
 
 /// Constructor Destror
-ExistenceClientStateLogin::ExistenceClientStateLogin(Context* context)
-    :ExistenceClientStateSingleton (context)
+ExistenceClientStateLogin::ExistenceClientStateLogin(Context * context)
+    :ExistenceClientStateSingleton(context)
 {
 
     cout << "Debug: State Login Constructor" << endl;
+    cout << "Output" << GetTestString() << endl;
 
     /// create UI
     LoginScreen();
@@ -148,11 +149,16 @@ void ExistenceClientStateLogin::OnUpdate(StringHash eventType, VariantMap& event
 /// code
 void ExistenceClientStateLogin::LoginScreenUI(void)
 {
+
+
     /// Get Needed SubSystems
-    ResourceCache* cache_ = ExistenceClient::GetResourceCacheSubsystems();
-    Renderer* renderer_ = ExistenceClient::GetRenderSubsystems();
-    Graphics* graphics_ = ExistenceClient::GetGraphicsSubsystems();
-    UI* ui_ = ExistenceClient::GetUISubsystems();
+    ResourceCache* cache_ = GetResourceCacheSubsystems();
+    Renderer* renderer_ = GetRenderSubsystems();
+    Graphics* graphics_ = GetGraphicsSubsystems();
+    UI * ui_ = GetUISubsystems();
+
+
+    cout << "Output" << GetTestString() << endl;
 
     UIElement * uiRoot_ = ui_ -> GetRoot();
 
@@ -164,7 +170,7 @@ void ExistenceClientStateLogin::LoginScreenUI(void)
     /// ExistenceGameState->SetUIState(UI_LOGININTERFACE);
 
     /// Login screen - Create the Window and add it to the UI's root node
-       /// Create the Window and add it to the UI's root node
+    /// Create the Window and add it to the UI's root node
 
     window_= new Window(context_);
 
@@ -314,7 +320,8 @@ void ExistenceClientStateLogin::LoginScreen(void)
     {
         int a=1;
 
-    } while(CurrentStateIsLogin);
+    }
+    while(CurrentStateIsLogin);
 
     return;
 }

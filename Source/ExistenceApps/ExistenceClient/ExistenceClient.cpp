@@ -188,6 +188,7 @@ void ExistenceClient::Start()
     /// load account
     LoadAccount();
 
+    testvalue=911;
 
 
     /// Finally subscribe to the update event. Note that by subscribing events at this point we have already missed some events

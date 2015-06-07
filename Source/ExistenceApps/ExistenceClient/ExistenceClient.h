@@ -168,7 +168,11 @@ class ExistenceClient : public ExistenceApp
 
     Window * GetSharedWindow(void) const;
 
-///protected:
+    int GetTestString(void)
+    {
+        return testvalue;
+    }
+
 
 
 protected:
@@ -206,6 +210,9 @@ protected:
     /// Server connection related
     bool ServerConnection;
 
+    int testvalue;
+
+private:
 
 };
 
@@ -215,6 +222,7 @@ class ExistenceClientStateSingleton: public ExistenceClient
 {
     OBJECT(ExistenceClientStateSingleton);
 public:
+    ExistenceClientStateSingleton();
     ExistenceClientStateSingleton(Context * context);
     virtual ~ExistenceClientStateSingleton();
     virtual void Enter();
