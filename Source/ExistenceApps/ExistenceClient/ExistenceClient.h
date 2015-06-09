@@ -227,10 +227,6 @@ protected:
 
 private:
 
-
-
-
-
 };
 
 /// Login State
@@ -238,7 +234,7 @@ class ExistenceClientStateSingleton : public LogicComponent
 {
     OBJECT(ExistenceClientStateSingleton);
 public:
-    ExistenceClient baseclass; /// reference Existence Client
+    ExistenceClient * baseclass; /// reference Existence Client
 
     ExistenceClientStateSingleton(Context * context);
     virtual ~ExistenceClientStateSingleton();
@@ -248,7 +244,6 @@ public:
 private:
     void Singleton(void);
 protected:
-
 };
 
 /// Login State
@@ -268,6 +263,8 @@ private:
     void LoginScreenUILoginHandleClosePressed(StringHash eventType, VariantMap& eventData);
 
 protected:
+/// pointer
+    ExistenceClient * Existence;
 
 };
 
@@ -286,8 +283,8 @@ private:
     void CreateAccountScreenUI(void);
     void CreateAccountUIHandleClosePressed(StringHash eventType, VariantMap& eventData);
 protected:
-
-
+/// pointer
+    ExistenceClient * Existence;
 
 };
 
@@ -310,57 +307,7 @@ private:
     void HandleCharacterSelectedReleased(StringHash eventType, VariantMap& eventData);
     void HandleCharacterSelectedInfoButtonReleased(StringHash eventType, VariantMap& eventData);
 protected:
-/// Scene Shared Pointer
-    SharedPtr<Scene> scene_;
-    SharedPtr<Scene> scenePlayerUI_;
-    SharedPtr<Scene> sceneLoadingGameModeTransition_;
-
-    /// Existence Game State Handler Pointer for Game State
-    SharedPtr<GameStateHandler>  ExistenceGameState;
-
-    /// Camera scene node.
-    SharedPtr<Node> cameraNode_;
-    SharedPtr<Node> cameraNodePlayerUI_;
-    SharedPtr<Scene> sceneLoadingGameModeTransitionUI_;
-
-    /// Urho3D window shared pointers
-    SharedPtr<Window> window_;
-    SharedPtr<Window> window2_;
-
-    /// Urho3D UIelement root, viewport, and render path
-    SharedPtr<UIElement> uiRoot_;
-
-    /// Viewport Shared
-    SharedPtr<Viewport> viewport;
-
-    /// RenderPath shared
-    SharedPtr<RenderPath> effectRenderPath;
-
-    /// Urho3D Shared pointer for input
-    SharedPtr<Input> input_;
-
-    /// Existence Weak pointer for a single character
-    WeakPtr<Character> character_;
-
-    /// Existence player structure class and variable declation for character/player related information
-    Player  TemporaryPlayer;
-    Player  * TemporaryAccountPlayerList;
-    unsigned int TemporaryAccountPlayerSelected;
-    unsigned int TemporaryAccountPlayerListLimit;
-
-    /// Existence class and variable declaration for alien race alliance information
-    vector<string> aliensarray;
-    vector<string> tempaliensarray;
-
-    /// This is temoporarily the necessary code
-    bool accountexist;
-
-    /// Server connection related
-    bool ServerConnection;
-
-    /// Debug Testing
-    int testvalue;
-
+    ExistenceClient * Existence;
 };
 
 /// Main Screen State
@@ -376,7 +323,8 @@ public:
 private:
     void GameMode(void);
 protected:
-
+/// pointer
+    ExistenceClient * Existence;
 };
 
 /// Player Create Login State
@@ -400,6 +348,8 @@ private:
     void CreatePlayerUIHandleControlClicked(StringHash eventType, VariantMap& eventData);
     void HandlePersonalitySelectionItemClick(StringHash eventType, VariantMap& eventData);
 protected:
+    /// pointer
+    ExistenceClient * Existence;
 
 };
 
@@ -423,6 +373,8 @@ private:
     void loadDummyScene(void);
     void loadScene(const int mode, const char * lineinput);
 protected:
+/// pointer
+    ExistenceClient * Existence;
 
 };
 

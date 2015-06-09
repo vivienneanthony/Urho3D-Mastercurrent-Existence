@@ -111,13 +111,11 @@
 
 using namespace std;
 using namespace Urho3D;
-using namespace ExistenceClient;
-
 
 /// Constructor Destror
 ExistenceClientStateMainScreen::ExistenceClientStateMainScreen(Urho3D::Context* context)
     :ExistenceClientStateSingleton (context)
-    ,scene_(baseclass.scene_)
+    ,Existence(baseclass)
 {
     /// create UI
     MainScreen();

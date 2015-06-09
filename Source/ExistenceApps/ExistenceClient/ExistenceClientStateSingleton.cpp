@@ -73,7 +73,7 @@
 #include "../../../Urho3D/Graphics/RenderPath.h"
 #include "../../../Urho3D/Math/Color.h"
 
-#include "GameStateHandler.h"
+#include "GameStateHandlerComponent.h"
 #include "GameStateEvents.h"
 #include "GameObject.h"
 #include "EnvironmentBuild.h"
@@ -115,6 +115,7 @@ using namespace Urho3D;
 
 ExistenceClientStateSingleton::ExistenceClientStateSingleton(Context * context)
     :ExistenceClient(context)
+    ,Existence(baseclass)
 {
 
     // singleton construct
