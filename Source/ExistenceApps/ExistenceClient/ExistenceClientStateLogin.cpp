@@ -117,7 +117,8 @@ ExistenceClientStateLogin::ExistenceClientStateLogin(Context * context)
 {
 
     cout << "Debug: State Login Constructor" << endl;
-    cout << "Output" << GetTestString() << endl;
+
+        cout << "Debug: State Login Constructor Class Test Value " << GetTestString() << " context_ " << &context_ << " context " <<& context <<endl;
 
     /// create UI
     LoginScreen();

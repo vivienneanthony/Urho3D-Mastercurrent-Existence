@@ -49,10 +49,6 @@
 #include "GameStateEvents.h"
 #include "GameStateHandler.h"
 
-
-
-
-
 string ConvertUIntToString(unsigned int val);
 
 /// This first example, maintaining tradition, prints a "Hello World" message.
@@ -60,20 +56,18 @@ string ConvertUIntToString(unsigned int val);
 ///     - Using the Sample / Application classes, which initialize the Urho3D engine and run the main loop
 ///     - Adding a Text element to the graphical user interface
 ///     - Subscribing to and handling of update events
+
+using namespace Urho3D;
+using namespace std;
+
 class ExistenceClient : public ExistenceApp
 {
-
     OBJECT(ExistenceClient);
 
-    /// friend the other classes
- /*   friend class ExistenceClientStateSingleton;
-    friend class ExistenceClientStateAccount;
-    friend class ExistenceClientStateProgress;
-    friend class ExistenceClientStateGameMode;
-    friend class ExistenceClientStateLogin;
-    friend class ExistenceClientStatePlayer;
-    friend class ExistenceClientStateMainScreen;*/
-
+public:
+    /// Mention friend classes
+    friend class ExistenceClientStateSingleton;
+    friend class ExistenceClientStateMainScreen;
 
     /// Construct.
     ExistenceClient(Context* context);
@@ -92,6 +86,8 @@ class ExistenceClient : public ExistenceApp
             "    </add>"
             "</patch>";
     }
+
+    void Init(Context * context);
 
     /// Diaplay login screen
     void SetupScreenViewport(void);
@@ -125,7 +121,7 @@ class ExistenceClient : public ExistenceApp
     void SaveAccount(accountinformation account);
     void SavePlayer(bool activeplayer);
     int LoadAccountPlayers(void);
-    int LoadPlayer(int player);
+    int LoadPlayer(int player) ;
     int LoadTemporaryPlayer(int player);
     int GenerateSceneLoadDifferential(const char *filename=NULL);
     int LoadEnvironmentSettings(const char *environment);
@@ -168,14 +164,27 @@ class ExistenceClient : public ExistenceApp
 
     Window * GetSharedWindow(void) const;
 
+    /// Debug test string
     int GetTestString(void)
     {
         return testvalue;
     }
 
 
-
 protected:
+
+    /// Scene Shared Pointer
+    SharedPtr<Scene> scene_;
+    SharedPtr<Scene> scenePlayerUI_;
+    SharedPtr<Scene> sceneLoadingGameModeTransition_;
+
+    /// Existence Game State Handler Pointer for Game State
+    SharedPtr<GameStateHandler>  ExistenceGameState;
+
+    /// Camera scene node.
+    SharedPtr<Node> cameraNode_;
+    SharedPtr<Node> cameraNodePlayerUI_;
+    SharedPtr<Scene> sceneLoadingGameModeTransitionUI_;
 
     /// Urho3D window shared pointers
     SharedPtr<Window> window_;
@@ -183,8 +192,11 @@ protected:
 
     /// Urho3D UIelement root, viewport, and render path
     SharedPtr<UIElement> uiRoot_;
+
+    /// Viewport Shared
     SharedPtr<Viewport> viewport;
 
+    /// RenderPath shared
     SharedPtr<RenderPath> effectRenderPath;
 
     /// Urho3D Shared pointer for input
@@ -192,7 +204,6 @@ protected:
 
     /// Existence Weak pointer for a single character
     WeakPtr<Character> character_;
-
 
     /// Existence player structure class and variable declation for character/player related information
     Player  TemporaryPlayer;
@@ -210,19 +221,25 @@ protected:
     /// Server connection related
     bool ServerConnection;
 
+    /// Debug Testing
     int testvalue;
+
 
 private:
 
+
+
+
+
 };
 
-
 /// Login State
-class ExistenceClientStateSingleton: public ExistenceClient
+class ExistenceClientStateSingleton : public LogicComponent
 {
     OBJECT(ExistenceClientStateSingleton);
 public:
-    ExistenceClientStateSingleton();
+    ExistenceClient baseclass; /// reference Existence Client
+
     ExistenceClientStateSingleton(Context * context);
     virtual ~ExistenceClientStateSingleton();
     virtual void Enter();
@@ -270,12 +287,15 @@ private:
     void CreateAccountUIHandleClosePressed(StringHash eventType, VariantMap& eventData);
 protected:
 
+
+
 };
 
 /// Main Screen State
 class ExistenceClientStateMainScreen: public ExistenceClientStateSingleton
 {
     OBJECT(ExistenceClientStateMainScreen);
+
 public:
     ExistenceClientStateMainScreen(Context * context);
     virtual ~ExistenceClientStateMainScreen();
@@ -290,6 +310,56 @@ private:
     void HandleCharacterSelectedReleased(StringHash eventType, VariantMap& eventData);
     void HandleCharacterSelectedInfoButtonReleased(StringHash eventType, VariantMap& eventData);
 protected:
+/// Scene Shared Pointer
+    SharedPtr<Scene> scene_;
+    SharedPtr<Scene> scenePlayerUI_;
+    SharedPtr<Scene> sceneLoadingGameModeTransition_;
+
+    /// Existence Game State Handler Pointer for Game State
+    SharedPtr<GameStateHandler>  ExistenceGameState;
+
+    /// Camera scene node.
+    SharedPtr<Node> cameraNode_;
+    SharedPtr<Node> cameraNodePlayerUI_;
+    SharedPtr<Scene> sceneLoadingGameModeTransitionUI_;
+
+    /// Urho3D window shared pointers
+    SharedPtr<Window> window_;
+    SharedPtr<Window> window2_;
+
+    /// Urho3D UIelement root, viewport, and render path
+    SharedPtr<UIElement> uiRoot_;
+
+    /// Viewport Shared
+    SharedPtr<Viewport> viewport;
+
+    /// RenderPath shared
+    SharedPtr<RenderPath> effectRenderPath;
+
+    /// Urho3D Shared pointer for input
+    SharedPtr<Input> input_;
+
+    /// Existence Weak pointer for a single character
+    WeakPtr<Character> character_;
+
+    /// Existence player structure class and variable declation for character/player related information
+    Player  TemporaryPlayer;
+    Player  * TemporaryAccountPlayerList;
+    unsigned int TemporaryAccountPlayerSelected;
+    unsigned int TemporaryAccountPlayerListLimit;
+
+    /// Existence class and variable declaration for alien race alliance information
+    vector<string> aliensarray;
+    vector<string> tempaliensarray;
+
+    /// This is temoporarily the necessary code
+    bool accountexist;
+
+    /// Server connection related
+    bool ServerConnection;
+
+    /// Debug Testing
+    int testvalue;
 
 };
 

@@ -103,44 +103,118 @@
 #include "ExistenceClient.h"
 #include "ExistenceClientUI.h"
 
+#include "GameStateHandlerComponent.h"
+
 #include "../../Urho3D/Engine/DebugHud.h"
 
 
-#define DEFAULTSIZE 4096
-
-using namespace std;
 using namespace Urho3D;
+using namespace std;
 
-
-
-ExistenceClientStateSingleton::ExistenceClientStateSingleton(Context * context)
-    :ExistenceClient(context)
+namespace Urho3D
 {
+/// Game State Handler Coponent
+GameStateHandlerComponent::GameStateHandlerComponent(Context* context) :
+    LogicComponent (context)
+{
+    /// constructor
 
-    // singleton construct
-    cout << "Debug: Singleton Constructor" << endl;
-
-    /// Debug output context and testvalue
-    cout << "Debug: Singleton Constructor Class Test Value " << GetTestString() << " context_ " << &context_ << " context " <<& context <<endl;
+    /// Debug Info
+    cout << "Debug: Game State Handler Component Constructor - context " << &context << endl;
 }
 
-ExistenceClientStateSingleton::~ExistenceClientStateSingleton()
+/// Game State Component Deconstructor
+GameStateHandlerComponent::~GameStateHandlerComponent()
 {
-    //dtor
-    cout << "Debug: Singleton Deconstructor" << endl;
+    /// Debug Info
+    cout << "Debug: Game State Handler Component Deconstructor " << endl;
 }
 
-void ExistenceClientStateSingleton::Enter()
+
+/// Register Subsystem
+void GameStateHandlerComponent::RegisterNewSubsystem(Urho3D::Context* context)
 {
-    //dtor
+    context -> RegisterSubsystem(new GameStateHandlerComponent(context));
+
+    /// Debug Info
+    cout << "Debug: Game State Handler Component Register - context " << &context << endl;
+
+    return;
 }
 
-void ExistenceClientStateSingleton::Exit()
+/// try to test the state
+int GameStateHandlerComponent::Start()
 {
-    //dtor
+    /// Test
+    ExistenceClientStateSingleton *  gameState = new ExistenceClientStateLogin(context);
 }
 
-void ExistenceClientStateSingleton::OnUpdate(StringHash eventType, VariantMap& eventData)
+/// Functions for states
+int GameStateHandlerComponent::GetConsoleState(void)
 {
-    //
+    int flag;
+
+    flag = consolestate;
+
+    return flag;
+}
+
+
+int GameStateHandlerComponent::SetConsoleState(int flag)
+{
+
+    consolestate=flag;
+
+    return 1;
+}
+
+int GameStateHandlerComponent::GetUIState(void)
+{
+    int flag;
+    flag=uistate;
+
+    return flag;
+}
+
+int GameStateHandlerComponent::SetUIState(int flag)
+{
+
+    uistate = flag;
+
+    return 1;
+}
+
+int GameStateHandlerComponent::GetCameraMode(void)
+{
+    int flag;
+
+    flag = cameramode;
+
+    return flag;;
+}
+
+int GameStateHandlerComponent::SetCameraMode(int flag)
+{
+
+    cameramode = flag;
+
+    return 1;
+}
+
+int GameStateHandlerComponent::GetDebugHudMode(void)
+{
+    int flag;
+
+    flag = debughud;
+
+    return flag;;
+}
+
+int GameStateHandlerComponent::SetDebugHudMode(int flag)
+{
+
+    debughud = flag;
+
+    return 1;
+}
 }

@@ -74,6 +74,7 @@
 #include "../../../Urho3D/Math/Color.h"
 
 #include "GameStateComponent.h"
+#include "GameStateHandlerComponent.h"
 #include "GameStateHandler.h"
 #include "GameStateEvents.h"
 #include "GameObject.h"
@@ -119,18 +120,23 @@ DEFINE_APPLICATION_MAIN(ExistenceClient)
 ExistenceClient::ExistenceClient(Context* context) :
     ExistenceApp(context), uiRoot_(GetSubsystem<UI>()->GetRoot())
 {
+
+
     /// Register
     Character::RegisterObject(context);
     GameObject::RegisterObject(context);
     EnvironmentBuild::RegisterObject(context);
     ProceduralTerrain::RegisterObject(context);
+    GameStateHandler::RegisterGameStates(context);
     GameStateHandler::RegisterObject(context);
     Manager::RegisterNewSubsystem(context);
     EnvironmentBuild::RegisterNewSubsystem(context);
-    GameStateComponent::RegisterNewSubsystem(context);
+    GameStateHandlerComponent::RegisterNewSubsystem(context);
 
-    cout << "Debug: Existence Client Base Class Constructor" << endl;
+    ///context_=context;
 
+    /// Register states
+    cout << "Debug: Existence Client Base Class Constructor context" << &context << " context_"<< &context_ << endl;
 }
 
 ExistenceClient::~ExistenceClient()
@@ -138,9 +144,16 @@ ExistenceClient::~ExistenceClient()
     cout << "Debug: Existence Client Base Class Deconstructor" << endl;
 }
 
+void ExistenceClient::Init(Context * context)
+{
+}
+
 /// Main program execution code
 void ExistenceClient::Start()
 {
+    /// Initialize
+    Init(context_);
+
     /// Execute base class startup
     ExistenceApp::Start();
 
@@ -149,9 +162,9 @@ void ExistenceClient::Start()
     FileSystem * filesystem = GetSubsystem<FileSystem>();
     Manager * manager_ = GetSubsystem<Manager>();
     EnvironmentBuild * environmentbuild_ = GetSubsystem<EnvironmentBuild>();
+    GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
 
     UI* ui = GetSubsystem<UI>();
-
 
     /// create variables (urho3d)
     String additionresourcePath;
@@ -188,8 +201,11 @@ void ExistenceClient::Start()
     /// load account
     LoadAccount();
 
+    /// Create test value
     testvalue=911;
 
+    /// Debug output context and testvalue
+    cout << "Debug: ExistenceClient Class Test Value " << testvalue << " context_ " << &context_ << endl;
 
     /// Finally subscribe to the update event. Note that by subscribing events at this point we have already missed some events
     /// like the ScreenMode event sent by the Graphics subsystem when opening the application window. To catch those as well we
@@ -200,12 +216,9 @@ void ExistenceClient::Start()
     srand (time(NULL));
 
     /// Configure rudimentary state handler
-    ///    ExistenceGameState->SetConsoleState(0);
-
-    /// Start here
-    SharedPtr<GameStateHandler> ExistenceGameState(new GameStateHandler(context_));
-
-   ExistenceGameState->Start();
+    /// ExistenceGameState->SetConsoleState(0);
+    ///ExistenceGameState = new GameStateHandler(&(*context_));
+    ///ExistenceGameState->Start();
 
     return;
 }

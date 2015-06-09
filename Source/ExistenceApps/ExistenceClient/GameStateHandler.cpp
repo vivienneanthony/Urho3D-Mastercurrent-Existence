@@ -121,11 +121,13 @@ GameStateHandler::GameStateHandler(Context * context):
     cameramode=CAMERAMODE_DEFAULT;
     debughud=false;
 
+    context_ = context;
+
     /// Subscribe to event state change
     SubscribeToEvent(G_STATES_CHANGE, HANDLER(GameStateHandler, onStateChange));
 
-    /// Register states
-    RegisterGameStates();
+    cout << "Debug: Game State Constructor context_ " << &context_ << " context " << &context << endl;
+
 }
 
 GameStateHandler::~GameStateHandler()
@@ -138,16 +140,20 @@ GameStateHandler::~GameStateHandler()
 }
 
 
-void GameStateHandler::RegisterGameStates()
+void GameStateHandler::RegisterGameStates(Context* context)
 {
     /// .... all states here
-    context_->RegisterFactory<ExistenceClientStateSingleton>();
-    context_->RegisterFactory<ExistenceClientStateAccount>();
-    context_->RegisterFactory<ExistenceClientStateGameMode>();
-    context_->RegisterFactory<ExistenceClientStateLogin>();
-    context_->RegisterFactory<ExistenceClientStatePlayer>();
-    context_->RegisterFactory<ExistenceClientStateProgress>();
-    context_->RegisterFactory<ExistenceClientStateMainScreen>();
+    context->RegisterFactory<ExistenceClientStateSingleton>();
+    context->RegisterFactory<ExistenceClientStateAccount>();
+    context->RegisterFactory<ExistenceClientStateGameMode>();
+    context->RegisterFactory<ExistenceClientStateLogin>();
+    context->RegisterFactory<ExistenceClientStatePlayer>();
+    context->RegisterFactory<ExistenceClientStateProgress>();
+    context->RegisterFactory<ExistenceClientStateMainScreen>();
+
+
+    cout << "Debug: Game State Register States context_ " << &context << endl;
+
 
 }
 
@@ -156,6 +162,8 @@ void GameStateHandler::RegisterGameStates()
 void GameStateHandler::RegisterObject(Context* context)
 {
     context->RegisterFactory<GameStateHandler>();
+
+    cout << "Debug: Game State Register Game Handler context " << &context << endl;
 }
 
 void GameStateHandler::Start(void)
@@ -213,15 +221,20 @@ void GameStateHandler::onStateChange( Urho3D::StringHash eventType, Urho3D::Vari
     }
 }
 
+
 void GameStateHandler::createState( String newState )
 {
     /// switch states
     if(newState=="ExistenceClientStateSingleton")
     {
+
+
         myDerivedStates.push_back(new ExistenceClientStateSingleton(context_));
     }
     else if(newState=="ExistenceClientStateLogin")
     {
+        cout << "Debug: Create State Login context_ " << &context_ << endl;
+
         myDerivedStates.push_back(new ExistenceClientStateLogin(context_));
     }
     else

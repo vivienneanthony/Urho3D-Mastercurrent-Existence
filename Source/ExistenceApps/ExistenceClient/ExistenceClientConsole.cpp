@@ -844,7 +844,7 @@ int ExistenceClient::ConsoleActionDebug(const char * lineinput)
         SavePlayer(1);
 
     }
-
+/*
 
     /// parameters for debug related command
     if(argument[1]=="hud")
@@ -861,7 +861,7 @@ int ExistenceClient::ConsoleActionDebug(const char * lineinput)
             GetSubsystem<DebugHud>()->ToggleAll();
         }
     }
-
+*/
     return 1;
 }
 

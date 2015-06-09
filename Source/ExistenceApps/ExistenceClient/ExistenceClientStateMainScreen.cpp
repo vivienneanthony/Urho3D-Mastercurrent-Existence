@@ -73,7 +73,7 @@
 #include "../../../Urho3D/Graphics/RenderPath.h"
 #include "../../../Urho3D/Math/Color.h"
 
-#include "GameStateHandler.h"
+#include "GameStateHandlerComponent.h"
 #include "GameStateEvents.h"
 #include "GameObject.h"
 #include "EnvironmentBuild.h"
@@ -111,10 +111,13 @@
 
 using namespace std;
 using namespace Urho3D;
+using namespace ExistenceClient;
+
 
 /// Constructor Destror
 ExistenceClientStateMainScreen::ExistenceClientStateMainScreen(Urho3D::Context* context)
     :ExistenceClientStateSingleton (context)
+    ,scene_(baseclass.scene_)
 {
     /// create UI
     MainScreen();

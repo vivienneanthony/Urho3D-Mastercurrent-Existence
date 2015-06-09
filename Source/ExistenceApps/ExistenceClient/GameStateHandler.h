@@ -21,6 +21,7 @@
 #define         CAMERAMODE_FIRSTPERSON              1
 #define         CAMERAMODE_FLY                      2
 
+#include "GameStateHandler.h"
 #include "GameStateComponent.h"
 
 
@@ -35,7 +36,7 @@ class GameStateHandler : public Object
     OBJECT(GameStateHandler);
 public:
     ///costructor
-    GameStateHandler(Context * context);
+    GameStateHandler(Urho3D::Context * context);
     /// Destruct.
     virtual  ~GameStateHandler();
     /// start point
@@ -47,7 +48,7 @@ public:
     // Register object factory and attributes.
     static void RegisterObject(Context* context);
     /// register all states
-    void RegisterGameStates();
+    static void RegisterGameStates(Context* content);
 
     /// Function to access other states
     int GetConsoleState(void);
