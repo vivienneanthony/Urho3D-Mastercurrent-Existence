@@ -114,15 +114,17 @@ using namespace Urho3D;
 
 
 ExistenceClientStateSingleton::ExistenceClientStateSingleton(Context * context)
-    :ExistenceClient(context)
-    ,Existence(baseclass)
+    :LogicComponent(context)
+    ,baseclass(NULL)
 {
 
-    // singleton construct
+    baseclass = ExistenceClient::applicationPtr;
+    /// ApplicationPtr is a  Urho3D::SharedPtr<ExistenceClient> in the Existence Class(Public)
+    /// baseclass is a Urho3D::SharedPtr<ExistenceClient>
+
+    /// singleton construct
     cout << "Debug: Singleton Constructor" << endl;
 
-    /// Debug output context and testvalue
-    cout << "Debug: Singleton Constructor Class Test Value " << GetTestString() << " context_ " << &context_ << " context " <<& context <<endl;
 }
 
 ExistenceClientStateSingleton::~ExistenceClientStateSingleton()
@@ -140,7 +142,6 @@ void ExistenceClientStateSingleton::Exit()
 {
     //dtor
 }
-
 void ExistenceClientStateSingleton::OnUpdate(StringHash eventType, VariantMap& eventData)
 {
     //

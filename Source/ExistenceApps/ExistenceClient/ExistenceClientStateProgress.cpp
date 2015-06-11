@@ -73,7 +73,7 @@
 #include "../../../Urho3D/Graphics/RenderPath.h"
 #include "../../../Urho3D/Math/Color.h"
 
-#include "GameStateHandlerComponet.h"
+#include "GameStateHandlerComponent.h"
 #include "GameStateEvents.h"
 #include "GameObject.h"
 #include "EnvironmentBuild.h"
@@ -173,28 +173,28 @@ void ExistenceClientStateProgress::ProgressScreenUI(void)
     ui->Clear();
 
     /// set ui state to none
-    ExistenceGameState->SetUIState(UI_PROGRESSINTERFACE);
+    ///ExistenceGameState->SetUIState(UI_PROGRESSINTERFACE);
 
     /// Get rendering window size as floats
     float width = (float)graphics->GetWidth();
     float height = (float)graphics->GetHeight();
 
     /// Create the Window and add it to the UI's root node
-    window_= new Window(context_);
+    Existence->window_= new Window(context_);
 
-    uiRoot_->AddChild(window_);
+    Existence->uiRoot_->AddChild(Existence->window_);
     UIElement* titleBar = new UIElement(context_);
     Text* windowTitle = new Text(context_);
     Text* progressText=new Text(context_);
     Button* continueButton = new Button(context_);
 
     /// Set Window size and layout settings
-    window_->SetMinSize(384, 192);
-    window_->SetLayout(LM_VERTICAL, 6, IntRect(6, 6, 6, 6));
-    window_->SetAlignment(HA_CENTER, VA_CENTER);
-    window_->SetName("LoginWindow");
-    window_->SetMovable(false);
-    window_->SetOpacity(.6);
+    Existence->window_->SetMinSize(384, 192);
+    Existence->window_->SetLayout(LM_VERTICAL, 6, IntRect(6, 6, 6, 6));
+    Existence->window_->SetAlignment(HA_CENTER, VA_CENTER);
+    Existence->window_->SetName("LoginWindow");
+    Existence->window_->SetMovable(false);
+    Existence->window_->SetOpacity(.6);
 
     /// Create Window 'titlebar' container
     titleBar->SetMinSize(0,32);
@@ -214,12 +214,12 @@ void ExistenceClientStateProgress::ProgressScreenUI(void)
 
     /// Add the controls to the title bar
     titleBar->AddChild(windowTitle);
-    window_->AddChild(titleBar);
-    window_->AddChild(progressText);
-    window_->AddChild(continueButton);
+    Existence->window_->AddChild(titleBar);
+    Existence->window_->AddChild(progressText);
+    Existence->window_->AddChild(continueButton);
 
     /// Apply styles
-    window_->SetStyleAuto();
+    Existence->window_->SetStyleAuto();
     windowTitle->SetStyleAuto();
 
     SubscribeToEvent(continueButton, E_RELEASED, HANDLER(ExistenceClientStateProgress, ProgressScreenUIHandleClosePressed));
@@ -231,10 +231,10 @@ void ExistenceClientStateProgress::ProgressScreenUI(void)
 void ExistenceClientStateProgress::ProgressScreenUIHandleClosePressed(StringHash eventType, VariantMap& eventData)
 {
     /// set ui state to none
-    ExistenceGameState->SetUIState(UI_PROGRESSINTERFACE);
+    ///ExistenceGameState->SetUIState(UI_PROGRESSINTERFACE);
 
     //mainScreenUI();
-    ExistenceGameState -> SendEvent("GAME_STATE_MAINSCREEN");
+    ///ExistenceGameState -> SendEvent("GAME_STATE_MAINSCREEN");
 
     return;
 }
@@ -252,12 +252,12 @@ void ExistenceClientStateProgress::CreateCharacter(void)
     UI* ui = GetSubsystem<UI>();
     FileSystem * filesystem = GetSubsystem<FileSystem>();
 
-    Node* objectNode = scene_->GetChild("Character");
+    Node* objectNode = Existence->scene_->GetChild("Character");
 
     /// Register Character component
-    character_ = objectNode->CreateComponent<Character>();
+    Existence-> character_ = objectNode->CreateComponent<Character>();
 
-    LoadPlayer(TemporaryAccountPlayerSelected);
+    Existence->LoadPlayer(Existence->TemporaryAccountPlayerSelected);
 
     /// Copy character information
     //character_ -> SetAlliance(TemporaryAccountPlayerList[TemporaryAccountPlayerSelected].GetAlliance());
@@ -267,7 +267,7 @@ void ExistenceClientStateProgress::CreateCharacter(void)
     //character_ -> SetHealth(100);
 
     /// Load a Character Mesh
-    LoadCharacterMesh(CHARACTERMAINSCENE, "Character",character_->GetAlliance().alienrace,character_->GetCharacteristics().gender);
+    Existence->LoadCharacterMesh(CHARACTERMAINSCENE, "Character",Existence->character_->GetAlliance().alienrace,Existence->character_->GetCharacteristics().gender);
 
     GameObject* charaterGameObject = objectNode -> CreateComponent<GameObject>();
 
@@ -307,11 +307,11 @@ void ExistenceClientStateProgress::CreateCharacter(void)
     Node * cameraNode_ = headNode ->CreateChild("CameraFirstPerson");
 
     /// Set an initial position for the camera scene node above the plane
-    cameraNode_->SetPosition(Vector3(0.0f,0.0f,0.15f));
-    cameraNode_->SetRotation(Quaternion(0.0,0.0,0.0));
+    Existence->cameraNode_->SetPosition(Vector3(0.0f,0.0f,0.15f));
+    Existence->cameraNode_->SetRotation(Quaternion(0.0,0.0,0.0));
 
     /// Set first person camera Node
-    Camera* cameraObject = cameraNode_->CreateComponent<Camera>();
+    Camera* cameraObject = Existence->cameraNode_->CreateComponent<Camera>();
     cameraObject->SetOrthographic(0);
     cameraObject->SetZoom(1);
     cameraObject->SetNearClip(0.0f);
@@ -330,27 +330,27 @@ void ExistenceClientStateProgress::CreateCharacter(void)
     crossboxModel ->ApplyMaterialList("Resources/Models/CrossBox.txt");
 
     /// Set camera to first person
-    ExistenceGameState->SetCameraMode(CAMERAMODE_FIRSTPERSON);
+    ///ExistenceGameState->SetCameraMode(CAMERAMODE_FIRSTPERSON);
 
     /// Set up a viewport to the Renderer subsystem so that the 3D scene can be seen. We need to define the scene and the camera
     /// at minimum. Additionally we could configure the viewport screen size and the rendering path (eg. forward / deferred) to
     /// use, but now we just use full screen and default render path configured	SetOrthographic ( in the engine command line options
     /// viewport -> SetCamera(cameraObject);
-    SharedPtr<Viewport> viewport(new Viewport(context_, scene_, cameraObject));
-    renderer->SetViewport(0, viewport);
+    Existence->viewport = new Viewport(context_, Existence->scene_, cameraObject);
+    renderer->SetViewport(0,Existence-> viewport);
 
-    effectRenderPath = viewport->GetRenderPath() -> Clone();
-    effectRenderPath->Append(cache->GetResource<XMLFile>("PostProcess/Bloom.xml"));
-    effectRenderPath->Append(cache->GetResource<XMLFile>("PostProcess/FXAA3.xml"));
+    Existence->effectRenderPath = Existence->viewport->GetRenderPath() -> Clone();
+    Existence->effectRenderPath->Append(cache->GetResource<XMLFile>("PostProcess/Bloom.xml"));
+    Existence->effectRenderPath->Append(cache->GetResource<XMLFile>("PostProcess/FXAA3.xml"));
 
     /// Make the bloom mixing parameter more pronounced
-    effectRenderPath->SetShaderParameter("BloomMix", Vector2(0.9f, 0.6f));
-    effectRenderPath->SetEnabled("Bloom", false);
-    effectRenderPath->SetEnabled("FXAA3", false);
-    viewport->SetRenderPath(effectRenderPath);
+    Existence->effectRenderPath->SetShaderParameter("BloomMix", Vector2(0.9f, 0.6f));
+    Existence->effectRenderPath->SetEnabled("Bloom", false);
+    Existence->effectRenderPath->SetEnabled("FXAA3", false);
+    Existence->viewport->SetRenderPath(Existence->effectRenderPath);
 
-    character_->controls_.pitch_ = cameraNode_->GetRotation().PitchAngle();
-    character_->controls_.yaw_ = cameraNode_->GetRotation().YawAngle();
+    Existence->character_->controls_.pitch_ = cameraNode_->GetRotation().PitchAngle();
+    Existence->character_->controls_.yaw_ = cameraNode_->GetRotation().YawAngle();
 
     return;
 }
@@ -372,13 +372,13 @@ void ExistenceClientStateProgress::GenerateScene(terrain_rule terrainrule,const 
     String InputDataFile;
 
     /// Create Scene components
-    scene_-> CreateComponent<Octree>();
-    scene_-> CreateComponent<PhysicsWorld>();
-    scene_-> CreateComponent<DebugRenderer>();
+    Existence->scene_-> CreateComponent<Octree>();
+    Existence->scene_-> CreateComponent<PhysicsWorld>();
+    Existence->scene_-> CreateComponent<DebugRenderer>();
 
     /// clear api
-    manager_->SetScene(scene_);
-    environmentbuild_->SetScene(scene_);
+    manager_->SetScene(Existence->scene_);
+    environmentbuild_->SetScene(Existence->scene_);
 
     /// test creation
     if(terrainrule.creationtime==0)
@@ -393,7 +393,7 @@ void ExistenceClientStateProgress::GenerateScene(terrain_rule terrainrule,const 
     /// Create skybox. The Skybox component is used like StaticModel, but it will be always located at the camera, giving the
     /// illusion of the box planes being far away. Use just the ordinary Box model and a suitable material, whose shader will
     /// generate the necessary 3D texture coordinates for cube mapping
-    Node* skyNode = scene_->CreateChild("Sky");
+    Node* skyNode = Existence->scene_->CreateChild("Sky");
 
     Skybox* skybox = skyNode->CreateComponent<Skybox>();
     skybox->SetModel(cache->GetResource<Model>("Models/Box.mdl"));
@@ -404,7 +404,7 @@ void ExistenceClientStateProgress::GenerateScene(terrain_rule terrainrule,const 
 
 
     /// Create a directional light to the world. Enable cascaded shadows on it
-    Node* lightNode = scene_->CreateChild("DirectionalLight1");
+    Node* lightNode = Existence->scene_->CreateChild("DirectionalLight1");
     lightNode->SetDirection(Vector3(0.6f, -1.0f, 0.8f));
     Light* light = lightNode->CreateComponent<Light>();
     light->SetLightType(LIGHT_DIRECTIONAL);
@@ -417,7 +417,7 @@ void ExistenceClientStateProgress::GenerateScene(terrain_rule terrainrule,const 
     lightNode->SetName("GeneratedLight_Light1");
 
     /// Create a directional light to the world. Enable cascaded shadows on it
-    Node* lightNode2 = scene_->CreateChild("DirectionalLight2");
+    Node* lightNode2 = Existence->scene_->CreateChild("DirectionalLight2");
     Light* light2 = lightNode2->CreateComponent<Light>();
     light2->SetLightType(LIGHT_DIRECTIONAL);
     light2->SetCastShadows(true);
@@ -430,7 +430,7 @@ void ExistenceClientStateProgress::GenerateScene(terrain_rule terrainrule,const 
     lightNode2->SetName("GeneratedLight_Light2");
 
     /// Create a directional light to the world. Enable cascaded shadows on it
-    Node* lightNode3 = scene_->CreateChild("DirectionalLight3");
+    Node* lightNode3 = Existence->scene_->CreateChild("DirectionalLight3");
     Light* light3 = lightNode3->CreateComponent<Light>();
     light3->SetLightType(LIGHT_DIRECTIONAL);
     light3->SetCastShadows(true);
@@ -443,7 +443,7 @@ void ExistenceClientStateProgress::GenerateScene(terrain_rule terrainrule,const 
     lightNode3->SetName("GeneratedLight_Light3");
 
     /// Define Terrain component information
-    Node* terrainNode = scene_->CreateChild("Terrain");
+    Node* terrainNode = Existence->scene_->CreateChild("Terrain");
     terrainNode ->SetName("GeneratedTerrainRule_TerrainRoot");
 
     Terrain* terrain = terrainNode->CreateComponent<Terrain>();
@@ -613,14 +613,14 @@ void ExistenceClientStateProgress::GenerateScene(terrain_rule terrainrule,const 
 
 
     /// Position character
-    Node * characternode_ = scene_->CreateChild("Character");
+    Node * characternode_ = Existence->scene_->CreateChild("Character");
     characternode_->SetPosition(Vector3(0.0f, position.y_ , 0.0f));
 
     /// Get the materials
     Material * skyboxMaterial = skybox->GetMaterial();
 
     /// Change environment
-    GenerateSceneUpdateEnvironment(terrainrule);
+    Existence->GenerateSceneUpdateEnvironment(terrainrule);
 
     /// Add objects functions
     GenerateSceneBuildWorld(terrainrule);
@@ -628,7 +628,7 @@ void ExistenceClientStateProgress::GenerateScene(terrain_rule terrainrule,const 
     /// Load differiental
     if(differentialfilename)
     {
-        GenerateSceneLoadDifferential(differentialfilename);
+        Existence->GenerateSceneLoadDifferential(differentialfilename);
 
     }
 
@@ -652,7 +652,7 @@ int ExistenceClientStateProgress::GenerateSceneBuildWorld(terrain_rule terrainru
     ///Node * WorldObjectNode = scene_-> CreateChild("EnvironmentBuildNode");
     ///EnvironmentBuild * EnvironmentBuildObjects = WorldObjectNode  -> CreateComponent<EnvironmentBuild>();
 
-    Node* terrainNode = scene_->GetChild("GeneratedTerrainRule_TerrainRoot",true);
+    Node* terrainNode = Existence->scene_->GetChild("GeneratedTerrainRule_TerrainRoot",true);
     Terrain * terrain = terrainNode -> GetComponent<Terrain>();
 
     /// Initialize
@@ -674,8 +674,8 @@ void ExistenceClientStateProgress::loadDummyScene(void)
     Graphics* graphics = GetSubsystem<Graphics>();
     UI* ui = GetSubsystem<UI>();
 
-    scene_-> CreateComponent<Octree>();
-    scene_-> CreateComponent<DebugRenderer>();
+    Existence->scene_-> CreateComponent<Octree>();
+    Existence->scene_-> CreateComponent<DebugRenderer>();
 
     /// Create the Octree component to the scene. This is required before adding any drawable components, or else nothing will
     /// show up. The default octree volume will be from (-1000, -1000, -1000) to (1000, 1000, 1000) in world coordinates; it
@@ -685,7 +685,7 @@ void ExistenceClientStateProgress::loadDummyScene(void)
     /// Create a child scene node (at world origin) and a StaticModel component into it. Set the StaticModel to show a simple
     /// plane mesh with a "stone" material. Note that naming the scene nodes is optional. Scale the scene node larger
     /// (100 x 100 world units)
-    Node* planeNode = scene_->CreateChild("Plane");
+    Node* planeNode = Existence->scene_->CreateChild("Plane");
     planeNode->SetScale(Vector3(100.0f, 1.0f, 100.0f));
     StaticModel* planeObject = planeNode->CreateComponent<StaticModel>();
     planeObject->SetModel(cache->GetResource<Model>("Models/Plane.mdl"));
@@ -705,7 +705,7 @@ void ExistenceClientStateProgress::loadDummyScene(void)
     /// Create a directional light to the world so that we can see something. The light scene node's orientation controls the
     /// light direction; we will use the SetDirection() function which calculates the orientation from a forward direction vector.
     /// The light will use default settings (white light, no shadows)
-    Node* lightNode = scene_->CreateChild("DirectionalLight");
+    Node* lightNode = Existence->scene_->CreateChild("DirectionalLight");
     lightNode->SetDirection(Vector3(0.6f, -1.0f, 0.8f)); /// The direction vector does not need to be normalized
     Light* light = lightNode->CreateComponent<Light>();
     light->SetLightType(LIGHT_DIRECTIONAL);
@@ -719,7 +719,7 @@ void ExistenceClientStateProgress::loadDummyScene(void)
     const unsigned NUM_OBJECTS = 200;
     for (unsigned i = 0; i < NUM_OBJECTS; ++i)
     {
-        Node* mushroomNode = scene_->CreateChild("Mushroom");
+        Node* mushroomNode = Existence->scene_->CreateChild("Mushroom");
         mushroomNode->SetPosition(Vector3(Random(90.0f) - 45.0f, 0.0f, Random(90.0f) - 45.0f));
         mushroomNode->SetRotation(Quaternion(0.0f, Random(360.0f), 0.0f));
         mushroomNode->SetScale(0.5f + Random(2.0f));
@@ -728,19 +728,19 @@ void ExistenceClientStateProgress::loadDummyScene(void)
         mushroomObject->SetMaterial(cache->GetResource<Material>("Materials/Mushroom.xml"));
     }
 
-    Node* characterNode = scene_->CreateChild("Character");
+    Node* characterNode = Existence->scene_->CreateChild("Character");
     characterNode->SetName("Character");
 
     /// Create a scene node for the camera, which we will move around
     /// The camera will use default settings (1000 far clip distance, 45 degrees FOV, set aspect ratio automatically)
-    cameraNode_ = scene_->CreateChild("Camera");
-    cameraNode_->CreateComponent<Camera>();
+    Existence->cameraNode_ = Existence->scene_->CreateChild("Camera");
+    Existence->cameraNode_->CreateComponent<Camera>();
 
     /// Set an initial position for the camera scene node above the plane
-    cameraNode_->SetPosition(Vector3(0.0f, 5.0f, 0.0f));
+    Existence->cameraNode_->SetPosition(Vector3(0.0f, 5.0f, 0.0f));
 
-    SharedPtr<Viewport> viewport(new Viewport(context_, scene_, cameraNode_->GetComponent<Camera>()));
-    renderer->SetViewport(0, viewport);
+    SharedPtr<Viewport> viewport(new Viewport(context_, Existence->scene_, Existence->cameraNode_->GetComponent<Camera>()));
+    renderer->SetViewport(0, Existence->viewport);
 
     return;
 }
@@ -761,8 +761,8 @@ void ExistenceClientStateProgress::loadScene(const int mode, const char * linein
     EnvironmentBuild * environmentbuild_= GetSubsystem<EnvironmentBuild>();
 
     /// clear api
-    manager_->SetScene(scene_);
-    environmentbuild_->SetScene(scene_);
+    manager_->SetScene(Existence->scene_);
+    environmentbuild_->SetScene(Existence->scene_);
 
     Input* input = GetSubsystem<Input>();
 
@@ -887,11 +887,11 @@ void ExistenceClientStateProgress::loadScene(const int mode, const char * linein
 
                 if (extension != ".xml")
                 {
-                    scene_ -> Load(dataFile);
+                    Existence->scene_ -> Load(dataFile);
                 }
                 else
                 {
-                    scene_ ->LoadXML(dataFile);
+                    Existence->scene_ ->LoadXML(dataFile);
                 }
 
             }
@@ -907,13 +907,13 @@ void ExistenceClientStateProgress::loadScene(const int mode, const char * linein
     else
     {
         /// load dummy scene
-        loadDummyScene();
+       loadDummyScene();
     }
 
 
 
 /// Get the Camera Node and setup the viewport
-    if((cameraNode_ = scene_->GetChild("Camera")))
+    if((Existence->cameraNode_ = Existence->scene_->GetChild("Camera")))
     {
 
         /*SharedPtr<Viewport> viewport(new Viewport(context_, scene_, cameraNode_->GetComponent<Camera>()));
@@ -923,29 +923,29 @@ void ExistenceClientStateProgress::loadScene(const int mode, const char * linein
     {
         /// Create a scene node for the camera, which we will move around
         /// The camera will use default settings (1000 far clip distance, 45 degrees FOV, set aspect ratio automatically)
-        cameraNode_ = new Node(context_);
+        Existence->cameraNode_ = new Node(context_);
 
-        cameraNode_ = scene_->CreateChild("Camera");
-        cameraNode_->CreateComponent<Camera>();
+        Existence->cameraNode_ = Existence->scene_->CreateChild("Camera");
+        Existence->cameraNode_->CreateComponent<Camera>();
 
-        Camera* camera = cameraNode_->CreateComponent<Camera>();
+        Camera* camera = Existence->cameraNode_->CreateComponent<Camera>();
         camera->SetFarClip(1000.0f);
 
         ///Set an initial position for the camera scene node above the ground
-        cameraNode_->SetPosition(Vector3(0.0f, 0.0f, 0.0f));
+        Existence->cameraNode_->SetPosition(Vector3(0.0f, 0.0f, 0.0f));
 
     }
 
 /// Setup viewport
-    SharedPtr<Viewport> viewport(new Viewport(context_, scene_, cameraNode_->GetComponent<Camera>()));
-    renderer->SetViewport(0, viewport);
+    SharedPtr<Viewport> viewport(new Viewport(context_, Existence->scene_, Existence->cameraNode_->GetComponent<Camera>()));
+    renderer->SetViewport(0, Existence->viewport);
 
 /// Loop through the whole scene and get the root Node
-    Node * RootNode = scene_ -> GetParent();
+    Node * RootNode = Existence->scene_ -> GetParent();
 
 /// Get node list
     PODVector <Node *> NodesVector;
-    scene_ -> GetChildren (NodesVector, true);
+    Existence->scene_ -> GetChildren (NodesVector, true);
 
 /// Set necessary objects
     Node * OrphanNode;
@@ -973,32 +973,32 @@ void ExistenceClientStateProgress::loadScene(const int mode, const char * linein
     CreateCharacter();
 
 /// Load main UI area
-    loadSceneUI();
+    Existence->loadSceneUI();
 
     /// rest of UI
-    loadHUDFile("Resources/UI/MainTopBarWindow.xml",0,0);
-    loadHUDFile("Resources/UI/PlayerInfoWindow.xml",0,34);
+    Existence->loadHUDFile("Resources/UI/MainTopBarWindow.xml",0,0);
+    Existence->loadHUDFile("Resources/UI/PlayerInfoWindow.xml",0,34);
 
     /// load hud
-    loadUIXML(UIQUICKMENU,0,0,0);
+    Existence->loadUIXML(UIQUICKMENU,0,0,0);
 
     /// Get player info  name from temporary list and put it into the character object
     Text* PlayerNameText = (Text*)ui->GetRoot()->GetChild("PlayerNameText", true);
 
     /// Get player level and level text
-    unsigned int level=floor(character_->GetLevels().level/10);
+    unsigned int level=floor(Existence->character_->GetLevels().level/10);
 
     string levelstring=ConvertUIntToString(level);
 
     string levelstext=levels[level];
 
     /// Set hud sting to level and character name
-    string playername=character_->GetPlayerInfo().lastname+" "+character_->GetPlayerInfo().firstname+" ("+levelstring+") "+ levelstext;
+    string playername=Existence->character_->GetPlayerInfo().lastname+" "+Existence->character_->GetPlayerInfo().firstname+" ("+levelstring+") "+ levelstext;
 
 
     PlayerNameText -> SetText(playername.c_str());
 
-    UpdatePlayerInfoBar();
+    Existence->UpdatePlayerInfoBar();
 
 /// use UI cursor
 /// Enable OS cursor
@@ -1006,13 +1006,13 @@ void ExistenceClientStateProgress::loadScene(const int mode, const char * linein
 
     if(ui->GetCursor()->IsVisible())
     {
-        Print ("Cursor Exist");
+        Existence->Print ("Cursor Exist");
 
-        Print(ui->GetCursor()->GetAppliedStyle());
+        Existence->Print(ui->GetCursor()->GetAppliedStyle());
     }
     else
     {
-        Print ("Cursor Does Not Exist");
+        Existence->Print ("Cursor Does Not Exist");
     }
 
     return;

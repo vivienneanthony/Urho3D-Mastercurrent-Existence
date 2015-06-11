@@ -178,20 +178,20 @@ void ExistenceClientStatePlayer::CreatePlayerScreenUI()
     float height = (float)graphics->GetHeight();
 
     /// set ui state to none
-    ExistenceGameState->SetUIState(UI_CHARACTERCREATIONINTERFACE);
-    TemporaryPlayer.Clear();
+    ///ExistenceGameState->SetUIState(UI_CHARACTERCREATIONINTERFACE);
+    Existence->TemporaryPlayer.Clear();
 
     /// Load XML
     loadSceneCreationCreation("charactercreationroom1.xml");
 
     /// Login screen
     /// Create the Window and add it to the UI's root node
-    window_= new Window(context_);
-    window2_=new Window(context_);
+    Existence->window_= new Window(context_);
+    Existence->window2_=new Window(context_);
 
     /// create first and secondary windows
-    uiRoot_->AddChild(window_);
-    uiRoot_->AddChild(window2_);
+    Existence->uiRoot_->AddChild(Existence->window_);
+    Existence->uiRoot_->AddChild(Existence->window2_);
 
     UIElement* titleBar = new UIElement(context_);
     UIElement* contineButtonUIElement  = new UIElement(context_);
@@ -206,19 +206,19 @@ void ExistenceClientStatePlayer::CreatePlayerScreenUI()
     Button* camerachangeorientationButton = new Button(context_);
 
     /// Set Window size and layout settings
-    window_->SetFixedSize(384, height-100-100);
-    window_->SetLayout(LM_VERTICAL,12, IntRect(6, 6, 378, height-100-100));
-    window_->SetPosition(30, 100);
-    window_->SetName("PlayerCreatorWindow");
-    window_->SetMovable(false);
-    window_->SetOpacity(.8);
+    Existence-> window_->SetFixedSize(384, height-100-100);
+    Existence->window_->SetLayout(LM_VERTICAL,12, IntRect(6, 6, 378, height-100-100));
+    Existence->window_->SetPosition(30, 100);
+    Existence->window_->SetName("PlayerCreatorWindow");
+    Existence->window_->SetMovable(false);
+    Existence->window_->SetOpacity(.8);
 
-    window2_->SetName("FocusCreaterWindow");
-    window2_->SetFixedSize(64,height-100-100);
-    window2_->SetLayout(LM_VERTICAL, 6, IntRect(6, 6, 6, 6));
-    window2_->SetPosition(1024+256,100);
-    window2_->SetMovable(false);
-    window2_->SetOpacity(.6);
+    Existence->window2_->SetName("FocusCreaterWindow");
+    Existence->window2_->SetFixedSize(64,height-100-100);
+    Existence->window2_->SetLayout(LM_VERTICAL, 6, IntRect(6, 6, 6, 6));
+    Existence->window2_->SetPosition(1024+256,100);
+    Existence->window2_->SetMovable(false);
+    Existence->window2_->SetOpacity(.6);
 
     /// Create Window 'titlebar' container
     titleBar->SetMinSize(0,32);
@@ -242,29 +242,29 @@ void ExistenceClientStatePlayer::CreatePlayerScreenUI()
     titleBar->AddChild(windowTitle);
 
     /// add components to the window
-    window_->AddChild(titleBar);
+    Existence->window_->AddChild(titleBar);
 
-    window2_->AddChild(createnewplayerfacezoomButton);
+    Existence->window2_->AddChild(createnewplayerfacezoomButton);
 
     /// Apply styles
-    window_->SetStyleAuto();
-    window2_->SetStyleAuto();
+    Existence->window_->SetStyleAuto();
+    Existence->window2_->SetStyleAuto();
 
     windowTitle->SetStyleAuto();
 
     /// Create a player node
-    Node* playermeshNode = scene_->CreateChild("playerMesh");
+    Node* playermeshNode = Existence->scene_->CreateChild("playerMesh");
 
     playermeshNode ->SetPosition(Vector3(0.0,0,0.0));
     playermeshNode ->SetRotation(Quaternion(0.0, 0.0,0.0));
 
     /// Create a scene node for the camera, which we will move around
     /// The camera will use default settings (1000 far clip distance, 45 degrees FOV, set aspect ratio automatically)
-    cameraNode_ = scene_->GetChild("Camera");
+    Existence->cameraNode_ = Existence->scene_->GetChild("Camera");
 
     /// Set an initial position for the camera scene node above the plane
-    cameraNode_->SetPosition(Vector3(0.0,1.0,5.0));
-    cameraNode_->SetRotation(Quaternion(0.0, 180.0,0.0));
+    Existence->cameraNode_->SetPosition(Vector3(0.0,1.0,5.0));
+    Existence->cameraNode_->SetRotation(Quaternion(0.0, 180.0,0.0));
 
     int windowwidth=384;
     int alienlimit=3;
@@ -505,21 +505,21 @@ void ExistenceClientStatePlayer::CreatePlayerScreenUI()
     camerachangeorientationUIElement->SetOpacity(0.8f);
 
     /// add the rest of the window elements
-    window_->AddChild(factionselectionUIElement);
-    window_->AddChild(alienselectionUIElement);
-    window_->AddChild(genderselectionUIElement);
-    window_->AddChild(blankUIElement);
-    window_->AddChild(playerUIElement);
-    window_->AddChild(playernameinputUIElement);
-    window_->AddChild(blankUIElement);
-    window_->AddChild(PersonalitytextUIElement);
-    window_->AddChild(PersonalityUIElements);
+    Existence->window_->AddChild(factionselectionUIElement);
+    Existence->window_->AddChild(alienselectionUIElement);
+    Existence->window_->AddChild(genderselectionUIElement);
+    Existence->window_->AddChild(blankUIElement);
+    Existence->window_->AddChild(playerUIElement);
+    Existence->window_->AddChild(playernameinputUIElement);
+    Existence->window_->AddChild(blankUIElement);
+    Existence->window_->AddChild(PersonalitytextUIElement);
+    Existence->window_->AddChild(PersonalityUIElements);
 
-    window_->AddChild(contineButtonUIElement);
+    Existence->window_->AddChild(contineButtonUIElement);
 
     camerachangeorientationUIElement->AddChild(camerachangeorientationButton);
 
-    uiRoot_->AddChild(camerachangeorientationUIElement);
+    Existence->uiRoot_->AddChild(camerachangeorientationUIElement);
 
     camerachangeorientationButton->SetStyleAuto();
     camerachangeorientationButton->SetStyle("cameraButton");
@@ -581,8 +581,8 @@ void ExistenceClientStatePlayer::CreatePlayerScreenUI()
     SubscribeToEvent(E_UIMOUSECLICK, HANDLER(ExistenceClientStatePlayer, CreatePlayerUIHandleControlClicked));
 
     /// Temporary data
-    playeralliance temporaryAlliance = TemporaryPlayer.GetAlliance();
-    playercharacteristics temporaryCharacteristics = TemporaryPlayer.GetCharacteristics();
+    playeralliance temporaryAlliance = Existence->TemporaryPlayer.GetAlliance();
+    playercharacteristics temporaryCharacteristics = Existence->TemporaryPlayer.GetCharacteristics();
 
     int choosegender=rand()%99;
     temporaryCharacteristics.gender=choosegender+1;
@@ -606,11 +606,11 @@ void ExistenceClientStatePlayer::CreatePlayerScreenUI()
     }
 
     /// Save information to temporary player
-    TemporaryPlayer.SetAlliance(temporaryAlliance);
-    TemporaryPlayer.SetCharacteristics(temporaryCharacteristics);
+    Existence->TemporaryPlayer.SetAlliance(temporaryAlliance);
+    Existence->TemporaryPlayer.SetCharacteristics(temporaryCharacteristics);
 
     /// Update character
-    loadplayerMesh(playermeshNode, TemporaryPlayer.GetAlliance().alienrace, TemporaryPlayer.GetCharacteristics().gender,DISPLAYMESH_MUILTIPLECHARACTER);
+    Existence->loadplayerMesh(playermeshNode, Existence->TemporaryPlayer.GetAlliance().alienrace, Existence->TemporaryPlayer.GetCharacteristics().gender,DISPLAYMESH_MUILTIPLECHARACTER);
 
     return;
 }
@@ -679,8 +679,8 @@ void ExistenceClientStatePlayer::CameraOrientationRotateMove (float degrees, int
     UI* ui_ = GetSubsystem<UI>();
 
     /// The camera will use default settings (1000 far clip distance, 45 degrees FOV, set aspect ratio automatically)
-    Node * cameraNode_ = scene_->GetChild("Camera",true);
-    Node * playermeshNode_ = scene_->GetChild("playermesh",true);
+    Node * cameraNode_ = Existence->scene_->GetChild("Camera",true);
+    Node * playermeshNode_ = Existence->scene_->GetChild("playermesh",true);
 
     /// Get position
     Vector3 playermeshPosition=playermeshNode_->GetWorldPosition();
@@ -717,8 +717,8 @@ void ExistenceClientStatePlayer::HandleMouseReleased(StringHash eventType, Varia
 
 
     /// Temporary data
-    playeralliance temporaryAlliance = TemporaryPlayer.GetAlliance();
-    playercharacteristics temporaryCharacteristics = TemporaryPlayer.GetCharacteristics();
+    playeralliance temporaryAlliance = Existence->TemporaryPlayer.GetAlliance();
+    playercharacteristics temporaryCharacteristics = Existence->TemporaryPlayer.GetCharacteristics();
 
     /// Temporarily define faction information (Might make this a class)
     unsigned int factionslimit=4;
@@ -780,8 +780,8 @@ void ExistenceClientStatePlayer::HandleMouseReleased(StringHash eventType, Varia
 
     unsigned int aliensarraysize;
 
-    aliensarray.reserve(16);
-    tempaliensarray.reserve(16);
+   Existence-> aliensarray.reserve(16);
+   Existence-> tempaliensarray.reserve(16);
 
     /// Verify if faction was pressed
     if(clickedtext=="factionButton")
@@ -824,8 +824,8 @@ void ExistenceClientStatePlayer::HandleMouseReleased(StringHash eventType, Varia
         vector<string> factionallianceinput = split(Faction[selectedcurrentfaction].alliedraces, " ");
 
         /// Allocate memory
-        aliensarray.clear();
-        tempaliensarray.clear();
+        Existence->aliensarray.clear();
+        Existence->tempaliensarray.clear();
 
         aliensarraysize=factionallianceinput.size();
 
@@ -833,13 +833,13 @@ void ExistenceClientStatePlayer::HandleMouseReleased(StringHash eventType, Varia
         /// Copy alien race per faction to alien array and temp array
         for(unsigned int idx=0; idx<factionallianceinput.size(); idx++)
         {
-            aliensarray.push_back(factionallianceinput.at(idx));//Copy the vector to the string
-            tempaliensarray.push_back(factionallianceinput.at(idx));//Copy the vector to the string
+            Existence->aliensarray.push_back(factionallianceinput.at(idx));//Copy the vector to the string
+            Existence->tempaliensarray.push_back(factionallianceinput.at(idx));//Copy the vector to the string
         }
 
         /// Set Default based on new alliance
         unsigned int num;
-        std::istringstream {aliensarray[0]} >> num;
+        std::istringstream {Existence->aliensarray[0]} >> num;
 
         /// Set default alienrace and gender
         temporaryAlliance.alienrace=num;
@@ -885,7 +885,7 @@ void ExistenceClientStatePlayer::HandleMouseReleased(StringHash eventType, Varia
                 string temporaryalien=ConvertUIntToString(Alien[alienrace].uniqueid);
 
                 /// Compare temporary alien from main array to created array
-                if(temporaryalien==aliensarray.at(alienarraycounter))
+                if(temporaryalien==Existence->aliensarray.at(alienarraycounter))
                 {
 
                     /// configure faction
@@ -932,7 +932,7 @@ void ExistenceClientStatePlayer::HandleMouseReleased(StringHash eventType, Varia
         /// Set Default based on new alliance
         unsigned int num=0;
 
-        std::istringstream {tempaliensarray.at(clickedbutton).c_str()} >> num;
+        std::istringstream {Existence->tempaliensarray.at(clickedbutton).c_str()} >> num;
 
         temporaryAlliance.alienrace=num;
 
@@ -952,27 +952,27 @@ void ExistenceClientStatePlayer::HandleMouseReleased(StringHash eventType, Varia
         temporaryCharacteristics.gender=99;
     }
 
-    TemporaryPlayer.SetCharacteristics(temporaryCharacteristics);
-    TemporaryPlayer.SetAlliance(temporaryAlliance);
+    Existence->TemporaryPlayer.SetCharacteristics(temporaryCharacteristics);
+    Existence->TemporaryPlayer.SetAlliance(temporaryAlliance);
 
     /// Get child
-    Node* playermeshNode = scene_->GetChild("playerMesh");
+    Node* playermeshNode = Existence->scene_->GetChild("playerMesh");
 
     playermeshNode->RemoveAllChildren();
 
     if(clickedtext=="factionButton")
     {
-        loadplayerMesh(playermeshNode, TemporaryPlayer.GetAlliance().alienrace, TemporaryPlayer.GetCharacteristics().gender,DISPLAYMESH_MUILTIPLECHARACTER);
+        Existence->loadplayerMesh(playermeshNode, Existence->TemporaryPlayer.GetAlliance().alienrace, Existence->TemporaryPlayer.GetCharacteristics().gender,DISPLAYMESH_MUILTIPLECHARACTER);
     }
     else     if(clickedtext=="alienButton")
     {
-        loadplayerMesh(playermeshNode, TemporaryPlayer.GetAlliance().alienrace, TemporaryPlayer.GetCharacteristics().gender,DISPLAYMESH_MUILTIPLECHARACTER);
+        Existence->loadplayerMesh(playermeshNode, Existence->TemporaryPlayer.GetAlliance().alienrace, Existence->TemporaryPlayer.GetCharacteristics().gender,DISPLAYMESH_MUILTIPLECHARACTER);
     }
 
 
     else
     {
-        loadplayerMesh(playermeshNode, TemporaryPlayer.GetAlliance().alienrace, TemporaryPlayer.GetCharacteristics().gender,DISPLAYMESH_SINGLECHARACTER);
+        Existence->loadplayerMesh(playermeshNode, Existence->TemporaryPlayer.GetAlliance().alienrace, Existence->TemporaryPlayer.GetCharacteristics().gender,DISPLAYMESH_SINGLECHARACTER);
 
     }
 
@@ -994,7 +994,7 @@ void ExistenceClientStatePlayer::CreatePlayerUIHandleClosePressed(StringHash eve
 {
 
     /// Set ui state to character creation
-    ExistenceGameState->SetUIState(UI_CHARACTERCREATIONINTERFACE);
+    ///ExistenceGameState->SetUIState(UI_CHARACTERCREATIONINTERFACE);
 
     /// Get Needed SubSystems
     ResourceCache* cache = GetSubsystem<ResourceCache>();
@@ -1003,8 +1003,8 @@ void ExistenceClientStatePlayer::CreatePlayerUIHandleClosePressed(StringHash eve
     UI* ui_ = GetSubsystem<UI>();
 
     /// remove child nodeAddItem (UIElement *item)
-    scene_->GetChild("playerMesh",true)->RemoveAllComponents();
-    scene_->GetChild("playerMesh",true)->Remove();
+    Existence->scene_->GetChild("playerMesh",true)->RemoveAllComponents();
+    Existence->scene_->GetChild("playerMesh",true)->Remove();
 
     /// Copy information/// Get line objects from Urho3d
     LineEdit* firstnameLineEdit = (LineEdit*)ui_->GetRoot()->GetChild("firstnameInput", true);
@@ -1021,7 +1021,7 @@ void ExistenceClientStatePlayer::CreatePlayerUIHandleClosePressed(StringHash eve
 
     /// Temporay player Info
     playerbasicinfo tempplayerinfo;
-    playercharacteristics tempplayercharacteristics=TemporaryPlayer.GetCharacteristics();
+    playercharacteristics tempplayercharacteristics=Existence->TemporaryPlayer.GetCharacteristics();
 
     /// Copy string information
     tempplayerinfo.firstname=firstnameInput.CString();
@@ -1031,18 +1031,18 @@ void ExistenceClientStatePlayer::CreatePlayerUIHandleClosePressed(StringHash eve
     tempplayercharacteristics.personalitytrait=personaltyselection;
 
     /// Set player information
-    TemporaryPlayer.SetCharacteristics(tempplayercharacteristics);
-    TemporaryPlayer.SetPlayerInfo(tempplayerinfo);
+    Existence->TemporaryPlayer.SetCharacteristics(tempplayercharacteristics);
+    Existence->TemporaryPlayer.SetPlayerInfo(tempplayerinfo);
 
     /// Save player information
-    SavePlayer(0);
+    Existence->SavePlayer(0);
 
-    eraseScene();
+   Existence-> eraseScene();
 
-    SetupScreenViewport();
+    Existence->SetupScreenViewport();
 
     //ProgressScreenUI();
-    ExistenceGameState -> SendEvent("GAME_STATE_GAMEMODELOAD");
+    ///ExistenceGameState -> SendEvent("GAME_STATE_GAMEMODELOAD");
 
 }
 
@@ -1172,11 +1172,11 @@ void ExistenceClientStatePlayer::loadSceneCreationCreation( const char * lineinp
 
             if (extension != ".xml")
             {
-                scene_ -> Load(dataFile);
+                Existence->scene_ -> Load(dataFile);
             }
             else
             {
-                scene_ ->LoadXML(dataFile);
+                Existence->scene_ ->LoadXML(dataFile);
             }
 
         }
@@ -1190,10 +1190,10 @@ void ExistenceClientStatePlayer::loadSceneCreationCreation( const char * lineinp
 
 
     /// Get the Camera Node and setup the viewport
-    Node * cameraNode_ = scene_->GetChild("Camera");
+    Node * cameraNode_ = Existence->scene_->GetChild("Camera");
 
     /// Change viewport to camera node
-    SharedPtr<Viewport> viewport(new Viewport(context_, scene_, cameraNode_->GetComponent<Camera>()));
+    SharedPtr<Viewport> viewport(new Viewport(context_, Existence->scene_, Existence->cameraNode_->GetComponent<Camera>()));
     renderer->SetViewport(0, viewport);
 
     return;

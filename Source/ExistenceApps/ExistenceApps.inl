@@ -41,6 +41,7 @@
 #include "../../Urho3D/Graphics/Texture2D.h"
 #include "../../Urho3D/Core/Timer.h"
 #include "../../Urho3D/Resource/XMLFile.h"
+#include "ExistenceClient/ExistenceClient.h"
 
 inline ExistenceApp::ExistenceApp(Context* context) :
     Application(context),
@@ -57,6 +58,8 @@ void ExistenceApp::Setup()
     engineParameters_["LogName"]     = GetSubsystem<FileSystem>()->GetAppPreferencesDir("urho3d", "logs") + GetTypeName() + ".log";
     engineParameters_["FullScreen"]  = true;
     engineParameters_["Headless"]    = false;
+
+    ExistencePtr=NULL;
 }
 
 void ExistenceApp::Start()

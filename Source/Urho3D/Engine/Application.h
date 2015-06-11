@@ -35,7 +35,7 @@ class Engine;
 class URHO3D_API Application : public Object
 {
     OBJECT(Application);
-    
+
 public:
     /// Construct. Parse default engine parameters from the command line, and create the engine in an uninitialized state.
     Application(Context* context);
@@ -55,7 +55,7 @@ public:
 protected:
     /// Handle log message.
     void HandleLogMessage(StringHash eventType, VariantMap& eventData);
-    
+
     /// Urho3D engine.
     SharedPtr<Engine> engine_;
     /// Engine parameters map.
@@ -73,6 +73,7 @@ int RunApplication() \
 { \
     Urho3D::SharedPtr<Urho3D::Context> context(new Urho3D::Context()); \
     Urho3D::SharedPtr<className> application(new className(context)); \
+    application->applicationPtr = application;\
     return application->Run(); \
 } \
 DEFINE_MAIN(RunApplication());
@@ -83,9 +84,10 @@ int RunApplication() \
 { \
     Urho3D::Context* context = new Urho3D::Context(); \
     className* application = new className(context); \
+    application->applicationPtr = application;\
     return application->Run(); \
 } \
 DEFINE_MAIN(RunApplication());
 #endif
-    
+
 }

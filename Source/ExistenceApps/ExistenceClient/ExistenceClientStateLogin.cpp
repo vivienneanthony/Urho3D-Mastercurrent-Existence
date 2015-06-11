@@ -119,9 +119,9 @@ ExistenceClientStateLogin::ExistenceClientStateLogin(Context * context)
 
     cout << "Debug: State Login Constructor" << endl;
 
-        cout << "Debug: State Login Constructor Class Test Value " << GetTestString() << " context_ " << &context_ << " context " <<& context <<endl;
-
     /// create UI
+    cout << Existence -> GetTestString() << endl;
+
     LoginScreen();
 }
 
@@ -152,17 +152,14 @@ void ExistenceClientStateLogin::OnUpdate(StringHash eventType, VariantMap& event
 void ExistenceClientStateLogin::LoginScreenUI(void)
 {
 
+    /// Get all Revelant resources
+    ResourceCache* cache = GetSubsystem<ResourceCache>();
+    Renderer* renderer = GetSubsystem<Renderer>();
+    Graphics* graphics_= GetSubsystem<Graphics>();
+    UI* ui = GetSubsystem<UI>();
+    FileSystem * filesystem = GetSubsystem<FileSystem>();
 
-    /// Get Needed SubSystems
-    ResourceCache* cache_ = GetResourceCacheSubsystems();
-    Renderer* renderer_ = GetRenderSubsystems();
-    Graphics* graphics_ = GetGraphicsSubsystems();
-    UI * ui_ = GetUISubsystems();
-
-
-    cout << "Output" << GetTestString() << endl;
-
-    UIElement * uiRoot_ = ui_ -> GetRoot();
+    UIElement * uiRoot_ = ui -> GetRoot();
 
     /// Get rendering window size as floats
     float width = (float)graphics_->GetWidth();
@@ -174,9 +171,9 @@ void ExistenceClientStateLogin::LoginScreenUI(void)
     /// Login screen - Create the Window and add it to the UI's root node
     /// Create the Window and add it to the UI's root node
 
-    window_= new Window(context_);
+    Existence->window_= new Window(context_);
 
-    uiRoot_->AddChild(window_);
+    Existence->uiRoot_->AddChild(Existence->window_);
 
     UIElement* usernameTextUIElement = new UIElement(context_);
     Text* usernameText = new Text(context_);
@@ -186,12 +183,12 @@ void ExistenceClientStateLogin::LoginScreenUI(void)
     LineEdit* passwordInput=new LineEdit(context_);
 
     /// Set Window size and layout settings
-    window_->SetMinSize(384, 192);
-    window_->SetLayout(LM_VERTICAL, 6, IntRect(6, 6, 6, 6));
-    window_->SetAlignment(HA_CENTER, VA_CENTER);
-    window_->SetName("LoginWindow");
-    window_->SetMovable(false);
-    window_->SetOpacity(.6);
+    Existence->window_->SetMinSize(384, 192);
+    Existence->window_->SetLayout(LM_VERTICAL, 6, IntRect(6, 6, 6, 6));
+    Existence->window_->SetAlignment(HA_CENTER, VA_CENTER);
+    Existence->window_->SetName("LoginWindow");
+    Existence->window_->SetMovable(false);
+    Existence->window_->SetOpacity(.6);
 
     /// Create Window 'titlebar' container
     usernameTextUIElement ->SetMinSize(0,32);
@@ -224,36 +221,39 @@ void ExistenceClientStateLogin::LoginScreenUI(void)
     /// Add the controls to the title bar
     usernameTextUIElement->AddChild(usernameText);
     passwordTextUIElement->AddChild(passwordText);
-    window_->AddChild(usernameTextUIElement);
-    window_->AddChild(usernameInput);
-    window_->AddChild(passwordTextUIElement);
-    window_->AddChild(passwordInput);
+    Existence->window_->AddChild(usernameTextUIElement);
+    Existence->window_->AddChild(usernameInput);
+    Existence->window_->AddChild(passwordTextUIElement);
+    Existence->window_->AddChild(passwordInput);
 
     /// declare buttons
     Button* loginButton = new Button(context_);
     Button* newaccountButton = new Button(context_);
 
     /// check if account exist
-    if(accountexist)
+    if(Existence->accountexist)
     {
         loginButton->SetName("Login");
         loginButton->SetStyle("loginButton");
-        window_->AddChild(loginButton);
+        Existence->window_->AddChild(loginButton);
     }
     else
     {
         newaccountButton->SetName("NewAccountLogin");
         newaccountButton->SetStyle("newaccountButton");
-        window_->AddChild(newaccountButton);
+        Existence->window_->AddChild(newaccountButton);
     }
 
     /// Apply styles
-    window_->SetStyleAuto();
+    Existence->window_->SetStyleAuto();
     usernameText->SetStyleAuto();
     passwordText->SetStyleAuto();
 
+
+    Existence->accountexist=false;
+
     /// Attach handler based on new account - Temporary
-    if(accountexist)
+    if(Existence->accountexist)
     {
         SubscribeToEvent(loginButton, E_RELEASED, HANDLER(ExistenceClientStateLogin, LoginScreenUILoginHandleClosePressed));
     }
@@ -271,7 +271,7 @@ void ExistenceClientStateLogin::LoginScreenUILoginHandleClosePressed(StringHash 
     /// set ui state to none
     ///ExistenceGameState->SetUIState(UI_LOGININTERFACE);
 
-    UI* ui_ = ExistenceClient::GetUISubsystems();
+    UI* ui_ = GetSubsystem<UI>();
 
     UIElement * RootUIElement = ui_->GetRoot();
 
@@ -279,8 +279,8 @@ void ExistenceClientStateLogin::LoginScreenUILoginHandleClosePressed(StringHash 
     String username = lineEdit->GetText();
 
     /// remove Existence Logo Node
-    scene_->GetChild("ExistenceLogo",true)->RemoveAllComponents();
-    scene_->GetChild("ExistenceLogo",true)->Remove();
+    Existence->scene_->GetChild("ExistenceLogo",true)->RemoveAllComponents();
+    Existence->scene_->GetChild("ExistenceLogo",true)->Remove();
 
     /// Call progress screen function
     ///ExistenceGameState -> SendEvent("GAME_STATE_PLAYERCREATE");
@@ -291,14 +291,14 @@ void ExistenceClientStateLogin::LoginScreenUILoginHandleClosePressed(StringHash 
 /// Login screen handler function
 void ExistenceClientStateLogin::LoginScreenUINewAccountHandleClosePressed(StringHash eventType, VariantMap& eventData)
 {
-    UI* ui = ExistenceClient::GetUISubsystems();
+    UI* ui = GetSubsystem<UI>();
 
     /// set ui state to none
     ///ExistenceGameState->SetUIState(UI_LOGININTERFACE);
 
     /// remove Existence Logo Node
-    scene_->GetChild("ExistenceLogo",true)->RemoveAllComponents();
-    scene_->GetChild("ExistenceLogo",true)->Remove();
+   Existence-> scene_->GetChild("ExistenceLogo",true)->RemoveAllComponents();
+   Existence-> scene_->GetChild("ExistenceLogo",true)->Remove();
 
 
     /// Call create play screen functi/

@@ -29,6 +29,7 @@
 
 #include "../../Urho3D/Engine/Application.h"
 #include "ExistenceClient/GameStateHandler.h"
+#include "ExistenceClient/ExistenceClient.h"
 
 namespace Urho3D
 {
@@ -67,6 +68,9 @@ public:
     /// Setup after engine initialization. Creates the logo, console & debug HUD.
     inline virtual void Start();
 
+    /// pointer
+    ExistenceClient * ExistencePtr;
+
 protected:
     /// Return XML patch instructions for screen joystick layout for a specific sample app, if any.
     virtual String GetScreenJoystickPatchString() const
@@ -77,6 +81,7 @@ protected:
     void InitTouchInput();
     /// Control logo visibility.
     void SetLogoVisible(bool enable);
+
 
 private:
 
@@ -93,6 +98,7 @@ private:
     unsigned screenJoystickSettingsIndex_;
     /// Pause flag.
     bool paused_;
+
 
 };
 

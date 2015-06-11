@@ -127,16 +127,17 @@ ExistenceClient::ExistenceClient(Context* context) :
     GameObject::RegisterObject(context);
     EnvironmentBuild::RegisterObject(context);
     ProceduralTerrain::RegisterObject(context);
-    GameStateHandler::RegisterGameStates(context);
-    GameStateHandler::RegisterObject(context);
+    ///GameStateHandler::RegisterObject(context);
     Manager::RegisterNewSubsystem(context);
     EnvironmentBuild::RegisterNewSubsystem(context);
     GameStateHandlerComponent::RegisterNewSubsystem(context);
+    GameStateHandlerComponent::RegisterGameStates(context);
 
-    ///context_=context;
+    cout << "Debig: Existence App Existence " << &applicationPtr << endl;
 
     /// Register states
     cout << "Debug: Existence Client Base Class Constructor context" << &context << " context_"<< &context_ << endl;
+
 }
 
 ExistenceClient::~ExistenceClient()
@@ -219,6 +220,17 @@ void ExistenceClient::Start()
     /// ExistenceGameState->SetConsoleState(0);
     ///ExistenceGameState = new GameStateHandler(&(*context_));
     ///ExistenceGameState->Start();
+
+    ///ExistencePtr = (static_cast) <ExistenceClient> this;
+
+
+    cout << "Debig: Existence App Existence " << applicationPtr ->GetTestString()<< endl;
+
+    /// Create test value
+    testvalue=121;
+
+
+    cout << "Debig: Existence App Existence " << applicationPtr ->GetTestString()<< endl;
 
     return;
 }

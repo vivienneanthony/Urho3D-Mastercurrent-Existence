@@ -68,6 +68,10 @@ public:
     /// Mention friend classes
     friend class ExistenceClientStateSingleton;
     friend class ExistenceClientStateMainScreen;
+    friend class ExistenceClientStatePlayer;
+    friend class ExistenceClientStateAccount;
+    friend class ExistenceClientStateLogin;
+    friend class ExistenceClientStateProgress;
 
     /// Construct.
     ExistenceClient(Context* context);
@@ -170,6 +174,8 @@ public:
         return testvalue;
     }
 
+   /// Base class
+    SharedPtr<ExistenceClient> applicationPtr;
 
 protected:
 
@@ -224,8 +230,15 @@ protected:
     /// Debug Testing
     int testvalue;
 
+    /// Camera yaw angle.
+    float yaw_;
+    /// Camera pitch angle.
+    float pitch_;
+
+
 
 private:
+
 
 };
 
@@ -234,7 +247,7 @@ class ExistenceClientStateSingleton : public LogicComponent
 {
     OBJECT(ExistenceClientStateSingleton);
 public:
-    ExistenceClient * baseclass; /// reference Existence Client
+  SharedPtr<ExistenceClient> baseclass;
 
     ExistenceClientStateSingleton(Context * context);
     virtual ~ExistenceClientStateSingleton();
@@ -244,6 +257,8 @@ public:
 private:
     void Singleton(void);
 protected:
+
+
 };
 
 /// Login State
@@ -267,6 +282,8 @@ protected:
     ExistenceClient * Existence;
 
 };
+
+
 
 /// Account State
 class ExistenceClientStateAccount: public ExistenceClientStateSingleton
@@ -377,6 +394,8 @@ protected:
     ExistenceClient * Existence;
 
 };
+
+
 
 
 /// Miscellanous functions

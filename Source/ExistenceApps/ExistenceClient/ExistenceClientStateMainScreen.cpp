@@ -165,7 +165,7 @@ void ExistenceClientStateMainScreen::MainScreen(void)
 void ExistenceClientStateMainScreen::MainScreenUI(void)
 {
     /// set ui state to none
-    ExistenceGameState->SetUIState(UI_CHARACTERSELECTIONINTERFACE);
+    /// ExistenceGameState->SetUIState(UI_CHARACTERSELECTIONINTERFACE);
 
     /// Get Needed SubSystems
     ResourceCache* cache = GetSubsystem<ResourceCache>();
@@ -176,9 +176,9 @@ void ExistenceClientStateMainScreen::MainScreenUI(void)
     ui->Clear();
 
     /// Create player mesh node and scale
-    Node* playermeshNode = scene_->CreateChild("playerMesh");
+    Node* playermeshNode = Existence-> scene_->CreateChild("playerMesh");
 
-    LoadAccountPlayers();
+    Existence -> LoadAccountPlayers();
 
     /// Get rendering window size as floats
     float width = (float)graphics->GetWidth();
@@ -236,14 +236,14 @@ void ExistenceClientStateMainScreen::MainScreenUI(void)
     menuUIElements -> AddChild(exitButton);
 
     /// add window elements
-    uiRoot_->AddChild(newcharacterUIElement);
+    Existence-> uiRoot_->AddChild(newcharacterUIElement);
 
-    uiRoot_->AddChild(menuUIElements);
+    Existence-> uiRoot_->AddChild(menuUIElements);
 
     unsigned int placement=8; /// Set pace between buttons variable
 
     /// Loop through all players recovered
-    for(unsigned int i=0; i<TemporaryAccountPlayerListLimit; ++i)
+    for(unsigned int i=0; i< Existence->TemporaryAccountPlayerListLimit; ++i)
     {
 
         UIElement * playerUIElement = new UIElement (context_);
@@ -298,7 +298,7 @@ void ExistenceClientStateMainScreen::MainScreenUI(void)
         playernameText -> SetTextAlignment(HA_LEFT);
 
         /// Create a username to display on player button
-        string playername= "  "+TemporaryAccountPlayerList[i].GetPlayerInfo().firstname+" "+TemporaryAccountPlayerList[i].GetPlayerInfo().lastname;
+        string playername= "  "+Existence->TemporaryAccountPlayerList[i].GetPlayerInfo().firstname+" "+ Existence->TemporaryAccountPlayerList[i].GetPlayerInfo().lastname;
 
         playernameText -> SetText(String(playername.c_str()));
 
@@ -331,7 +331,7 @@ void ExistenceClientStateMainScreen::MainScreenUI(void)
         playerUIElement ->AddChild(playerupdatesUIElement);
 
 
-        uiRoot_->AddChild(playerUIElement);
+        Existence-> uiRoot_->AddChild(playerUIElement);
 
         playernameButton -> SetStyle("playermainscreenButton");
 
@@ -390,11 +390,11 @@ void ExistenceClientStateMainScreen::MainScreenUI(void)
 
     playermeshNode->SetScale(2);
 
-    Node * cameraNode=scene_->GetChild("Camera");
+    Node * cameraNode=Existence-> scene_->GetChild("Camera");
     cameraNode->SetPosition(Vector3(2.0f,-0.5f,4.0f));
 
     /// Add three point lighting
-    Node* FillLightNode = scene_->CreateChild("DirectionalLight");
+    Node* FillLightNode =  Existence->scene_->CreateChild("DirectionalLight");
     FillLightNode->SetDirection(playermeshPosition+Vector3(1.0f,0.0f,1.0f)); /// The direction vector does not need to be normalized
     Light* FillLight = FillLightNode->CreateComponent<Light>();
     FillLight->SetLightType(LIGHT_DIRECTIONAL);
@@ -403,7 +403,7 @@ void ExistenceClientStateMainScreen::MainScreenUI(void)
     FillLightNode->LookAt(playermeshPosition);
 
     /// Add three point lighting
-    Node* KeyLightNode = scene_->CreateChild("DirectionalLight");
+    Node* KeyLightNode =  Existence->scene_->CreateChild("DirectionalLight");
     KeyLightNode->SetDirection(playermeshPosition+Vector3(1.0f,0.0f,-1.0f)); /// The direction vector does not need to be normalized
     Light* KeyLight = KeyLightNode->CreateComponent<Light>();
     KeyLight->SetLightType(LIGHT_DIRECTIONAL);
@@ -412,7 +412,7 @@ void ExistenceClientStateMainScreen::MainScreenUI(void)
     KeyLightNode->LookAt(playermeshPosition);
 
     /// Add three point lighting
-    Node* BackLightNode = scene_->CreateChild("DirectionalLight");
+    Node* BackLightNode =  Existence->scene_->CreateChild("DirectionalLight");
     BackLightNode->SetDirection(playermeshPosition+Vector3(-1.0f,0.0f,-1.0f)); /// The direction vector does not need to be normalized
     Light* BackLight = BackLightNode->CreateComponent<Light>();
     BackLight->SetLightType(LIGHT_DIRECTIONAL);
@@ -421,13 +421,13 @@ void ExistenceClientStateMainScreen::MainScreenUI(void)
     BackLightNode->LookAt(playermeshPosition);
 
     /// Load the player mesh based on display random if no character and charcter
-    if(TemporaryAccountPlayerListLimit==0)
+    if( Existence->TemporaryAccountPlayerListLimit==0)
     {
-        loadplayerMesh(playermeshNode, TemporaryPlayer.GetAlliance().alienrace, TemporaryPlayer.GetCharacteristics().gender,DISPLAYMESH_SINGLECHARACTER);
+        Existence-> loadplayerMesh(playermeshNode,  Existence->TemporaryPlayer.GetAlliance().alienrace,  Existence->TemporaryPlayer.GetCharacteristics().gender,DISPLAYMESH_SINGLECHARACTER);
     }
     else
     {
-        loadplayerMesh(playermeshNode,TemporaryAccountPlayerList[0].GetAlliance().alienrace, TemporaryAccountPlayerList[0].GetCharacteristics().gender,DISPLAYMESH_SINGLECHARACTER);
+        Existence-> loadplayerMesh(playermeshNode, Existence->TemporaryAccountPlayerList[0].GetAlliance().alienrace,  Existence->TemporaryAccountPlayerList[0].GetCharacteristics().gender,DISPLAYMESH_SINGLECHARACTER);
     }
 
     /// Subscribe to events
@@ -443,7 +443,7 @@ void ExistenceClientStateMainScreen::MainScreenUI(void)
 void ExistenceClientStateMainScreen::MainScreenUIHandleClosePressed(StringHash eventType, VariantMap& eventData)
 {
     /// Set ui state to UI_CHARACTERSELECTIONINTERFACE
-    ExistenceGameState->SetUIState(UI_CHARACTERSELECTIONINTERFACE);
+    ///ExistenceGameState->SetUIState(UI_CHARACTERSELECTIONINTERFACE);
 
     /// Get control that was clicked
     UIElement* clicked = static_cast<UIElement*>(eventData[UIMouseClick::P_ELEMENT].GetPtr());
@@ -459,26 +459,27 @@ void ExistenceClientStateMainScreen::MainScreenUIHandleClosePressed(StringHash e
         if(clickednamestring=="newcharacterButton")
         {
             /// remove child nodeAddItem (UIElement *item)
-            scene_->GetChild("playerMesh",true)->Remove();
+            Existence-> scene_->GetChild("playerMesh",true)->Remove();
 
             /// Clear screen
-            eraseScene();
+             Existence->eraseScene();
 
             Console* console = GetSubsystem<Console>();
 
             console -> SetVisible(false);
 
-            ExistenceGameState->SetConsoleState(UI_CONSOLEOFF);
+            ///ExistenceGameState->SetConsoleState(UI_CONSOLEOFF);
 
             /// Enable OS cursor
             GetSubsystem<Input>()->SetMouseVisible(true);
 
-            ExistenceGameState-> SendEvent("GAME_STATE_PLAYER");
+            ///ExistenceGameState-> SendEvent("GAME_STATE_PLAYER");
 
         }
         else if(clickednamestring=="exitButton")
         {
-            engine_->Exit();
+            ///engine_->Exit();
+            ///Existence -> Exit();
         }
     }
 
@@ -502,10 +503,10 @@ void ExistenceClientStateMainScreen::HandleCharacterStartButtonReleased(StringHa
     int button = clickedButtonString.Back()-'0';
 
     /// Load UI root
-    UIElement * uiroot = ui_ ->	GetRoot ();
+    UIElement * uiroot =  ui_ ->	GetRoot ();
 
     /// Locate Window PlayerWindow
-    Window* SceneLoaderWindow = dynamic_cast<Window*>(uiroot ->GetChild("SceneLoaderWindow", true));
+    Window* SceneLoaderWindow = dynamic_cast<Window*>( uiroot ->GetChild("SceneLoaderWindow", true));
 
     /// IF PlayerWindow exist then enable visibility
     if(SceneLoaderWindow)
@@ -518,7 +519,7 @@ void ExistenceClientStateMainScreen::HandleCharacterStartButtonReleased(StringHa
     else
     {
         /// Load Player WIndow UI
-        loadUIXML(UISCENESELECTWINDOW,200,100, button);
+        Existence-> loadUIXML(UISCENESELECTWINDOW,200,100, button);
     }
 }
 
@@ -544,15 +545,15 @@ void ExistenceClientStateMainScreen::HandleCharacterSelectedReleased(StringHash 
     {
 
         /// Get player mesh node and remove children
-        Node* playermeshNode = scene_->GetChild("playerMesh");
+        Node* playermeshNode = Existence-> scene_->GetChild("playerMesh");
 
         playermeshNode->RemoveAllChildren();
 
         /// Set selected player
-        TemporaryAccountPlayerSelected=clickedbutton;
+        Existence-> TemporaryAccountPlayerSelected=clickedbutton;
 
         /// Load player mesh in main screen ui
-        loadplayerMesh(playermeshNode, TemporaryAccountPlayerList[clickedbutton].GetAlliance().alienrace, TemporaryAccountPlayerList[clickedbutton].GetCharacteristics().gender,DISPLAYMESH_SINGLECHARACTER);
+        Existence-> loadplayerMesh(playermeshNode,  Existence->TemporaryAccountPlayerList[clickedbutton].GetAlliance().alienrace,  Existence->TemporaryAccountPlayerList[clickedbutton].GetCharacteristics().gender,DISPLAYMESH_SINGLECHARACTER);
     }
 }
 
@@ -590,7 +591,7 @@ void ExistenceClientStateMainScreen::HandleCharacterSelectedInfoButtonReleased(S
     else
     {
         /// Load Player WIndow UI
-        loadUIXML(UIPLAYERWINDOW,200,200, button);
+        Existence-> loadUIXML(UIPLAYERWINDOW,200,200, button);
     }
 }
 

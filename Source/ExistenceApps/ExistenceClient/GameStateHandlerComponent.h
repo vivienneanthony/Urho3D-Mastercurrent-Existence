@@ -21,11 +21,13 @@
 #define         CAMERAMODE_FIRSTPERSON              1
 #define         CAMERAMODE_FLY                      2
 
-#include "GameStateHandlerComponent.h"
 
-using namespace Urho3D;
+#include "ExistenceClient.h"
+
 using namespace std;
 
+
+using namespace Urho3D;
 
 class URHO3D_API  GameStateHandlerComponent : public LogicComponent
 {
@@ -37,6 +39,8 @@ public:
     virtual  ~GameStateHandlerComponent();
     /// Register object factory and attributes.
     static void RegisterNewSubsystem(Context* context);
+    static void RegisterGameStates(Context* context);
+    void Start(void);
 
     /// Function to access other states
     int GetConsoleState(void);
@@ -52,6 +56,10 @@ public:
     int SetDebugHudMode(int flag);
 
 private:
+ /// Not used at the moment
+    /// holder
+    ExistenceClientStateSingleton * GameState;
+
 
     /// Added flags
     int consolestate;
@@ -63,3 +71,4 @@ private:
 };
 
 #endif // GAMESTATEHANDLER_H
+

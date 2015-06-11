@@ -73,7 +73,7 @@
 #include "../../../Urho3D/Graphics/RenderPath.h"
 #include "../../../Urho3D/Math/Color.h"
 
-#include "GameStateHandler.h"
+#include "GameStateHandlerComponent.h"
 #include "GameStateEvents.h"
 #include "GameObject.h"
 #include "EnvironmentBuild.h"
@@ -103,7 +103,6 @@
 #include "ExistenceClient.h"
 #include "ExistenceClientUI.h"
 
-#include "GameStateHandlerComponent.h"
 
 #include "../../Urho3D/Engine/DebugHud.h"
 
@@ -111,8 +110,7 @@
 using namespace Urho3D;
 using namespace std;
 
-namespace Urho3D
-{
+
 /// Game State Handler Coponent
 GameStateHandlerComponent::GameStateHandlerComponent(Context* context) :
     LogicComponent (context)
@@ -122,6 +120,7 @@ GameStateHandlerComponent::GameStateHandlerComponent(Context* context) :
     /// Debug Info
     cout << "Debug: Game State Handler Component Constructor - context " << &context << endl;
 }
+
 
 /// Game State Component Deconstructor
 GameStateHandlerComponent::~GameStateHandlerComponent()
@@ -142,11 +141,31 @@ void GameStateHandlerComponent::RegisterNewSubsystem(Urho3D::Context* context)
     return;
 }
 
+void GameStateHandlerComponent::RegisterGameStates(Context* context)
+{
+    /// .... all states here
+    context->RegisterFactory<ExistenceClientStateSingleton>();
+    context->RegisterFactory<ExistenceClientStateAccount>();
+    context->RegisterFactory<ExistenceClientStateGameMode>();
+    context->RegisterFactory<ExistenceClientStateLogin>();
+    context->RegisterFactory<ExistenceClientStatePlayer>();
+    context->RegisterFactory<ExistenceClientStateProgress>();
+    context->RegisterFactory<ExistenceClientStateMainScreen>();
+
+
+    cout << "Debug: Game State Register States context " << &context << endl;
+
+
+}
+
+
 /// try to test the state
-int GameStateHandlerComponent::Start()
+void GameStateHandlerComponent::Start(void)
 {
     /// Test
-    ExistenceClientStateSingleton *  gameState = new ExistenceClientStateLogin(context);
+    ExistenceClientStateSingleton *  gameState = new ExistenceClientStateLogin(context_);
+
+
 }
 
 /// Functions for states
@@ -217,4 +236,4 @@ int GameStateHandlerComponent::SetDebugHudMode(int flag)
 
     return 1;
 }
-}
+

@@ -177,11 +177,11 @@ void ExistenceClientStateAccount::CreateAccountScreenUI(void)
     float height = (float)graphics->GetHeight();
 
     /// set ui state to none
-    ExistenceGameState->SetUIState(UI_ACCOUNTCREATIONINTERFACE);
+    ///ExistenceGameState->SetUIState(UI_ACCOUNTCREATIONINTERFACE);
 
     /// Create the Window and add it to the UI's root node
-    window_= new Window(context_);
-    uiRoot_->AddChild(window_);
+    Existence -> window_= new Window(context_);
+    Existence ->uiRoot_->AddChild(Existence->window_);
 
     /// Define UIElements and childrens types
     UIElement* titleBar = new UIElement(context_);
@@ -226,12 +226,12 @@ void ExistenceClientStateAccount::CreateAccountScreenUI(void)
     blankUIElement->SetFixedHeight(16);
 
     /// Set Window size and layout settings
-    window_->SetMinSize(384, 192);
-    window_->SetLayout(LM_VERTICAL, 6, IntRect(6, 6, 6, 6));
-    window_->SetAlignment(HA_CENTER, VA_CENTER);
-    window_->SetName("CreateAccountWindow");
-    window_->SetMovable(false);
-    window_->SetOpacity(.6);
+    Existence ->window_->SetMinSize(384, 192);
+    Existence ->window_->SetLayout(LM_VERTICAL, 6, IntRect(6, 6, 6, 6));
+    Existence ->window_->SetAlignment(HA_CENTER, VA_CENTER);
+    Existence ->window_->SetName("CreateAccountWindow");
+    Existence ->window_->SetMovable(false);
+    Existence ->window_->SetOpacity(.6);
 
     /// Create Window 'titlebar' container
     windowTitle->SetName("CreateAccount");
@@ -301,17 +301,17 @@ void ExistenceClientStateAccount::CreateAccountScreenUI(void)
 
     /// Add Children
     titleBar->AddChild(windowTitle);
-    window_->AddChild(titleBar);
-    window_->AddChild(usernameInput);
-    window_->AddChild(emailText);
-    window_->AddChild(emailInput);
-    window_->AddChild(confirmpassword1UIElement);
-    window_->AddChild(passwordInput1);
-    window_->AddChild(confirmpassword2UIElement);
-    window_->AddChild(passwordInput2);
+    Existence->window_->AddChild(titleBar);
+    Existence->window_->AddChild(usernameInput);
+    Existence->window_->AddChild(emailText);
+    Existence->window_->AddChild(emailInput);
+    Existence->window_->AddChild(confirmpassword1UIElement);
+    Existence->window_->AddChild(passwordInput1);
+    Existence->window_->AddChild(confirmpassword2UIElement);
+    Existence->window_->AddChild(passwordInput2);
 
     blankUIElement-> AddChild(blankText);
-    window_->AddChild(blankUIElement);
+    Existence->window_->AddChild(blankUIElement);
 
     blank2UIElement-> AddChild(blank2Text);
 
@@ -326,14 +326,14 @@ void ExistenceClientStateAccount::CreateAccountScreenUI(void)
     newaccount2Button->SetStyle("continueButton");
 
     /// add children
-    window_->AddChild(playerUIElement);
-    window_->AddChild(playernameinputUIElement);
-    window_->AddChild(blank2UIElement);
+    Existence ->window_->AddChild(playerUIElement);
+    Existence ->window_->AddChild(playernameinputUIElement);
+    Existence ->window_->AddChild(blank2UIElement);
 
-    window_->AddChild(newaccount2Button);
+    Existence->window_->AddChild(newaccount2Button);
 
     /// Apply styles
-    window_->SetStyleAuto();
+    Existence->window_->SetStyleAuto();
     windowTitle->SetStyleAuto();
     confirmpassword1Text->SetStyleAuto();
     confirmpassword2Text->SetStyleAuto();
@@ -362,7 +362,7 @@ void ExistenceClientStateAccount::CreateAccountUIHandleClosePressed(StringHash e
     UI* ui_ = GetSubsystem<UI>();
 
     /// Set UI state to account creation interface
-    ExistenceGameState->SetUIState(UI_ACCOUNTCREATIONINTERFACE);
+    ///ExistenceGameState->SetUIState(UI_ACCOUNTCREATIONINTERFACE);
 
     /// Get line objects
     LineEdit* firstnameLineEdit = (LineEdit*)ui_->GetRoot()->GetChild("firstnameInput", true);
@@ -391,12 +391,12 @@ void ExistenceClientStateAccount::CreateAccountUIHandleClosePressed(StringHash e
     account.password=password1Input.CString();
 
     /// Save Account Information
-    SaveAccount(account);
+Existence ->    SaveAccount(account);
 
-    eraseScene();
+    Existence ->eraseScene();
 
     //CreatePlayerScreenUI();
-    ExistenceGameState -> SendEvent("GAME_STATE_PLAYERCREATE");
+    ///ExistenceGameState -> SendEvent("GAME_STATE_PLAYERCREATE");
     return;
 }
 
