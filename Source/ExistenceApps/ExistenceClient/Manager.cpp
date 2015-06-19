@@ -84,7 +84,7 @@
 
 /// Existence Specific
 #include "Character.h"
-#include "GameStateHandler.h"
+#include "GameStateHandlerComponent.h"
 #include "GameObject.h"
 #include "EnvironmentBuild.h"
 #include "Manager.h"

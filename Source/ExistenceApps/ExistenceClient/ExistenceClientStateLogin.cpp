@@ -110,69 +110,90 @@
 using namespace std;
 using namespace Urho3D;
 
-
-/// Constructor Destror
+/// State Login Constructor
 ExistenceClientStateLogin::ExistenceClientStateLogin(Context * context)
     :ExistenceClientStateSingleton(context)
-    ,Existence(baseclass)
+    ,Existence(NULL)
 {
-
+    /// Debug
     cout << "Debug: State Login Constructor" << endl;
 
-    /// create UI
-    cout << Existence -> GetTestString() << endl;
+    /// Get component
+    GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
+    /// Set aApplication
+    Existence = gamestatehandlercomponent_->GetApplication();
 
-    LoginScreen();
+    /// Debug
+    cout << "Debug: State Login Constructor Test Value " << Existence->testvalue << endl;
+
+    return;
 }
 
+/// State Login Desconstructor
 ExistenceClientStateLogin::~ExistenceClientStateLogin()
 {
+    /// Debug
     cout << "Debug: State Login Deconstructor" << endl;
 
-    //dtor
+    return;
 }
 
-
+/// State Login Enter
 void ExistenceClientStateLogin::Enter()
 {
-    //dtor
+
+    /// Debug
+    cout << "Debug: State Login Enter" << endl;
+
+    /// Login function start when entered
+    LoginScreen();
+
+    return;
+
 }
 
+/// State Login Exit
 void ExistenceClientStateLogin::Exit()
 {
-    //dtor
+    /// Debug
+    cout << "Debug: State Login Exit" << endl;
+
+    return;
 }
 
+/// State Login OnUpdate
 void ExistenceClientStateLogin::OnUpdate(StringHash eventType, VariantMap& eventData)
 {
-    //
+    /// Debug
+    cout << "Debug: State Login OnUpdate" << endl;
 }
 
-/// code
+void ExistenceClientStateLogin::SetParameter(String parameter_)
+{
+    /// Do Nothing
+    return;
+}
+
+/// State Login Screen UI
 void ExistenceClientStateLogin::LoginScreenUI(void)
 {
+    /// Debug
+    cout << "Debug: State Login Create UI" << endl;
 
-    /// Get all Revelant resources
+    /// Get all revelant resources
     ResourceCache* cache = GetSubsystem<ResourceCache>();
-    Renderer* renderer = GetSubsystem<Renderer>();
     Graphics* graphics_= GetSubsystem<Graphics>();
-    UI* ui = GetSubsystem<UI>();
-    FileSystem * filesystem = GetSubsystem<FileSystem>();
-
-    UIElement * uiRoot_ = ui -> GetRoot();
+    GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
 
     /// Get rendering window size as floats
     float width = (float)graphics_->GetWidth();
     float height = (float)graphics_->GetHeight();
 
     /// Set UI gamestate to logininterface
-    /// ExistenceGameState->SetUIState(UI_LOGININTERFACE);
+    gamestatehandlercomponent_ ->SetUIState(UI_LOGININTERFACE);
 
     /// Login screen - Create the Window and add it to the UI's root node
-    /// Create the Window and add it to the UI's root node
-
     Existence->window_= new Window(context_);
-
     Existence->uiRoot_->AddChild(Existence->window_);
 
     UIElement* usernameTextUIElement = new UIElement(context_);
@@ -226,21 +247,30 @@ void ExistenceClientStateLogin::LoginScreenUI(void)
     Existence->window_->AddChild(passwordTextUIElement);
     Existence->window_->AddChild(passwordInput);
 
-    /// declare buttons
+    /// Declare buttons
     Button* loginButton = new Button(context_);
     Button* newaccountButton = new Button(context_);
+
+    /// Set accountexist to false temporary
+    Existence->accountexist=true;
 
     /// check if account exist
     if(Existence->accountexist)
     {
+        /// Use login button
         loginButton->SetName("Login");
         loginButton->SetStyle("loginButton");
+
+        /// Add login button
         Existence->window_->AddChild(loginButton);
     }
     else
     {
+        /// Uew new account Button
         newaccountButton->SetName("NewAccountLogin");
         newaccountButton->SetStyle("newaccountButton");
+
+        /// Add new account button
         Existence->window_->AddChild(newaccountButton);
     }
 
@@ -248,9 +278,6 @@ void ExistenceClientStateLogin::LoginScreenUI(void)
     Existence->window_->SetStyleAuto();
     usernameText->SetStyleAuto();
     passwordText->SetStyleAuto();
-
-
-    Existence->accountexist=false;
 
     /// Attach handler based on new account - Temporary
     if(Existence->accountexist)
@@ -265,44 +292,76 @@ void ExistenceClientStateLogin::LoginScreenUI(void)
     return;
 }
 
-// Handlers for login screen (Handler)
+/// Handlers for login screen (Handler) - Login Account
 void ExistenceClientStateLogin::LoginScreenUILoginHandleClosePressed(StringHash eventType, VariantMap& eventData)
 {
-    /// set ui state to none
-    ///ExistenceGameState->SetUIState(UI_LOGININTERFACE);
-
+    /// Get all revelant resources
     UI* ui_ = GetSubsystem<UI>();
+    GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
 
+    /// Set game state UI interfface
+    gamestatehandlercomponent_ ->SetUIState(UI_LOGININTERFACE);
+
+    /// Get root element for the UI
     UIElement * RootUIElement = ui_->GetRoot();
 
     LineEdit* lineEdit = (LineEdit*)ui_->GetRoot()->GetChild("usernameInput", true);
     String username = lineEdit->GetText();
 
-    /// remove Existence Logo Node
-    Existence->scene_->GetChild("ExistenceLogo",true)->RemoveAllComponents();
-    Existence->scene_->GetChild("ExistenceLogo",true)->Remove();
+    /// Remove Existence Logo Node if it exist
+    if(Existence->scene_->GetChild("ExistenceLogo",true))
+    {
+        Existence->scene_->GetChild("ExistenceLogo",true)->RemoveAllComponents();
+        Existence->scene_->GetChild("ExistenceLogo",true)->Remove();
 
-    /// Call progress screen function
-    ///ExistenceGameState -> SendEvent("GAME_STATE_PLAYERCREATE");
+    }
+
+    /// Erase UI
+    Existence -> EraseUI();
+
+
+        UnsubscribeFromAllEvents();
+
+
+    /// Create a event
+    VariantMap gamestatechange;
+    gamestatechange[GameState::P_CMD] = GAME_STATE_MAINMENU;
+
+    cout << "Debug: Attempt to send a state change" << endl;
+
+    this->SendEvent(G_STATES_CHANGE,gamestatechange);
 
     return;
 }
 
-/// Login screen handler function
+/// Handlers for login screen (Handler) -New Account
 void ExistenceClientStateLogin::LoginScreenUINewAccountHandleClosePressed(StringHash eventType, VariantMap& eventData)
 {
-    UI* ui = GetSubsystem<UI>();
+    /// Get all revelant resources
+    UI* ui_ = GetSubsystem<UI>();
+    GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
 
-    /// set ui state to none
-    ///ExistenceGameState->SetUIState(UI_LOGININTERFACE);
+    /// Set game state UI interfface
+    gamestatehandlercomponent_ ->SetUIState(UI_LOGININTERFACE);
 
-    /// remove Existence Logo Node
-   Existence-> scene_->GetChild("ExistenceLogo",true)->RemoveAllComponents();
-   Existence-> scene_->GetChild("ExistenceLogo",true)->Remove();
+    /// Get root element for the UI
+    UIElement * RootUIElement = ui_->GetRoot();
 
+    LineEdit* lineEdit = (LineEdit*)ui_->GetRoot()->GetChild("usernameInput", true);
+    String username = lineEdit->GetText();
+
+    /// Remove Existence Logo Node if it exist
+    if(Existence->scene_->GetChild("ExistenceLogo",true))
+    {
+        Existence->scene_->GetChild("ExistenceLogo",true)->RemoveAllComponents();
+        Existence->scene_->GetChild("ExistenceLogo",true)->Remove();
+    }
+
+    /// Erase UI
+    Existence -> EraseUI();
 
     /// Call create play screen functi/
-    ///    ExistenceGameState -> SendEvent("GAME_STATE_ACCOUNTCREATE");
+    /// ExistenceGameState -> SendEvent("GAME_STATE_ACCOUNTCREATE");
 
     return;
 }
@@ -310,20 +369,14 @@ void ExistenceClientStateLogin::LoginScreenUINewAccountHandleClosePressed(String
 /// Login state main screen
 void ExistenceClientStateLogin::LoginScreen(void)
 {
+    /// Debug
+    cout << "Debug: ExistenceClientStateLogin::LoginScreen" << endl;
+
     /// Set variables
     bool CurrentStateIsLogin=true;
 
     /// Load the user interace
     LoginScreenUI();
-
-    /// Loop
-    cout << "start loop" << endl;
-    do
-    {
-        int a=1;
-
-    }
-    while(CurrentStateIsLogin);
 
     return;
 }

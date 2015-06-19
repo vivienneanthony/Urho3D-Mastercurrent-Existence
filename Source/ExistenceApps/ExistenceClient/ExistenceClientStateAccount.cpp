@@ -73,7 +73,7 @@
 #include "../../../Urho3D/Graphics/RenderPath.h"
 #include "../../../Urho3D/Math/Color.h"
 
-#include "GameStateHandler.h"
+#include "GameStateHandlerComponent.h"
 #include "GameStateEvents.h"
 #include "GameObject.h"
 #include "EnvironmentBuild.h"
@@ -113,36 +113,71 @@ using namespace std;
 using namespace Urho3D;
 
 
-
-/// Constructor Destror
+/// State Account Constructor
 ExistenceClientStateAccount::ExistenceClientStateAccount(Context* context):
     ExistenceClientStateSingleton (context)
+    ,Existence(NULL)
 {
-    /// create UI
-    Account();
+    /// Debug
+    cout << "Debug: State Account Constructor" << endl;
+
+    /// Get component
+    GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
+    /// Set aApplication
+    Existence = gamestatehandlercomponent_->GetApplication();
+
+    /// Debug
+    cout << "Debug: State Account Constructor Test Value " << Existence->testvalue << endl;
+
+    return;
 }
 
+/// State Account Desctructor
 ExistenceClientStateAccount::~ExistenceClientStateAccount()
 {
-    //dtor
+     /// Debug
+    cout << "Debug: State Account Deconstructor" << endl;
+
+    return;
 }
 
+/// State Account Enter
 void ExistenceClientStateAccount::Enter()
 {
-    //dtor
+    /// Debug
+    cout << "Debug: State Account Enter" << endl;
+
+    /// create UI
+    Account();
+
+    return;
 }
 
+/// State Account Exit
 void ExistenceClientStateAccount::Exit()
 {
-    //dtor
+    /// Debug
+    cout << "Debug: State Account Exit" << endl;
+
+    return;
 }
 
+/// State Account On Update
 void ExistenceClientStateAccount::OnUpdate(StringHash eventType, VariantMap& eventData)
 {
-    //
+       /// Debug
+    cout << "Debug: State Account OnUpdate" << endl;
+
+    return;
 }
 
-/// Login state main screen
+void ExistenceClientStateAccount::SetParameter(String parameter_)
+{
+    /// Do Nothing
+    return;
+}
+
+/// State Account UI
 void ExistenceClientStateAccount::Account(void)
 {
     /// Set variables
@@ -151,13 +186,7 @@ void ExistenceClientStateAccount::Account(void)
     /// Load the user interace
     CreateAccountScreenUI();
 
-    /// Loop
-    do
-    {
-    }
-    while(CurrentStateIsLogin);
-
-    return;
+     return;
 }
 
 
@@ -169,7 +198,9 @@ void ExistenceClientStateAccount::CreateAccountScreenUI(void)
     Renderer* renderer = GetSubsystem<Renderer>();
     Graphics* graphics = GetSubsystem<Graphics>();
     UI* ui = GetSubsystem<UI>();
+    GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
 
+    /// Clear screen
     ui->Clear();
 
     /// Get rendering window size as floats
@@ -177,11 +208,11 @@ void ExistenceClientStateAccount::CreateAccountScreenUI(void)
     float height = (float)graphics->GetHeight();
 
     /// set ui state to none
-    ///ExistenceGameState->SetUIState(UI_ACCOUNTCREATIONINTERFACE);
+    gamestatehandlercomponent_->SetUIState(UI_ACCOUNTCREATIONINTERFACE);
 
     /// Create the Window and add it to the UI's root node
-    Existence -> window_= new Window(context_);
-    Existence ->uiRoot_->AddChild(Existence->window_);
+    Existence->window_= new Window(context_);
+    Existence->uiRoot_->AddChild(Existence->window_);
 
     /// Define UIElements and childrens types
     UIElement* titleBar = new UIElement(context_);
@@ -355,14 +386,15 @@ void ExistenceClientStateAccount::CreateAccountScreenUI(void)
     return;
 }
 
+/// Create Accooount UI  Handler
 void ExistenceClientStateAccount::CreateAccountUIHandleClosePressed(StringHash eventType, VariantMap& eventData)
 {
     /// Get Needed SubSystems
-    ResourceCache* cache = GetSubsystem<ResourceCache>();
     UI* ui_ = GetSubsystem<UI>();
+    GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
 
     /// Set UI state to account creation interface
-    ///ExistenceGameState->SetUIState(UI_ACCOUNTCREATIONINTERFACE);
+    gamestatehandlercomponent_ ->SetUIState(UI_ACCOUNTCREATIONINTERFACE);
 
     /// Get line objects
     LineEdit* firstnameLineEdit = (LineEdit*)ui_->GetRoot()->GetChild("firstnameInput", true);
@@ -391,11 +423,12 @@ void ExistenceClientStateAccount::CreateAccountUIHandleClosePressed(StringHash e
     account.password=password1Input.CString();
 
     /// Save Account Information
-Existence ->    SaveAccount(account);
+    Existence -> SaveAccount(account);
 
-    Existence ->eraseScene();
+    /// Erase the UI
+    Existence -> EraseUI();
 
-    //CreatePlayerScreenUI();
+
     ///ExistenceGameState -> SendEvent("GAME_STATE_PLAYERCREATE");
     return;
 }

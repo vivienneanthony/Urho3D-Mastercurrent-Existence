@@ -75,7 +75,7 @@
 #include "../../../Urho3D/Graphics/RenderPath.h"
 #include "../../../Urho3D/Math/Color.h"
 
-#include "GameStateHandler.h"
+#include "GameStateHandlerComponent.h"
 #include "GameStateEvents.h"
 #include "GameObject.h"
 #include "Manager.h"
@@ -133,31 +133,37 @@ bool ExistenceClient::loadUIXML(int windowtype, const int positionx, const int p
     {
         filenameHUD.Append("Resources/UI/QuickMenu.xml");
     }
-    /// select interface based on input
-    else if (windowtype==UIPLAYERWINDOW)
-    {
-        filenameHUD.Append("Resources/UI/PlayerWindow.xml");
-    }
-    else if (windowtype==UISCENESELECTWINDOW)
-    {
-        filenameHUD.Append("Resources/UI/SceneLoaderWindow.xml");
-    }
-    else if (windowtype==UIPREFERENCESWINDOW)
-    {
-        filenameHUD.Append("Resources/UI/PreferencesWindow.xml");
-    }
-    else if (windowtype==UICONFIGURATIONWINDOW)
-    {
-        filenameHUD.Append("Resources/UI/ConfigurationWindow.xml");
-    }
-    else if(windowtype==UIABOUTWINDOW)
-    {
-        filenameHUD.Append("Resources/UI/AboutWindow.xml");
-    }
     else
-    {
-        return 0;
-    }
+        /// chose based on menu type
+        if(windowtype==UIMINIQUICKMENU)
+        {
+            filenameHUD.Append("Resources/UI/QuickMenu.xml");
+        }
+    /// select interface based on input
+        else if (windowtype==UIPLAYERWINDOW)
+        {
+            filenameHUD.Append("Resources/UI/PlayerWindow.xml");
+        }
+        else if (windowtype==UISCENESELECTWINDOW)
+        {
+            filenameHUD.Append("Resources/UI/SceneLoaderWindow.xml");
+        }
+        else if (windowtype==UIPREFERENCESWINDOW)
+        {
+            filenameHUD.Append("Resources/UI/PreferencesWindow.xml");
+        }
+        else if (windowtype==UICONFIGURATIONWINDOW)
+        {
+            filenameHUD.Append("Resources/UI/ConfigurationWindow.xml");
+        }
+        else if(windowtype==UIABOUTWINDOW)
+        {
+            filenameHUD.Append("Resources/UI/AboutWindow.xml");
+        }
+        else
+        {
+            return 0;
+        }
 
     XMLFile* style = cache->GetResource<XMLFile>("UI/DefaultStyle.xml");
 
@@ -267,6 +273,29 @@ bool ExistenceClient::loadUIXML(int windowtype, const int positionx, const int p
         SubscribeToEvent(exitButton, E_RELEASED, HANDLER(ExistenceClient, QuickMenuPressed));
     }
 
+
+    /// If load is quickmenu on side assign buttons and move position  to far right
+    if(windowtype==UIMINIQUICKMENU)
+    {
+        /// set position
+        HUDFileElement -> SetPosition(width-18,100);
+
+        /// get buttons assign a event
+        Button * playerButton  = (Button *) HUDFileElement -> GetChild("PlayerButton",true);
+        Button * preferencesButton  = (Button *) HUDFileElement -> GetChild("PreferencesButton",true);
+        Button * aboutButton  = (Button *) HUDFileElement -> GetChild("AboutButton",true);
+        Button * configurationButton  = (Button *) HUDFileElement -> GetChild("ConfigurationButton",true);
+        Button * exitButton  = (Button *) HUDFileElement -> GetChild("ExitButton",true);
+
+        playerButton->SetEnabled(false);
+        exitButton->SetEnabled(false);
+
+        SubscribeToEvent(preferencesButton, E_RELEASED, HANDLER(ExistenceClient, QuickMenuPressed));
+        SubscribeToEvent(aboutButton, E_RELEASED, HANDLER(ExistenceClient, QuickMenuPressed));
+        SubscribeToEvent(configurationButton, E_RELEASED, HANDLER(ExistenceClient, QuickMenuPressed));
+    }
+
+
     if(windowtype==UISCENESELECTWINDOW)
     {
 
@@ -326,6 +355,7 @@ void ExistenceClient::QuickMenuPressed(StringHash eventType, VariantMap& eventDa
     Renderer* renderer = GetSubsystem<Renderer>();
     ResourceCache* cache = GetSubsystem<ResourceCache>();
     UI* ui_ = GetSubsystem<UI>();
+    GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
 
     /// get the button that was clicked
     Button* clicked = static_cast<Button*>(eventData[UIMouseClick::P_ELEMENT].GetPtr());
@@ -341,26 +371,23 @@ void ExistenceClient::QuickMenuPressed(StringHash eventType, VariantMap& eventDa
     /// If exit was clicked
     if (clickedtext=="ExitButton")
     {
-        if(ExistenceGameState->GetDebugHudMode()==true)
+        if(gamestatehandlercomponent_->GetDebugHudMode()==true)
         {
-            ExistenceGameState->SetDebugHudMode(false);
+            gamestatehandlercomponent_->SetDebugHudMode(false);
             GetSubsystem<DebugHud>()->ToggleAll();
         }
-
-        eraseScene();
 
         GetSubsystem<Input>()->SetMouseVisible(true);
 
         /// set ui state to none
-        ExistenceGameState->SetUIState(UI_CHARACTERSELECTIONINTERFACE);
+        gamestatehandlercomponent_->SetUIState(UI_CHARACTERSELECTIONINTERFACE);
         ///ExistenceGameState->SetGameState(STATE_MAIN);
 
         /// setup scene
         SetupScreenViewport();
 
-        ExistenceGameState->SetCameraMode(CAMERAMODE_DEFAULT);
+        gamestatehandlercomponent_->SetCameraMode(CAMERAMODE_DEFAULT);
 
-        ExistenceGameState->SendEvent("GAME_STATE_MAINSCREEN");
 
         /// Create a scene node for the camera, which we will move around
         /// The camera will use default settings (1000 far clip distance, 45 degrees FOV, set aspect ratio automatically)
@@ -368,6 +395,15 @@ void ExistenceClient::QuickMenuPressed(StringHash eventType, VariantMap& eventDa
 
         /// Set an initial position for the camera scene node above the plane
         cameraNode_->SetPosition(Vector3(2.0,0.0,5.0));
+
+
+        /// Create a event
+        VariantMap gamestatechange;
+        gamestatechange[GameState::P_CMD] = GAME_STATE_MAINMENU;
+
+        cout << "Debug: Attempt to send a state change" << endl;
+
+        this->SendEvent(G_STATES_CHANGE,gamestatechange);
 
         return;
     }
@@ -750,8 +786,8 @@ int ExistenceClient::UpdateUISceneLoader(void)
     ScenesListView->SetClearSelectionOnDefocus(false);
     ScenesListView->SetMultiselect (false);
 
-        /// Set Counter
-        unsigned int counter=0;
+    /// Set Counter
+    unsigned int counter=0;
 
     /// If scenes file exist
     if(scenesload!=NULL)
@@ -819,6 +855,8 @@ void ExistenceClient::SceneLoaderHanderPress(StringHash eventType, VariantMap& e
 {
     /// Get the button that was clicked
     UI* ui_ = GetSubsystem<UI>();
+    GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
+
 
     /// Get needed info
     ListView* ScenesListView= (ListView*)ui_->GetRoot()->GetChild("ScenesListView", true);
@@ -835,18 +873,24 @@ void ExistenceClient::SceneLoaderHanderPress(StringHash eventType, VariantMap& e
     TemporaryAccountPlayerSelected=button;
 
     /// Get Button String
-    String clicked("/scene file "+selectedScene->GetName());
+    String clicked("file "+selectedScene->GetName());
 
     /// erase scene
     eraseScene();
 
     /// change state
-    ExistenceGameState->SetUIState(UI_GAMECONSOLE);
+    gamestatehandlercomponent_->SetUIState(UI_GAMECONSOLE);
 
-    ExistenceGameState->SendEvent("GAME_STATE_GAMEMODELOAD");
+    ///ExistenceGameState->SendEvent("GAME_STATE_GAMEMODELOAD");
 
-    /// load scene
-    ///  loadScene(1,  clicked.CString());
+    /// Create a event
+    VariantMap gamestatechange;
+    gamestatechange[GameState::P_CMD] = GAME_STATE_PROGRESS;
+    gamestatechange[GameState::P_ARG] = clicked.CString();
+
+    cout << "Debug: Attempt to send a state change" << endl;
+
+    this->SendEvent(G_STATES_CHANGE,gamestatechange);
 
     return;
 }

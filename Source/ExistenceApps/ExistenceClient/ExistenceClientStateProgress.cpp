@@ -111,34 +111,78 @@
 
 using namespace std;
 using namespace Urho3D;
+using namespace Update;
 
 /// Constructor Destror
 ExistenceClientStateProgress::ExistenceClientStateProgress(Urho3D::Context* context)
     :ExistenceClientStateSingleton (context)
     ,Existence(baseclass)
 {
-    /// create UI
-    Progress();
+
+    /// Debug
+    cout << "Debug: State Main Progress Constructor" << endl;
+
+    /// int
+    progressload_ = PROGRESSDEFAULT;
+    progressloadingstate = PROGRESSSCENELOAD;
+
+    /// Get component
+    GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
+    /// Set aApplication
+    Existence = gamestatehandlercomponent_->GetApplication();
+
+    /// Subscribe to event
+    SubscribeToEvent(P_LOAD_CHANGE, HANDLER(ExistenceClientStateProgress, ProgressLoadOnStateChange));
+
+    return;
 }
 
 ExistenceClientStateProgress::~ExistenceClientStateProgress()
 {
-    //dtor
+
+    /// Debug
+    cout << "Debug: State Main Progress Deconstructor" << endl;
+
+    return;
 }
+
+void ExistenceClientStateProgress::SetParameter(String parameter_)
+{
+    /// Copy
+    progressloadparameters_= parameter_;
+
+    ///progressloadparameters_->Append(parameter_);
+
+    /// Debug
+    /// cout << "Debug:State Main Progress SetParameter " << progressloadparameters_ ->CString() << endl;
+
+    return;
+}
+
+
 
 void ExistenceClientStateProgress::Enter()
 {
-    //dtor
+
+    /// Debug
+    cout << "Debug: State Main Progress Enter" << endl;
+
+    Progress();
+    return;
 }
 
 void ExistenceClientStateProgress::Exit()
 {
-    //dtor
+
+    /// Debug
+    cout << "Debug: State Main Progress Exit" << endl;
+
+    return;
 }
 
 void ExistenceClientStateProgress::OnUpdate(StringHash eventType, VariantMap& eventData)
 {
-    //
+    return;
 }
 
 
@@ -147,15 +191,25 @@ void ExistenceClientStateProgress::Progress(void)
     /// Temporary for use flag of states
     bool CurrentStateIsProgress = true;
 
-    /// load the UI
+    /// Setup screen
+    ProgressScreenViewport();
+
+    /// Load the UI
     ProgressScreenUI();
 
-    /// loop
-    do
-    {
+    /// Set Timer
+    ProgressTimer.Reset();
 
-    }
-    while (CurrentStateIsProgress);
+///    cout << "Timer" << ProgressTimer.GetMSec(false) << endl;
+
+    ///  Handle Post Updates
+    SubscribeToEvent(E_POSTUPDATE,HANDLER(ExistenceClientStateProgress,ProgessionHandleUpdate));
+
+
+    /// Load Scene
+    loadScene(1, progressloadparameters_);
+
+    return;
 }
 
 
@@ -168,9 +222,13 @@ void ExistenceClientStateProgress::ProgressScreenUI(void)
     ResourceCache* cache = GetSubsystem<ResourceCache>();
     Renderer* renderer = GetSubsystem<Renderer>();
     Graphics* graphics = GetSubsystem<Graphics>();
-    UI* ui = GetSubsystem<UI>();
+    UI* ui_ = GetSubsystem<UI>();
 
-    ui->Clear();
+    /// Clear the UI
+    ui_->Clear();
+
+    /// Get root
+    UIElement * progressuiRoot_ = ui_-> GetRoot();
 
     /// set ui state to none
     ///ExistenceGameState->SetUIState(UI_PROGRESSINTERFACE);
@@ -180,21 +238,20 @@ void ExistenceClientStateProgress::ProgressScreenUI(void)
     float height = (float)graphics->GetHeight();
 
     /// Create the Window and add it to the UI's root node
-    Existence->window_= new Window(context_);
+    progressWindow_= new Window(context_);
 
-    Existence->uiRoot_->AddChild(Existence->window_);
     UIElement* titleBar = new UIElement(context_);
     Text* windowTitle = new Text(context_);
     Text* progressText=new Text(context_);
     Button* continueButton = new Button(context_);
 
     /// Set Window size and layout settings
-    Existence->window_->SetMinSize(384, 192);
-    Existence->window_->SetLayout(LM_VERTICAL, 6, IntRect(6, 6, 6, 6));
-    Existence->window_->SetAlignment(HA_CENTER, VA_CENTER);
-    Existence->window_->SetName("LoginWindow");
-    Existence->window_->SetMovable(false);
-    Existence->window_->SetOpacity(.6);
+    progressWindow_->SetMinSize(384, 192);
+    progressWindow_->SetLayout(LM_VERTICAL, 6, IntRect(6, 6, 6, 6));
+    progressWindow_->SetAlignment(HA_CENTER, VA_CENTER);
+    progressWindow_->SetName("LoginWindow");
+    progressWindow_->SetMovable(false);
+    progressWindow_->SetOpacity(.6);
 
     /// Create Window 'titlebar' container
     titleBar->SetMinSize(0,32);
@@ -206,7 +263,6 @@ void ExistenceClientStateProgress::ProgressScreenUI(void)
 
     progressText->SetName("progressText");
     progressText->SetText("Loading ghost characters states... ");
-    progressText->SetStyleAuto();
 
     /// addlones
     continueButton->SetName("Login");
@@ -214,15 +270,18 @@ void ExistenceClientStateProgress::ProgressScreenUI(void)
 
     /// Add the controls to the title bar
     titleBar->AddChild(windowTitle);
-    Existence->window_->AddChild(titleBar);
-    Existence->window_->AddChild(progressText);
-    Existence->window_->AddChild(continueButton);
+    progressWindow_->AddChild(titleBar);
+    progressWindow_->AddChild(progressText);
+    progressWindow_->AddChild(continueButton);
+
+    progressuiRoot_ -> AddChild(progressWindow_);
 
     /// Apply styles
-    Existence->window_->SetStyleAuto();
+    progressWindow_->SetStyleAuto();
+    progressText->SetStyleAuto();
     windowTitle->SetStyleAuto();
 
-    SubscribeToEvent(continueButton, E_RELEASED, HANDLER(ExistenceClientStateProgress, ProgressScreenUIHandleClosePressed));
+    ///SubscribeToEvent(continueButton, E_RELEASED, HANDLER(ExistenceClientStateProgress, ProgressScreenUIHandleClosePressed));
 
     return;
 }
@@ -233,7 +292,7 @@ void ExistenceClientStateProgress::ProgressScreenUIHandleClosePressed(StringHash
     /// set ui state to none
     ///ExistenceGameState->SetUIState(UI_PROGRESSINTERFACE);
 
-    //mainScreenUI();
+    ///mainScreenUI();
     ///ExistenceGameState -> SendEvent("GAME_STATE_MAINSCREEN");
 
     return;
@@ -242,7 +301,6 @@ void ExistenceClientStateProgress::ProgressScreenUIHandleClosePressed(StringHash
 
 
 /// Create a chacter
-
 void ExistenceClientStateProgress::CreateCharacter(void)
 {
     /// Get all Revelant resources
@@ -252,19 +310,16 @@ void ExistenceClientStateProgress::CreateCharacter(void)
     UI* ui = GetSubsystem<UI>();
     FileSystem * filesystem = GetSubsystem<FileSystem>();
 
-    Node* objectNode = Existence->scene_->GetChild("Character");
+
+    Node* objectNode = Existence->scene_->GetChild("Character",true);
 
     /// Register Character component
-    Existence-> character_ = objectNode->CreateComponent<Character>();
+    Existence -> character_ = objectNode->CreateComponent<Character>();
 
-    Existence->LoadPlayer(Existence->TemporaryAccountPlayerSelected);
+    Existence -> LoadPlayer(Existence->TemporaryAccountPlayerSelected);
 
-    /// Copy character information
-    //character_ -> SetAlliance(TemporaryAccountPlayerList[TemporaryAccountPlayerSelected].GetAlliance());
-    //character_ -> SetCharacteristics(TemporaryAccountPlayerList[TemporaryAccountPlayerSelected].GetCharacteristics());
-    //character_ -> SetPlayerInfo(TemporaryAccountPlayerList[TemporaryAccountPlayerSelected].GetPlayerInfo());
-
-    //character_ -> SetHealth(100);
+    /// Create Character
+    ProgressSendEvent(0, String("Creating and updating character ...  "));
 
     /// Load a Character Mesh
     Existence->LoadCharacterMesh(CHARACTERMAINSCENE, "Character",Existence->character_->GetAlliance().alienrace,Existence->character_->GetCharacteristics().gender);
@@ -299,23 +354,25 @@ void ExistenceClientStateProgress::CreateCharacter(void)
     shape->SetPosition(Vector3(staticmodelboxcenter));
     shape->SetLodLevel(1);
 
-    /// Gets the child position
-    Node* headNode = objectNode->GetChild("head", true);
+    /*   /// Gets the child position
+       Node* headNode = objectNode->GetChild("head", true);
 
-    /// Create a scene node for the camera, which we will move around
-    /// The camera will use default settings (1000 far clip distance, 45 degrees FOV, set aspect ratio automatically)
-    Node * cameraNode_ = headNode ->CreateChild("CameraFirstPerson");
+       /// Create a scene node for the camera, which we will move around
+       /// The camera will use default settings (1000 far clip distance, 45 degrees FOV, set aspect ratio automatically)
+       Node * cameraNode_ = headNode ->CreateChild("CameraFirstPerson");
 
-    /// Set an initial position for the camera scene node above the plane
-    Existence->cameraNode_->SetPosition(Vector3(0.0f,0.0f,0.15f));
-    Existence->cameraNode_->SetRotation(Quaternion(0.0,0.0,0.0));
 
-    /// Set first person camera Node
-    Camera* cameraObject = Existence->cameraNode_->CreateComponent<Camera>();
-    cameraObject->SetOrthographic(0);
-    cameraObject->SetZoom(1);
-    cameraObject->SetNearClip(0.0f);
-    cameraObject->SetUseClipping(false);
+
+       /// Set an initial position for the camera scene node above the plane
+       Existence->cameraNode_->SetPosition(Vector3(0.0f,0.0f,0.15f));
+       Existence->cameraNode_->SetRotation(Quaternion(0.0,0.0,0.0));
+
+       /// Set first person camera Node
+       Camera* cameraObject = Existence->cameraNode_->CreateComponent<Camera>();
+       cameraObject->SetOrthographic(0);
+       cameraObject->SetZoom(1);
+       cameraObject->SetNearClip(0.0f);
+       cameraObject->SetUseClipping(false);*/
 
     Node * crossboxNode = objectNode ->CreateChild("CrossBox");
 
@@ -329,37 +386,12 @@ void ExistenceClientStateProgress::CreateCharacter(void)
     crossboxModel ->SetModel(cache->GetResource<Model>("Resources/Models/CrossBox.mdl"));
     crossboxModel ->ApplyMaterialList("Resources/Models/CrossBox.txt");
 
-    /// Set camera to first person
-    ///ExistenceGameState->SetCameraMode(CAMERAMODE_FIRSTPERSON);
-
-    /// Set up a viewport to the Renderer subsystem so that the 3D scene can be seen. We need to define the scene and the camera
-    /// at minimum. Additionally we could configure the viewport screen size and the rendering path (eg. forward / deferred) to
-    /// use, but now we just use full screen and default render path configured	SetOrthographic ( in the engine command line options
-    /// viewport -> SetCamera(cameraObject);
-    Existence->viewport = new Viewport(context_, Existence->scene_, cameraObject);
-    renderer->SetViewport(0,Existence-> viewport);
-
-    Existence->effectRenderPath = Existence->viewport->GetRenderPath() -> Clone();
-    Existence->effectRenderPath->Append(cache->GetResource<XMLFile>("PostProcess/Bloom.xml"));
-    Existence->effectRenderPath->Append(cache->GetResource<XMLFile>("PostProcess/FXAA3.xml"));
-
-    /// Make the bloom mixing parameter more pronounced
-    Existence->effectRenderPath->SetShaderParameter("BloomMix", Vector2(0.9f, 0.6f));
-    Existence->effectRenderPath->SetEnabled("Bloom", false);
-    Existence->effectRenderPath->SetEnabled("FXAA3", false);
-    Existence->viewport->SetRenderPath(Existence->effectRenderPath);
-
-    Existence->character_->controls_.pitch_ = cameraNode_->GetRotation().PitchAngle();
-    Existence->character_->controls_.yaw_ = cameraNode_->GetRotation().YawAngle();
-
     return;
 }
 
-// code to handle actual commans
-
+/// Generate Scene
 void ExistenceClientStateProgress::GenerateScene(terrain_rule terrainrule,const char *differentialfilename)
 {
-
     /// Define Resouces
     ResourceCache* cache = GetSubsystem<ResourceCache>();
     Renderer* renderer = GetSubsystem<Renderer>();
@@ -635,9 +667,7 @@ void ExistenceClientStateProgress::GenerateScene(terrain_rule terrainrule,const 
     return;
 }
 
-
-
-/// Build world
+/// Build world for generated scene
 int ExistenceClientStateProgress::GenerateSceneBuildWorld(terrain_rule terrainrule)
 {
     /// Define Resouces
@@ -648,10 +678,7 @@ int ExistenceClientStateProgress::GenerateSceneBuildWorld(terrain_rule terrainru
     FileSystem * filesystem = GetSubsystem<FileSystem>();
     EnvironmentBuild * environmentbuild_ = GetSubsystem<EnvironmentBuild>();
 
-    /// Build world
-    ///Node * WorldObjectNode = scene_-> CreateChild("EnvironmentBuildNode");
-    ///EnvironmentBuild * EnvironmentBuildObjects = WorldObjectNode  -> CreateComponent<EnvironmentBuild>();
-
+    /// Get Terrain Child
     Node* terrainNode = Existence->scene_->GetChild("GeneratedTerrainRule_TerrainRoot",true);
     Terrain * terrain = terrainNode -> GetComponent<Terrain>();
 
@@ -660,11 +687,8 @@ int ExistenceClientStateProgress::GenerateSceneBuildWorld(terrain_rule terrainru
 
     environmentbuild_ -> GenerateWorldObjects(0, terrainrule);
 
-
     return 1;
 }
-
-
 
 /// Load a dummy scene
 void ExistenceClientStateProgress::loadDummyScene(void)
@@ -739,15 +763,12 @@ void ExistenceClientStateProgress::loadDummyScene(void)
     /// Set an initial position for the camera scene node above the plane
     Existence->cameraNode_->SetPosition(Vector3(0.0f, 5.0f, 0.0f));
 
-    SharedPtr<Viewport> viewport(new Viewport(context_, Existence->scene_, Existence->cameraNode_->GetComponent<Camera>()));
-    renderer->SetViewport(0, Existence->viewport);
 
     return;
 }
 
-
 /// Load a scene
-void ExistenceClientStateProgress::loadScene(const int mode, const char * lineinput)
+bool ExistenceClientStateProgress::loadScene(const int mode, String lineinput)
 {
     /// get resources
     ResourceCache* cache = GetSubsystem<ResourceCache>();
@@ -767,11 +788,14 @@ void ExistenceClientStateProgress::loadScene(const int mode, const char * linein
     Input* input = GetSubsystem<Input>();
 
     /// string string leaving something comparable
-    string argumentsstring = lineinput;
+    string argumentsstring = string(lineinput.CString());
     string argument[80];
+
+    cout << "string" << argumentsstring.c_str()<< endl;
 
     /// create a idx
     int idx = 0;
+    bool success = false;
 
     /// transfer to lowercase
     std::transform(argumentsstring.begin(), argumentsstring.end(), argumentsstring.begin(), ::tolower);
@@ -780,7 +804,7 @@ void ExistenceClientStateProgress::loadScene(const int mode, const char * linein
     stringstream ssin(argumentsstring);
 
     /// loop through arguments
-    while (ssin.good() && idx < 40)
+    while (ssin.good() && idx < 80)
     {
         ssin >> argument[idx];
         ++idx;
@@ -793,27 +817,22 @@ void ExistenceClientStateProgress::loadScene(const int mode, const char * linein
 
     unsigned long long int creationtime = 0; /// Default
 
-    /// Run trhrough arugments - first check if GENERATE
-    if(argument[1]=="generate")
-    {
+    cout << "Argument1 " << argument[1].c_str() << endl;
 
-        if(argument[2]=="random")
-        {
-            /// get current time
-            creationtime = 0;
-        }
-        else if(argument[2]=="reset")
+
+    /// Run trhrough arugments - first check if GENERATE
+    if(argument[0]=="generate")
+    {
+        ProgressSendEvent(0, String("Generating scene .... "));
+
+        if(argument[1]=="random")
         {
             /// get current time
             time_t tempseed = time(NULL);
 
             creationtime = static_cast<unsigned long int> (tempseed);
-
-            GetSubsystem<Input>()->SetMouseVisible(true);
-
-            return;
         }
-        else if(argument[2] =="datetime")
+        else if(argument[1] =="datetime")
         {
 
             /// get current time
@@ -831,7 +850,7 @@ void ExistenceClientStateProgress::loadScene(const int mode, const char * linein
             }
             padded=1;
         }
-        else if(argument[2]=="seed")
+        else if(argument[1]=="seed")
         {
             std::string::size_type sz;   // alias of size_t
 
@@ -840,11 +859,9 @@ void ExistenceClientStateProgress::loadScene(const int mode, const char * linein
         }
         else
         {
-
             /// get current time
             creationtime = 0;
         }
-
 
         /// Copy rule information
         terrain_rule terrainrule;
@@ -860,66 +877,80 @@ void ExistenceClientStateProgress::loadScene(const int mode, const char * linein
 
         /// generate a seen
         GenerateScene(terrainrule, argument[6+padded].c_str());
+
+        success=true;
     }
 /// Run trhrough arugments - first check if FILE
-    else if (argument[1]=="file")
+    else if (argument[0]=="file")
     {
+        ProgressSendEvent(0, String("Locating file scene ... "));
+
         /// Create variables (urho3d)
         String InputDataFile;
 
         InputDataFile.Append(filesystem->GetProgramDir().CString());
         InputDataFile.Append("Resources/Scenes/");
-        InputDataFile.Append(argument[2].c_str());
+        InputDataFile.Append(argument[1].c_str());
+
+        cout << "Debug : Scene load file " << InputDataFile.CString() << endl;
+
 
         /// Check if the input data file exist
         if(filesystem->FileExists(InputDataFile))
         {
             /// Open file as a Urho3d Datafile
-            File dataFile(context_, InputDataFile, FILE_READ);
+            dataFile = new File(context_, InputDataFile, FILE_READ);
 
-            if (dataFile.IsOpen())
+            if (dataFile -> IsOpen())
             {
 
                 /// Get File Extension
                 String extension = GetExtension(InputDataFile);
 
                 /// Load File based on Extension
+                ProgressSendEvent(0, String("Opening file scene  ... "));
 
+                /// Determine file extension
                 if (extension != ".xml")
                 {
-                    Existence->scene_ -> Load(dataFile);
+                    ///success= Existence-> scene_ -> Load(dataFile);
+                    success = Existence-> scene_ -> LoadAsync(dataFile);
                 }
                 else
                 {
-                    Existence->scene_ ->LoadXML(dataFile);
+                    success= Existence-> scene_ ->LoadAsyncXML(dataFile);
                 }
-
             }
-
+            else
+            {
+                /// set is error
+                success=false;
+            }
         }
         else
         {
+            /// Send event loading dummy scene automatic success
+            ProgressSendEvent(0, String("Loading a dummy scene ... "));
+
             /// Load dummy scene
             loadDummyScene();
+
+            success= true;
         }
-
     }
     else
     {
+        /// Send event loading dummy scene automatic success
+        ProgressSendEvent(0, String("Loading a dummy scene ... "));
+
         /// load dummy scene
-       loadDummyScene();
+        loadDummyScene();
+
+        success= true;
     }
 
-
-
-/// Get the Camera Node and setup the viewport
-    if((Existence->cameraNode_ = Existence->scene_->GetChild("Camera")))
-    {
-
-        /*SharedPtr<Viewport> viewport(new Viewport(context_, scene_, cameraNode_->GetComponent<Camera>()));
-        renderer->SetViewport(0, viewport);*/
-    }
-    else
+    /// Get the Camera Node and setup the viewport
+    if(!(Existence->cameraNode_ = Existence->scene_->GetChild("Camera")))
     {
         /// Create a scene node for the camera, which we will move around
         /// The camera will use default settings (1000 far clip distance, 45 degrees FOV, set aspect ratio automatically)
@@ -935,23 +966,304 @@ void ExistenceClientStateProgress::loadScene(const int mode, const char * linein
         Existence->cameraNode_->SetPosition(Vector3(0.0f, 0.0f, 0.0f));
 
     }
+    else
+    {
+        /// Cannot locate camera so return false
+        success = false;
+    }
 
-/// Setup viewport
-    SharedPtr<Viewport> viewport(new Viewport(context_, Existence->scene_, Existence->cameraNode_->GetComponent<Camera>()));
-    renderer->SetViewport(0, Existence->viewport);
 
-/// Loop through the whole scene and get the root Node
+    return success;
+}
+
+void ExistenceClientStateProgress::ProgressScreenViewport(void)
+{
+    /// Get resources and clear everything
+    ResourceCache* cache = GetSubsystem<ResourceCache>();
+    Renderer* renderer = GetSubsystem<Renderer>();
+    Graphics* graphics = GetSubsystem<Graphics>();
+    UI* ui = GetSubsystem<UI>();
+    FileSystem * filesystem = GetSubsystem<FileSystem>();
+
+    /// CLEAR_COLOR
+    Existence -> EraseUI();
+    Existence -> EraseScene();
+
+    /// Create a new scene
+    progressScene_ = new Scene(context_);
+    progressUI_ = new UI(context_);
+
+    /// Clear memory
+    progressUI_ -> Clear();
+    progressScene_ -> Clear();
+
+    /// Create a mew sceme
+
+    /// Add Octree
+    progressScene_ ->CreateComponent<Octree>();
+
+    /// Add a camera node
+    Node * cameraNode_ = progressScene_ -> CreateChild("Camera");
+    cameraNode_->CreateComponent<Camera>();
+
+    /// Setup Current Viewport
+    SharedPtr<Viewport> progressViewport_(new Viewport(context_, progressScene_, cameraNode_->GetComponent<Camera>()));
+    renderer->SetViewport(0, progressViewport_);
+
+    return;
+}
+
+
+/// handler for progress load
+void ExistenceClientStateProgress::ProgressLoadOnStateChange(StringHash eventType, VariantMap& eventData)
+{
+    /// Resources
+    UI* ui_ = GetSubsystem<UI>();
+
+    /// Get Data
+    int  Status=eventData[LoadState::P_CMD].GetInt();
+    String Arguments=eventData[LoadState::P_ARG].GetString();
+///    String Sender=eventData[LoadState::P_OBJ].GetString();
+
+    /// Get UI root
+    UIElement * progressRootUI = ui_ -> GetRoot();
+
+    /// double check
+    if(Status==0)
+    {
+        /// If bar exist
+        Text * progressText = (Text *)progressRootUI->GetChild("progressText",true);
+
+        /// If the Progress Text exist
+        if(progressText)
+        {
+            /// Set Text
+            progressText -> SetText(Arguments);
+        }
+    }
+
+    /// double check
+    if(Status==1)
+    {
+        /// go to Handler Progress Load
+        HandlerProgressLoadSuccess(eventType, eventData);
+
+        return;
+    }
+
+    if(Status==9999)
+    {
+        /// Create Popup
+        PopupWindowConfirm("Progress","Progress Alert","Time out loading");
+
+        /// Get UI
+        UI* ui_ = GetSubsystem<UI>();
+
+        /// Get the root
+        UIElement * progressUIRoot_ = ui_-> GetRoot();
+
+        Button * continueButton = (Button *) progressUIRoot_ -> GetChild("ProgressAlertContinueButton",true);
+
+        /// Subscribe
+        SubscribeToEvent(continueButton, E_RELEASED, HANDLER(ExistenceClientStateProgress,HandlerProgressLoadFailed));
+    }
+
+    return;
+}
+
+/// Broadcast a event
+void ExistenceClientStateProgress::ProgressSendEvent(int commandstatus, String message)
+{
+
+    VariantMap progresseventData;
+
+    /// Send Load Event
+    progresseventData[LoadState::P_CMD] = commandstatus;
+    progresseventData[LoadState::P_ARG] = message;
+    ///    eventData[LoadState::P_OBJ] = this;
+
+    cout << "Send Event " << commandstatus << " message " << message.CString() << endl;
+
+    /// Send event
+    this->SendEvent(P_LOAD_CHANGE, progresseventData);
+
+    return;
+}
+
+
+/// Handle updates check for a ssucessfule load
+void ExistenceClientStateProgress::ProgessionHandleUpdate(StringHash eventType, VariantMap& eventData)
+{
+    /// Take the frame time step, which is stored as a float
+    float timeStep = eventData[P_TIMESTEP].GetFloat();
+
+    /// Check scene loading state
+    if(progressloadingstate == PROGRESSSCENELOAD)
+    {
+
+        /// Check async load of a scene
+        if(Existence -> scene_-> GetAsyncProgress()>=1)
+        {
+            /// set progress loadign state
+            progressloadingstate = PROGRESSCHARACTERLOAD;
+
+            Existence -> scene_ ->StopAsyncLoading ();
+
+            /// Add Lifetimes
+            AddLife();
+
+            /// Create character
+            CreateCharacter();
+
+            ProgressSendEvent(1,String("Completed"));
+        }
+    }
+
+    /// If timer exceeds 6000 milliseconds
+    if(ProgressTimer.GetMSec(false)>60000&&progressload_!=PROGRESSTIMEOUT)
+    {
+        ///  Send Time out
+        ProgressSendEvent(9999,String("Timeout occurred ... "));
+
+        progressload_ = PROGRESSTIMEOUT;
+    }
+
+    /// If timer exceeds 9000 milliseconds
+    if(ProgressTimer.GetMSec(false)>240000)
+    {
+        /// Exit
+        ///Existence -> Exit();
+
+        ///  Handle Post Updates
+        UnsubscribeFromAllEvents();
+    }
+    return;
+}
+
+
+// Log UI Code
+/// Create progress screen UI
+void ExistenceClientStateProgress::PopupWindowConfirm(const String &WindowName, const String &Title, const String &Message)
+{
+
+    /// Get Needed SubSystems
+    Graphics* graphics_ = GetSubsystem<Graphics>();
+    UI* ui_ = GetSubsystem<UI>();
+
+    /// Get root
+    UIElement * progressuiRoot_ = ui_-> GetRoot();
+
+    /// Get rendering window size as floats
+    float width = (float)graphics_->GetWidth();
+    float height = (float)graphics_->GetHeight();
+
+    /// Create the Window and add it to the UI's root node
+    progressWindow_= new Window(context_);
+
+    UIElement* titleBar = new UIElement(context_);
+    Text* windowTitle = new Text(context_);
+    Text* progressText=new Text(context_);
+    Button* continueButton = new Button(context_);
+
+    /// Set Window size and layout settings
+    progressWindow_->SetMinSize(384, 248);
+    progressWindow_->SetLayout(LM_VERTICAL, 6, IntRect(6, 6, 6, 6));
+    progressWindow_->SetAlignment(HA_CENTER, VA_CENTER);
+    progressWindow_->SetName(WindowName+"AlertWindow");
+    progressWindow_->SetMovable(true);
+    progressWindow_->SetOpacity(1);
+
+    /// Create Window 'titlebar' container
+    titleBar->SetMinSize(0,32);
+    titleBar->SetVerticalAlignment(VA_TOP);
+    titleBar->SetLayoutMode(LM_HORIZONTAL);
+
+    windowTitle->SetName(WindowName+"AlertWindowTitle");
+    windowTitle->SetText(Title);
+
+    progressText->SetName(WindowName+"AlertWindowMessage");
+    progressText->SetText(Message);
+
+    /// addlones
+    continueButton->SetName(WindowName+String("AlertContinueButton"));
+    continueButton->SetPosition(300,212);
+    continueButton -> SetHorizontalAlignment(HA_RIGHT);
+
+    /// Add the controls to the title bar
+    titleBar->AddChild(windowTitle);
+    progressWindow_->AddChild(titleBar);
+    progressWindow_->AddChild(progressText);
+    progressWindow_->AddChild(continueButton);
+
+    progressuiRoot_ -> AddChild(progressWindow_);
+
+    /// Apply styles
+    progressWindow_->SetStyleAuto();
+    progressText->SetStyleAuto();
+    windowTitle->SetStyleAuto();
+    continueButton->SetStyle("continueButton");
+
+    return;
+}
+
+void ExistenceClientStateProgress::HandlerProgressLoadSuccess(StringHash eventType, VariantMap& eventData)
+{
+    /// Unsubscribe
+    UnsubscribeFromAllEvents();
+
+    /// Clear
+    UI* ui_ = GetSubsystem<UI>();
+
+    /// Clear UI
+    ui_ -> Clear();
+    progressScene_->Clear();
+
+    /// Create a event
+    VariantMap gamestatechange;
+    gamestatechange[GameState::P_CMD] = GAME_STATE_GAMEMODE;
+
+    cout << "Debug: Attempt to send a state change" << endl;
+
+    this->SendEvent(G_STATES_CHANGE,gamestatechange);
+
+
+    return;
+    ///need to go to focus if success call start
+}
+
+void ExistenceClientStateProgress::HandlerProgressLoadFailed(StringHash eventType, VariantMap& eventData)
+{
+
+    /// Unsubscribe
+    UnsubscribeFromAllEvents();
+
+    /// need to go to function
+    /// Exit
+    Existence -> Exit();
+
+    return;
+}
+
+/// Add lifetime to nodes  if needed
+void ExistenceClientStateProgress::AddLife(void)
+{
+    /// Send event loading dummy scene automatic success
+    ProgressSendEvent(0, String("Adding game life to null life ... "));
+
+    /// Loop through the whole scene and get the root Node
     Node * RootNode = Existence->scene_ -> GetParent();
 
-/// Get node list
+    /// Get node list
     PODVector <Node *> NodesVector;
     Existence->scene_ -> GetChildren (NodesVector, true);
 
-/// Set necessary objects
+    /// Set necessary objects
     Node * OrphanNode;
     String Nodename;
 
-/// loop nodes
+    ProgressSendEvent(0, String("Adding lifetime to nodes ... "));
+
+    /// loop nodes
     for(int i=0; i < NodesVector.Size(); i++)
     {
         /// Do nothing like copy the node vector to a node
@@ -967,56 +1279,12 @@ void ExistenceClientStateProgress::loadScene(const int mode, const char * linein
         }
 
     }
-
-/// Create a character
-/// Copy character information to player
-    CreateCharacter();
-
-/// Load main UI area
-    Existence->loadSceneUI();
-
-    /// rest of UI
-    Existence->loadHUDFile("Resources/UI/MainTopBarWindow.xml",0,0);
-    Existence->loadHUDFile("Resources/UI/PlayerInfoWindow.xml",0,34);
-
-    /// load hud
-    Existence->loadUIXML(UIQUICKMENU,0,0,0);
-
-    /// Get player info  name from temporary list and put it into the character object
-    Text* PlayerNameText = (Text*)ui->GetRoot()->GetChild("PlayerNameText", true);
-
-    /// Get player level and level text
-    unsigned int level=floor(Existence->character_->GetLevels().level/10);
-
-    string levelstring=ConvertUIntToString(level);
-
-    string levelstext=levels[level];
-
-    /// Set hud sting to level and character name
-    string playername=Existence->character_->GetPlayerInfo().lastname+" "+Existence->character_->GetPlayerInfo().firstname+" ("+levelstring+") "+ levelstext;
-
-
-    PlayerNameText -> SetText(playername.c_str());
-
-    Existence->UpdatePlayerInfoBar();
-
-/// use UI cursor
-/// Enable OS cursor
-    ui->GetCursor()->SetVisible(true);
-
-    if(ui->GetCursor()->IsVisible())
-    {
-        Existence->Print ("Cursor Exist");
-
-        Existence->Print(ui->GetCursor()->GetAppliedStyle());
-    }
-    else
-    {
-        Existence->Print ("Cursor Does Not Exist");
-    }
-
-    return;
 }
 
 
+void ExistenceClientStateProgress::AlternativeSendEvent(int event)
+{
+    ProgressSendEvent(event,"");
 
+    return;
+}

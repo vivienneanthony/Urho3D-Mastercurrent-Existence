@@ -73,7 +73,7 @@
 #include "../../../Urho3D/Graphics/RenderPath.h"
 #include "../../../Urho3D/Math/Color.h"
 
-#include "GameStateHandler.h"
+#include "GameStateHandlerComponent.h"
 #include "GameObject.h"
 #include "EnvironmentBuild.h"
 #include "Manager.h"
@@ -111,9 +111,32 @@
 using namespace std;
 using namespace Urho3D;
 
+/// Erase the UI
+void ExistenceClient::EraseUI(void)
+{
+    /// Get resources
+    UI * ui_ = GetSubsystem<UI>();
+
+    /// Clear
+    ui_ -> Clear();
+
+    return;
+}
+
+/// Erase the Scene_
+void ExistenceClient::EraseScene(void)
+{
+    /// Clear scene
+    scene_->Clear();
+
+    return;
+}
+
+
 /// Load Character Mesh
 int ExistenceClient::LoadCharacterMesh(int mode, String nodename, unsigned int alienrace, unsigned int gender)
 {
+
     /// Get Needed SubSystems
     ResourceCache* cache = GetSubsystem<ResourceCache>();
     Renderer* renderer = GetSubsystem<Renderer>();

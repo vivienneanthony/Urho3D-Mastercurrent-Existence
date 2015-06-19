@@ -45,9 +45,9 @@
 #include "../Player.h"
 #include "../PlayerLevels.h"
 
-
 #include "GameStateEvents.h"
-#include "GameStateHandler.h"
+#include "GameStateHandlerComponent.h"
+#include <vector>
 
 string ConvertUIntToString(unsigned int val);
 
@@ -57,8 +57,9 @@ string ConvertUIntToString(unsigned int val);
 ///     - Adding a Text element to the graphical user interface
 ///     - Subscribing to and handling of update events
 
-using namespace Urho3D;
+
 using namespace std;
+
 
 class ExistenceClient : public ExistenceApp
 {
@@ -72,6 +73,8 @@ public:
     friend class ExistenceClientStateAccount;
     friend class ExistenceClientStateLogin;
     friend class ExistenceClientStateProgress;
+    friend class ExistenceClientStateGameMode;
+    friend class ExistenceClientStateSplash;
 
     /// Construct.
     ExistenceClient(Context* context);
@@ -97,6 +100,7 @@ public:
     void SetupScreenViewport(void);
     void SetupScreenUI(void);
 
+    void Exit(void);
     /// Subscribe to application-wide logic update events.
     void SubscribeToEvents();
     /// Handle the logic update event.
@@ -133,6 +137,8 @@ public:
     /// Console related functions
     void InitializeConsole(void);
     void HandleConsoleCommand(StringHash eventType, VariantMap& eventData);
+    void HandlerFunctionKeyDown(StringHash eventType, VariantMap& eventData);
+
 
     int ConsoleActionEnvironment(const char * lineinput);
     int ConsoleActionCamera(const char * lineinput);
@@ -141,6 +147,8 @@ public:
     int ConsoleActionRenderer(const char * lineinput);
     int ConsoleActionBuild(const char * lineinput);
 
+    void EraseUI(void);
+    void EraseScene(void);
     /// UI Related Functions
     void loadSceneUI(void);
     bool loadHUDFile(const char * filename, const int positionx, const int positiony);
@@ -174,8 +182,15 @@ public:
         return testvalue;
     }
 
-   /// Base class
+    /// Base class get
+    SharedPtr <ExistenceClient> GetApplicationPTR(void) const
+    {
+        return applicationPtr;
+    }
+
+
     SharedPtr<ExistenceClient> applicationPtr;
+
 
 protected:
 
@@ -184,8 +199,6 @@ protected:
     SharedPtr<Scene> scenePlayerUI_;
     SharedPtr<Scene> sceneLoadingGameModeTransition_;
 
-    /// Existence Game State Handler Pointer for Game State
-    SharedPtr<GameStateHandler>  ExistenceGameState;
 
     /// Camera scene node.
     SharedPtr<Node> cameraNode_;
@@ -238,8 +251,12 @@ protected:
 
 
 private:
+    void SplashShowGameLogo(void);
+    void SplashStatInit(void);
+    void HandlerSplashUpdate(StringHash eventType, VariantMap& eventData);
+    void SplashSetupScreenViewport(void);
 
-
+    Timer SplashTimer;
 };
 
 /// Login State
@@ -247,16 +264,45 @@ class ExistenceClientStateSingleton : public LogicComponent
 {
     OBJECT(ExistenceClientStateSingleton);
 public:
-  SharedPtr<ExistenceClient> baseclass;
-
+    SharedPtr<ExistenceClient> baseclass;
     ExistenceClientStateSingleton(Context * context);
     virtual ~ExistenceClientStateSingleton();
     virtual void Enter();
     virtual void Exit();
     virtual void OnUpdate(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
+    virtual void SetParameter(String parameters_);
 private:
     void Singleton(void);
 protected:
+
+
+};
+
+/// Login State
+class ExistenceClientStateSplash : public ExistenceClientStateSingleton
+{
+    OBJECT(ExistenceClientStateSplash);
+public:
+    ExistenceClientStateSplash(Context * context);
+    virtual ~ExistenceClientStateSplash();
+    virtual void Enter();
+    virtual void Exit();
+    virtual void OnUpdate(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
+    virtual void SetParameter(String parameters_);
+private:
+protected:
+    void SplashScreen(void);
+    void SplashSetupScreenViewport(void);
+    void SplashShowGameLogo(void);
+
+    void SplashStatInit(void);
+    void HandlerSplashUpdate(StringHash eventType, VariantMap& eventData);
+
+    Timer SplashTimer;
+    SharedPtr<ExistenceClient> Existence;
+  /// Open file as a Urho3d Datafile
+    SharedPtr<File> dataFile;
+    bool splashcompleted;
 
 
 };
@@ -271,6 +317,7 @@ public:
     virtual void Enter();
     virtual void Exit();
     virtual void OnUpdate(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
+    virtual void SetParameter(String parameters_);
 private:
     void LoginScreen(void);
     void LoginScreenUI(void);
@@ -278,9 +325,7 @@ private:
     void LoginScreenUILoginHandleClosePressed(StringHash eventType, VariantMap& eventData);
 
 protected:
-/// pointer
-    ExistenceClient * Existence;
-
+    SharedPtr<ExistenceClient> Existence;
 };
 
 
@@ -295,13 +340,14 @@ public:
     virtual void Enter();
     virtual void Exit();
     virtual void OnUpdate(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
+    virtual void SetParameter(String parameters_);
 private:
     void Account(void);
     void CreateAccountScreenUI(void);
     void CreateAccountUIHandleClosePressed(StringHash eventType, VariantMap& eventData);
 protected:
 /// pointer
-    ExistenceClient * Existence;
+    SharedPtr<ExistenceClient> Existence;
 
 };
 
@@ -316,6 +362,7 @@ public:
     virtual void Enter();
     virtual void Exit();
     virtual void OnUpdate(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
+    virtual void SetParameter(String parameters_);
 private:
     void MainScreen(void);
     void MainScreenUI(void);
@@ -324,7 +371,7 @@ private:
     void HandleCharacterSelectedReleased(StringHash eventType, VariantMap& eventData);
     void HandleCharacterSelectedInfoButtonReleased(StringHash eventType, VariantMap& eventData);
 protected:
-    ExistenceClient * Existence;
+    SharedPtr<ExistenceClient> Existence;
 };
 
 /// Main Screen State
@@ -337,11 +384,16 @@ public:
     virtual void Enter();
     virtual void Exit();
     virtual void OnUpdate(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
+    virtual void SetParameter(String parameters_);
+    void HandleUpdate(StringHash eventType, VariantMap& eventData);
+    void OnMoveCamera(float timeStep);
 private:
     void GameMode(void);
+    void LoadGameModeUI(void);
+    void HandlerPostUpdates(StringHash eventType, VariantMap& eventData);
 protected:
 /// pointer
-    ExistenceClient * Existence;
+    SharedPtr<ExistenceClient> Existence;
 };
 
 /// Player Create Login State
@@ -354,6 +406,7 @@ public:
     virtual void Enter();
     virtual void Exit();
     virtual void OnUpdate(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
+    virtual void SetParameter(String parameters_);
 private:
     void Player(void);
     void CreatePlayerScreenUI(void);
@@ -366,7 +419,7 @@ private:
     void HandlePersonalitySelectionItemClick(StringHash eventType, VariantMap& eventData);
 protected:
     /// pointer
-    ExistenceClient * Existence;
+    SharedPtr<ExistenceClient> Existence;
 
 };
 
@@ -380,22 +433,60 @@ public:
     virtual void Enter();
     virtual void Exit();
     virtual void OnUpdate(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
+    virtual void SetParameter(String parameters_);
 private:
     void Progress(void);
-    void ProgressScreenUI(void);
     void ProgressScreenUIHandleClosePressed(StringHash eventType, VariantMap& eventData);
     void CreateCharacter(void);
     void GenerateScene(terrain_rule terrainrule,const char *differentialfilename);
     int GenerateSceneBuildWorld(terrain_rule terrainrule);
     void loadDummyScene(void);
-    void loadScene(const int mode, const char * lineinput);
+    bool loadScene(const int mode, String lineinput);
+
+    /// Clear Viewport
+    void ProgressScreenViewport(void);
+    void ProgressScreenUI(void);
+
+    /// Add a loader state
+    void ProgressLoadOnStateChange(StringHash eventType, VariantMap& eventData);
+    void ProgressSendEvent(int commandstatus, String message);
+    void ProgessionHandleUpdate(StringHash eventType, VariantMap& eventData);
+
+    /// Temporary alert
+    void PopupWindowConfirm(const String &WindowName, const String &Title, const String &Message);
+
+    void HandlerProgressLoadFailed(StringHash eventType, VariantMap& eventData);
+    void HandlerProgressLoadSuccess(StringHash eventType, VariantMap& eventData);
+
+    void AddLife(void);
+
+    void AlternativeSendEvent(int event);
+
 protected:
-/// pointer
-    ExistenceClient * Existence;
+    /// pointer
+    SharedPtr<ExistenceClient> Existence;
+
+    /// Progress Screen
+    SharedPtr<Scene> progressScene_;
+    SharedPtr<UI> progressUI_;
+    SharedPtr<RenderPath> progressrendererPath_;
+    SharedPtr<Camera> progresscameraNode_;
+    SharedPtr<Viewport> progressViewport_;
+    SharedPtr<Window> progressWindow_;
+
+    Timer ProgressTimer;
+    String progressloadparameters_;
+
+    int progressload_;
+    int progressloadingstate;
+
+    /// Open file as a Urho3d Datafile
+    SharedPtr<File> dataFile;
+
+    WeakPtr<VariantMap> eventDataPtr;
+
 
 };
-
-
 
 
 /// Miscellanous functions
@@ -412,3 +503,5 @@ bool intersects( range a, range b );
 range make_range( float a, float b );
 
 #endif
+
+

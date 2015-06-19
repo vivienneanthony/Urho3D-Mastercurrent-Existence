@@ -74,7 +74,7 @@
 #include "../../../Urho3D/Math/Color.h"
 
 
-#include "GameStateHandler.h"
+#include "GameStateHandlerComponent.h"
 #include "GameStateEvents.h"
 #include "GameObject.h"
 #include "EnvironmentBuild.h"
@@ -117,6 +117,9 @@ using namespace Urho3D;
 /// Initialize the main console
 void ExistenceClient::InitializeConsole(void)
 {
+    /// Get component
+    GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
+
     /// create basic console
     Console* console = GetSubsystem<Console>();
     console->SetNumRows(2);
@@ -125,8 +128,52 @@ void ExistenceClient::InitializeConsole(void)
     console->SetVisible(false);
     console->GetCloseButton()->SetVisible(false);
 
-    //ExistenceGameState->SetConsoleState(UI_CONSOLEOFF);
+   gamestatehandlercomponent_ ->SetConsoleState(UI_CONSOLEOFF);
 }
+
+
+/// Handler for keydown
+void ExistenceClient::HandlerFunctionKeyDown(StringHash eventType, VariantMap& eventData)
+{
+    /// Get Urho3D Subsystem
+    UI* ui = GetSubsystem<UI>();
+
+    /// Get component
+    GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
+
+    gamestatehandlercomponent_->SetConsoleState(GetSubsystem<Console>()->IsVisible());
+
+    /// Unlike the other samples, exiting the engine when ESC is pressed instead of just closing the console
+    if (eventData[KeyDown::P_KEY].GetInt() == KEY_F12)
+    {
+        if((gamestatehandlercomponent_->GetUIState()==UI_CHARACTERSELECTIONINTERFACE)||(gamestatehandlercomponent_->GetUIState()==UI_GAMECONSOLE))
+        {
+            if(gamestatehandlercomponent_->GetConsoleState())
+            {
+                /// Console Interface
+                Console* console = GetSubsystem<Console>();
+
+                console -> SetVisible(false);
+
+                UI* ui = GetSubsystem<UI>();
+
+                gamestatehandlercomponent_->SetConsoleState(false);
+
+            }
+            else
+            {
+                /// Console Interface
+                Console* console = GetSubsystem<Console>();
+
+                console -> SetVisible(true);
+                gamestatehandlercomponent_->SetConsoleState(true);
+            }
+        }
+
+    }
+    return;
+}
+
 
 /// code to handle console command inputs
 void ExistenceClient::HandleConsoleCommand(StringHash eventType, VariantMap& eventData)
@@ -741,6 +788,10 @@ int ExistenceClient::ConsoleActionEnvironment(const char * lineinput)
 int ExistenceClient::ConsoleActionCamera(const char * lineinput)
 {
 
+   /// Get component
+    GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
+
+
     /// get resources
     ResourceCache* cache = GetSubsystem<ResourceCache>();
     Renderer* renderer = GetSubsystem<Renderer>();
@@ -779,7 +830,7 @@ int ExistenceClient::ConsoleActionCamera(const char * lineinput)
         SharedPtr<Viewport> viewport(new Viewport(context_, scene_, cameraObject));
         renderer->SetViewport(0, viewport);
 
-         ExistenceGameState->SetCameraMode(CAMERAMODE_FIRSTPERSON);
+         gamestatehandlercomponent_ ->SetCameraMode(CAMERAMODE_FIRSTPERSON);
     }
 
 
@@ -793,7 +844,7 @@ int ExistenceClient::ConsoleActionCamera(const char * lineinput)
         SharedPtr<Viewport> viewport(new Viewport(context_, scene_, cameraObject));
         renderer->SetViewport(0, viewport);
 
-        ExistenceGameState->SetCameraMode(CAMERAMODE_FLY);
+        gamestatehandlercomponent_ ->SetCameraMode(CAMERAMODE_FLY);
     }
 
 
@@ -803,6 +854,9 @@ int ExistenceClient::ConsoleActionCamera(const char * lineinput)
 /// Routine for Console Debug related actions
 int ExistenceClient::ConsoleActionDebug(const char * lineinput)
 {
+     /// Get component
+    GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
+
 
     /// get resources
     ResourceCache* cache = GetSubsystem<ResourceCache>();

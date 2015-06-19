@@ -24,12 +24,12 @@
 //
 
 //#pragma once
-
+#include <Urho3D/Urho3D.h>
 
 
 #include "../../Urho3D/Engine/Application.h"
-#include "ExistenceClient/GameStateHandler.h"
 #include "ExistenceClient/ExistenceClient.h"
+#include "ExistenceClient/GameStateHandlerComponent.h"
 
 namespace Urho3D
 {
@@ -38,6 +38,10 @@ class Node;
 class Scene;
 class Sprite;
 }
+
+/// fw declaration
+class ExistenceClient;
+class ExistenceClientStateSingleton;
 
 // All Urho3D classes reside in namespace Urho3D
 using namespace Urho3D;

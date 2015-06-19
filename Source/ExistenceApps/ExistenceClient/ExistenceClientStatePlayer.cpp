@@ -116,33 +116,69 @@ using namespace Urho3D;
 /// Constructor Destror
 ExistenceClientStatePlayer::ExistenceClientStatePlayer(Urho3D::Context* context):
     ExistenceClientStateSingleton (context)
-    ,Existence(baseclass)
+    ,Existence(NULL)
 {
-    /// create UI
-    Player();
+    /// Debug
+    cout << "Debug: State Player Constructor" << endl;
+
+    /// Get component
+    GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
+    /// Set aApplication
+    Existence = gamestatehandlercomponent_->GetApplication();
+
+    /// Debug
+    cout << "Debug: State Player Constructor Test Value " << Existence->testvalue << endl;
+
+    return;
 }
 
+/// State Player Destructor
 ExistenceClientStatePlayer::
 ~ExistenceClientStatePlayer()
 {
-    //dtor
+    /// Debug
+    cout << "Debug: State Player Deconstructor" << endl;
+
+    return;
 }
 
-void ExistenceClientStatePlayer::OnUpdate(StringHash eventType, VariantMap& eventData)
-{
-    //
-}
-
+/// State Player Enter
 void ExistenceClientStatePlayer::Enter()
 {
-    //dtor
+    /// Debug
+    cout << "Debug: State Player Enter" << endl;
+
+    /// create UI
+    Player();
+
+    return;
 }
 
+/// State Player Exit
 void ExistenceClientStatePlayer::Exit()
 {
-    //dtor
+    /// Debug
+    cout << "Debug: State Player Exit" << endl;
+
+    return;
 }
 
+/// State Player OnUpdate
+void ExistenceClientStatePlayer::OnUpdate(StringHash eventType, VariantMap& eventData)
+{
+    /// Debug
+    cout << "Debug: State Player OnUpdate" << endl;
+
+    return;
+}
+
+void ExistenceClientStatePlayer::SetParameter(String parameter_)
+{
+    /// Do Nothing
+    return;
+}
+
+/// State Player main code
 void ExistenceClientStatePlayer::Player(void)
 {
     /// Set variables
@@ -151,34 +187,29 @@ void ExistenceClientStatePlayer::Player(void)
     /// Load the user interace
     CreatePlayerScreenUI();
 
-    /// Loop
-    do
-    {
-    }
-    while(CurrentStateIsPlayer);
-
     return;
 }
 
 /// Create a player screen UI
 void ExistenceClientStatePlayer::CreatePlayerScreenUI()
 {
-
     /// Get Needed SubSystems
     ResourceCache* cache = GetSubsystem<ResourceCache>();
     Renderer* renderer = GetSubsystem<Renderer>();
     Graphics* graphics = GetSubsystem<Graphics>();
-    UI* ui = GetSubsystem<UI>();
+    UI* ui_ = GetSubsystem<UI>();
+    GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
 
     /// Clear user interface
-    ui->Clear();
+    ui_->Clear();
 
     /// Get rendering window size as floats
     float width = (float)graphics->GetWidth();
     float height = (float)graphics->GetHeight();
 
     /// set ui state to none
-    ///ExistenceGameState->SetUIState(UI_CHARACTERCREATIONINTERFACE);
+    gamestatehandlercomponent_->SetUIState(UI_CHARACTERCREATIONINTERFACE);
+
     Existence->TemporaryPlayer.Clear();
 
     /// Load XML
@@ -525,7 +556,6 @@ void ExistenceClientStatePlayer::CreatePlayerScreenUI()
     camerachangeorientationButton->SetStyle("cameraButton");
     camerachangeorientationButton->SetName("cameraorientationButton");
 
-
     nameText->SetStyleAuto();
     firstnameInput->SetStyleAuto();
     middlenameInput->SetStyleAuto();
@@ -615,7 +645,6 @@ void ExistenceClientStatePlayer::CreatePlayerScreenUI()
     return;
 }
 
-
 /// Handle character selection
 void ExistenceClientStatePlayer::HandlerCameraOrientation(StringHash eventType, VariantMap& eventData)
 {
@@ -623,7 +652,6 @@ void ExistenceClientStatePlayer::HandlerCameraOrientation(StringHash eventType, 
     /// get the button that was clicked
     Button* clicked = static_cast<Button*>(eventData[UIMouseClick::P_ELEMENT].GetPtr());
     UI* ui_ = GetSubsystem<UI>();
-    Renderer* renderer = GetSubsystem<Renderer>();
     Graphics* graphics = GetSubsystem<Graphics>();
     Input* input=GetSubsystem<Input>();
 
@@ -675,7 +703,6 @@ void ExistenceClientStatePlayer::CameraOrientationRotateMove (float degrees, int
 {
     /// get the button that was clicked
     Renderer* renderer = GetSubsystem<Renderer>();
-    Graphics* graphics = GetSubsystem<Graphics>();
     UI* ui_ = GetSubsystem<UI>();
 
     /// The camera will use default settings (1000 far clip distance, 45 degrees FOV, set aspect ratio automatically)
@@ -706,7 +733,6 @@ void ExistenceClientStatePlayer::CameraOrientationRotateMove (float degrees, int
     return;
 }
 
-
 /// Handle character selection
 void ExistenceClientStatePlayer::HandleMouseReleased(StringHash eventType, VariantMap& eventData)
 {
@@ -714,7 +740,6 @@ void ExistenceClientStatePlayer::HandleMouseReleased(StringHash eventType, Varia
     /// get the button that was clicked
     UIElement* clicked = static_cast<UIElement*>(eventData[UIMouseClick::P_ELEMENT].GetPtr());
     UI* ui_ = GetSubsystem<UI>();
-
 
     /// Temporary data
     playeralliance temporaryAlliance = Existence->TemporaryPlayer.GetAlliance();
@@ -780,8 +805,8 @@ void ExistenceClientStatePlayer::HandleMouseReleased(StringHash eventType, Varia
 
     unsigned int aliensarraysize;
 
-   Existence-> aliensarray.reserve(16);
-   Existence-> tempaliensarray.reserve(16);
+    Existence-> aliensarray.reserve(16);
+    Existence-> tempaliensarray.reserve(16);
 
     /// Verify if faction was pressed
     if(clickedtext=="factionButton")
@@ -968,8 +993,6 @@ void ExistenceClientStatePlayer::HandleMouseReleased(StringHash eventType, Varia
     {
         Existence->loadplayerMesh(playermeshNode, Existence->TemporaryPlayer.GetAlliance().alienrace, Existence->TemporaryPlayer.GetCharacteristics().gender,DISPLAYMESH_MUILTIPLECHARACTER);
     }
-
-
     else
     {
         Existence->loadplayerMesh(playermeshNode, Existence->TemporaryPlayer.GetAlliance().alienrace, Existence->TemporaryPlayer.GetCharacteristics().gender,DISPLAYMESH_SINGLECHARACTER);
@@ -993,13 +1016,15 @@ void ExistenceClientStatePlayer::HandleMouseReleased(StringHash eventType, Varia
 void ExistenceClientStatePlayer::CreatePlayerUIHandleClosePressed(StringHash eventType, VariantMap& eventData)
 {
 
-    /// Set ui state to character creation
-    ///ExistenceGameState->SetUIState(UI_CHARACTERCREATIONINTERFACE);
-
     /// Get Needed SubSystems
     ResourceCache* cache = GetSubsystem<ResourceCache>();
     Renderer* renderer = GetSubsystem<Renderer>();
     Graphics* graphics = GetSubsystem<Graphics>();
+    GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
+
+    /// Set UI state
+    gamestatehandlercomponent_->SetUIState(UI_CHARACTERCREATIONINTERFACE);
+
     UI* ui_ = GetSubsystem<UI>();
 
     /// remove child nodeAddItem (UIElement *item)
@@ -1037,19 +1062,20 @@ void ExistenceClientStatePlayer::CreatePlayerUIHandleClosePressed(StringHash eve
     /// Save player information
     Existence->SavePlayer(0);
 
-   Existence-> eraseScene();
+    Existence-> eraseScene();
 
-    Existence->SetupScreenViewport();
+    /// Create a event
+    VariantMap gamestatechange;
+    gamestatechange[GameState::P_CMD] = GAME_STATE_MAINMENU;
 
-    //ProgressScreenUI();
-    ///ExistenceGameState -> SendEvent("GAME_STATE_GAMEMODELOAD");
+    cout << "Debug: Attempt to send a state change" << endl;
 
+    this->SendEvent(G_STATES_CHANGE,gamestatechange);
 }
 
 /// Character zoom mode pressed
 void ExistenceClientStatePlayer::CreatePlayerUIHandleControlClicked(StringHash eventType, VariantMap& eventData)
 {
-
     /// Get control that was clicked
     UIElement* clicked = static_cast<UIElement*>(eventData[UIMouseClick::P_ELEMENT].GetPtr());
 
@@ -1063,11 +1089,9 @@ void ExistenceClientStatePlayer::CreatePlayerUIHandleControlClicked(StringHash e
     }
 }
 
-
 /// Handler for personality selection item click
 void ExistenceClientStatePlayer::HandlePersonalitySelectionItemClick(StringHash eventType, VariantMap& eventData)
 {
-
     ///Get the UI interface information as a pointer
     UI* ui_ = GetSubsystem<UI>();
 
@@ -1083,9 +1107,7 @@ void ExistenceClientStatePlayer::HandlePersonalitySelectionItemClick(StringHash 
     return;
 }
 
-
-
-/// Generate a name
+/// Generate a character name
 string GenerateName(char group, char subgroup)
 {
     /// Create a string
@@ -1138,16 +1160,13 @@ string GenerateName(char group, char subgroup)
 }
 
 
-// Load a scene
+/// Load a scene (preset)
 void ExistenceClientStatePlayer::loadSceneCreationCreation( const char * lineinput)
 {
     /// get resources
     ResourceCache* cache = GetSubsystem<ResourceCache>();
     Renderer* renderer = GetSubsystem<Renderer>();
-    Graphics* graphics = GetSubsystem<Graphics>();
-    UI* ui = GetSubsystem<UI>();
     FileSystem * filesystem = GetSubsystem<FileSystem>();
-
 
     /// Create variables (urho3d)
     String InputDataFile;
@@ -1182,19 +1201,13 @@ void ExistenceClientStatePlayer::loadSceneCreationCreation( const char * lineinp
         }
 
     }
-    else
-    {
-        /// Load dummy scene
-//        loadDummyScene();
-    }
-
 
     /// Get the Camera Node and setup the viewport
-    Node * cameraNode_ = Existence->scene_->GetChild("Camera");
+    Node * cameraNode_ = Existence->scene_->GetChild("Camera",true);
 
     /// Change viewport to camera node
-    SharedPtr<Viewport> viewport(new Viewport(context_, Existence->scene_, Existence->cameraNode_->GetComponent<Camera>()));
-    renderer->SetViewport(0, viewport);
+    Existence->viewport=new Viewport(context_, Existence->scene_, cameraNode_->GetComponent<Camera>());
+    renderer->SetViewport(0, Existence->viewport);
 
     return;
 }

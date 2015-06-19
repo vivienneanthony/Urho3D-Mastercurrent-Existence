@@ -73,7 +73,7 @@
 #include "../../../Urho3D/Graphics/RenderPath.h"
 #include "../../../Urho3D/Math/Color.h"
 
-#include "GameStateHandler.h"
+#include "GameStateHandlerComponent.h"
 #include "GameObject.h"
 #include "EnvironmentBuild.h"
 #include "Manager.h"

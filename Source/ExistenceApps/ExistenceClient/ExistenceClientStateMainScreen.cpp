@@ -117,28 +117,73 @@ ExistenceClientStateMainScreen::ExistenceClientStateMainScreen(Urho3D::Context* 
     :ExistenceClientStateSingleton (context)
     ,Existence(baseclass)
 {
-    /// create UI
-    MainScreen();
+
+    /// Debug
+    cout << "Debug: State Main Screen Constructor" << endl;
+
+    /// Get component
+    GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
+    /// Set aApplication
+    Existence = gamestatehandlercomponent_->GetApplication();
+
+    return;
 }
 
 ExistenceClientStateMainScreen::~ExistenceClientStateMainScreen()
 {
-    //dtor
+    /// Debug
+    cout << "Debug: State Main Screen Deconstructor" << endl;
+
+    return;
 }
 
 void ExistenceClientStateMainScreen::Enter()
 {
-    //dtor
+    /// Get Needed SubSystems
+    ResourceCache* cache = GetSubsystem<ResourceCache>();
+    Renderer* renderer = GetSubsystem<Renderer>();
+    Graphics* graphics = GetSubsystem<Graphics>();
+    UI* ui = GetSubsystem<UI>();
+
+
+    /// Debug
+    cout << "Debug: State Main Screen Enter" << endl;
+
+    /// Clear Everything
+    Existence->scene_->Clear();
+    ui->Clear();
+
+    /// Setup the screen UI
+    Existence->SetupScreenViewport();
+    Existence->SetupScreenUI();
+
+    /// Load the user interace
+    MainScreen();
+
+    return;
 }
 
 void ExistenceClientStateMainScreen::Exit()
 {
-    //dtor
+    /// Debug
+    cout << "Debug: State Main Screen Exit" << endl;
+
+    return;
 }
 
 void ExistenceClientStateMainScreen::OnUpdate(StringHash eventType, VariantMap& eventData)
 {
-    //
+    /// Debug
+    cout << "Debug: State Main Screen OnUpdate" << endl;
+
+    return;
+}
+
+
+void ExistenceClientStateMainScreen::SetParameter(String parameter_)
+{
+    /// Do Nothing
+    return;
 }
 
 
@@ -148,14 +193,19 @@ void ExistenceClientStateMainScreen::MainScreen(void)
     /// Set variables
     bool CurrentStateIsMainScreen=true;
 
-    /// Load the user interace
+
+    /// Remove Existence Logo Node if it exist
+    if(Existence->scene_->GetChild("ExistenceLogo",true))
+    {
+        Existence->scene_->GetChild("ExistenceLogo",true)->RemoveAllComponents();
+        Existence->scene_->GetChild("ExistenceLogo",true)->Remove();
+    }
+
     MainScreenUI();
 
-    /// Loop
-    do
-    {
-    }
-    while(CurrentStateIsMainScreen);
+     /// load hud
+    Existence->loadUIXML(UIMINIQUICKMENU,0,0,0);
+
 
     return;
 }
@@ -173,7 +223,6 @@ void ExistenceClientStateMainScreen::MainScreenUI(void)
     Graphics* graphics = GetSubsystem<Graphics>();
     UI* ui = GetSubsystem<UI>();
 
-    ui->Clear();
 
     /// Create player mesh node and scale
     Node* playermeshNode = Existence-> scene_->CreateChild("playerMesh");
@@ -390,7 +439,9 @@ void ExistenceClientStateMainScreen::MainScreenUI(void)
 
     playermeshNode->SetScale(2);
 
+    /// See if a camera exist
     Node * cameraNode=Existence-> scene_->GetChild("Camera");
+
     cameraNode->SetPosition(Vector3(2.0f,-0.5f,4.0f));
 
     /// Add three point lighting
@@ -442,6 +493,9 @@ void ExistenceClientStateMainScreen::MainScreenUI(void)
 /// Main screen user interface handle close pressed
 void ExistenceClientStateMainScreen::MainScreenUIHandleClosePressed(StringHash eventType, VariantMap& eventData)
 {
+    /// Resource
+    GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
+
     /// Set ui state to UI_CHARACTERSELECTIONINTERFACE
     ///ExistenceGameState->SetUIState(UI_CHARACTERSELECTIONINTERFACE);
 
@@ -462,24 +516,32 @@ void ExistenceClientStateMainScreen::MainScreenUIHandleClosePressed(StringHash e
             Existence-> scene_->GetChild("playerMesh",true)->Remove();
 
             /// Clear screen
-             Existence->eraseScene();
+            Existence->eraseScene();
 
             Console* console = GetSubsystem<Console>();
 
             console -> SetVisible(false);
 
-            ///ExistenceGameState->SetConsoleState(UI_CONSOLEOFF);
+            gamestatehandlercomponent_ ->SetConsoleState(UI_CONSOLEOFF);
 
             /// Enable OS cursor
             GetSubsystem<Input>()->SetMouseVisible(true);
 
-            ///ExistenceGameState-> SendEvent("GAME_STATE_PLAYER");
+            UnsubscribeFromAllEvents();
+
+            /// Create a event
+            VariantMap gamestatechange;
+            gamestatechange[GameState::P_CMD] = GAME_STATE_PLAYERCREATE;
+
+            cout << "Debug: Attempt to send a state change" << endl;
+
+            this->SendEvent(G_STATES_CHANGE,gamestatechange);
 
         }
         else if(clickednamestring=="exitButton")
         {
             ///engine_->Exit();
-            ///Existence -> Exit();
+            Existence -> Exit();
         }
     }
 
@@ -521,6 +583,8 @@ void ExistenceClientStateMainScreen::HandleCharacterStartButtonReleased(StringHa
         /// Load Player WIndow UI
         Existence-> loadUIXML(UISCENESELECTWINDOW,200,100, button);
     }
+
+    return;
 }
 
 
@@ -555,6 +619,8 @@ void ExistenceClientStateMainScreen::HandleCharacterSelectedReleased(StringHash 
         /// Load player mesh in main screen ui
         Existence-> loadplayerMesh(playermeshNode,  Existence->TemporaryAccountPlayerList[clickedbutton].GetAlliance().alienrace,  Existence->TemporaryAccountPlayerList[clickedbutton].GetCharacteristics().gender,DISPLAYMESH_SINGLECHARACTER);
     }
+
+    return;
 }
 
 
@@ -593,6 +659,10 @@ void ExistenceClientStateMainScreen::HandleCharacterSelectedInfoButtonReleased(S
         /// Load Player WIndow UI
         Existence-> loadUIXML(UIPLAYERWINDOW,200,200, button);
     }
+
+    return;
 }
+
+
 
 

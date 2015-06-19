@@ -40,7 +40,15 @@ public:
     /// Register object factory and attributes.
     static void RegisterNewSubsystem(Context* context);
     static void RegisterGameStates(Context* context);
+
     void Start(void);
+
+    /// App related
+
+    void SetApplication(SharedPtr <ExistenceClient> temp);
+
+    void createState(String newState,Urho3D::VariantMap& eventData);
+    void onStateChange( Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
 
     /// Function to access other states
     int GetConsoleState(void);
@@ -55,10 +63,13 @@ public:
     int GetDebugHudMode(void);
     int SetDebugHudMode(int flag);
 
+
+    SharedPtr<ExistenceClient> GetApplication(void);
+
 private:
  /// Not used at the moment
     /// holder
-    ExistenceClientStateSingleton * GameState;
+    ExistenceClientStateSingleton * gameState;
 
 
     /// Added flags
@@ -67,7 +78,7 @@ private:
     int cameramode;
     int debughud;
 
-
+    SharedPtr<ExistenceClient> GameStateHandlerApplication;
 };
 
 #endif // GAMESTATEHANDLER_H

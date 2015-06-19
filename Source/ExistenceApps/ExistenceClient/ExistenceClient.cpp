@@ -60,6 +60,8 @@
 #include "../../../Urho3D/Graphics/Animation.h"
 #include "../../../Urho3D/Graphics/AnimatedModel.h"
 #include "../../../Urho3D/Graphics/AnimationController.h"
+#include "../../../Urho3D/UI/BorderImage.h"
+#include "../../../Urho3D/Graphics/GraphicsEvents.h"
 #include "Character.h"
 #include "../../../Urho3D/Graphics/Terrain.h"
 #include "../../../Urho3D/Engine/EngineEvents.h"
@@ -73,9 +75,7 @@
 #include "../../../Urho3D/Graphics/RenderPath.h"
 #include "../../../Urho3D/Math/Color.h"
 
-#include "GameStateComponent.h"
 #include "GameStateHandlerComponent.h"
-#include "GameStateHandler.h"
 #include "GameStateEvents.h"
 #include "GameObject.h"
 #include "EnvironmentBuild.h"
@@ -120,14 +120,11 @@ DEFINE_APPLICATION_MAIN(ExistenceClient)
 ExistenceClient::ExistenceClient(Context* context) :
     ExistenceApp(context), uiRoot_(GetSubsystem<UI>()->GetRoot())
 {
-
-
     /// Register
     Character::RegisterObject(context);
     GameObject::RegisterObject(context);
     EnvironmentBuild::RegisterObject(context);
     ProceduralTerrain::RegisterObject(context);
-    ///GameStateHandler::RegisterObject(context);
     Manager::RegisterNewSubsystem(context);
     EnvironmentBuild::RegisterNewSubsystem(context);
     GameStateHandlerComponent::RegisterNewSubsystem(context);
@@ -138,15 +135,19 @@ ExistenceClient::ExistenceClient(Context* context) :
     /// Register states
     cout << "Debug: Existence Client Base Class Constructor context" << &context << " context_"<< &context_ << endl;
 
+    return;
 }
 
 ExistenceClient::~ExistenceClient()
 {
     cout << "Debug: Existence Client Base Class Deconstructor" << endl;
+
+    return;
 }
 
 void ExistenceClient::Init(Context * context)
 {
+    return;
 }
 
 /// Main program execution code
@@ -165,6 +166,10 @@ void ExistenceClient::Start()
     EnvironmentBuild * environmentbuild_ = GetSubsystem<EnvironmentBuild>();
     GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
 
+    /// Set aApplication
+    gamestatehandlercomponent_->SetApplication(applicationPtr);
+
+    /// Get ui
     UI* ui = GetSubsystem<UI>();
 
     /// create variables (urho3d)
@@ -187,9 +192,14 @@ void ExistenceClient::Start()
     accountexist=false;
 
     /// Setup Screen and Viewport
-    SetupScreenViewport();
-    AddLogoViewport();
-    SetupScreenUI();
+    ///SetupScreenViewport();
+    ///AddLogoViewport();
+    ///SetupScreenUI();
+    //SplashSetupScreenViewport();
+    //SplashShowGameLogo();
+    //SplashTimer.Reset();
+    //SplashStatInit();
+
 
     /// Initialize Console
     InitializeConsole();
@@ -216,21 +226,14 @@ void ExistenceClient::Start()
     /// Randomize timer
     srand (time(NULL));
 
-    /// Configure rudimentary state handler
-    /// ExistenceGameState->SetConsoleState(0);
-    ///ExistenceGameState = new GameStateHandler(&(*context_));
-    ///ExistenceGameState->Start();
-
-    ///ExistencePtr = (static_cast) <ExistenceClient> this;
-
-
     cout << "Debig: Existence App Existence " << applicationPtr ->GetTestString()<< endl;
 
     /// Create test value
     testvalue=121;
 
-
     cout << "Debig: Existence App Existence " << applicationPtr ->GetTestString()<< endl;
+
+    gamestatehandlercomponent_->Start();
 
     return;
 }
@@ -246,30 +249,8 @@ void ExistenceClient::SubscribeToEvents()
     SubscribeToEvent(E_UPDATE, HANDLER(ExistenceClient, HandleUpdate));
 
     /// Add to Event (Key Input)
-    SubscribeToEvent(E_KEYDOWN, HANDLER(ExistenceClient, HandleKeyDown));
+    SubscribeToEvent(E_KEYDOWN, HANDLER(ExistenceClient, HandlerFunctionKeyDown));
 
-    ///  Handle Post Updates
-    SubscribeToEvent(E_POSTUPDATE,HANDLER(ExistenceClient,HandlePostUpdates));
-}
-
-/// Handle post updates
-void ExistenceClient::HandlePostUpdates(StringHash eventType, VariantMap& eventData)
-{
-    /*) UI* ui = GetSubsystem<UI>();
-
-     /// check if in game mode
-     if(ExistenceGameState->GetCurrentState()==GameStates:STATE_GAME_GAMEMODE)
-     {
-         Sprite* healthBar = (Sprite*)ui->GetRoot()->GetChild("PlayerInfoHealthBarIndicate", true);
-
-         if(healthBar!=NULL)
-         {
-
-             float scale=character_->GetHealth()/100;
-
-             healthBar -> SetScale(scale,1.0f);
-         }
-     }*/
 }
 
 /// Setup the main viewport
@@ -323,8 +304,6 @@ void ExistenceClient::SetupScreenViewport()
     lightObject2->SetBrightness(.4);
     lightObject2->SetSpecularIntensity(0);
 
-
-
     Node* lightNode3 = scene_->CreateChild("DirectionalLight");
     //lightNode3->SetDirection(Vector3(0.0,12,0.0)); /// The direction vector does not need to be normalized
     //lightNode3->SetRotation(Quaternion(0.0,180.0,0.0));
@@ -350,8 +329,6 @@ void ExistenceClient::SetupScreenViewport()
     /// use, but now we just use full screen and default render path configured	SetOrthographic ( in the engine command line options
     SharedPtr<Viewport> viewport(new Viewport(context_, scene_, cameraNode_->GetComponent<Camera>()));
     renderer->SetViewport(0, viewport);
-
-
 
     return;
 }
@@ -390,249 +367,8 @@ void ExistenceClient::HandleUpdate(StringHash eventType, VariantMap& eventData)
     /// Take the frame time step, which is stored as a float
     float timeStep = eventData[P_TIMESTEP].GetFloat();
 
-    Input* input = GetSubsystem<Input>();
-    /*
-        /// Move the camera, scale movement with time step
-        MoveCamera(timeStep);
-
-
-        /// Handle UI updates
-        if(ExistenceGameState->getCurrentState()==GAME_STATE_GAMEMODE)
-        {
-            UpdateUI(timeStep);
-        }
-
-        /// controls movement
-        if(ExistenceGameState->GetCameraMode()==CAMERAMODE_FIRSTPERSON&&ExistenceGameState->getCurrentState()==GAME_STATE_GAMEMODE)
-        {
-            /// Clear previous controls
-            character_->controls_.Set(CTRL_FORWARD | CTRL_BACK | CTRL_LEFT | CTRL_RIGHT | CTRL_JUMP | CTRL_FIRE, false);
-
-            /// check if UI element is active
-            if(!GetSubsystem<UI>()->GetFocusElement())
-            {
-
-                /// Clear previous controls
-
-                /// Update controls using keys
-                UI* ui = GetSubsystem<UI>();
-
-                character_->controls_.Set(CTRL_FORWARD, input->GetKeyDown('W'));
-                character_->controls_.Set(CTRL_BACK, input->GetKeyDown('S'));
-                character_->controls_.Set(CTRL_LEFT, input->GetKeyDown('A'));
-                character_->controls_.Set(CTRL_RIGHT, input->GetKeyDown('D'));
-                character_->controls_.Set(CTRL_FIRE, input->GetKeyDown('Q'));
-
-                character_->controls_.Set(CTRL_JUMP, input->GetKeyDown(KEY_SPACE));
-
-                /// Get character information
-                Node * characterNode = scene_->GetChild("Character",true);
-
-                RigidBody* body = characterNode->GetComponent<RigidBody>();
-
-                Node * firstpersonCameraNode = characterNode -> GetChild("CameraFirstPerson",true);
-
-                float YAW_SENSITIVITY=.5;
-
-                /// Updaw character yaw and povement
-                character_->controls_.yaw_ +=(float)input->GetMouseMoveX() * YAW_SENSITIVITY;
-                character_->controls_.pitch_ +=(float)input->GetMouseMoveY() * YAW_SENSITIVITY;
-
-                character_->controls_.yaw_ = Clamp(character_->controls_.yaw_, -80.0f, 80.0f);
-                character_->controls_.pitch_ = Clamp(character_->controls_.pitch_, -80.0f, 80.0f);
-
-                /// Copy yaw and pitch
-                float yaw_=character_->controls_.yaw_;
-                float pitch_=character_->controls_.pitch_;
-
-                firstpersonCameraNode->SetRotation(Quaternion(pitch_,yaw_, 0.0f));
-
-            }
-        }
-    */
     return;
 }
-
-
-/// Handler for keydown
-void ExistenceClient::HandleKeyDown(StringHash eventType, VariantMap& eventData)
-{
-    /// Get Urho3D Subsystem
-    UI* ui = GetSubsystem<UI>();
-
-    //ExistenceGameState->SetConsoleState(GetSubsystem<Console>()->IsVisible());
-
-    ExistenceGameState->SetConsoleState(0);
-    /*
-        /// Unlike the other samples, exiting the engine when ESC is pressed instead of just closing the console
-        if (eventData[KeyDown::P_KEY].GetInt() == KEY_F12)
-        {
-            if((ExistenceGameState->GetUIState()==UI_CHARACTERSELECTIONINTERFACE)||(ExistenceGameState->GetUIState()==UI_GAMECONSOLE))
-            {
-                if(ExistenceGameState->GetConsoleState())
-                {
-                    Console* console = GetSubsystem<Console>();
-
-                    console -> SetVisible(false);
-
-                    UI* ui = GetSubsystem<UI>();
-
-                    ExistenceGameState->SetConsoleState(false);
-
-                }
-                else
-                {
-                    Console* console = GetSubsystem<Console>();
-
-                    console -> SetVisible(true);
-                    ExistenceGameState->SetConsoleState(true);
-
-                }
-            }
-
-            return;
-        }
-
-        if (eventData[KeyDown::P_KEY].GetInt() == KEY_F10&&ExistenceGameState->getCurrentState()==GAME_STATE_GAMEMODE)
-        {
-            /// load window
-            UIElement * uiroot = ui ->	GetRoot ();
-
-            /// Locate Player Window
-            Window * PlayerWindowUIElement = dynamic_cast<Window *>(uiroot->GetChild("PlayerWindow",true));
-
-            /// Enable
-            if(PlayerWindowUIElement)
-            {
-                PlayerWindowUIElement -> SetVisible(true);
-
-                PlayerWindowUIElement-> GetParent() -> SetVisible(true);
-                PlayerWindowUIElement-> GetParent() -> SetBringToFront(true);
-
-            }
-            else
-            {
-                loadUIXML(UIPLAYERWINDOW,200,200,0);
-            }
-
-        }
-
-
-        /// Check if game is in first person camera mode and in game state
-        if(ExistenceGameState->GetCameraMode()==CAMERAMODE_FIRSTPERSON&&ExistenceGameState->getCurrentState()==GAME_STATE_GAMEMODE)
-        {
-            /// check if UI element is active
-            if(GetSubsystem<UI>()->GetFocusElement())
-            {
-                return;
-            }
-
-            /// Locate camera in scene
-            Node * characterNode = scene_->GetChild("Character",true);
-            RigidBody* body = characterNode->GetComponent<RigidBody>();
-
-            float force=.2;
-        }
-    */
-    return;
-}
-
-/// Move camera used in camera fly mode
-void ExistenceClient::MoveCamera(float timeStep)
-{
-    /// Do not move if the UI has a focused element (the console)
-    if (GetSubsystem<UI>()->GetFocusElement()||ExistenceGameState->GetConsoleState())
-    {
-        return;
-    }
-
-    if(ExistenceGameState->getCurrentState()==ExistenceGameState->getCurrentState()==GAME_STATE_MAINMENU)
-    {
-        return;
-    }
-
-    Input* input = GetSubsystem<Input>();
-
-    if(ExistenceGameState->GetCameraMode()==CAMERAMODE_FLY)
-    {
-
-
-        /// Movement speed as world units per second
-        float MOVE_SPEED=5.0f;
-
-        /// Mouse sensitivity as degrees per pixel
-        const float MOUSE_SENSITIVITY = 0.2f;
-
-        /// Use this frame's mouse motion to adjust camera node yaw and pitch. Clamp the pitch between -90 and 90 degrees
-        IntVector2 mouseMove = input->GetMouseMove();
-        yaw_ += MOUSE_SENSITIVITY * mouseMove.x_;
-        pitch_ += MOUSE_SENSITIVITY * mouseMove.y_;
-        pitch_ = Clamp(pitch_, -180.0f, 180.0f);
-
-        /// Construct new orientation for the camera scene node from yaw and pitch. Roll is fixed to zero
-        cameraNode_->SetRotation(Quaternion(pitch_, yaw_, 0.0f));
-
-        /// Read WASD keys and move the camera scene node to the corresponding direction if they are pressed
-        /// Use the Translate() function (default local space) to move relative to the node's orientation.
-        if (input->GetKeyDown('W'))
-        {
-            cameraNode_->Translate(Vector3::FORWARD * MOVE_SPEED * timeStep);
-        }
-
-        if (input->GetKeyDown('S'))
-        {
-            cameraNode_->Translate(Vector3::BACK * MOVE_SPEED * timeStep);
-        }
-
-        if (input->GetKeyDown('A'))
-        {
-            cameraNode_->Translate(Vector3::LEFT * MOVE_SPEED * timeStep);
-        }
-
-        if (input->GetKeyDown('D'))
-        {
-            cameraNode_->Translate(Vector3::RIGHT * MOVE_SPEED * timeStep);
-        }
-
-        /// added controls for up and down movement
-        if (input->GetKeyDown('Q'))
-        {
-            cameraNode_->Translate(Vector3::UP * MOVE_SPEED * timeStep);
-        }
-
-        if (input->GetKeyDown('E'))
-        {
-            cameraNode_->Translate(Vector3::DOWN * MOVE_SPEED * timeStep);
-        }
-
-
-        /// added controls for up and down movement
-        if (input->GetKeyDown('1'))
-        {
-
-            MOVE_SPEED=5.0f;
-        }
-
-        if (input->GetKeyDown('2'))
-        {
-            MOVE_SPEED=15.0f;
-        }
-
-        if (input->GetKeyDown('3'))
-        {
-            MOVE_SPEED=10.0f;
-        }
-
-        if (input->GetKeyDown('4'))
-        {
-            MOVE_SPEED=20.0f;
-        }
-    }
-
-
-    return;
-}
-
 
 /// Print to output buffe console
 void ExistenceClient::Print(const String& output)
@@ -641,9 +377,7 @@ void ExistenceClient::Print(const String& output)
     LOGRAW(output + "\n");
 }
 
-
-
-
+/// Create a cursor
 int  ExistenceClient::CreateCursor(void)
 {
 
@@ -670,7 +404,7 @@ int  ExistenceClient::CreateCursor(void)
 
 }
 
-
+/// Setup the screen UI
 void ExistenceClient::SetupScreenUI(void)
 {
     /// Create a new scene UI
@@ -750,8 +484,6 @@ Renderer * ExistenceClient::GetRenderSubsystems(void) const
     return CurrentRendererSubsystem;
 }
 
-
-
 /// Get subsystems
 Graphics * ExistenceClient::GetGraphicsSubsystems(void) const
 {
@@ -784,4 +516,115 @@ Window * ExistenceClient::GetSharedWindow(void) const
     return window_;
 }
 
+void ExistenceClient::Exit()
+{
+    engine_->Exit();
+}
 
+
+/// Setup the main viewport
+void ExistenceClient::SplashSetupScreenViewport(void)
+{
+    /// Get Needed SubSystems
+    ResourceCache* cache = GetSubsystem<ResourceCache>();
+    Renderer* renderer = GetSubsystem<Renderer>();
+    Graphics* graphics = GetSubsystem<Graphics>();
+    UI* ui = GetSubsystem<UI>();
+
+    /// Get rendering window size as floats
+    float width = (float)graphics->GetWidth();
+    float height = (float)graphics->GetHeight();
+
+    renderer -> SetTextureQuality (QUALITY_HIGH);
+    renderer ->SetMaterialQuality (QUALITY_HIGH);
+    renderer ->SetShadowQuality (SHADOWQUALITY_HIGH_24BIT);
+
+    /// create a new scene
+    scene_= new Scene(context_);
+    scene_-> CreateComponent<Octree>();
+    scene_-> CreateComponent<DebugRenderer>();
+
+    /// Create a scene node for the camera, which we will move around
+    /// The camera will use default settings (1000 far clip distance, 45 degrees FOV, set aspect ratio automatically)
+    cameraNode_ = scene_->CreateChild("CameraSplashScreen");
+
+    /// Set an initial position for the camera scene node above the plane
+    cameraNode_->SetPosition(Vector3(0.0,0.0,5.0));
+    cameraNode_->SetRotation(Quaternion(0.0,-180.0,0.0));
+    Camera* cameraObject = cameraNode_->CreateComponent<Camera>();
+    cameraObject->SetOrthographic(1);
+    cameraObject->SetZoom(3);
+
+    /// Set up a viewport to the Renderer subsystem so that the 3D scene can be seen. We need to define the scene and the camera
+    /// at minimum. Additionally we could configure the viewport screen size and the rendering path (eg. forward / deferred) to
+    /// use, but now we just use full screen and default render path configured	SetOrthographic ( in the engine command line options
+    SharedPtr<Viewport> viewport(new Viewport(context_, scene_, cameraNode_->GetComponent<Camera>()));
+    renderer->SetViewport(0, viewport);
+
+    return;
+}
+
+/// Add logo to the viewport
+void ExistenceClient::SplashShowGameLogo(void)
+{
+    /// Get Needed SubSystems
+    ResourceCache* cache = GetSubsystem<ResourceCache>();
+    Renderer* renderer = GetSubsystem<Renderer>();
+    Graphics* graphics = GetSubsystem<Graphics>();
+    UI* ui = GetSubsystem<UI>();
+
+    BorderImage* splashUI = new BorderImage(context_);
+    splashUI->SetName("Splash");
+
+    Texture2D* texture = cache->GetResource<Texture2D>("Resources/Textures/gamelogo.png");
+    splashUI->SetTexture(texture); // Set texture
+    splashUI->SetSize(texture->GetWidth(), texture->GetHeight());
+    splashUI->SetAlignment(HA_CENTER, VA_CENTER);
+
+    ui->GetRoot()->AddChild(splashUI);
+
+
+    return;
+}
+
+void ExistenceClient::SplashStatInit(void)
+{
+
+    SubscribeToEvent(E_UPDATE, HANDLER(ExistenceClient, HandlerSplashUpdate)); // Keep visible until rendering of the scene
+
+    /// start frame
+    GetSubsystem<Engine>()->RunFrame(); // Render Splash immediately
+
+    return;
+}
+
+
+void ExistenceClient::HandlerSplashUpdate(StringHash eventType, VariantMap& eventData)
+{
+    /// Get Needed SubSystems
+    ResourceCache* cache = GetSubsystem<ResourceCache>();
+    Renderer* renderer = GetSubsystem<Renderer>();
+    Graphics* graphics = GetSubsystem<Graphics>();
+    UI* ui = GetSubsystem<UI>();
+
+    /// Check scene status
+    if((scene_-> GetAsyncProgress()==true)&&(SplashTimer.GetMSec(false)>=600000000))
+    {
+
+        /// Create a scene node for the camera, which we will move around
+        /// The camera will use default settings (1000 far clip distance, 45 degrees FOV, set aspect ratio automatically)
+        Node * cameraNode_ = scene_->GetChild("CameraLogin");
+
+        /// If camera exist change viewport
+        if(cameraNode_)
+        {
+            /// Set up a viewport to the Renderer subsystem so that the 3D scene can be seen. We need to define the scene and the camera
+            /// at minimum. Additionally we could configure the viewport screen size and the rendering path (eg. forward / deferred) to
+            /// use, but now we just use full screen and default render path configured	SetOrthographic ( in the engine command line options
+            SharedPtr<Viewport> viewport(new Viewport(context_, scene_, cameraNode_->GetComponent<Camera>()));
+            renderer->SetViewport(0, viewport);
+        }
+    }
+
+    return ;
+}

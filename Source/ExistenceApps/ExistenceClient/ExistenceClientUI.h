@@ -24,6 +24,7 @@
 //
 
 #define UIPLAYERWINDOW          0
+#define UIMINIQUICKMENU             78
 #define UIQUICKMENU             79
 #define UISCENESELECTWINDOW     80
 #define UIPREFERENCESWINDOW      90

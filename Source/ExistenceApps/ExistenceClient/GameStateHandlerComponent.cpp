@@ -108,17 +108,25 @@
 
 
 using namespace Urho3D;
+
 using namespace std;
 
 
 /// Game State Handler Coponent
 GameStateHandlerComponent::GameStateHandlerComponent(Context* context) :
     LogicComponent (context)
+    ,GameStateHandlerApplication(NULL)
 {
-    /// constructor
 
     /// Debug Info
     cout << "Debug: Game State Handler Component Constructor - context " << &context << endl;
+
+    /// constructor
+    /// Debug
+    cout << "Debug: Game State Handler OnStateChange subscribetoevent" << endl;
+
+    SubscribeToEvent(G_STATES_CHANGE, HANDLER(GameStateHandlerComponent, onStateChange));
+
 }
 
 
@@ -136,7 +144,7 @@ void GameStateHandlerComponent::RegisterNewSubsystem(Urho3D::Context* context)
     context -> RegisterSubsystem(new GameStateHandlerComponent(context));
 
     /// Debug Info
-    cout << "Debug: Game State Handler Component Register - context " << &context << endl;
+    cout << "Debug: Game State Handler RegisterNewSystem " << &context << endl;
 
     return;
 }
@@ -152,20 +160,216 @@ void GameStateHandlerComponent::RegisterGameStates(Context* context)
     context->RegisterFactory<ExistenceClientStateProgress>();
     context->RegisterFactory<ExistenceClientStateMainScreen>();
 
+    /// Debug Info
+    cout << "Debug: Game State Handler RegisterGameStates " << &context << endl;
 
-    cout << "Debug: Game State Register States context " << &context << endl;
+}
 
 
+/// try to test the state
+void GameStateHandlerComponent::SetApplication(SharedPtr <ExistenceClient> temp)
+{
+
+    GameStateHandlerApplication = temp;
+
+    return;
 }
 
 
 /// try to test the state
 void GameStateHandlerComponent::Start(void)
 {
-    /// Test
-    ExistenceClientStateSingleton *  gameState = new ExistenceClientStateLogin(context_);
+    /// Start
+    ExistenceClientStateSingleton *  gameState = new ExistenceClientStateSplash(context_);
+
+    gameState->Enter();
+
+    return;
+}
+
+/// Game Sate Handler Changer State
+void GameStateHandlerComponent::createState(String newState, Urho3D::VariantMap& eventData)
+{
+
+    /// Debug Info
+    cout << "Debug: Game State Handler Component createState" << endl;
+
+    /// Create a blank pointer
+    ExistenceClientStateSingleton * newgameState=NULL;
+
+    /// Switch
+    if (String(ExistenceClientStateLogin::GetTypeNameStatic())==newState)
+    {
+        /// change to that state
+        cout << "Debug: Create Login Progress Called" << endl;;
+
+        /// change to that state
+        ExistenceClientStateSingleton *  newgameState = new ExistenceClientStateLogin(context_);
+
+        /// delete old state
+        delete gameState;
+        gameState=newgameState;
+        gameState->Enter();
+    }
+    else if (String(ExistenceClientStateGameMode::GetTypeNameStatic())==newState)
+    {
+        /// change to that state
+        cout << "Debug: Create Game Mode Called" << endl;
+
+        ExistenceClientStateSingleton *  newgameState = new ExistenceClientStateGameMode(context_);
+
+        /// delete old state
+        delete  gameState;
+        gameState=newgameState;
+        gameState->Enter();
+    }
+    else if (String(ExistenceClientStateMainScreen::GetTypeNameStatic())==newState)
+    {
+        /// change to that state
+        cout << "Debug: Create Main Screen Called" << endl;
+
+        ExistenceClientStateSingleton *  newgameState = new ExistenceClientStateMainScreen(context_);
+
+        /// delete old state
+        delete gameState;
+        gameState=newgameState;
+        gameState->Enter();
+    }
+    else if (String(ExistenceClientStateAccount::GetTypeNameStatic())==newState)
+    {
+        /// change to that state
+        cout << "Debug: Create Main Screen Called" << endl;
+
+        ExistenceClientStateSingleton *  newgameState = new ExistenceClientStateAccount(context_);
+
+        /// delete old state
+        delete  gameState;
+        gameState=newgameState;
+        gameState->Enter();
+    }
+    else if (String(ExistenceClientStatePlayer::GetTypeNameStatic())==newState)
+    {
+        /// change to that state
+        cout << "Debug: Create Player Called" << endl;
+
+        ExistenceClientStateSingleton *  newgameState = new ExistenceClientStatePlayer(context_);
+
+        /// delete old state
+        delete  gameState;
+        gameState=newgameState;
+        gameState->Enter();
+    }
+    else if (String(ExistenceClientStateProgress::GetTypeNameStatic())==newState)
+    {
+        /// change to that state
+        cout << "Debug: Create Player Called" << endl;
+
+        ExistenceClientStateSingleton *  newgameState = new ExistenceClientStateProgress(context_);
+
+        /// delete old state
+        delete  gameState;
+        gameState=newgameState;
+        gameState->SetParameter(eventData[GameState::P_ARG].GetString());
+        gameState->Enter();
+    }
+    else if (String(ExistenceClientStateSplash::GetTypeNameStatic())==newState)
+    {
+        /// change to that state
+        cout << "Debug: Create Splash Called" << endl;
+
+        ExistenceClientStateSingleton *  newgameState = new ExistenceClientStateSplash(context_);
+
+        /// delete old state
+        delete  gameState;
+        gameState=newgameState;
+        gameState->Enter();
+    }
+
+    return;
+}
 
 
+/// onSteChangeHandler
+void GameStateHandlerComponent::onStateChange( Urho3D::StringHash eventType, Urho3D::VariantMap& eventData )
+{
+
+    /// Debug Info
+    cout << "Debug: Game State Handler Component onStateChange called" << endl;
+
+    /// intercept state event
+    GameStates newState=  static_cast<GameStates>(eventData[GameState::P_CMD].GetInt());
+
+    switch (newState)
+    {
+    case  GAME_STATE_PROGRESS: //called from intro GameIntroSample
+        /// exit out
+        if(gameState!=NULL)
+        {
+            gameState->Exit();
+        };
+        /// create a new state
+        createState(ExistenceClientStateProgress::GetTypeNameStatic(),eventData);
+        break;
+    case  GAME_STATE_GAMEMODE: //called from intro GameIntroSample
+        /// exit out
+        if(gameState!=NULL)
+        {
+            gameState->Exit();
+        };
+        /// create a new state
+        createState(ExistenceClientStateGameMode::GetTypeNameStatic(),eventData);
+        break;
+    case  GAME_STATE_LOGIN: //called from intro GameIntroSample
+        /// exit out
+        if(gameState!=NULL)
+        {
+            gameState->Exit();
+        };
+        /// create a new state
+        createState(ExistenceClientStateLogin::GetTypeNameStatic(),eventData);
+        break;
+    case  GAME_STATE_PLAYERCREATE: //called from intro GameIntroSample
+        /// exit out
+        if(gameState!=NULL)
+        {
+            gameState->Exit();
+        };
+        /// create a new state
+        createState(ExistenceClientStatePlayer::GetTypeNameStatic(),eventData);
+        break;
+    case  GAME_STATE_ACCOUNTCREATE: //called from intro GameIntroSample
+        /// exit out
+        if(gameState!=NULL)
+        {
+            gameState->Exit();
+        };
+        /// create a new state
+        createState(ExistenceClientStateAccount::GetTypeNameStatic(),eventData);
+        break;
+    case  GAME_STATE_MAINMENU: //called from intro GameIntroSample
+        /// exit out
+        if(gameState!=NULL)
+        {
+            gameState->Exit();
+        };
+        /// create a new state
+        createState(ExistenceClientStateMainScreen::GetTypeNameStatic(),eventData);
+        break;
+    case  GAME_STATE_SPLASH: //called from intro GameIntroSample
+        /// exit out
+        if(gameState!=NULL)
+        {
+            gameState->Exit();
+        };
+        /// create a new state
+        createState(ExistenceClientStateSplash::GetTypeNameStatic(),eventData);
+        break;
+    default:
+        cout << "Debug: Unkown State " << newState;
+        break;
+    }
+
+    return;
 }
 
 /// Functions for states
@@ -237,3 +441,8 @@ int GameStateHandlerComponent::SetDebugHudMode(int flag)
     return 1;
 }
 
+/// try to test the state
+SharedPtr<ExistenceClient> GameStateHandlerComponent::GetApplication(void)
+{
+    return GameStateHandlerApplication;
+}
