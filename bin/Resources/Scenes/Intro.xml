@@ -1,0 +1,486 @@
+<?xml version="1.0"?>
+<scene id="1">
+	<attribute name="Name" value="" />
+	<attribute name="Time Scale" value="1" />
+	<attribute name="Smoothing Constant" value="50" />
+	<attribute name="Snap Threshold" value="5" />
+	<attribute name="Elapsed Time" value="0" />
+	<attribute name="Next Replicated Node ID" value="1" />
+	<attribute name="Next Replicated Component ID" value="4" />
+	<attribute name="Next Local Node ID" value="16777263" />
+	<attribute name="Next Local Component ID" value="16777336" />
+	<attribute name="Variables" />
+	<attribute name="Variable Names" value="" />
+	<component type="Octree" id="1" />
+	<component type="DebugRenderer" id="2" />
+	<component type="PhysicsWorld" id="3" />
+	<node id="16777216">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="" />
+		<attribute name="Position" value="0 0 0" />
+		<attribute name="Rotation" value="1 0 0 0" />
+		<attribute name="Scale" value="50 50 50" />
+		<attribute name="Variables" />
+		<component type="Skybox" id="16777216">
+			<attribute name="Model" value="Model;Models/sphereskybox.mdl" />
+			<attribute name="Material" value="Material;Materials/SkyBox_SpaceVax.xml" />
+		</component>
+	</node>
+	<node id="16777233">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="" />
+		<attribute name="Position" value="-403.432 116.02 -254.65" />
+		<attribute name="Rotation" value="0.880168 -0.373042 0.271344 -0.111885" />
+		<attribute name="Scale" value="1 1 1" />
+		<attribute name="Variables" />
+		<component type="Light" id="16777262">
+			<attribute name="Light Type" value="Directional" />
+			<attribute name="Specular Intensity" value="0.1" />
+			<attribute name="Brightness Multiplier" value="0.3" />
+			<attribute name="Range" value="100" />
+			<attribute name="Cast Shadows" value="true" />
+		</component>
+	</node>
+	<node id="16777234">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="Magellan" />
+		<attribute name="Position" value="2.41438 -171.058 176.174" />
+		<attribute name="Rotation" value="1 0 0 0" />
+		<attribute name="Scale" value="1 1 1" />
+		<attribute name="Variables" />
+		<node id="16777235">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="MagellanBridge" />
+			<attribute name="Position" value="4.25104e-06 159.743 -177.754" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777263">
+				<attribute name="Model" value="Model;Models/MagellanBridge.mdl" />
+				<attribute name="Material" value="Material;Materials/Magellan.xml" />
+			</component>
+			<component type="RigidBody" id="16777264">
+				<attribute name="Physics Position" value="2.41438 -11.3147 -1.58023" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777265">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/MagellanBridge.mdl" />
+			</component>
+		</node>
+		<node id="16777236">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="MagellanBussardGuards" />
+			<attribute name="Position" value="-2.1697e-06 123.91 30.9817" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777266">
+				<attribute name="Model" value="Model;Models/MagellanBussardGuards.mdl" />
+				<attribute name="Material" value="Material;Materials/Magellan.xml" />
+			</component>
+			<component type="RigidBody" id="16777267">
+				<attribute name="Physics Position" value="2.41438 -47.1477 207.155" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777268">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/MagellanBussardGuards.mdl" />
+			</component>
+		</node>
+		<node id="16777237">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="MagellanDeflectorSecondary" />
+			<attribute name="Position" value="1.12669e-06 173.77 22.0212" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777269">
+				<attribute name="Model" value="Model;Models/MagellanDeflectorSecondary.mdl" />
+				<attribute name="Material" value="Material;Materials/Magellan.xml" />
+			</component>
+			<component type="RigidBody" id="16777270">
+				<attribute name="Physics Position" value="2.41438 2.71233 198.195" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777271">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/MagellanDeflectorSecondary.mdl" />
+			</component>
+		</node>
+		<node id="16777238">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="MagellanFrontHull" />
+			<attribute name="Position" value="0 139.031 -318.278" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777272">
+				<attribute name="Model" value="Model;Models/MagellanFrontHull.mdl" />
+				<attribute name="Material" value="Material;Materials/Magellan.xml" />
+			</component>
+			<component type="RigidBody" id="16777273">
+				<attribute name="Physics Position" value="2.41438 -32.0267 -142.104" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777274">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/MagellanFrontHull.mdl" />
+			</component>
+		</node>
+		<node id="16777239">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="MagellanHull" />
+			<attribute name="Position" value="2.67073e-08 143.377 15.2391" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777275">
+				<attribute name="Model" value="Model;Models/MagellanHull.mdl" />
+				<attribute name="Material" value="Material;Materials/Magellan.xml" />
+			</component>
+			<component type="RigidBody" id="16777276">
+				<attribute name="Physics Position" value="2.41438 -27.6807 191.413" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777277">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/MagellanHull.mdl" />
+			</component>
+		</node>
+		<node id="16777240">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="MagellanImpulsePlates" />
+			<attribute name="Position" value="1.55947e-06 138.906 -86.0999" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777278">
+				<attribute name="Model" value="Model;Models/MagellanImpulsePlates.mdl" />
+				<attribute name="Material" value="Material;Materials/Magellan.xml" />
+			</component>
+			<component type="RigidBody" id="16777279">
+				<attribute name="Physics Position" value="2.41438 -32.1517 90.0739" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777280">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/MagellanImpulsePlates.mdl" />
+			</component>
+		</node>
+		<node id="16777241">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="MagellanLight" />
+			<attribute name="Position" value="-7.42148e-07 145.942 -69.3846" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777281">
+				<attribute name="Model" value="Model;Models/MagellanLight.mdl" />
+				<attribute name="Material" value="Material;Materials/MagellanGlassTranslucent.xml;Materials/Magellan.xml;Materials/MagellanBeaconRed.xml;Materials/MagellanBeaconGreen.xml" />
+			</component>
+			<component type="RigidBody" id="16777282">
+				<attribute name="Physics Position" value="2.41438 -25.1157 106.789" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777283">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/MagellanLight.mdl" />
+			</component>
+		</node>
+		<node id="16777242">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="MagellanLowerPlyon" />
+			<attribute name="Position" value="-2.1697e-06 123.91 30.9817" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777284">
+				<attribute name="Model" value="Model;Models/MagellanLowerPlyon.mdl" />
+				<attribute name="Material" value="Material;Materials/Magellan.xml" />
+			</component>
+			<component type="RigidBody" id="16777285">
+				<attribute name="Physics Position" value="2.41438 -47.1477 207.155" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777286">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/MagellanLowerPlyon.mdl" />
+			</component>
+		</node>
+		<node id="16777243">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="MagellanMiddlePylon" />
+			<attribute name="Position" value="-1.69079e-06 158.22 -0.914817" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777287">
+				<attribute name="Model" value="Model;Models/MagellanMiddlePylon.mdl" />
+				<attribute name="Material" value="Material;Materials/Magellan.xml" />
+			</component>
+			<component type="RigidBody" id="16777288">
+				<attribute name="Physics Position" value="2.41438 -12.8377 175.259" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777289">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/MagellanMiddlePylon.mdl" />
+			</component>
+		</node>
+		<node id="16777244">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="MagellanNacelle" />
+			<attribute name="Position" value="4.29907e-06 102.897 105.905" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777290">
+				<attribute name="Model" value="Model;Models/MagellanNacelle.mdl" />
+				<attribute name="Material" value="Material;Materials/Magellan.xml" />
+			</component>
+			<component type="RigidBody" id="16777291">
+				<attribute name="Physics Position" value="2.41438 -68.1607 282.079" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777292">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/MagellanNacelle.mdl" />
+			</component>
+		</node>
+		<node id="16777245">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="MagellanNacelleSupport" />
+			<attribute name="Position" value="5.22613e-06 113.951 70.3425" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777293">
+				<attribute name="Model" value="Model;Models/MagellanNacelleSupport.mdl" />
+				<attribute name="Material" value="Material;Materials/Magellan.xml" />
+			</component>
+			<component type="RigidBody" id="16777294">
+				<attribute name="Physics Position" value="2.41438 -57.1067 246.516" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777295">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/MagellanNacelleSupport.mdl" />
+			</component>
+		</node>
+		<node id="16777246">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="MagellanPrimaryDeflector" />
+			<attribute name="Position" value="1.12669e-06 173.77 -27.6616" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777296">
+				<attribute name="Model" value="Model;Models/MagellanPrimaryDeflector.mdl" />
+				<attribute name="Material" value="Material;Materials/Magellan.xml;Materials/MagellanDeflector.xml" />
+			</component>
+			<component type="RigidBody" id="16777297">
+				<attribute name="Physics Position" value="2.41438 2.71233 148.512" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777298">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/MagellanPrimaryDeflector.mdl" />
+			</component>
+		</node>
+		<node id="16777247">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="MagellanSecondaryDeflector" />
+			<attribute name="Position" value="-2.34643e-07 116.696 -179.287" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777299">
+				<attribute name="Model" value="Model;Models/MagellanSecondaryDeflector.mdl" />
+				<attribute name="Material" value="Material;Materials/Magellan.xml;Materials/MagellanDeflector.xml" />
+			</component>
+			<component type="RigidBody" id="16777300">
+				<attribute name="Physics Position" value="2.41438 -54.3617 -3.11324" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777301">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/MagellanSecondaryDeflector.mdl" />
+			</component>
+		</node>
+		<node id="16777248">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="MagellanThrusters" />
+			<attribute name="Position" value="-1.36526e-06 138.868 -93.8357" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777302">
+				<attribute name="Model" value="Model;Models/MagellanThrusters.mdl" />
+				<attribute name="Material" value="Material;Materials/Magellan.xml" />
+			</component>
+			<component type="RigidBody" id="16777303">
+				<attribute name="Physics Position" value="2.41438 -32.1897 82.3381" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777304">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/MagellanThrusters.mdl" />
+			</component>
+		</node>
+		<node id="16777249">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="MagellanUpperPylon" />
+			<attribute name="Position" value="-1.58996e-06 145.222 60.753" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777305">
+				<attribute name="Model" value="Model;Models/MagellanUpperPylon.mdl" />
+				<attribute name="Material" value="Material;Materials/Magellan.xml" />
+			</component>
+			<component type="RigidBody" id="16777306">
+				<attribute name="Physics Position" value="2.41438 -25.8357 236.927" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777307">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/MagellanUpperPylon.mdl" />
+			</component>
+		</node>
+		<node id="16777250">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="MegallanHullUpperHull" />
+			<attribute name="Position" value="3.32972e-07 155.373 -73.8457" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777308">
+				<attribute name="Model" value="Model;Models/MegallanHullUpperHull.mdl" />
+				<attribute name="Material" value="Material;Materials/Magellan.xml" />
+			</component>
+			<component type="RigidBody" id="16777309">
+				<attribute name="Physics Position" value="2.41438 -15.6847 102.328" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777310">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/MegallanHullUpperHull.mdl" />
+			</component>
+		</node>
+		<node id="16777251">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="MegallanPrimaryHull" />
+			<attribute name="Position" value="-2.34643e-07 123.386 -80.1914" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777311">
+				<attribute name="Model" value="Model;Models/MegallanPrimaryHull.mdl" />
+				<attribute name="Material" value="Material;Materials/Magellan.xml" />
+			</component>
+			<component type="RigidBody" id="16777312">
+				<attribute name="Physics Position" value="2.41438 -47.6717 95.9824" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777313">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/MegallanPrimaryHull.mdl" />
+			</component>
+		</node>
+		<node id="16777252">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="MegallanSaucer" />
+			<attribute name="Position" value="4.42972e-06 143.376 -221.952" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777314">
+				<attribute name="Model" value="Model;Models/MegallanSaucer.mdl" />
+				<attribute name="Material" value="Material;Materials/Magellan.xml" />
+			</component>
+			<component type="RigidBody" id="16777315">
+				<attribute name="Physics Position" value="2.41438 -27.6817 -45.7782" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777316">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/MegallanSaucer.mdl" />
+			</component>
+		</node>
+		<node id="16777261">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="MagellanNacelleGlass" />
+			<attribute name="Position" value="4.29907e-06 102.897 105.905" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777332">
+				<attribute name="Model" value="Model;Models/MagellanNacelleGlass.mdl" />
+				<attribute name="Material" value="Material;Materials/Material.xml" />
+			</component>
+			<component type="RigidBody" id="16777333">
+				<attribute name="Physics Position" value="2.41438 -68.161 282.079" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777334">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/MagellanNacelleGlass.mdl" />
+			</component>
+		</node>
+		<node id="16777260">
+			<attribute name="Is Enabled" value="true" />
+			<attribute name="Name" value="MagellanBussard" />
+			<attribute name="Position" value="4.29907e-06 102.897 105.905" />
+			<attribute name="Rotation" value="1 0 0 0" />
+			<attribute name="Scale" value="1 1 1" />
+			<attribute name="Variables" />
+			<component type="StaticModel" id="16777329">
+				<attribute name="Model" value="Model;Models/MagellanBussard.mdl" />
+				<attribute name="Material" value="Material;Materials/MagellanBussard.xml" />
+			</component>
+			<component type="RigidBody" id="16777330">
+				<attribute name="Physics Position" value="2.41438 -68.161 282.079" />
+				<attribute name="Collision Layer" value="2" />
+				<attribute name="Use Gravity" value="false" />
+			</component>
+			<component type="CollisionShape" id="16777331">
+				<attribute name="Shape Type" value="TriangleMesh" />
+				<attribute name="Model" value="Model;Models/MagellanBussard.mdl" />
+			</component>
+		</node>
+	</node>
+	<node id="16777262">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="" />
+		<attribute name="Position" value="-783.536 352.126 -505.347" />
+		<attribute name="Rotation" value="0.83157 0.45593 -0.209612 0.238081" />
+		<attribute name="Scale" value="1 1 1" />
+		<attribute name="Variables" />
+		<component type="Light" id="16777335">
+			<attribute name="Light Type" value="Directional" />
+			<attribute name="Color" value="0.9 0.9 0.99 1" />
+			<attribute name="Brightness Multiplier" value="0.5" />
+			<attribute name="Cast Shadows" value="true" />
+		</component>
+	</node>
+</scene>

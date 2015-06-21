@@ -1,0 +1,9 @@
+<cubemap>
+    <face name="Galaxy_posx.dds" />
+    <face name="Galaxy_negx.dds" />
+    <face name="Galaxy_posy.dds" />
+    <face name="Galaxy_negy.dds" />
+    <face name="Galaxy_posz.dds" />
+    <face name="Galaxy_negz.dds" />
+    <quality low="0" />
+</cubemap>

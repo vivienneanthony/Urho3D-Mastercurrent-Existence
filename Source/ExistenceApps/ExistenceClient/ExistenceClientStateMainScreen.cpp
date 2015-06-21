@@ -102,6 +102,7 @@
 
 #include "ExistenceClient.h"
 #include "ExistenceClientStateMainScreen.h"
+#include "ExistenceClientStateProgress.h"
 #include "ExistenceClientUI.h"
 
 #include "../../Urho3D/Engine/DebugHud.h"
@@ -125,6 +126,9 @@ ExistenceClientStateMainScreen::ExistenceClientStateMainScreen(Urho3D::Context* 
     GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
     /// Set aApplication
     Existence = gamestatehandlercomponent_->GetApplication();
+
+    /// Subscribe to
+    SubscribeToEvent(P_LOAD_CHANGE,HANDLER(ExistenceClientStateMainScreen,ListenToLoad));
 
     return;
 }
@@ -203,7 +207,7 @@ void ExistenceClientStateMainScreen::MainScreen(void)
 
     MainScreenUI();
 
-     /// load hud
+    /// load hud
     Existence->loadUIXML(UIMINIQUICKMENU,0,0,0);
 
 
@@ -497,7 +501,7 @@ void ExistenceClientStateMainScreen::MainScreenUIHandleClosePressed(StringHash e
     GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
 
     /// Set ui state to UI_CHARACTERSELECTIONINTERFACE
-    ///ExistenceGameState->SetUIState(UI_CHARACTERSELECTIONINTERFACE);
+    gamestatehandlercomponent_ ->SetUIState(UI_CHARACTERSELECTIONINTERFACE);
 
     /// Get control that was clicked
     UIElement* clicked = static_cast<UIElement*>(eventData[UIMouseClick::P_ELEMENT].GetPtr());
@@ -663,6 +667,26 @@ void ExistenceClientStateMainScreen::HandleCharacterSelectedInfoButtonReleased(S
     return;
 }
 
+void ExistenceClientStateMainScreen::ListenToLoad(StringHash eventType, VariantMap& eventData)
+{
+    /// Get Datas
+    int  Status=eventData[LoadState::P_CMD].GetInt();
+    String Arguments=eventData[LoadState::P_ARG].GetString();
 
+    /// check if a a 100 was received
+    if(Status==100)
+    {
+        /// Create a event
+        VariantMap gamestatechange;
+        gamestatechange[GameState::P_CMD] = GAME_STATE_PROGRESS;
+        gamestatechange[GameState::P_ARG] = Arguments;
+
+        cout << "Debug: Attempt to send a state change. Send Change State to Game from ListenToLoad" << endl;
+
+        SendEvent(G_STATES_CHANGE,gamestatechange);
+    }
+
+    return;
+}
 
 

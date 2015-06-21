@@ -370,6 +370,7 @@ private:
     void HandleCharacterStartButtonReleased(StringHash eventType, VariantMap& eventData);
     void HandleCharacterSelectedReleased(StringHash eventType, VariantMap& eventData);
     void HandleCharacterSelectedInfoButtonReleased(StringHash eventType, VariantMap& eventData);
+    void ListenToLoad(StringHash eventType, VariantMap& eventData);
 protected:
     SharedPtr<ExistenceClient> Existence;
 };

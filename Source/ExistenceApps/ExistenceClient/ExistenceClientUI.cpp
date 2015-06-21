@@ -101,6 +101,7 @@
 
 #include "ExistenceClient.h"
 #include "ExistenceClientUI.h"
+#include "ExistenceClientStateProgress.h"
 
 #define DEFAULTSIZE 4096
 
@@ -881,16 +882,25 @@ void ExistenceClient::SceneLoaderHanderPress(StringHash eventType, VariantMap& e
     /// change state
     gamestatehandlercomponent_->SetUIState(UI_GAMECONSOLE);
 
-    ///ExistenceGameState->SendEvent("GAME_STATE_GAMEMODELOAD");
-
-    /// Create a event
+  /* /// Create a event
     VariantMap gamestatechange;
     gamestatechange[GameState::P_CMD] = GAME_STATE_PROGRESS;
-    gamestatechange[GameState::P_ARG] = clicked.CString();
+    gamestatechange[GameState::P_ARG] = clicked;
 
     cout << "Debug: Attempt to send a state change" << endl;
 
-    this->SendEvent(G_STATES_CHANGE,gamestatechange);
+    SendEvent(G_STATES_CHANGE,gamestatechange);
+*/
+
+    /// Create a event
+    VariantMap gamestatechange;
+    gamestatechange[LoadState::P_CMD] = 100;
+    gamestatechange[LoadState::P_ARG] = clicked;
+
+    cout << "Debug: Attempt to send a state change. Call MainScreen:ListenLoad(something like that)" << endl;
+
+    SendEvent(P_LOAD_CHANGE,gamestatechange);
+
 
     return;
 }

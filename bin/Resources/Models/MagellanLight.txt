@@ -1,0 +1,4 @@
+Materials/MagellanGlassTranslucent.xml
+Materials/Magellan.xml
+Materials/MagellanBeaconRed.xml
+Materials/MagellanBeaconGreen.xml

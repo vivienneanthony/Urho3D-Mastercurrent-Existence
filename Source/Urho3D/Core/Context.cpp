@@ -57,7 +57,7 @@ Context::Context() :
     // Always reset the random seed on Android, as the Urho3D library might not be unloaded between runs
     SetRandomSeed(1);
     #endif
-    
+
     // Set the main thread ID (assuming the Context is created in it)
     Thread::SetMainThread();
 }
@@ -71,10 +71,10 @@ Context::~Context()
     RemoveSubsystem("Input");
     RemoveSubsystem("Renderer");
     RemoveSubsystem("Graphics");
-    
+
     subsystems_.Clear();
     factories_.Clear();
-    
+
     // Delete allocated event data maps
     for (PODVector<VariantMap*>::Iterator i = eventDataMaps_.Begin(); i != eventDataMaps_.End(); ++i)
         delete *i;
@@ -153,7 +153,7 @@ VariantMap& Context::GetEventDataMap()
     unsigned nestingLevel = eventSenders_.Size();
     while (eventDataMaps_.Size() < nestingLevel + 1)
         eventDataMaps_.Push(new VariantMap());
-    
+
     VariantMap& ret = *eventDataMaps_[nestingLevel];
     ret.Clear();
     return ret;

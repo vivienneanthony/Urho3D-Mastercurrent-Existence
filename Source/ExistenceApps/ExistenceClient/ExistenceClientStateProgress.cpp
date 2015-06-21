@@ -128,11 +128,10 @@ ExistenceClientStateProgress::ExistenceClientStateProgress(Urho3D::Context* cont
 
     /// Get component
     GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
+
     /// Set aApplication
     Existence = gamestatehandlercomponent_->GetApplication();
 
-    /// Subscribe to event
-    SubscribeToEvent(P_LOAD_CHANGE, HANDLER(ExistenceClientStateProgress, ProgressLoadOnStateChange));
 
     return;
 }
@@ -151,10 +150,9 @@ void ExistenceClientStateProgress::SetParameter(String parameter_)
     /// Copy
     progressloadparameters_= parameter_;
 
-    ///progressloadparameters_->Append(parameter_);
-
     /// Debug
-    /// cout << "Debug:State Main Progress SetParameter " << progressloadparameters_ ->CString() << endl;
+    cout << "Debug:State Main Progress SetParameter " << progressloadparameters_.CString() << endl;
+
 
     return;
 }
@@ -167,7 +165,15 @@ void ExistenceClientStateProgress::Enter()
     /// Debug
     cout << "Debug: State Main Progress Enter" << endl;
 
+    /// Subscribe to event (Listen to Load Change)
+    SubscribeToEvent(P_LOAD_CHANGE, HANDLER(ExistenceClientStateProgress, ProgressLoadOnStateChange));
+
+    /// Debug
+    cout << "Debug:State Main Progress SubscribeToEvent(P_LOAD_CHANGE, HANDLER(ExistenceClientStateProgress, ProgressLoadOnStateChange))" << endl;
+
+    /// Start progress
     Progress();
+
     return;
 }
 
@@ -200,11 +206,8 @@ void ExistenceClientStateProgress::Progress(void)
     /// Set Timer
     ProgressTimer.Reset();
 
-///    cout << "Timer" << ProgressTimer.GetMSec(false) << endl;
-
     ///  Handle Post Updates
     SubscribeToEvent(E_POSTUPDATE,HANDLER(ExistenceClientStateProgress,ProgessionHandleUpdate));
-
 
     /// Load Scene
     loadScene(1, progressloadparameters_);
@@ -353,26 +356,6 @@ void ExistenceClientStateProgress::CreateCharacter(void)
     shape->SetBox(Vector3::ONE);
     shape->SetPosition(Vector3(staticmodelboxcenter));
     shape->SetLodLevel(1);
-
-    /*   /// Gets the child position
-       Node* headNode = objectNode->GetChild("head", true);
-
-       /// Create a scene node for the camera, which we will move around
-       /// The camera will use default settings (1000 far clip distance, 45 degrees FOV, set aspect ratio automatically)
-       Node * cameraNode_ = headNode ->CreateChild("CameraFirstPerson");
-
-
-
-       /// Set an initial position for the camera scene node above the plane
-       Existence->cameraNode_->SetPosition(Vector3(0.0f,0.0f,0.15f));
-       Existence->cameraNode_->SetRotation(Quaternion(0.0,0.0,0.0));
-
-       /// Set first person camera Node
-       Camera* cameraObject = Existence->cameraNode_->CreateComponent<Camera>();
-       cameraObject->SetOrthographic(0);
-       cameraObject->SetZoom(1);
-       cameraObject->SetNearClip(0.0f);
-       cameraObject->SetUseClipping(false);*/
 
     Node * crossboxNode = objectNode ->CreateChild("CrossBox");
 
@@ -624,8 +607,6 @@ void ExistenceClientStateProgress::GenerateScene(terrain_rule terrainrule,const 
     /// Rotate image and assign texture
     blend -> 	FlipVertical ();
 
-    blend -> SavePNG("testing2.png");
-
     environmentbuild_ -> SetTextureMap(blend);
 
     blendtex ->SetData(blend, true);
@@ -763,7 +744,6 @@ void ExistenceClientStateProgress::loadDummyScene(void)
     /// Set an initial position for the camera scene node above the plane
     Existence->cameraNode_->SetPosition(Vector3(0.0f, 5.0f, 0.0f));
 
-
     return;
 }
 
@@ -892,8 +872,8 @@ bool ExistenceClientStateProgress::loadScene(const int mode, String lineinput)
         InputDataFile.Append("Resources/Scenes/");
         InputDataFile.Append(argument[1].c_str());
 
+        /// Debug Info
         cout << "Debug : Scene load file " << InputDataFile.CString() << endl;
-
 
         /// Check if the input data file exist
         if(filesystem->FileExists(InputDataFile))
@@ -976,6 +956,7 @@ bool ExistenceClientStateProgress::loadScene(const int mode, String lineinput)
     return success;
 }
 
+/// Setup the viewport
 void ExistenceClientStateProgress::ProgressScreenViewport(void)
 {
     /// Get resources and clear everything
@@ -986,18 +967,12 @@ void ExistenceClientStateProgress::ProgressScreenViewport(void)
     FileSystem * filesystem = GetSubsystem<FileSystem>();
 
     /// CLEAR_COLOR
-    Existence -> EraseUI();
     Existence -> EraseScene();
+    Existence -> EraseUI();
 
     /// Create a new scene
     progressScene_ = new Scene(context_);
     progressUI_ = new UI(context_);
-
-    /// Clear memory
-    progressUI_ -> Clear();
-    progressScene_ -> Clear();
-
-    /// Create a mew sceme
 
     /// Add Octree
     progressScene_ ->CreateComponent<Octree>();
@@ -1013,36 +988,40 @@ void ExistenceClientStateProgress::ProgressScreenViewport(void)
     return;
 }
 
-
 /// handler for progress load
 void ExistenceClientStateProgress::ProgressLoadOnStateChange(StringHash eventType, VariantMap& eventData)
 {
     /// Resources
     UI* ui_ = GetSubsystem<UI>();
 
-    /// Get Data
+    /// Get Datas
     int  Status=eventData[LoadState::P_CMD].GetInt();
     String Arguments=eventData[LoadState::P_ARG].GetString();
-///    String Sender=eventData[LoadState::P_OBJ].GetString();
 
     /// Get UI root
     UIElement * progressRootUI = ui_ -> GetRoot();
 
-    /// double check
+    cout << "Progress OnStateChangeCalled " << Status << " Data " << Arguments.CString() << endl;
+
+    /// If bar exist
+/// Text * progressText = (Text *)progressRootUI->GetChild("progressText",true);
+
+    Text * progressText = (Text *)progressRootUI->GetChild("progressText",true);
+
+    /// Just update the status bar with data
     if(Status==0)
     {
-        /// If bar exist
-        Text * progressText = (Text *)progressRootUI->GetChild("progressText",true);
 
         /// If the Progress Text exist
         if(progressText)
         {
             /// Set Text
+            cout << "Set Text" << endl;
             progressText -> SetText(Arguments);
         }
     }
 
-    /// double check
+    /// Loading completed call Load Success
     if(Status==1)
     {
         /// go to Handler Progress Load
@@ -1051,6 +1030,7 @@ void ExistenceClientStateProgress::ProgressLoadOnStateChange(StringHash eventTyp
         return;
     }
 
+    /// Status there was a problem doing loading
     if(Status==9999)
     {
         /// Create Popup
@@ -1074,22 +1054,22 @@ void ExistenceClientStateProgress::ProgressLoadOnStateChange(StringHash eventTyp
 /// Broadcast a event
 void ExistenceClientStateProgress::ProgressSendEvent(int commandstatus, String message)
 {
-
-    VariantMap progresseventData;
+    /// Set Variant Map
+    VariantMap eventData;
 
     /// Send Load Event
-    progresseventData[LoadState::P_CMD] = commandstatus;
-    progresseventData[LoadState::P_ARG] = message;
-    ///    eventData[LoadState::P_OBJ] = this;
+    eventData[LoadState::P_CMD] = commandstatus;
+    eventData[LoadState::P_ARG] = message;
+    eventData[LoadState::P_OBJ] = this;
 
+    /// Send Event text
     cout << "Send Event " << commandstatus << " message " << message.CString() << endl;
 
     /// Send event
-    this->SendEvent(P_LOAD_CHANGE, progresseventData);
+    SendEvent(P_LOAD_CHANGE, eventData);
 
     return;
 }
-
 
 /// Handle updates check for a ssucessfule load
 void ExistenceClientStateProgress::ProgessionHandleUpdate(StringHash eventType, VariantMap& eventData)
@@ -1115,15 +1095,19 @@ void ExistenceClientStateProgress::ProgessionHandleUpdate(StringHash eventType, 
             /// Create character
             CreateCharacter();
 
+            /// Everything loaded turn off async and send status completed
             ProgressSendEvent(1,String("Completed"));
+            /// Send Load Event
         }
     }
 
     /// If timer exceeds 6000 milliseconds
     if(ProgressTimer.GetMSec(false)>60000&&progressload_!=PROGRESSTIMEOUT)
     {
+
         ///  Send Time out
         ProgressSendEvent(9999,String("Timeout occurred ... "));
+        /// Send Load Event
 
         progressload_ = PROGRESSTIMEOUT;
     }
@@ -1131,17 +1115,14 @@ void ExistenceClientStateProgress::ProgessionHandleUpdate(StringHash eventType, 
     /// If timer exceeds 9000 milliseconds
     if(ProgressTimer.GetMSec(false)>240000)
     {
-        /// Exit
-        ///Existence -> Exit();
-
         ///  Handle Post Updates
         UnsubscribeFromAllEvents();
+
+        /// code maybe to create a status to exist out here
+
     }
     return;
 }
-
-
-// Log UI Code
 /// Create progress screen UI
 void ExistenceClientStateProgress::PopupWindowConfirm(const String &WindowName, const String &Title, const String &Message)
 {
@@ -1224,11 +1205,10 @@ void ExistenceClientStateProgress::HandlerProgressLoadSuccess(StringHash eventTy
 
     cout << "Debug: Attempt to send a state change" << endl;
 
-    this->SendEvent(G_STATES_CHANGE,gamestatechange);
+    SendEvent(G_STATES_CHANGE,gamestatechange);
 
 
     return;
-    ///need to go to focus if success call start
 }
 
 void ExistenceClientStateProgress::HandlerProgressLoadFailed(StringHash eventType, VariantMap& eventData)

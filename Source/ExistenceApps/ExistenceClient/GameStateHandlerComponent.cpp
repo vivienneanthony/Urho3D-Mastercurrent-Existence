@@ -262,7 +262,7 @@ void GameStateHandlerComponent::createState(String newState, Urho3D::VariantMap&
     else if (String(ExistenceClientStateProgress::GetTypeNameStatic())==newState)
     {
         /// change to that state
-        cout << "Debug: Create Player Called" << endl;
+        cout << "Debug: Create Progress Called" << endl;
 
         ExistenceClientStateSingleton *  newgameState = new ExistenceClientStateProgress(context_);
 
