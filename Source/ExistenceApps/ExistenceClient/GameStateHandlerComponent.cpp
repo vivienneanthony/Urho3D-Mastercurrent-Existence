@@ -216,6 +216,7 @@ void GameStateHandlerComponent::createState(String newState, Urho3D::VariantMap&
         /// change to that state
         cout << "Debug: Create Game Mode Called" << endl;
 
+gameState->Exit();
         ExistenceClientStateSingleton *  newgameState = new ExistenceClientStateGameMode(context_);
 
         /// delete old state
@@ -283,6 +284,7 @@ void GameStateHandlerComponent::createState(String newState, Urho3D::VariantMap&
         delete  gameState;
         gameState=newgameState;
         gameState->Enter();
+
     }
 
     return;

@@ -116,7 +116,7 @@ using namespace Update;
 /// Constructor Destror
 ExistenceClientStateProgress::ExistenceClientStateProgress(Urho3D::Context* context)
     :ExistenceClientStateSingleton (context)
-    ,Existence(baseclass)
+    ,Existence(NULL)
 {
 
     /// Debug
@@ -183,6 +183,9 @@ void ExistenceClientStateProgress::Exit()
     /// Debug
     cout << "Debug: State Main Progress Exit" << endl;
 
+///  Handle Post Updates
+        UnsubscribeFromAllEvents();
+
     return;
 }
 
@@ -214,7 +217,6 @@ void ExistenceClientStateProgress::Progress(void)
 
     return;
 }
-
 
 // Log UI Code
 /// Create progress screen UI
@@ -383,6 +385,7 @@ void ExistenceClientStateProgress::GenerateScene(terrain_rule terrainrule,const 
     FileSystem * filesystem = GetSubsystem<FileSystem>();
     Manager * manager_ = GetSubsystem<Manager>();
     EnvironmentBuild * environmentbuild_= GetSubsystem<EnvironmentBuild>();
+
     /// create variables (urho3d)
     String InputDataFile;
 
@@ -642,7 +645,6 @@ void ExistenceClientStateProgress::GenerateScene(terrain_rule terrainrule,const 
     if(differentialfilename)
     {
         Existence->GenerateSceneLoadDifferential(differentialfilename);
-
     }
 
     return;
@@ -770,8 +772,6 @@ bool ExistenceClientStateProgress::loadScene(const int mode, String lineinput)
     /// string string leaving something comparable
     string argumentsstring = string(lineinput.CString());
     string argument[80];
-
-    cout << "string" << argumentsstring.c_str()<< endl;
 
     /// create a idx
     int idx = 0;
@@ -982,7 +982,7 @@ void ExistenceClientStateProgress::ProgressScreenViewport(void)
     cameraNode_->CreateComponent<Camera>();
 
     /// Setup Current Viewport
-    SharedPtr<Viewport> progressViewport_(new Viewport(context_, progressScene_, cameraNode_->GetComponent<Camera>()));
+    progressViewport_ = new Viewport(context_, progressScene_, cameraNode_->GetComponent<Camera>());
     renderer->SetViewport(0, progressViewport_);
 
     return;
@@ -1001,11 +1001,10 @@ void ExistenceClientStateProgress::ProgressLoadOnStateChange(StringHash eventTyp
     /// Get UI root
     UIElement * progressRootUI = ui_ -> GetRoot();
 
+    /// Debug info
     cout << "Progress OnStateChangeCalled " << Status << " Data " << Arguments.CString() << endl;
 
     /// If bar exist
-/// Text * progressText = (Text *)progressRootUI->GetChild("progressText",true);
-
     Text * progressText = (Text *)progressRootUI->GetChild("progressText",true);
 
     /// Just update the status bar with data
@@ -1098,6 +1097,8 @@ void ExistenceClientStateProgress::ProgessionHandleUpdate(StringHash eventType, 
             /// Everything loaded turn off async and send status completed
             ProgressSendEvent(1,String("Completed"));
             /// Send Load Event
+
+            return;
         }
     }
 
@@ -1108,8 +1109,8 @@ void ExistenceClientStateProgress::ProgessionHandleUpdate(StringHash eventType, 
         ///  Send Time out
         ProgressSendEvent(9999,String("Timeout occurred ... "));
         /// Send Load Event
-
         progressload_ = PROGRESSTIMEOUT;
+        return;
     }
 
     /// If timer exceeds 9000 milliseconds
@@ -1119,7 +1120,6 @@ void ExistenceClientStateProgress::ProgessionHandleUpdate(StringHash eventType, 
         UnsubscribeFromAllEvents();
 
         /// code maybe to create a status to exist out here
-
     }
     return;
 }
@@ -1203,6 +1203,7 @@ void ExistenceClientStateProgress::HandlerProgressLoadSuccess(StringHash eventTy
     VariantMap gamestatechange;
     gamestatechange[GameState::P_CMD] = GAME_STATE_GAMEMODE;
 
+    /// Debug
     cout << "Debug: Attempt to send a state change" << endl;
 
     SendEvent(G_STATES_CHANGE,gamestatechange);
