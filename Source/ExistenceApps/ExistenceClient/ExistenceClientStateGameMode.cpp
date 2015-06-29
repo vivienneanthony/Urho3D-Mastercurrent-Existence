@@ -127,6 +127,9 @@ ExistenceClientStateGameMode::ExistenceClientStateGameMode(Context* context):
     /// Set aApplication
     Existence = gamestatehandlercomponent_->GetApplication();
 
+    /// Set UI State
+    gamestatehandlercomponent_->SetUIState(UI_GAMECONSOLE);
+
     /// Subscribe () function for processing update events
     SubscribeToEvent(E_UPDATE, HANDLER(ExistenceClientStateGameMode, HandleUpdate));
 
@@ -466,7 +469,11 @@ void ExistenceClientStateGameMode::HandlerPostUpdates(StringHash eventType, Vari
     /// game state
     UI* ui = GetSubsystem<UI>();
 
-    Sprite* healthBar = (Sprite*)ui->GetRoot()->GetChild("PlayerInfoHealthBarIndicate", true);
+    //Sprite* healthBar = (Sprite*)ui->GetRoot()->GetChild("PlayerInfoHealthBarIndicate", true) */
+
+    UIElement * uiRoot_ =  ui->GetRoot();
+
+    Sprite* healthBar = (Sprite*) uiRoot_ ->GetChild("PlayerInfoHealthBarIndicate", true);
 
     if(healthBar!=NULL)
     {

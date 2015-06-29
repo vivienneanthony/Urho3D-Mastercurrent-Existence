@@ -123,6 +123,9 @@ ExistenceClientStateLogin::ExistenceClientStateLogin(Context * context)
     /// Set aApplication
     Existence = gamestatehandlercomponent_->GetApplication();
 
+     /// Set UI State
+    gamestatehandlercomponent_->SetUIState(UI_LOGININTERFACE);
+
     /// Debug
     cout << "Debug: State Login Constructor Test Value " << Existence->testvalue << endl;
 
@@ -188,9 +191,6 @@ void ExistenceClientStateLogin::LoginScreenUI(void)
     /// Get rendering window size as floats
     float width = (float)graphics_->GetWidth();
     float height = (float)graphics_->GetHeight();
-
-    /// Set UI gamestate to logininterface
-    gamestatehandlercomponent_ ->SetUIState(UI_LOGININTERFACE);
 
     /// Login screen - Create the Window and add it to the UI's root node
     Existence->window_= new Window(context_);
@@ -299,9 +299,6 @@ void ExistenceClientStateLogin::LoginScreenUILoginHandleClosePressed(StringHash 
     UI* ui_ = GetSubsystem<UI>();
     GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
 
-    /// Set game state UI interfface
-    gamestatehandlercomponent_ ->SetUIState(UI_LOGININTERFACE);
-
     /// Get root element for the UI
     UIElement * RootUIElement = ui_->GetRoot();
 
@@ -340,9 +337,6 @@ void ExistenceClientStateLogin::LoginScreenUINewAccountHandleClosePressed(String
     /// Get all revelant resources
     UI* ui_ = GetSubsystem<UI>();
     GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
-
-    /// Set game state UI interfface
-    gamestatehandlercomponent_ ->SetUIState(UI_LOGININTERFACE);
 
     /// Get root element for the UI
     UIElement * RootUIElement = ui_->GetRoot();

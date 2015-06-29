@@ -382,7 +382,7 @@ void ExistenceClient::QuickMenuPressed(StringHash eventType, VariantMap& eventDa
 
         /// set ui state to none
         gamestatehandlercomponent_->SetUIState(UI_CHARACTERSELECTIONINTERFACE);
-        ///ExistenceGameState->SetGameState(STATE_MAIN);
+
 
         /// setup scene
         SetupScreenViewport();
@@ -881,16 +881,6 @@ void ExistenceClient::SceneLoaderHanderPress(StringHash eventType, VariantMap& e
 
     /// change state
     gamestatehandlercomponent_->SetUIState(UI_GAMECONSOLE);
-
-  /* /// Create a event
-    VariantMap gamestatechange;
-    gamestatechange[GameState::P_CMD] = GAME_STATE_PROGRESS;
-    gamestatechange[GameState::P_ARG] = clicked;
-
-    cout << "Debug: Attempt to send a state change" << endl;
-
-    SendEvent(G_STATES_CHANGE,gamestatechange);
-*/
 
     /// Create a event
     VariantMap gamestatechange;

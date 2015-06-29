@@ -207,6 +207,9 @@ void ExistenceClient::Start()
     GetSubsystem<Input>()->Update();
 
     /// Enable OS cursor
+       /// Configure rudimentary state handler
+    gamestatehandlercomponent_ ->SetUIState(UI_NONE);
+
     GetSubsystem<Input>()->SetMouseVisible(true);
 
     /// load account

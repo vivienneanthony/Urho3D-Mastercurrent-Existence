@@ -124,8 +124,12 @@ ExistenceClientStateMainScreen::ExistenceClientStateMainScreen(Urho3D::Context* 
 
     /// Get component
     GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
-    /// Set aApplication
+
+    /// Set Application
     Existence = gamestatehandlercomponent_->GetApplication();
+
+    ///CHange State
+    gamestatehandlercomponent_->SetUIState(UI_CHARACTERSELECTIONINTERFACE);
 
     /// Subscribe to
     SubscribeToEvent(P_LOAD_CHANGE,HANDLER(ExistenceClientStateMainScreen,ListenToLoad));
@@ -149,12 +153,11 @@ void ExistenceClientStateMainScreen::Enter()
     Graphics* graphics = GetSubsystem<Graphics>();
     UI* ui = GetSubsystem<UI>();
 
-
     /// Debug
     cout << "Debug: State Main Screen Enter" << endl;
 
     /// Clear Everything
-    Existence->scene_->Clear();
+    ///Existence->scene_->Clear();
     ui->Clear();
 
     /// Setup the screen UI
@@ -218,9 +221,6 @@ void ExistenceClientStateMainScreen::MainScreen(void)
 /// Main screen user interface function
 void ExistenceClientStateMainScreen::MainScreenUI(void)
 {
-    /// set ui state to none
-    /// ExistenceGameState->SetUIState(UI_CHARACTERSELECTIONINTERFACE);
-
     /// Get Needed SubSystems
     ResourceCache* cache = GetSubsystem<ResourceCache>();
     Renderer* renderer = GetSubsystem<Renderer>();
@@ -499,9 +499,6 @@ void ExistenceClientStateMainScreen::MainScreenUIHandleClosePressed(StringHash e
 {
     /// Resource
     GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
-
-    /// Set ui state to UI_CHARACTERSELECTIONINTERFACE
-    gamestatehandlercomponent_ ->SetUIState(UI_CHARACTERSELECTIONINTERFACE);
 
     /// Get control that was clicked
     UIElement* clicked = static_cast<UIElement*>(eventData[UIMouseClick::P_ELEMENT].GetPtr());

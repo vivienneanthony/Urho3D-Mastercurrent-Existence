@@ -126,6 +126,9 @@ ExistenceClientStateAccount::ExistenceClientStateAccount(Context* context):
     /// Set aApplication
     Existence = gamestatehandlercomponent_->GetApplication();
 
+    /// Set UI State
+    gamestatehandlercomponent_->SetUIState(UI_ACCOUNTCREATIONINTERFACE);
+
     /// Debug
     cout << "Debug: State Account Constructor Test Value " << Existence->testvalue << endl;
 
@@ -206,9 +209,6 @@ void ExistenceClientStateAccount::CreateAccountScreenUI(void)
     /// Get rendering window size as floats
     float width = (float)graphics->GetWidth();
     float height = (float)graphics->GetHeight();
-
-    /// set ui state to none
-    gamestatehandlercomponent_->SetUIState(UI_ACCOUNTCREATIONINTERFACE);
 
     /// Create the Window and add it to the UI's root node
     Existence->window_= new Window(context_);
@@ -393,8 +393,6 @@ void ExistenceClientStateAccount::CreateAccountUIHandleClosePressed(StringHash e
     UI* ui_ = GetSubsystem<UI>();
     GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
 
-    /// Set UI state to account creation interface
-    gamestatehandlercomponent_ ->SetUIState(UI_ACCOUNTCREATIONINTERFACE);
 
     /// Get line objects
     LineEdit* firstnameLineEdit = (LineEdit*)ui_->GetRoot()->GetChild("firstnameInput", true);

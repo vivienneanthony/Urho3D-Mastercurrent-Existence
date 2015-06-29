@@ -9,6 +9,7 @@
 #define         UI_CHARACTERSELECTIONINTERFACE      4
 #define         UI_PROGRESSINTERFACE                5
 #define         UI_GAMECONSOLE                      6
+#define         UI_SPLASHSCREEN                     7
 
 #define         STATE_NONE                          10
 #define         STATE_MAIN                          11
@@ -50,6 +51,8 @@ public:
     void createState(String newState,Urho3D::VariantMap& eventData);
     void onStateChange( Urho3D::StringHash eventType, Urho3D::VariantMap& eventData );
 
+    String GetCurrentState(void);
+
     /// Function to access other states
     int GetConsoleState(void);
     int SetConsoleState(int flag);
@@ -79,6 +82,8 @@ private:
     int debughud;
 
     SharedPtr<ExistenceClient> GameStateHandlerApplication;
+
+    String state;
 };
 
 #endif // GAMESTATEHANDLER_H

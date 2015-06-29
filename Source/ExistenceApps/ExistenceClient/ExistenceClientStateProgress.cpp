@@ -117,6 +117,11 @@ using namespace Update;
 ExistenceClientStateProgress::ExistenceClientStateProgress(Urho3D::Context* context)
     :ExistenceClientStateSingleton (context)
     ,Existence(NULL)
+    ,loadedtransition(0)
+    ,progressloadgenerated_(0)
+    ,progressloadmode_(0)
+    ,progressload_(0)
+    ,progressloadingstate(0)
 {
 
     /// Debug
@@ -125,12 +130,19 @@ ExistenceClientStateProgress::ExistenceClientStateProgress(Urho3D::Context* cont
     /// int
     progressload_ = PROGRESSDEFAULT;
     progressloadingstate = PROGRESSSCENELOAD;
+    loadedtransition=false;
+    progressloadgenerated_=PROGRESSLOADGENERATED_DEFAULT;
+    progressloadmode_=PROGRESSLOADMODE_DEFAULT;
+
 
     /// Get component
     GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
 
     /// Set aApplication
     Existence = gamestatehandlercomponent_->GetApplication();
+
+    /// Set UI State
+    gamestatehandlercomponent_->SetUIState(UI_PROGRESSINTERFACE);
 
 
     return;
@@ -177,24 +189,29 @@ void ExistenceClientStateProgress::Enter()
     return;
 }
 
+
+/// On exit
 void ExistenceClientStateProgress::Exit()
 {
 
     /// Debug
     cout << "Debug: State Main Progress Exit" << endl;
 
-///  Handle Post Updates
-        UnsubscribeFromAllEvents();
+    ///  Handle Post Updates
+    UnsubscribeFromAllEvents();
 
     return;
 }
 
+
+/// On update
 void ExistenceClientStateProgress::OnUpdate(StringHash eventType, VariantMap& eventData)
 {
     return;
 }
 
 
+/// Existence Client State Progress
 void ExistenceClientStateProgress::Progress(void)
 {
     /// Temporary for use flag of states
@@ -205,6 +222,9 @@ void ExistenceClientStateProgress::Progress(void)
 
     /// Load the UI
     ProgressScreenUI();
+
+    /// Load transition
+    LoadTransition();
 
     /// Set Timer
     ProgressTimer.Reset();
@@ -218,7 +238,6 @@ void ExistenceClientStateProgress::Progress(void)
     return;
 }
 
-// Log UI Code
 /// Create progress screen UI
 void ExistenceClientStateProgress::ProgressScreenUI(void)
 {
@@ -229,14 +248,15 @@ void ExistenceClientStateProgress::ProgressScreenUI(void)
     Graphics* graphics = GetSubsystem<Graphics>();
     UI* ui_ = GetSubsystem<UI>();
 
+
+    /// Get component
+    ///GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
+
     /// Clear the UI
     ui_->Clear();
 
     /// Get root
     UIElement * progressuiRoot_ = ui_-> GetRoot();
-
-    /// set ui state to none
-    ///ExistenceGameState->SetUIState(UI_PROGRESSINTERFACE);
 
     /// Get rendering window size as floats
     float width = (float)graphics->GetWidth();
@@ -315,7 +335,7 @@ void ExistenceClientStateProgress::CreateCharacter(void)
     UI* ui = GetSubsystem<UI>();
     FileSystem * filesystem = GetSubsystem<FileSystem>();
 
-
+    /// Get the character node
     Node* objectNode = Existence->scene_->GetChild("Character",true);
 
     /// Register Character component
@@ -406,6 +426,10 @@ void ExistenceClientStateProgress::GenerateScene(terrain_rule terrainrule,const 
 
         terrainrule.creationtime=(unsigned long long int)pick1*pick2;
     }
+
+    /// change load mode
+    progressloadmode_=PROGRESSLOADMODE_PROCEDURAL;
+
 
 
     /// Create skybox. The Skybox component is used like StaticModel, but it will be always located at the camera, giving the
@@ -498,7 +522,6 @@ void ExistenceClientStateProgress::GenerateScene(terrain_rule terrainrule,const 
     bool override=false;
     float persistence=basepersistence;
 
-
     /// Set component
     terrainProcedural -> Initialize();
     terrainProcedural -> SetDimensions(DEFAULTSIZE,DEFAULTSIZE);
@@ -522,8 +545,6 @@ void ExistenceClientStateProgress::GenerateScene(terrain_rule terrainrule,const 
 
     terrainHeightMap -> FlipVertical();
 
-    /// Generte image
-
     /// Define heightmap texture
     int bw=DEFAULTSIZE+1,bh=DEFAULTSIZE+1;
 
@@ -543,7 +564,6 @@ void ExistenceClientStateProgress::GenerateScene(terrain_rule terrainrule,const 
     blendMap = new Image(context_);
     blendMap -> SetSize(bw,bh,1,4);
     blendMap -> Clear(Color(0,0,0,0));
-
 
     float steep=0.0f;
     float steepforlerp=0.0f;
@@ -627,7 +647,6 @@ void ExistenceClientStateProgress::GenerateScene(terrain_rule terrainrule,const 
     /// Add node
     manager_->AddGeneratedObject(terrainNode);
 
-
     /// Position character
     Node * characternode_ = Existence->scene_->CreateChild("Character");
     characternode_->SetPosition(Vector3(0.0f, position.y_ , 0.0f));
@@ -638,14 +657,26 @@ void ExistenceClientStateProgress::GenerateScene(terrain_rule terrainrule,const 
     /// Change environment
     Existence->GenerateSceneUpdateEnvironment(terrainrule);
 
-    /// Add objects functions
-    GenerateSceneBuildWorld(terrainrule);
+/// Temporary Disabled
+    /*
+            /// Add objects functions
+            GenerateSceneBuildWorld(terrainrule);
 
-    /// Load differiental
-    if(differentialfilename)
-    {
-        Existence->GenerateSceneLoadDifferential(differentialfilename);
-    }
+            /// Load differiental
+            if(differentialfilename)
+            {
+                Existence->GenerateSceneLoadDifferential(differentialfilename);
+            }
+
+        */
+/// Temporary Disabled
+
+
+    /// change generate scene
+    progressloadgenerated_=PROGRESSLOADGENERATED_COMPLETE;
+
+
+    cout << progressloadgenerated_ << " " << progressloadmode_ << endl;
 
     return;
 }
@@ -671,6 +702,64 @@ int ExistenceClientStateProgress::GenerateSceneBuildWorld(terrain_rule terrainru
     environmentbuild_ -> GenerateWorldObjects(0, terrainrule);
 
     return 1;
+}
+
+/// Load Transition
+void ExistenceClientStateProgress::LoadTransition(void)
+{
+
+    /// Define Resouces
+    ResourceCache* cache = GetSubsystem<ResourceCache>();
+    Renderer* renderer = GetSubsystem<Renderer>();
+    Graphics* graphics = GetSubsystem<Graphics>();
+    UI* ui = GetSubsystem<UI>();
+    FileSystem * filesystem = GetSubsystem<FileSystem>();
+    EnvironmentBuild * environmentbuild_ = GetSubsystem<EnvironmentBuild>();
+
+    /// Create variables (urho3d)
+    String ProgressDataFile;
+
+    ProgressDataFile.Append(filesystem->GetProgramDir().CString());
+    ProgressDataFile.Append("Resources/Scenes/");
+    ProgressDataFile.Append("Transition1.xml");
+
+    bool success=false;
+
+    /// Debug Info
+    cout << "Debug : Scene load file " << ProgressDataFile.CString() << endl;
+
+    /// Check if the input data file exist
+    if(filesystem->FileExists(ProgressDataFile))
+    {
+        /// Open file as a Urho3d Datafile
+        dataFile = new File(context_, ProgressDataFile, FILE_READ);
+
+        if (dataFile -> IsOpen())
+        {
+
+            /// Get File Extension
+            String extension = GetExtension(ProgressDataFile);
+
+            /// Determine file extension
+            if (extension != ".xml")
+            {
+
+                ///success= Existence-> scene_ -> Load(dataFile);
+                success = progressScene_ -> LoadAsync(dataFile);
+            }
+            else
+            {
+                success= progressScene_ ->LoadAsyncXML(dataFile);
+            }
+        }
+        else
+        {
+            /// set is error
+            success=false;
+        }
+    }
+
+    return;
 }
 
 /// Load a dummy scene
@@ -799,10 +888,10 @@ bool ExistenceClientStateProgress::loadScene(const int mode, String lineinput)
 
     cout << "Argument1 " << argument[1].c_str() << endl;
 
-
     /// Run trhrough arugments - first check if GENERATE
     if(argument[0]=="generate")
     {
+
         ProgressSendEvent(0, String("Generating scene .... "));
 
         if(argument[1]=="random")
@@ -863,7 +952,11 @@ bool ExistenceClientStateProgress::loadScene(const int mode, String lineinput)
 /// Run trhrough arugments - first check if FILE
     else if (argument[0]=="file")
     {
+
         ProgressSendEvent(0, String("Locating file scene ... "));
+
+        /// change load mode
+        progressloadmode_=PROGRESSLOADMODE_FILE;
 
         /// Create variables (urho3d)
         String InputDataFile;
@@ -1073,37 +1166,141 @@ void ExistenceClientStateProgress::ProgressSendEvent(int commandstatus, String m
 /// Handle updates check for a ssucessfule load
 void ExistenceClientStateProgress::ProgessionHandleUpdate(StringHash eventType, VariantMap& eventData)
 {
+
+    /// Get resources and clear everything
+    ResourceCache* cache = GetSubsystem<ResourceCache>();
+    Renderer* renderer = GetSubsystem<Renderer>();
+    Graphics* graphics = GetSubsystem<Graphics>();
+    UI* ui = GetSubsystem<UI>();
+    FileSystem * filesystem = GetSubsystem<FileSystem>();
+
     /// Take the frame time step, which is stored as a float
     float timeStep = eventData[P_TIMESTEP].GetFloat();
+
+    /// get async
+    if(progressScene_->GetAsyncProgress()>=1&&loadedtransition==false)
+    {
+        /// setup viewport to transistion screen
+        /// Create a scene node for the camera, which we will move around
+        /// The camera will use default settings (1000 far clip distance, 45 degrees FOV, set aspect ratio automatically)
+        Node * cameraNode_ = progressScene_->GetChild("MainCamera", true);
+
+        /// If camera exist change viewport
+        if(cameraNode_)
+        {
+            /// Set up a viewport to the Renderer subsystem so that the 3D scene can be seen. We need to define the scene and the camera
+            /// at minimum. Additionally we could configure the viewport screen size and the rendering path (eg. forward / deferred) to
+            /// use, but now we just use full screen and default render path configured	SetOrthographic ( in the engine command line options
+            progressViewport_ = new Viewport(context_, progressScene_, cameraNode_->GetComponent<Camera>());
+            renderer->SetViewport(0,progressViewport_);
+
+            /// Get current rendering path
+            progressrendererPath_ = progressViewport_->GetRenderPath() -> Clone();
+
+            /// loadd resources
+            progressrendererPath_->Append(cache->GetResource<XMLFile>("PostProcess/Bloom.xml"));
+            progressrendererPath_->Append(cache->GetResource<XMLFile>("PostProcess/FXAA2.xml"));
+
+            /// Make the bloom mixing parameter more pronounced
+            progressrendererPath_ ->SetShaderParameter("BloomMix", Vector2(0.9f, 0.6f));
+            progressrendererPath_ ->SetEnabled("Bloom", false);
+            progressrendererPath_ ->SetEnabled("FXAA2", false);
+
+            /// Pointer render path to new
+            progressViewport_->SetRenderPath(progressrendererPath_) ;
+
+            /// Turn on effects
+            progressrendererPath_->ToggleEnabled("Bloom");
+            progressrendererPath_->ToggleEnabled("FXAA2");
+
+
+        }
+
+        /// Get rendering window size as floats
+        float width = (float)graphics->GetWidth();
+        float height = (float)graphics->GetHeight();
+
+        /// Create LetterBox Sprite
+        Sprite* LetterBoxSprite = new Sprite(context_);
+        LetterBoxSprite->SetName("LetterBoxSprite");
+
+        /// Get letter box image
+        Texture2D* texture = cache ->GetResource<Texture2D>("Resources/Textures/LetterBox.png");
+
+        /// Set letter box properties
+        LetterBoxSprite->SetTexture(texture); // Set texture
+        LetterBoxSprite->SetSize(width,height);
+        LetterBoxSprite->SetAlignment(HA_CENTER, VA_CENTER);
+
+        /// Create letter box image to UIElement
+        UIElement * LetterBoxUIElement = new UIElement(context_);
+        LetterBoxUIElement->AddChild(LetterBoxSprite);
+
+        UIElement * uiRoot_ = ui->GetRoot();
+
+        /// Add letter box UIElement to ui
+        uiRoot_->AddChild(LetterBoxUIElement);
+
+        /// Set style of UIElements
+        LetterBoxUIElement->SetOpacity(.8);
+
+        LetterBoxSprite->SetStyleAuto();
+        LetterBoxUIElement->SetStyleAuto();
+
+
+        loadedtransition=true;
+
+        return;
+    }
+
 
     /// Check scene loading state
     if(progressloadingstate == PROGRESSSCENELOAD)
     {
 
         /// Check async load of a scene
-        if(Existence -> scene_-> GetAsyncProgress()>=1)
+        if(Existence -> scene_-> GetAsyncProgress()>=1&&progressloadmode_==PROGRESSLOADMODE_FILE)
         {
             /// set progress loadign state
             progressloadingstate = PROGRESSCHARACTERLOAD;
 
             Existence -> scene_ ->StopAsyncLoading ();
 
-            /// Add Lifetimes
-            AddLife();
+            return;
+        }
 
-            /// Create character
-            CreateCharacter();
+        /// if generated loaded
+        if(progressloadgenerated_==PROGRESSLOADGENERATED_COMPLETE&&progressloadmode_==PROGRESSLOADMODE_PROCEDURAL)
+        {
+            /// set progress loadign state
+            progressloadingstate = PROGRESSCHARACTERLOAD;
 
-            /// Everything loaded turn off async and send status completed
-            ProgressSendEvent(1,String("Completed"));
-            /// Send Load Event
+            cout << "it got here at least" << endl;
 
             return;
         }
     }
 
+    /// if load character
+    if(progressloadingstate==PROGRESSCHARACTERLOAD)
+    {
+
+        /// Add Lifetimes
+        AddLife();
+
+        /// Create character
+        CreateCharacter();
+
+        /// Everything loaded turn off async and send status completed
+        ProgressSendEvent(1,String("Completed"));
+
+        progressloadingstate=-1;
+
+        return;
+    }
+
     /// If timer exceeds 6000 milliseconds
-    if(ProgressTimer.GetMSec(false)>60000&&progressload_!=PROGRESSTIMEOUT)
+    if(ProgressTimer.GetMSec(false)>120000&&progressload_!=PROGRESSTIMEOUT)
     {
 
         ///  Send Time out
@@ -1123,6 +1320,7 @@ void ExistenceClientStateProgress::ProgessionHandleUpdate(StringHash eventType, 
     }
     return;
 }
+
 /// Create progress screen UI
 void ExistenceClientStateProgress::PopupWindowConfirm(const String &WindowName, const String &Title, const String &Message)
 {
@@ -1212,6 +1410,7 @@ void ExistenceClientStateProgress::HandlerProgressLoadSuccess(StringHash eventTy
     return;
 }
 
+/// Load failed
 void ExistenceClientStateProgress::HandlerProgressLoadFailed(StringHash eventType, VariantMap& eventData)
 {
 
@@ -1261,7 +1460,6 @@ void ExistenceClientStateProgress::AddLife(void)
 
     }
 }
-
 
 void ExistenceClientStateProgress::AlternativeSendEvent(int event)
 {

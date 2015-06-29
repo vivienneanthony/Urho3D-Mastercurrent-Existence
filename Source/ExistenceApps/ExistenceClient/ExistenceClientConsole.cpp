@@ -80,6 +80,7 @@
 #include "EnvironmentBuild.h"
 #include "Manager.h"
 #include "../Account.h"
+#include "ExistenceClientStateProgress.h"
 
 #include <string>
 #include <iostream>
@@ -128,7 +129,7 @@ void ExistenceClient::InitializeConsole(void)
     console->SetVisible(false);
     console->GetCloseButton()->SetVisible(false);
 
-   gamestatehandlercomponent_ ->SetConsoleState(UI_CONSOLEOFF);
+    gamestatehandlercomponent_ ->SetConsoleState(UI_CONSOLEOFF);
 }
 
 
@@ -190,6 +191,9 @@ void ExistenceClient::HandleInput(const String& input)
     Renderer* renderer = GetSubsystem<Renderer>();
     ResourceCache* cache = GetSubsystem<ResourceCache>();
     UI* ui = GetSubsystem<UI>();
+    /// Get component
+    GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
+
 
     /// Get input and lower case it
     /// then convert to normal string
@@ -210,54 +214,57 @@ void ExistenceClient::HandleInput(const String& input)
     }
 
 
-    /*
+    /// check if scene input
     if (parseinput[0] == "/scene")
     {
 
-        if(ExistenceGameState->getCurrentState()==GameStates::GAME_STATE_GAMEMODE)
+        if(gamestatehandlercomponent_->GetCurrentState()!="ExistenceClientStateMainScreen")
         {
             return;
-
         }
+
+        /// remove scene
+        String newString = String(input);
+        newString.Replace(String("/scene"),String(""),false);
+
+        /// erase scene
         eraseScene();
 
+        /// Set console state
+        gamestatehandlercomponent_->SetUIState(UI_GAMECONSOLE);
 
-        ExistenceGameState->SetUIState(UI_GAMECONSOLE);
-        ///ExistenceGameState->SetGameState(STATE_GAME);
+        /// Create a event
+        VariantMap gamestatechange;
+        gamestatechange[LoadState::P_CMD] = 100;
+        gamestatechange[LoadState::P_ARG] = newString;
 
-        ///loadScene(1, input.CString());
+        cout << "Debug: Attempt to send a state change. Call MainScreen:ListenLoad(something like that)" << endl;
+
+        SendEvent(P_LOAD_CHANGE,gamestatechange);
+
+
     }
+
+
+    ///
     /// if it the game is in game mode go here
-    else if(ExistenceGameState->getCurrentState()==GameStates::GAME_STATE_GAMEMODE)
+    else if(gamestatehandlercomponent_->GetCurrentState()=="ExistenceClientStateGameMode")
     {
 
         /// Check termination - Check Action
         if(parseinput[0] == "/end")
         {
 
-            if(ExistenceGameState->GetDebugHudMode()==true)
+            if(gamestatehandlercomponent_->GetDebugHudMode()==true)
             {
-                ExistenceGameState->SetDebugHudMode(false);
+                gamestatehandlercomponent_->SetDebugHudMode(false);
                 GetSubsystem<DebugHud>()->ToggleAll();
             }
-
-            eraseScene();
-
-            GetSubsystem<Input>()->SetMouseVisible(true);
-
-            /// set ui state to none
-            ExistenceGameState->SetUIState(UI_CHARACTERSELECTIONINTERFACE);
-            ///ExistenceGameState->SetGameState(STATE_MAIN);
 
             /// setup scene
             SetupScreenViewport();
 
-            ExistenceGameState->SetCameraMode(CAMERAMODE_DEFAULT);
-
-            ///mainScreenUI();
-
-            /// change state
-            ExistenceGameState-> SendEvent("GAME_STATE_MAINMENU");
+            gamestatehandlercomponent_->SetCameraMode(CAMERAMODE_DEFAULT);
 
             /// Create a scene node for the camera, which we will move around
             /// The camera will use default settings (1000 far clip distance, 45 degrees FOV, set aspect ratio automatically)
@@ -265,6 +272,16 @@ void ExistenceClient::HandleInput(const String& input)
 
             /// Set an initial position for the camera scene node above the plane
             cameraNode_->SetPosition(Vector3(2.0,0.0,5.0));
+
+            /// Create a event
+            VariantMap gamestatechange;
+            gamestatechange[GameState::P_CMD] = GAME_STATE_MAINMENU;
+
+            cout << "Debug: Attempt to send a state change" << endl;
+
+            this->SendEvent(G_STATES_CHANGE,gamestatechange);
+
+            return;
 
         }
         /// go to environment function
@@ -313,7 +330,7 @@ void ExistenceClient::HandleInput(const String& input)
             ConsoleActionRenderer(input.CString());
         }
 
-    }*/
+    }
 }
 
 
@@ -788,7 +805,7 @@ int ExistenceClient::ConsoleActionEnvironment(const char * lineinput)
 int ExistenceClient::ConsoleActionCamera(const char * lineinput)
 {
 
-   /// Get component
+    /// Get component
     GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
 
 
@@ -819,7 +836,6 @@ int ExistenceClient::ConsoleActionCamera(const char * lineinput)
         ++idx;
     }
 
-
     /// parameters for zone related command
     if(argument[1]=="firstpersonmode")
     {
@@ -830,7 +846,7 @@ int ExistenceClient::ConsoleActionCamera(const char * lineinput)
         SharedPtr<Viewport> viewport(new Viewport(context_, scene_, cameraObject));
         renderer->SetViewport(0, viewport);
 
-         gamestatehandlercomponent_ ->SetCameraMode(CAMERAMODE_FIRSTPERSON);
+        gamestatehandlercomponent_ ->SetCameraMode(CAMERAMODE_FIRSTPERSON);
     }
 
 
@@ -854,7 +870,7 @@ int ExistenceClient::ConsoleActionCamera(const char * lineinput)
 /// Routine for Console Debug related actions
 int ExistenceClient::ConsoleActionDebug(const char * lineinput)
 {
-     /// Get component
+    /// Get component
     GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
 
 
@@ -898,24 +914,24 @@ int ExistenceClient::ConsoleActionDebug(const char * lineinput)
         SavePlayer(1);
 
     }
-/*
+    /*
 
-    /// parameters for debug related command
-    if(argument[1]=="hud")
-    {
-        /// toggle debug hud
-        if(ExistenceGameState->GetDebugHudMode()==false)
+        /// parameters for debug related command
+        if(argument[1]=="hud")
         {
-            ExistenceGameState->SetDebugHudMode(true);
-            GetSubsystem<DebugHud>()->ToggleAll();
+            /// toggle debug hud
+            if(ExistenceGameState->GetDebugHudMode()==false)
+            {
+                ExistenceGameState->SetDebugHudMode(true);
+                GetSubsystem<DebugHud>()->ToggleAll();
+            }
+            else
+            {
+                ExistenceGameState->SetDebugHudMode(false);
+                GetSubsystem<DebugHud>()->ToggleAll();
+            }
         }
-        else
-        {
-            ExistenceGameState->SetDebugHudMode(false);
-            GetSubsystem<DebugHud>()->ToggleAll();
-        }
-    }
-*/
+    */
     return 1;
 }
 

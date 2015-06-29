@@ -463,6 +463,8 @@ private:
 
     void AlternativeSendEvent(int event);
 
+    void LoadTransition(void);
+
 protected:
     /// pointer
     SharedPtr<ExistenceClient> Existence;
@@ -471,6 +473,9 @@ protected:
     SharedPtr<Scene> progressScene_;
     SharedPtr<UI> progressUI_;
     SharedPtr<RenderPath> progressrendererPath_;
+    /// RenderPath shared
+    SharedPtr<RenderPath> effectRenderPath;
+
     SharedPtr<Camera> progresscameraNode_;
     SharedPtr<Viewport> progressViewport_;
     SharedPtr<Window> progressWindow_;
@@ -483,10 +488,14 @@ protected:
 
     /// Open file as a Urho3d Datafile
     SharedPtr<File> dataFile;
+    SharedPtr<File> ProgressDataFile;
 
+    bool loadedtransition;
     WeakPtr<VariantMap> eventDataPtr;
 
 
+    unsigned int progressloadmode_;
+    unsigned int progressloadgenerated_;
 };
 
 

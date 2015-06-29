@@ -203,6 +203,8 @@ void GameStateHandlerComponent::createState(String newState, Urho3D::VariantMap&
         /// change to that state
         cout << "Debug: Create Login Progress Called" << endl;;
 
+        state=ExistenceClientStateLogin::GetTypeNameStatic();
+
         /// change to that state
         ExistenceClientStateSingleton *  newgameState = new ExistenceClientStateLogin(context_);
 
@@ -216,7 +218,9 @@ void GameStateHandlerComponent::createState(String newState, Urho3D::VariantMap&
         /// change to that state
         cout << "Debug: Create Game Mode Called" << endl;
 
-gameState->Exit();
+        state=ExistenceClientStateGameMode::GetTypeNameStatic();
+
+        ///gameState->Exit();
         ExistenceClientStateSingleton *  newgameState = new ExistenceClientStateGameMode(context_);
 
         /// delete old state
@@ -228,6 +232,8 @@ gameState->Exit();
     {
         /// change to that state
         cout << "Debug: Create Main Screen Called" << endl;
+
+        state=ExistenceClientStateMainScreen::GetTypeNameStatic();
 
         ExistenceClientStateSingleton *  newgameState = new ExistenceClientStateMainScreen(context_);
 
@@ -241,6 +247,8 @@ gameState->Exit();
         /// change to that state
         cout << "Debug: Create Main Screen Called" << endl;
 
+        state=ExistenceClientStateAccount::GetTypeNameStatic();
+
         ExistenceClientStateSingleton *  newgameState = new ExistenceClientStateAccount(context_);
 
         /// delete old state
@@ -252,6 +260,8 @@ gameState->Exit();
     {
         /// change to that state
         cout << "Debug: Create Player Called" << endl;
+
+        state=ExistenceClientStatePlayer::GetTypeNameStatic();
 
         ExistenceClientStateSingleton *  newgameState = new ExistenceClientStatePlayer(context_);
 
@@ -265,6 +275,8 @@ gameState->Exit();
         /// change to that state
         cout << "Debug: Create Progress Called" << endl;
 
+        state = ExistenceClientStateProgress::GetTypeNameStatic();
+
         ExistenceClientStateSingleton *  newgameState = new ExistenceClientStateProgress(context_);
 
         /// delete old state
@@ -277,6 +289,8 @@ gameState->Exit();
     {
         /// change to that state
         cout << "Debug: Create Splash Called" << endl;
+
+        state=ExistenceClientStateSplash::GetTypeNameStatic();
 
         ExistenceClientStateSingleton *  newgameState = new ExistenceClientStateSplash(context_);
 
@@ -373,6 +387,13 @@ void GameStateHandlerComponent::onStateChange( Urho3D::StringHash eventType, Urh
 
     return;
 }
+
+/// save state
+String GameStateHandlerComponent::GetCurrentState(void)
+{
+    return state;
+}
+
 
 /// Functions for states
 int GameStateHandlerComponent::GetConsoleState(void)

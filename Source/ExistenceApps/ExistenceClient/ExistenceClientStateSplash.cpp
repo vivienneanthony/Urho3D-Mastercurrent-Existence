@@ -124,6 +124,9 @@ ExistenceClientStateSplash::ExistenceClientStateSplash(Context * context)
     /// Set aApplication
     Existence = gamestatehandlercomponent_->GetApplication();
 
+    ///CHange State
+    gamestatehandlercomponent_->SetUIState(UI_SPLASHSCREEN);
+
     /// Debug
     cout << "Debug: State SplashConstructor Test Value " << Existence->testvalue << endl;
 

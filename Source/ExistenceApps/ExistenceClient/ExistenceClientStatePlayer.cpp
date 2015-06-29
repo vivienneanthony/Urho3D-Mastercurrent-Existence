@@ -126,6 +126,9 @@ ExistenceClientStatePlayer::ExistenceClientStatePlayer(Urho3D::Context* context)
     /// Set aApplication
     Existence = gamestatehandlercomponent_->GetApplication();
 
+    /// Set UI State
+    gamestatehandlercomponent_->SetUIState(UI_CHARACTERCREATIONINTERFACE);
+
     /// Debug
     cout << "Debug: State Player Constructor Test Value " << Existence->testvalue << endl;
 
@@ -206,9 +209,6 @@ void ExistenceClientStatePlayer::CreatePlayerScreenUI()
     /// Get rendering window size as floats
     float width = (float)graphics->GetWidth();
     float height = (float)graphics->GetHeight();
-
-    /// set ui state to none
-    gamestatehandlercomponent_->SetUIState(UI_CHARACTERCREATIONINTERFACE);
 
     Existence->TemporaryPlayer.Clear();
 
@@ -1021,9 +1021,6 @@ void ExistenceClientStatePlayer::CreatePlayerUIHandleClosePressed(StringHash eve
     Renderer* renderer = GetSubsystem<Renderer>();
     Graphics* graphics = GetSubsystem<Graphics>();
     GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
-
-    /// Set UI state
-    gamestatehandlercomponent_->SetUIState(UI_CHARACTERCREATIONINTERFACE);
 
     UI* ui_ = GetSubsystem<UI>();
 
