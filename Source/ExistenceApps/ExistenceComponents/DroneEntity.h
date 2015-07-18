@@ -46,9 +46,9 @@ const int LAYER_MOVE = 0;
 const int LAYER_ATTACK = 1;
 
 
-const float DroneEntityMoveForce = 1.0f;
-const float DroneEntityAirMoveForce = 0.1f;
-const float DroneEntityDampingForce = 50.0f;
+const float DroneEntityMoveForce = 25.0f;
+const float DroneEntityAirMoveForce = 1.05f;
+const float DroneEntityDampingForce = 5.0f;
 const float DroneEntityJumpForce = 450.0f;
 const Vector3 DroneEntityThrowVelocity(0.0f, 4.25f, 20.0f);
 const Vector3 DroneEntityThrowPosition(0.0f, 0.2f, 1.0f);
@@ -70,7 +70,7 @@ public:
     static void RegisterObject(Context* context);
     virtual void Start();
     virtual void FixedUpdate(float timeStep);
-    void OnNodeCollision(StringHash eventType, VariantMap& eventData);
+    virtual void OnNodeCollision(StringHash eventType, VariantMap& eventData);
 
     /// Movement controls. Assigned by the main program each frame.
     Controls controls;

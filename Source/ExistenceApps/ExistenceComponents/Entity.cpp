@@ -194,11 +194,11 @@ void Entity::HandleNodeCollision(StringHash eventType, VariantMap& eventData)
     StaticModel * staticmodelreference= otherNode->GetComponent<StaticModel>();
     AnimatedModel * animatedmodelreference = otherNode->GetComponent<AnimatedModel>();
 
-    /// if node has a static model
-    if ((staticmodelreference||animatedmodelreference)&&otherBody)
+    if (otherBody->GetCollisionLayer() == 2)
     {
         OnNodeCollision(eventType, eventData);
     }
+
 
     return;
 }

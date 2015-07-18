@@ -25,15 +25,15 @@ using namespace Urho3D;
 /// DroneEntity Constructor
 DroneEntity::DroneEntity(Context* context)  :Entity(context)
     ,okToJump(0)
-    ,inAirTime(0)
+    ,inAirTime(1)
     ,onGroundTime(0)
     ,isSliding(0)
     ,onGround(0)
     ,dirChangeTime(0)
 {
     /// Initialize values just in case to null or matching value
-    okToJump=true;
-    inAirTime=0;
+    okToJump=false;
+    inAirTime=1;
     onGroundTime=0;
     isSliding=false;
     dirChangeTime=0;
@@ -164,13 +164,21 @@ void DroneEntity::FixedUpdate(float timeStep)
             {
                 Vector3 force(0, 0, 0);
                 if (controls.IsDown(CTRL_FORWARD))
-                    {force += q * Vector3(0, 0, 1);}
+                {
+                    force += q * Vector3(0, 0, 1);
+                }
                 if (controls.IsDown(CTRL_BACK))
-                    {force += q * Vector3(0, 0, -1);}
+                {
+                    force += q * Vector3(0, 0, -1);
+                }
                 if (controls.IsDown(CTRL_LEFT))
-                    {force += q * Vector3(-1, 0, 0);}
+                {
+                    force += q * Vector3(-1, 0, 0);
+                }
                 if (controls.IsDown(CTRL_RIGHT))
-                    {force += q * Vector3(1, 0, 0);}
+                {
+                    force += q * Vector3(1, 0, 0);
+                }
 
                 /// Normalize so that diagonal strafing isn't faster
                 force.Normalize();
@@ -184,6 +192,18 @@ void DroneEntity::FixedUpdate(float timeStep)
 
     /// Set previous controls to current controls
     prevControls = controls;
+
+    if (body->IsActive())
+    {
+        onGround = false;
+        isSliding = false;
+    }
+    else
+    {
+        ///If body is not active, assume it rests on the ground
+        onGround = true;
+        isSliding = false;
+    }
 
     return;
 }
@@ -202,35 +222,49 @@ void DroneEntity::SetSliding(bool changeSliding)
 
 void DroneEntity::OnNodeCollision(StringHash eventType, VariantMap& eventData)
 {
-	/// Check collision contacts and see if character is standing on ground (look for a contact that has near vertical normal)
-	using namespace NodeCollision;
+    /// Check collision contacts and see if character is standing on ground (look for a contact that has near vertical normal)
+    using namespace NodeCollision;
 
-	VectorBuffer contacts = eventData["Contacts"].GetBuffer();
-	while (!contacts.IsEof())
-	{
-		Vector3 contactPosition = contacts.ReadVector3();
-		Vector3 contactNormal = contacts.ReadVector3();
-		float contactDistance = contacts.ReadFloat();
-		float contactImpulse = contacts.ReadFloat();
+    VectorBuffer contacts = eventData["Contacts"].GetBuffer();
 
-		/// If contact is below node center and mostly vertical, assume it's ground contact
-		if (contactPosition.y_ < node_->GetPosition().y_)
-		{
-			float level = Abs(contactNormal.y_);
-			if (level > 0.75)
-				onGround = true;
-			else
-			{
-				/// If contact is somewhere inbetween vertical/horizontal, is sliding a slope
-				if (level > 0.1)
-					isSliding = true;
-			}
-		}
-	}
+    /// While contacts
+    while (!contacts.IsEof())
+    {
+        Vector3 contactPosition = contacts.ReadVector3();
+        Vector3 contactNormal = contacts.ReadVector3();
+        float contactDistance = contacts.ReadFloat();
+        float contactImpulse = contacts.ReadFloat();
 
-	/// Ground contact has priority over sliding contact
-	if (onGround == true)
-		isSliding = false;
+        /// If contact is below node center and mostly vertical, assume it's ground contact
+        if (contactPosition.y_ < node_->GetPosition().y_)
+        {
+            float level = Abs(contactNormal.y_);
+            if (level > 0.75)
+            {
+
+                onGround = true;
+
+            }
+            else
+            {
+                /// If contact is somewhere inbetween vertical/horizontal, is sliding a slope
+                if (level > 0.1)
+                {
+
+                    isSliding = true;
+
+                }
+            }
+        }
+    }
+
+    /// Ground contact has priority over sliding contact
+    if (onGround == true)
+    {
+
+        isSliding = false;
+
+    }
 
     return;
 }
