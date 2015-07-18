@@ -43,8 +43,7 @@ public:
 
     /// Called on physics update, fixed timestep.
 	virtual void FixedUpdate(float timeStep);
-	void WorldCollision(VariantMap& eventData);
-
+	virtual void OnNodeCollision(StringHash eventType, VariantMap& eventData);
 
     /// Clear everything
     int Clear(void);

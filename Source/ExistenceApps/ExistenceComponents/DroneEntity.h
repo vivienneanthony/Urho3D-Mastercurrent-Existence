@@ -70,6 +70,7 @@ public:
     static void RegisterObject(Context* context);
     virtual void Start();
     virtual void FixedUpdate(float timeStep);
+    void OnNodeCollision(StringHash eventType, VariantMap& eventData);
 
     /// Movement controls. Assigned by the main program each frame.
     Controls controls;
