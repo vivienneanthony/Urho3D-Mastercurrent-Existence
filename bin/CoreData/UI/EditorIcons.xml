@@ -387,4 +387,24 @@
         <attribute name="Texture" value="Texture2D;Textures/Editor/EditorIcons.png" />
         <attribute name="Image Rect" value="112 16 126 30" />
     </element>
+     <element type="InteractObject">
+        <attribute name="Texture" value="Texture2D;Textures/Editor/EditorIconsExistence.png" />
+        <attribute name="Image Rect" value="0 0 16 16" />
+    </element>
+    <element type="ProceduralTerrain">
+        <attribute name="Texture" value="Texture2D;Textures/Editor/EditorIconsExistence.png" />
+        <attribute name="Image Rect" value="0 0 16 16" />
+    </element>
+    <element type="GameObject">
+        <attribute name="Texture" value="Texture2D;Textures/Editor/EditorIconsExistence.png" />
+        <attribute name="Image Rect" value="0 0 16 16" />
+    </element>
+    <element type="Character">
+        <attribute name="Texture" value="Texture2D;Textures/Editor/EditorIconsExistence.png" />
+        <attribute name="Image Rect" value="0 0 16 16" />
+    </element>
+        <element type="DroneEntity">
+        <attribute name="Texture" value="Texture2D;Textures/Editor/EditorIconsExistence.png" />
+        <attribute name="Image Rect" value="0 0 16 16" />
+    </element>
 </elements>

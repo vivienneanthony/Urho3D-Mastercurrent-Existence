@@ -62,7 +62,7 @@
 #include "../../../Urho3D/Graphics/AnimationController.h"
 #include "../../../Urho3D/UI/BorderImage.h"
 #include "../../../Urho3D/Graphics/GraphicsEvents.h"
-#include "Character.h"
+#include "../ExistenceComponents/Character.h"
 #include "../../../Urho3D/Graphics/Terrain.h"
 #include "../../../Urho3D/Engine/EngineEvents.h"
 #include "../../../Urho3D/Graphics/Zone.h"
@@ -75,11 +75,12 @@
 #include "../../../Urho3D/Graphics/RenderPath.h"
 #include "../../../Urho3D/Math/Color.h"
 
-#include "GameStateHandlerComponent.h"
-#include "GameStateEvents.h"
-#include "GameObject.h"
-#include "EnvironmentBuild.h"
-#include "Manager.h"
+#include "../ExistenceComponents/GameStateHandlerComponent.h"
+#include "../ExistenceComponents/GameStateEvents.h"
+#include "../ExistenceComponents/GameObject.h"
+#include "../ExistenceComponents/InteractObject.h"
+#include "../ExistenceComponents/EnvironmentBuild.h"
+#include "../ExistenceComponents/Manager.h"
 #include "../Account.h"
 
 #include <string>
@@ -123,6 +124,7 @@ ExistenceClient::ExistenceClient(Context* context) :
     /// Register
     Character::RegisterObject(context);
     GameObject::RegisterObject(context);
+    InteractObject::RegisterObject(context);
     EnvironmentBuild::RegisterObject(context);
     ProceduralTerrain::RegisterObject(context);
     Manager::RegisterNewSubsystem(context);
@@ -190,16 +192,6 @@ void ExistenceClient::Start()
 
     /// Set game active status
     accountexist=false;
-
-    /// Setup Screen and Viewport
-    ///SetupScreenViewport();
-    ///AddLogoViewport();
-    ///SetupScreenUI();
-    //SplashSetupScreenViewport();
-    //SplashShowGameLogo();
-    //SplashTimer.Reset();
-    //SplashStatInit();
-
 
     /// Initialize Console
     InitializeConsole();

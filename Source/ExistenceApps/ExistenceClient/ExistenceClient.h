@@ -35,9 +35,11 @@
 #define CAMERAORIENTATIONROTATEYAW 1
 #define CAMERAORIENTATIONROTATEPITCH 1
 
-#include "../../../Urho3D/Procedural/Rules.h"
 
+#include <vector>
 #include <time.h>
+
+#include "../../../Urho3D/Procedural/Rules.h"
 
 #include "../ExistenceApps.h"
 #include "../Account.h"
@@ -45,9 +47,9 @@
 #include "../Player.h"
 #include "../PlayerLevels.h"
 
-#include "GameStateEvents.h"
-#include "GameStateHandlerComponent.h"
-#include <vector>
+#include "../ExistenceComponents/GameStateEvents.h"
+#include "../ExistenceComponents/GameStateHandlerComponent.h"
+
 
 string ConvertUIntToString(unsigned int val);
 
@@ -388,10 +390,13 @@ public:
     virtual void SetParameter(String parameters_);
     void HandleUpdate(StringHash eventType, VariantMap& eventData);
     void OnMoveCamera(float timeStep);
+    bool Raycast(float maxDistance, Vector3& hitPos, Node*& hitNode);
+    void GetTargetPressed(void);
 private:
     void GameMode(void);
     void LoadGameModeUI(void);
     void HandlerPostUpdates(StringHash eventType, VariantMap& eventData);
+    void InteractListener(StringHash eventType, VariantMap& eventData);
 protected:
 /// pointer
     SharedPtr<ExistenceClient> Existence;

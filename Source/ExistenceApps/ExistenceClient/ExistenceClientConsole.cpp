@@ -60,7 +60,7 @@
 #include "../../../Urho3D/Graphics/Animation.h"
 #include "../../../Urho3D/Graphics/AnimatedModel.h"
 #include "../../../Urho3D/Graphics/AnimationController.h"
-#include "Character.h"
+#include "../ExistenceComponents/Character.h"
 #include "../../../Urho3D/Graphics/Terrain.h"
 #include "../../../Urho3D/Engine/EngineEvents.h"
 #include "../../../Urho3D/Graphics/Zone.h"
@@ -74,11 +74,11 @@
 #include "../../../Urho3D/Math/Color.h"
 
 
-#include "GameStateHandlerComponent.h"
-#include "GameStateEvents.h"
-#include "GameObject.h"
-#include "EnvironmentBuild.h"
-#include "Manager.h"
+#include "../ExistenceComponents/GameStateHandlerComponent.h"
+#include "../ExistenceComponents/GameStateEvents.h"
+#include "../ExistenceComponents/GameObject.h"
+#include "../ExistenceComponents/EnvironmentBuild.h"
+#include "../ExistenceComponents/Manager.h"
 #include "../Account.h"
 #include "ExistenceClientStateProgress.h"
 
@@ -142,6 +142,7 @@ void ExistenceClient::HandlerFunctionKeyDown(StringHash eventType, VariantMap& e
     /// Get component
     GameStateHandlerComponent * gamestatehandlercomponent_ = GetSubsystem<GameStateHandlerComponent>();
 
+    /// Set component state to current visibility
     gamestatehandlercomponent_->SetConsoleState(GetSubsystem<Console>()->IsVisible());
 
     /// Unlike the other samples, exiting the engine when ESC is pressed instead of just closing the console

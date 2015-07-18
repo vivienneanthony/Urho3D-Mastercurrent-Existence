@@ -60,7 +60,7 @@
 #include "../../../Urho3D/Graphics/Animation.h"
 #include "../../../Urho3D/Graphics/AnimatedModel.h"
 #include "../../../Urho3D/Graphics/AnimationController.h"
-#include "Character.h"
+#include "../ExistenceComponents/Character.h"
 #include "../../../Urho3D/Graphics/Terrain.h"
 #include "../../../Urho3D/Engine/EngineEvents.h"
 #include "../../../Urho3D/Graphics/Zone.h"
@@ -73,11 +73,11 @@
 #include "../../../Urho3D/Graphics/RenderPath.h"
 #include "../../../Urho3D/Math/Color.h"
 
-#include "GameStateHandlerComponent.h"
-#include "GameStateEvents.h"
-#include "GameObject.h"
-#include "EnvironmentBuild.h"
-#include "Manager.h"
+#include "../ExistenceComponents/GameStateHandlerComponent.h"
+#include "../ExistenceComponents/GameStateEvents.h"
+#include "../ExistenceComponents/GameObject.h"
+#include "../ExistenceComponents/EnvironmentBuild.h"
+#include "../ExistenceComponents/Manager.h"
 #include "../Account.h"
 
 #include <string>

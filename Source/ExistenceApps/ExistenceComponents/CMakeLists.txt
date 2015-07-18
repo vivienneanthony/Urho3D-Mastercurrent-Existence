@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2008-2014 the Urho3D project.
+# Copyright (c) 2008-2015 the Urho3D project.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,14 +20,9 @@
 # THE SOFTWARE.
 #
 
-# Define target name
-set (TARGET_NAME ExistenceClient)
+# Find Urho3D library
+find_package (Urho3D REQUIRED)
+include_directories (${URHO3D_INCLUDE_DIRS})
 
-# Define source files
-define_source_files (EXTRA_H_FILES ${COMMON_SAMPLE_H_FILES} ${EXISTENCECOMPONENTS_FILES} ${EXISTENCE_CPP_FILES} ${EXISTENCE_H_FILES})
 
-# Setup target with resource copying
-setup_main_executable ()
 
-# Setup test cases
-add_test (NAME ${TARGET_NAME} COMMAND ${TARGET_NAME} -timeout ${URHO3D_TEST_TIME_OUT})

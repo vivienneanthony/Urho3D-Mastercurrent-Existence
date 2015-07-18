@@ -56,6 +56,7 @@
 
 using namespace Urho3D;
 
+
 Character::Character(Context* context) :
     LogicComponent(context),
     onGround_(false),
@@ -69,7 +70,7 @@ Character::Character(Context* context) :
 
 void Character::RegisterObject(Context* context)
 {
-    context->RegisterFactory<Character>();
+    context->RegisterFactory<Character>("Existence");
 
     // These macros register the class attributes to the Context for automatic load / save handling.
     ATTRIBUTE("On Ground", bool,onGround_, false, AM_DEFAULT);

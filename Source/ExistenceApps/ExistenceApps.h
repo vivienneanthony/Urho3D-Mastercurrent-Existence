@@ -28,8 +28,11 @@
 
 
 #include "../../Urho3D/Engine/Application.h"
+#include "ExistenceComponents/GameStateHandlerComponent.h"
+
+
 #include "ExistenceClient/ExistenceClient.h"
-#include "ExistenceClient/GameStateHandlerComponent.h"
+
 
 namespace Urho3D
 {

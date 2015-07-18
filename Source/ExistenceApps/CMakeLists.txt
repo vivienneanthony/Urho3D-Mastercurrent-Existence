@@ -33,6 +33,35 @@ set (COMMON_SAMPLE_H_FILES "${CMAKE_CURRENT_SOURCE_DIR}/ExistenceApps.h" "${CMAK
 # Define dependency libs
 set (INCLUDE_DIRS_ONLY ${CMAKE_CURRENT_SOURCE_DIR})
 
-# Add samples
-add_subdirectory (ExistenceClient)
+# All files
+file (GLOB EXISTENCE_CPP_FILES "${CMAKE_CURRENT_SOURCE_DIR}/ExistenceComponents/*.cpp")
+file (GLOB EXISTENCE_H_FILES "${CMAKE_CURRENT_SOURCE_DIR}/ExistenceComponents/*.h")
 
+# Specific files
+set (EXISTENCEEDITOR_CPP_FILES
+   ${CMAKE_CURRENT_SOURCE_DIR}/ExistenceComponents/GameObject.cpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/ExistenceComponents/InteractObject.cpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/ExistenceComponents/Character.cpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/ExistenceComponents/Player.cpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/ExistenceComponents/DroneEntity.cpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/ExistenceComponents/Entity.cpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/ExistenceComponents/AIController.cpp
+)
+
+set (EXISTENCEEDITOR_H_FILES
+   ${CMAKE_CURRENT_SOURCE_DIR}/ExistenceComponents/GameObject.h
+   ${CMAKE_CURRENT_SOURCE_DIR}/ExistenceComponents/InteractObject.h
+   ${CMAKE_CURRENT_SOURCE_DIR}/ExistenceComponents/Character.h
+   ${CMAKE_CURRENT_SOURCE_DIR}/ExistenceComponents/DroneEntity.h
+   ${CMAKE_CURRENT_SOURCE_DIR}/ExistenceComponents/Entity.h
+   ${CMAKE_CURRENT_SOURCE_DIR}/ExistenceComponents/AIController.h
+)
+
+# Add samples
+if(URHO3D_EXISTENCECLIENT)
+    add_subdirectory (ExistenceClient)
+endif ()
+
+if(URHO3D_EXISTENCEEDITOR)
+    add_subdirectory (ExistenceEditor)
+endif ()

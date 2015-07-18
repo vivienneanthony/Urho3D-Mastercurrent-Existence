@@ -1,3 +1,5 @@
+#ifndef CHARACTER_H
+#define CHARACTER_H
 //
 // Copyright (c) 2008-2014 the Urho3D project.
 //
@@ -20,7 +22,6 @@
 // THE SOFTWARE.
 //
 
-#pragma once
 
 //#include "Player.h"
 #include "../../../Urho3D/Input/Controls.h"
@@ -45,6 +46,7 @@ const int CTRL_LEFT = 4;
 const int CTRL_RIGHT = 8;
 const int CTRL_JUMP = 16;
 const int CTRL_FIRE = 32;
+const int CTRL_ALL = 63;
 
 const float MOVE_FORCE = 0.8f;
 const float INAIR_MOVE_FORCE = 0.02f;
@@ -117,3 +119,4 @@ private:
 
 
 };
+#endif

@@ -1,7 +1,6 @@
 #ifndef GAMESTATEHANDLERCOMPONENT_H
 #define GAMESTATEHANDLERCOMPONENT_H
 
-
 #define         UI_NONE                             0
 #define         UI_LOGININTERFACE                   1
 #define         UI_ACCOUNTCREATIONINTERFACE         2
@@ -22,16 +21,22 @@
 #define         CAMERAMODE_FIRSTPERSON              1
 #define         CAMERAMODE_FLY                      2
 
+#include <Urho3D/Urho3D.h>
 
-#include "ExistenceClient.h"
+#include "../ExistenceClient/ExistenceClient.h"
+
 
 using namespace std;
-
-
 using namespace Urho3D;
+
+class ExistenceClient;
+class ExistenceClientStateSingleton;
+
 
 class URHO3D_API  GameStateHandlerComponent : public LogicComponent
 {
+
+
     OBJECT(GameStateHandlerComponent);
 public:
     /// Constructor

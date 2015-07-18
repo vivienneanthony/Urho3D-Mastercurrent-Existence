@@ -22,6 +22,8 @@
 
 #include <Urho3D/Urho3D.h>
 
+#include <iostream>
+
 #include "../../../Urho3D/Graphics/AnimationController.h"
 #include "../../../Urho3D/Core/Context.h"
 #include "../../../Urho3D/IO/MemoryBuffer.h"
@@ -33,78 +35,52 @@
 #include "../../../Urho3D/Scene/LogicComponent.h"
 #include "../../../Urho3D/Core/Timer.h"
 
-#include "GameObject.h"
+#include "InteractObject.h"
+#include "InteractEvent.h"
 
-/// Define Types
-#define OBJECTTYPE_Default       0
-#define OBJECTTYPE_StaticMesh    1
-#define OBJECTTYPE_AnimatedMesh  2
-#define OBJECTTYPE_Terrain       3
-#define OBJECTTYPE_Character     10
-#define OBJECTTYPE_Camera        100
-#define OBJECTTYPE_Light         101
 
+
+using namespace Urho3D;
 
 using namespace std;
+
 /// Base code
-GameObject::GameObject(Context* context) :
-    LogicComponent(context),
-    GameObjectLifetime(-1.0f)
+InteractObject::InteractObject(Context* context) :
+    LogicComponent(context)
 {
-    /// Only the physics update event is needed: unsubscribe from the rest for optimization
+
+/// Only the physics update event is needed: unsubscribe from the rest for optimization
     SetUpdateEventMask(USE_FIXEDUPDATE);
+
+/// Debug
+    cout << "Debug: Interact Object Component Constructor" << endl;
+
 }
 
 /// Registering a object
-void GameObject::RegisterObject(Context* context)
+void InteractObject::RegisterObject(Context* context)
 {
-    context->RegisterFactory<GameObject>();
-    /// These macros register the class attributes to the Context for automatic load / save handling.
-    // We specify the Default attribute mode which means it will be used both for saving into file, and network replication
-    ATTRIBUTE("Game Lifetime", float, GameObjectLifetime, -1.0f, AM_DEFAULT);
+    context->RegisterFactory<InteractObject>("Existence");
+
+
+    /// Debug
+    cout << "Debug: Interact Object Register Factory " << endl;
+
 
     return;
 }
 
 
-/// Creation of a game object
-void GameObject::Start()
+/// Creation of a Interact object
+void InteractObject::Start()
 {
-    /// Set
-    GameObjectLifetime = -1.0f;
 
     return;
 }
 
 /// Fix update
-void GameObject::FixedUpdate(float timeStep)
+void InteractObject::FixedUpdate(float timeStep)
 {
-
-    /// Disappear when duration expired
-    if (GameObjectLifetime  >= 0)
-    {
-        GameObjectLifetime -= timeStep;
-        if (GameObjectLifetime <= 0)
-        {
-
-            node_->Remove();
-        }
-    }
     return;
-}
-
-/// Set Lifetime
-void GameObject::SetLifetime(float lifetime)
-{
-    GameObjectLifetime = lifetime;
-
-    return;
-}
-
-/// Set Lifetime
-float GameObject::GetLifetime(void)
-{
-
-    return GameObjectLifetime;
 }
 

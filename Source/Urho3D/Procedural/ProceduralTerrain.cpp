@@ -70,7 +70,7 @@ ProceduralTerrain::~ProceduralTerrain()
 /// Move all of these to proceduralTerrain
 void ProceduralTerrain::RegisterObject(Context* context)
 {
-    context->RegisterFactory<ProceduralTerrain>();
+    context->RegisterFactory<ProceduralTerrain>("Existence");
 
     /// set defaults
     ATTRIBUTE("World Type", int, worldtype, 0.0f, AM_DEFAULT);

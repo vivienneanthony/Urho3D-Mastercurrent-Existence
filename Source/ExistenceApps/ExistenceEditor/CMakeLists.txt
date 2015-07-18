@@ -21,10 +21,10 @@
 #
 
 # Define target name
-set (TARGET_NAME ExistenceClient)
+set (TARGET_NAME ExistenceEditor)
 
 # Define source files
-define_source_files (EXTRA_H_FILES ${COMMON_SAMPLE_H_FILES} ${EXISTENCECOMPONENTS_FILES} ${EXISTENCE_CPP_FILES} ${EXISTENCE_H_FILES})
+define_source_files (EXTRA_H_FILES ${COMMON_SAMPLE_H_FILES} ${EXISTENCEEDITOR_CPP_FILES} ${EXISTENCEEDITOR_H_FILES})
 
 # Setup target with resource copying
 setup_main_executable ()

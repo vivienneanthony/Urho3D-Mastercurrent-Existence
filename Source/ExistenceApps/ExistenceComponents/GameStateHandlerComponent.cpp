@@ -73,7 +73,7 @@
 #include "../../../Urho3D/Graphics/RenderPath.h"
 #include "../../../Urho3D/Math/Color.h"
 
-#include "GameStateHandlerComponent.h"
+
 #include "GameStateEvents.h"
 #include "GameObject.h"
 #include "EnvironmentBuild.h"
@@ -100,8 +100,9 @@
 #include "../../../Urho3D/Procedural/ProceduralTerrain.h"
 #include "../../../Urho3D/Procedural/RandomNumberGenerator.h"
 
-#include "ExistenceClient.h"
-#include "ExistenceClientUI.h"
+#include "../ExistenceClient/ExistenceClient.h"
+#include "GameStateHandlerComponent.h"
+#include "../ExistenceClient/ExistenceClientUI.h"
 
 
 #include "../../Urho3D/Engine/DebugHud.h"

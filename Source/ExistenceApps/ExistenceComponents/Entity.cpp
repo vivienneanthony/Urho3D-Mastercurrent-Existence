@@ -30,6 +30,9 @@
 #include "../../../Urho3D/Physics/RigidBody.h"
 #include "../../../Urho3D/Scene/Scene.h"
 #include "../../../Urho3D/Scene/SceneEvents.h"
+#include "../../../Urho3D/Graphics/StaticModel.h"
+#include "../../../Urho3D/Graphics/AnimatedModel.h"
+
 
 #include "Character.h"
 #include "Entity.h"
@@ -37,28 +40,14 @@
 #include <iostream>
 
 
-
-
 using namespace std;
+using namespace Urho3D;
 
 
-/// Set and get the character health
-int Entity::SetHealth(int health)
-{
-    CharacterEntity.health = health;
+/// create a entity
+Entity::Entity(Context* context) :
+    LogicComponent(context)
 
-    return 1;
-
-}
-
-int Entity::GetHealth(void)
-{
-    return CharacterEntity.health;
-}
-
-
-/// Don nothing now;
-int Entity::Start(void)
 {
 
     /// Initalize information
@@ -84,14 +73,33 @@ int Entity::Start(void)
     CharacterEntity.alienalliancealigned=0;
     CharacterEntity.gender=0;
 
+    // Only the physics update event is needed: unsubscribe from the rest for optimization
+    SetUpdateEventMask(USE_FIXEDUPDATE);
+}
 
-    return true;
+/// Set and get the character health
+int Entity::SetHealth(int health)
+{
+    CharacterEntity.health = health;
+
+    return 1;
+
+}
+
+int Entity::GetHealth(void)
+{
+    return CharacterEntity.health;
+}
+
+
+/// Don nothing now;
+void Entity::Start(void)
+{
+    return;
 }
 
 int Entity::Clear(void)
 {
-    Start();
-
     return 1;
 }
 
@@ -151,7 +159,7 @@ int Entity::SetEntityInfo(playerbasicinfo TempEntity)
     return 1;
 }
 
-
+/// Entity GetEntityInfo
 playerbasicinfo Entity::GetEntityInfo(void)
 {
     /// Charcter specs
@@ -163,4 +171,50 @@ playerbasicinfo Entity::GetEntityInfo(void)
     Temporarybasicinfo.lastname = CharacterEntity.lastname;
 
     return Temporarybasicinfo;
+}
+
+/// Entity Register Object
+void Entity::RegisterObject(Context* context)
+{
+    context->RegisterFactory<Entity>("Existence");
+
+
+}
+
+/// Entity Handle Node Collision
+void Entity::HandleNodeCollision(StringHash eventType, VariantMap& eventData)
+{
+    using namespace NodeCollision;
+
+    // Get the other colliding body, make sure it is moving (has nonzero mass)
+    RigidBody* otherBody = (RigidBody*)eventData[P_OTHERBODY].GetPtr();
+    Node* otherNode = (Node*)eventData[P_OTHERNODE].GetPtr();
+
+    // If the other collision shape belongs to static geometry, perform world collision
+    StaticModel * staticmodelreference= otherNode->GetComponent<StaticModel>();
+    AnimatedModel * animatedmodelreference = otherNode->GetComponent<AnimatedModel>();
+
+    /// if node has a static model
+    if (staticmodelreference||animatedmodelreference)
+    {
+        WorldCollision(eventData);
+    }
+
+    return;
+}
+
+
+/// Entity FixedUpdate
+void Entity::FixedUpdate(float timeStep)
+{
+
+
+}
+
+/// World Collision Entity
+void Entity::WorldCollision(VariantMap& eventData)
+{
+    /// world collsion
+    /// Code for collision goes here but might move it to to each t
+    return;
 }

@@ -161,7 +161,7 @@ else ()
 endif ()
 if (ANDROID)
     set (ANDROID TRUE CACHE INTERNAL "Setup build for Android platform")
-    cmake_dependent_option (ANDROID_NDK_GDB "Enable ndk-gdb for debugging (Android build only)" FALSE "CMAKE_BUILD_TYPE STREQUAL Debug" FALSE)
+    cmake_pdependent_option (ANDROID_NDK_GDB "Enable ndk-gdb for debugging (Android build only)" FALSE "CMAKE_BUILD_TYPE STREQUAL Debug" FALSE)
 else ()
     unset (ANDROID_NDK_GDB CACHE)
 endif ()
@@ -1317,6 +1317,7 @@ macro (define_source_files)
     endif ()
     list (APPEND CPP_FILES ${ARG_EXTRA_CPP_FILES})
     list (APPEND H_FILES ${ARG_EXTRA_H_FILES})
+   
     set (SOURCE_FILES ${CPP_FILES} ${H_FILES})
 
     # Optionally enable PCH
