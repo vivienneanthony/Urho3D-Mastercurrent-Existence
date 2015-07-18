@@ -216,5 +216,36 @@ void Entity::WorldCollision(VariantMap& eventData)
 {
     /// world collsion
     /// Code for collision goes here but might move it to to each t
+
+    // Check collision contacts and see if character is standing on ground (look for a contact that has near vertical normal)
+	using namespace NodeCollision;
+
+	VectorBuffer contacts = eventData["Contacts"].GetBuffer();
+	while (!contacts.IsEof())
+	{
+		Vector3 contactPosition = contacts.ReadVector3();
+		Vector3 contactNormal = contacts.ReadVector3();
+		float contactDistance = contacts.ReadFloat();
+		float contactImpulse = contacts.ReadFloat();
+
+		// If contact is below node center and mostly vertical, assume it's ground contact
+		if (contactPosition.y_ < node_->GetPosition().y_)
+		{
+			float level = Abs(contactNormal.y_);
+			if (level > 0.75)
+				onGround = true;
+			else
+			{
+				// If contact is somewhere inbetween vertical/horizontal, is sliding a slope
+				if (level > 0.1)
+					isSliding = true;
+			}
+		}
+	}
+
+	// Ground contact has priority over sliding contact
+	if (onGround == true)
+		isSliding = false;
+
     return;
 }
